@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	예비 인덱스
 </body>
 </html>

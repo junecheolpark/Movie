@@ -8,11 +8,11 @@
           <element id="module-output" name="Test00" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="application" name="tomcat-dbcp" />
           <element id="library" level="application" name="cos" />
           <element id="library" level="application" name="gson-2.8.9" />
           <element id="library" level="application" name="JDBC" />
           <element id="library" level="application" name="jstl-1.2" />
+          <element id="library" level="application" name="tomcat-dbcp" />
         </element>
       </element>
     </root>
