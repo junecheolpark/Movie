@@ -289,5 +289,7 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/java,macos,windows,eclipse,intellij,git
 
 *.imi
-!/.idea/
-!/web/
+META-INF/
+web/
+Test00.iml
+.idea
