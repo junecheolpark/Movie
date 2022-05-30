@@ -7,8 +7,7 @@ public class BasketDTO {
 	private String user_category;
 	
 	public BasketDTO() {}
-	public BasketDTO(int seq_basket, String user_id, String movieCd, String user_category) {
-		super();
+	public BasketDTO(int seq_basket, String user_id, String movieCd, String user_category) {		
 		this.seq_basket = seq_basket;
 		this.user_id = user_id;
 		this.movieCd = movieCd;
