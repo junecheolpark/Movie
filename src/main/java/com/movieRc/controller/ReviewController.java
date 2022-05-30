@@ -1,6 +1,12 @@
 package com.movieRc.controller;
 
+import com.movieRc.dao.MovieDAO;
+import com.movieRc.dto.MovieDTO;
+import com.movieRc.util.Pagination;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +29,27 @@ public class ReviewController extends HttpServlet {
 
 	}
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset = utf-8");
+		String uri = request.getRequestURI();
+		MovieDAO movieDAO = new MovieDAO();
+		Pagination pagination = new Pagination();
 
+		 if (uri.equals("/listLookup")){
+			 int curPage = Integer.parseInt(request.getParameter("curPage"));
+			try {
+				int totalCount = movieDAO.CountAll();
+				HashMap<String, Object> hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
+				int start = (int) hashMap.get("postStart");
+				int end = (int) hashMap.get("postEnd");
+				ArrayList<MovieDTO> arrayList = movieDAO.selectAll(start,end);
+
+				request.setAttribute("hashMap", hashMap);
+				request.setAttribute("arrayList", arrayList);
+				request.getRequestDispatcher("/review/listLookup.jsp").forward(request,response);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
 }
