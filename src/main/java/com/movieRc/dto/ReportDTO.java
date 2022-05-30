@@ -13,7 +13,7 @@ public class ReportDTO {
 	public ReportDTO() {}
 	public ReportDTO(int seq_report, String category_check, String rp_content, String user_id, int seq_review,
 			int seq_comment, int seq_post, String user_category) {
-		super();
+		
 		this.seq_report = seq_report;
 		this.category_check = category_check;
 		this.rp_content = rp_content;
