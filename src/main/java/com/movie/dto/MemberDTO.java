@@ -7,7 +7,7 @@ public class MemberDTO {
 	private String user_pw;
 	private String user_nickname;
 	private String user_name;
-	private String user_birth;
+	private int user_birth;
 	private String user_phone;
 	private String postcode;
 	private String roadAddr;
@@ -19,7 +19,7 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(String user_id, String user_category, String user_k, String user_pw, String user_nickname,
-			String user_name, String user_birth, String user_phone, String postcode, String roadAddr, String detailAddr,
+			String user_name, int user_birth, String user_phone, String postcode, String roadAddr, String detailAddr,
 			String extraAddr, String grade) {
 		super();
 		this.user_id = user_id;
@@ -85,11 +85,11 @@ public class MemberDTO {
 		this.user_name = user_name;
 	}
 
-	public String getUser_birth() {
+	public int getUser_birth() {
 		return user_birth;
 	}
 
-	public void setUser_birth(String user_birth) {
+	public void setUser_birth(int user_birth) {
 		this.user_birth = user_birth;
 	}
 
