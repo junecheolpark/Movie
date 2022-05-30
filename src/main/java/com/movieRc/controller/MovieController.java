@@ -30,12 +30,12 @@ public class ReviewController extends HttpServlet {
 	}
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; charset = utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String uri = request.getRequestURI();
 		MovieDAO movieDAO = new MovieDAO();
 		Pagination pagination = new Pagination();
 
-		 if (uri.equals("/listLookup")){
+		 if (uri.equals("/listLookup.review")){
 			 int curPage = Integer.parseInt(request.getParameter("curPage"));
 			try {
 				int totalCount = movieDAO.CountAll();

@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,21 +20,27 @@
         body {
             height: 4000px;
         }
+
         * {
             box-sizing: border-box;
         }
+
         header {
             height: 3.075%;
             background-color: black;
         }
+
         footer {
-            height: 11.625%;
+            height: 9%;
             background-color: black;
         }
+
         .container {
-            height: 85.3%;
+            height: 87.925%;
             width: 100%;
+            padding-bottom: 12px;
         }
+
         #titleContainer {
             height: 2%;
             width: 100%;
@@ -44,25 +52,33 @@
             padding: 10px;
             border-radius: 8px;
         }
-        #titleDiv {}
+
+        #titleDiv {
+
+        }
+
         #titleDiv #title {
             font-size: 1.5em;
             font-weight: bold;
         }
+
         #titleDiv #movieNum {
             font-size: 0.8em;
             color: silver;
         }
+
         #searchBtn {
             background-color: #037b94;
             color: white;
             border: none;
             border-radius: 8px;
         }
+
         #searchInput {
             border-radius: 8px;
             margin-right: 5px;
         }
+
         #selectionDiv1 {
             margin-top: 20px;
             height: 1%;
@@ -74,6 +90,7 @@
             border-top-right-radius: 8px;
             background-color: #503396;
         }
+
         #selectionDiv1 button {
             background-color: #503396;
             color: white;
@@ -96,6 +113,7 @@
             border-bottom-right-radius: 8px;
             margin-bottom: 20px;
         }
+
         #selectionDiv2 button {
             background-color: #503396;
             color: white;
@@ -106,13 +124,16 @@
         #selectionDiv2 button:hover {
             color: silver;
         }
+
         #movieDiv {
             height: 93%;
         }
+
         .movieLi {
             height: 19.8%;
             width: 100%;
         }
+
         .pagingDiv {
             height: 1%;
             display: flex;
@@ -122,23 +143,27 @@
             background-color: black;
             border-radius: 8px;
         }
+
         .movie {
             height: 50%;
             width: 33%;
         }
-        @media screen and (max-width : 992px) {
+
+        @media screen and (max-width: 992px) {
             .movie {
                 height: 33.3%;
                 width: 50%;
             }
         }
+
         .movie .movieImgDiv {
-            height: 90%;
+            height: 72%;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 10px;
         }
+
         .movieNameDiv {
             height: 10%;
             display: flex;
@@ -147,30 +172,57 @@
             padding: 5px;
             gap: 10px;
         }
+
         .movieNameDiv a {
-            flex-basis: 70%;
+            flex-basis: 200px;
             color: black;
             text-decoration: none;
+        }
+
+        .movieName {
+            display: block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
         .directors {
-            flex-basis: 30%;
+            display: block;
+            flex-basis: 100px;
             color: silver;
             font-size: 0.8em;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
         .movie .movieImgDiv img {
             height: 100%;
             border-radius: 10px;
         }
 
+        .movieCategory {
+            width: 300px;
+            height: 10%;
+            color: silver;
+            font-size: 0.8em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: right;
+        }
+
+        .movieAvgPoint {
+            height: 8%;
+            color: silver;
+            font-size: 0.7em;
+            text-align: right;
+        }
+
         a {
             text-decoration: none;
         }
+
         /*
         .contents {
             height: 500px;
@@ -294,6 +346,10 @@
                 display: none;
             }
         }
+
+        .pagination {
+            margin: 20px;
+        }
     </style>
 </head>
 <script
@@ -335,7 +391,7 @@
                         id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/review/listLookup.jsp">영화</a>
+                            <a class="nav-link" href="/listLookup.review?curPage=1">영화</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">리뷰</a>
@@ -382,7 +438,7 @@
                 <div class="col-5 d-flex justify-content-center">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/review/listLookup.jsp">영화</a>
+                            <a class="nav-link" href="/listLookup.review?curPage=1">영화</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">리뷰</a>
@@ -436,7 +492,6 @@
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
-
                     </div>
 
                 </div>
@@ -460,12 +515,12 @@
         </div>
     </div>
     <div id="selectionDiv1">
-        <button type="button" class="selectComic">코믹</button>
-        <button type="button" class="selectComic">액션</button>
-        <button type="button" class="selectComic">멜로</button>
-        <button type="button" class="selectComic">SF</button>
-        <button type="button" class="selectComic">호러</button>
-        <button type="button" class="selectComic">기타</button>
+        <button type="button" class="selectByCategory" value = "">코믹</button>
+        <button type="button" class="selectByCategory">액션</button>
+        <button type="button" class="selectByCategory">멜로</button>
+        <button type="button" class="selectByCategory">SF</button>
+        <button type="button" class="selectByCategory">호러</button>
+        <button type="button" class="selectByCategory">기타</button>
     </div>
     <div id="selectionDiv2">
         <button type="button" id="selectByReviewCount">리뷰 많은 순</button>
@@ -473,349 +528,51 @@
     </div>
     <div id="movieDiv">
         <div class="movieLi row">
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
+            <c:if test="${not empty arrayList}">
+                <c:forEach items="${arrayList}" var="movieDTO">
+                    <div class="movie col-6 col-lg-4">
+                        <div class="movieImgDiv">
+                            <img src="/NoImg.webp">
+                        </div>
+                        <div class="movieNameDiv">
+                            <span class="movieName">
+                                 <a href="">${movieDTO.movieNm}</a>
+                            </span>
+                            <c:if test="${not empty movieDTO.directors}">
+                                <span class="directors">${movieDTO.directors}</span>"
+                            </c:if>
+                            <c:if test="${empty movieDTO.directors}">
+                                <span class="directors">등록된 감독이 없습니다</span>"
+                            </c:if>
+                        </div>
+                        <div class="categoryDiv">
+                            <span class="movieCategory">${movieDTO.genreAlt}</span>
+                        </div>
+                        <div class="avgPointDiv">
+                            <span class="movieAvgPoint">5.0</span>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty arrayList}">
+                <div class="col-12">
+                    조회 결과가 없습니다.
                 </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/images/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-        </div>
-        <div class="movieLi row">
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-        </div>
-        <div class="movieLi row">
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-        </div>
-        <div class="movieLi row">
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-        </div>
-        <div class="movieLi row">
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
-            <div class="movie col-6 col-lg-4">
-                <div class="movieImgDiv">
-                    <img src="/NoImg.webp">
-                </div>
-                <div class="movieNameDiv">
-                    <span class="movieName">
-                        <a href="">영화제목이 들어갈 칸입니다</a>
-                    </span>
-                    <span class="directors">감독명</span>
-                </div>
-            </div>
+            </c:if>
         </div>
     </div>
-    <div class="pagingDiv">
-        페이징 숫자값
-    </div>
+    <nav aria-label="PageNav">
+        <ul class="pagination d-flex justify-content-center">
+            <li class="page-item prevBtn"><a class="page-link" href="/listLookup.review?curPage=${hashMap.naviStart-1}">Previous</a>
+            </li>
+            <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
+                <li class="page-item"><a class="page-link" href="/listLookup.review?curPage=${pageNum}">${pageNum}</a>
+                </li>
+            </c:forEach>
+            <li class="page-item nextBtn"><a class="page-link" href="/listLookup.review?curPage=${hashMap.naviEnd+1}">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 <footer class="py-5 text-light">
     <div class="container">
@@ -933,7 +690,17 @@
             href="#"><svg class="bi" width="24" height="24"> 페이스북 </svg></a></li> </ul> -->
         </div>
     </div>
-
 </footer>
+<script>
+    let prevBtn = ${hashMap.prevBtn};
+    if (!prevBtn) {
+        $(".prevBtn").addClass("disabled");
+    }
+
+    let nextBtn = ${hashMap.nextBtn};
+    if (!nextBtn) {
+        $(".nextBtn").addClass("disabled");
+    }
+</script>
 </body>
 </html>
