@@ -8,14 +8,14 @@ import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import com.review.dto.MovieDTO;
+import com.review.dto.ReviewDTO;
 
 
 
-public class MovieDAO {
+public class ReviewDAO {
 	private BasicDataSource bds;
 
-	public MovieDAO() {
+	public ReviewDAO() {
 		try {
 			Context iCtx = new InitialContext();
 			Context envCtx = (Context)iCtx.lookup("java:comp/env");
@@ -25,20 +25,13 @@ public class MovieDAO {
 		}
 	}
 	
-	public int write(MovieDTO dto) throws Exception{
-		String sql = "insert into tbl_movie values(?,?,?,?,?,?)";
-
+	public int write(String r_content) throws Exception{
+		String sql = "insert into tbl_review values(seq_review.nextval, 'movieCd','id','category','nickname',?,sysdate)";
+		
 		try(Connection con = bds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-
-			
-			pstmt.setString(1, dto.getMovieCd());
-			pstmt.setString(2, dto.getMovieNm());
-			pstmt.setString(3, dto.getMovieNmEn());
-			pstmt.setString(4, dto.getPrdtYear());
-			pstmt.setString(5, dto.getNationAlt());
-			pstmt.setString(6, dto.getGenreAlt());
-			pstmt.setString(7, dto.getDirectors());
+		
+			pstmt.setString(1, r_content);
 
 			int rs = pstmt.executeUpdate();
 			return rs;

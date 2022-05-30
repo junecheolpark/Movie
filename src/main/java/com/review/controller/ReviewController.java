@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.review.dao.ReviewDAO;
+
 @WebServlet("*.re")
 public class ReviewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,9 +25,23 @@ public class ReviewController extends HttpServlet {
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
 		
-		if (uri.equals("/test1.re")) {
-			String movieCd = request.getParameter("movieCd");
-			System.out.println("movieCd: " + movieCd);
+		if (uri.equals("/write.re")) {
+			String r_content = request.getParameter("r_content");
+			System.out.println("r_content: " + r_content);
+			
+			ReviewDAO rdao = new ReviewDAO();
+			try {
+				int rs = rdao.write(r_content);
+//				if(rs >0) {
+//					System.out.println("성공!");
+//					response.sendRedirect("/review_d/inquiry_d.jsp");
+//				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
 		}
 		
 		

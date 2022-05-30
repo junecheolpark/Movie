@@ -429,7 +429,7 @@
 
     <!-- Contents -->
 
-    <body>
+
 
 
         <div class="container">
@@ -704,7 +704,7 @@
                     $("#star1").css({ "color": "black" });
                 } else if (rs == 2) {
                     $("#star1",).css({ "color": "black" });
-                    $("#star2",).css({ "color": "black" });
+                    $("#star2",).css({ "color": "black" });d
                 } else if (rs == 3) {
                     $("#star1",).css({ "color": "black" });
                     $("#star2",).css({ "color": "black" });
