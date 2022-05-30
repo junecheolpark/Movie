@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("*.review")
-public class ReviewController extends HttpServlet {
+@WebServlet("*.movie")
+public class MovieController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doAction(request, response);
@@ -35,7 +35,7 @@ public class ReviewController extends HttpServlet {
 		MovieDAO movieDAO = new MovieDAO();
 		Pagination pagination = new Pagination();
 
-		 if (uri.equals("/listLookup.review")){
+		 if (uri.equals("/listLookup.movie")){
 			 int curPage = Integer.parseInt(request.getParameter("curPage"));
 			try {
 				int totalCount = movieDAO.CountAll();
@@ -46,10 +46,17 @@ public class ReviewController extends HttpServlet {
 
 				request.setAttribute("hashMap", hashMap);
 				request.setAttribute("arrayList", arrayList);
-				request.getRequestDispatcher("/review/listLookup.jsp").forward(request,response);
+				request.getRequestDispatcher("/movie/listLookup.jsp").forward(request,response);
 			} catch (Exception e){
 				e.printStackTrace();
 			}
-		}
+		} else if(uri.equals("/search.movie")){
+			 String genreAlt = request.getParameter("genreAlt");
+			 if(genreAlt!=null){
+
+			 } else if (genreAlt.equals("기타")){
+
+			 }
+		 }
 	}
 }

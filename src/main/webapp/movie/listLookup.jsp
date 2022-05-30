@@ -391,7 +391,7 @@
                         id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/listLookup.review?curPage=1">영화</a>
+                            <a class="nav-link" href="/listLookup.movie?curPage=1">영화</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">리뷰</a>
@@ -438,7 +438,7 @@
                 <div class="col-5 d-flex justify-content-center">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/listLookup.review?curPage=1">영화</a>
+                            <a class="nav-link" href="/listLookup.movie?curPage=1">영화</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">리뷰</a>
@@ -515,11 +515,11 @@
         </div>
     </div>
     <div id="selectionDiv1">
-        <button type="button" class="selectByCategory" value = "">코믹</button>
-        <button type="button" class="selectByCategory">액션</button>
-        <button type="button" class="selectByCategory">멜로</button>
-        <button type="button" class="selectByCategory">SF</button>
-        <button type="button" class="selectByCategory">호러</button>
+        <button type="button" class="selectByCategory" value = "코믹">코믹</button>
+        <button type="button" class="selectByCategory" value = "액션">액션</button>
+        <button type="button" class="selectByCategory" value = "멜로">멜로</button>
+        <button type="button" class="selectByCategory" value = "SF">SF</button>
+        <button type="button" class="selectByCategory" value = "호러">호러</button>
         <button type="button" class="selectByCategory">기타</button>
     </div>
     <div id="selectionDiv2">
@@ -563,13 +563,13 @@
     </div>
     <nav aria-label="PageNav">
         <ul class="pagination d-flex justify-content-center">
-            <li class="page-item prevBtn"><a class="page-link" href="/listLookup.review?curPage=${hashMap.naviStart-1}">Previous</a>
+            <li class="page-item prevBtn"><a class="page-link" href="/listLookup.movie?curPage=${hashMap.naviStart-1}">Previous</a>
             </li>
             <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
-                <li class="page-item"><a class="page-link" href="/listLookup.review?curPage=${pageNum}">${pageNum}</a>
+                <li class="page-item"><a class="page-link" href="/listLookup.movie?curPage=${pageNum}">${pageNum}</a>
                 </li>
             </c:forEach>
-            <li class="page-item nextBtn"><a class="page-link" href="/listLookup.review?curPage=${hashMap.naviEnd+1}">Next</a>
+            <li class="page-item nextBtn"><a class="page-link" href="/listLookup.movie?curPage=${hashMap.naviEnd+1}">Next</a>
             </li>
         </ul>
     </nav>
@@ -701,6 +701,11 @@
     if (!nextBtn) {
         $(".nextBtn").addClass("disabled");
     }
+
+    $(".selectByCategory").on("click", function (){
+        let val = $(this).val();
+        location.href = "/search.movie?genreAlt="+val;
+    });
 </script>
 </body>
 </html>

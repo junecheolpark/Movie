@@ -46,8 +46,8 @@ public class MovieDAO {
     public ArrayList<MovieDTO> selectAll (int start, int end) throws Exception {
         String sql = "select * from" +
                 "             (select rownum as num, a.* from" +
-                "                                            (select * from tbl_movie order by 1 desc) a where rownum <= ?)" +
-                "where rownum >= ?;";
+                "                                            (select * from tbl_movie order by 1 desc) a)" +
+                "where num between ? and ?";
         try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             preparedStatement.setInt(1, start);
@@ -56,18 +56,68 @@ public class MovieDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
             while (resultSet.next()){
-                String movieCd = resultSet.getString(1);
-                String movieNm = resultSet.getString(2);
-                String movieNmen = resultSet.getString(3);
-                String prdtYear = resultSet.getString(4);
-                String nationAlt = resultSet.getString(5);
-                String genreAlt = resultSet.getString(6);
-                String directors = resultSet.getString(7);
+                String movieCd = resultSet.getString(2);
+                String movieNm = resultSet.getString(3);
+                String movieNmen = resultSet.getString(4);
+                String prdtYear = resultSet.getString(5);
+                String nationAlt = resultSet.getString(6);
+                String genreAlt = resultSet.getString(7);
+                String directors = resultSet.getString(8);
 
                 arrayList.add(new MovieDTO(movieCd,movieNm,movieNmen,prdtYear,nationAlt,genreAlt,directors));
             } return arrayList;
         }
     }
 
+    public ArrayList<MovieDTO> searchByGenre(String genreAlt, int start, int end) throws Exception{
+        String sql = "select*" +
+                "from (select a.*, rownum as num" +
+                "      from (select * from tbl_movie where genreAlt like ? order by 1 desc) a)" +
+                "where num between ? and ?;";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, "%"+genreAlt+"%");
+            preparedStatement.setInt(2, start);
+            preparedStatement.setInt(3, start);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<MovieDTO> arrayList = new ArrayList<>();
+            while (resultSet.next()){
+                String movieCd = resultSet.getString(2);
+                String movieNm = resultSet.getString(3);
+                String movieNmen = resultSet.getString(4);
+                String prdtYear = resultSet.getString(5);
+                String nationAlt = resultSet.getString(6);
+                String genreAlt = resultSet.getString(7);
+                String directors = resultSet.getString(8);
+
+                arrayList.add(new MovieDTO(movieCd,movieNm,movieNmen,prdtYear,nationAlt,genreAlt,directors));
+            } return arrayList;
+        }
+    }
+    public ArrayList<MovieDTO> searchByGenreEtc(int start, int end) throws Exception{
+        String sql = "select*" +
+                "from (select a.*, rownum as num" +
+                "      from (select * from tbl_movie where genreAlt like ? order by 1 desc) a)" +
+                "where num between ? and ?;";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, "%"+genreAlt+"%");
+            preparedStatement.setInt(2, start);
+            preparedStatement.setInt(3, start);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<MovieDTO> arrayList = new ArrayList<>();
+            while (resultSet.next()){
+                String movieCd = resultSet.getString(2);
+                String movieNm = resultSet.getString(3);
+                String movieNmen = resultSet.getString(4);
+                String prdtYear = resultSet.getString(5);
+                String nationAlt = resultSet.getString(6);
+                String genreAlt = resultSet.getString(7);
+                String directors = resultSet.getString(8);
+
+                arrayList.add(new MovieDTO(movieCd,movieNm,movieNmen,prdtYear,nationAlt,genreAlt,directors));
+            } return arrayList;
+        }
+    }
 
 }

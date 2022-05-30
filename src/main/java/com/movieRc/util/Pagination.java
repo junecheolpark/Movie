@@ -45,7 +45,7 @@ public class Pagination {
         // 총 페이지 수
         totalPage = totalCnt / recordPerPage + (totalPage % recordPerPage == 0 ? 0 : 1);
         // 페이징 처리
-        if (curPage > 1) curPage = 1;
+        if (curPage < 1) curPage = 1;
         else if (curPage > totalPage) curPage = totalPage;
 
         // 네비 시작점, 끝점
@@ -62,8 +62,8 @@ public class Pagination {
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("totalCnt", totalCnt);
-        hashMap.put("navStart", naviStart);
-        hashMap.put("navEnd", naviEnd);
+        hashMap.put("naviStart", naviStart);
+        hashMap.put("naviEnd", naviEnd);
         hashMap.put("prevBtn", prevBtn);
         hashMap.put("nextBtn", nextBtn);
         hashMap.put("postStart", postStart);
