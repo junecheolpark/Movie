@@ -1,4 +1,4 @@
-package com.movie.dto;
+package com.movieRc.dto;
 
 public class MemberDTO {
 	private String user_id;
@@ -21,7 +21,7 @@ public class MemberDTO {
 	public MemberDTO(String user_id, String user_category, String user_k, String user_pw, String user_nickname,
 			String user_name, int user_birth, String user_phone, String postcode, String roadAddr, String detailAddr,
 			String extraAddr, String grade) {
-		super();
+		
 		this.user_id = user_id;
 		this.user_category = user_category;
 		this.user_k = user_k;

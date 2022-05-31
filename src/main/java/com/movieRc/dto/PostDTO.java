@@ -1,4 +1,4 @@
-package com.movie.dto;
+package com.movieRc.dto;
 
 public class PostDTO {
  private int seq_post;
@@ -14,8 +14,7 @@ public class PostDTO {
  
 public PostDTO(int seq_post, String user_nickname, String p_title, String p_content, String p_date, int p_veiw_count,
 		String user_id, String user_category) {
-	super();
-	this.seq_post = seq_post;
+	this.seq_post = seq_post;	
 	this.user_nickname = user_nickname;
 	this.p_title = p_title;
 	this.p_content = p_content;
