@@ -67,18 +67,6 @@
             color: silver;
         }
 
-        #searchBtn {
-            background-color: #037b94;
-            color: white;
-            border: none;
-            border-radius: 8px;
-        }
-
-        #searchInput {
-            border-radius: 8px;
-            margin-right: 5px;
-        }
-
         #selectionDiv1 {
             margin-top: 20px;
             height: 1%;
@@ -126,7 +114,8 @@
         }
 
         #movieDiv {
-            height: 93%;
+            height: 90%;
+            margin-bottom: 20px;
         }
 
         .movieLi {
@@ -134,19 +123,14 @@
             width: 100%;
         }
 
-        .pagingDiv {
-            height: 1%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            background-color: black;
-            border-radius: 8px;
-        }
-
         .movie {
             height: 50%;
             width: 33%;
+        }
+
+        .movie div {
+            padding-left: 100px;
+            padding-right: 100px;
         }
 
         @media screen and (max-width: 992px) {
@@ -167,7 +151,7 @@
         .movieNameDiv {
             height: 10%;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             padding: 5px;
             gap: 10px;
@@ -217,6 +201,27 @@
             color: silver;
             font-size: 0.7em;
             text-align: right;
+        }
+        .searchDiv {
+            height: 1%;
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+            margin-top: 30px;
+        }
+
+        #searchBtn {
+            background-color: #037b94;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            flex-basis: 70%;
+        }
+
+        #searchInput {
+            border-radius: 8px;
+            margin-right: 5px;
+            flex-basis: 30%;
         }
 
         a {
@@ -417,15 +422,16 @@
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
-                    <form class="d-flex">
+                    <form class="searchForm d-flex" method="get" action="/search.movie">
                         <input
-                                class="form-control me-2"
+                                class="searchInput form-control me-2"
                                 type="search"
                                 placeholder="Search"
-                                aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                                aria-label="Search" name="val">
+                        <input type="hidden" name = 's_type' value="movieNm">
+                        <input type="hidden" name = 'curPage' value="1">
+                        <button class="searchBtn btn btn-outline-success" type="button">Search</button>
                     </form>
-
                 </div>
             </div>
         </nav>
@@ -483,13 +489,16 @@
                             </a>
                         </div>
                         <div class="col-5">
-                            <form class="d-flex">
+                            <form class="searchForm d-flex" method="get" action="/search.movie">
                                 <input
-                                        class="form-control me-2"
+                                        class="searchInput form-control me-2"
                                         type="search"
                                         placeholder="Search"
-                                        aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
+                                        aria-label="Search"
+                                        name = "val">
+                                <input type="hidden" name = 's_type' value="movieNm">
+                                <input type="hidden" name = 'curPage' value="1">
+                                <button class="searchBtn btn btn-outline-success" type="button">Search</button>
                             </form>
                         </div>
                     </div>
@@ -506,25 +515,29 @@
 <div class="container">
     <div id="titleContainer">
         <div id="titleDiv">
-            <span id="title">영화 목록</span>
+            <span id="title">
+                <c:if test="${empty s_type||s_type ne 'genreAlt'}">
+                    전체 영화
+                </c:if>
+                <c:if test="${s_type eq 'genreAlt'}">
+                    ${val} 영화
+                </c:if>
+            </span>
             <span id="movieNum">
-                (xxx)</span></div>
-        <div id="searchDiv">
-            <input type="text" id="searchInput" placeholder="검색">
-            <button type="button" id="searchBtn">검색</button>
-        </div>
+                (${totalCount})</span></div>
     </div>
     <div id="selectionDiv1">
-        <button type="button" class="selectByCategory" value = "코믹">코믹</button>
-        <button type="button" class="selectByCategory" value = "액션">액션</button>
-        <button type="button" class="selectByCategory" value = "멜로">멜로</button>
-        <button type="button" class="selectByCategory" value = "SF">SF</button>
-        <button type="button" class="selectByCategory" value = "호러">호러</button>
-        <button type="button" class="selectByCategory">기타</button>
+        <button type="button" class="selectByCategory" value="코미디">코미디</button>
+        <button type="button" class="selectByCategory" value="액션">액션</button>
+        <button type="button" class="selectByCategory" value="멜로">멜로</button>
+        <button type="button" class="selectByCategory" value="SF">SF</button>
+        <button type="button" class="selectByCategory" value="호러">호러</button>
+        <button type="button" class="selectByCategory" value="기타">기타</button>
     </div>
     <div id="selectionDiv2">
-        <button type="button" id="selectByReviewCount">리뷰 많은 순</button>
-        <button type="button" id="selectByHighAveragePoint">높은 평점 순</button>
+        <button type="button" id="orderByRecentMovie">최신 영화 순</button>
+        <button type="button" id="orderByReviewCount">리뷰 많은 순</button>
+        <button type="button" id="orderByHighAveragePoint">높은 평점 순</button>
     </div>
     <div id="movieDiv">
         <div class="movieLi row">
@@ -539,10 +552,10 @@
                                  <a href="">${movieDTO.movieNm}</a>
                             </span>
                             <c:if test="${not empty movieDTO.directors}">
-                                <span class="directors">${movieDTO.directors}</span>"
+                                <span class="directors">${movieDTO.directors}</span>
                             </c:if>
                             <c:if test="${empty movieDTO.directors}">
-                                <span class="directors">등록된 감독이 없습니다</span>"
+                                <span class="directors">등록된 감독이 없습니다</span>
                             </c:if>
                         </div>
                         <div class="categoryDiv">
@@ -563,16 +576,42 @@
     </div>
     <nav aria-label="PageNav">
         <ul class="pagination d-flex justify-content-center">
-            <li class="page-item prevBtn"><a class="page-link" href="/listLookup.movie?curPage=${hashMap.naviStart-1}">Previous</a>
-            </li>
-            <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
-                <li class="page-item"><a class="page-link" href="/listLookup.movie?curPage=${pageNum}">${pageNum}</a>
+            <c:if test="${empty s_type}">
+                <li class="page-item prevBtn"><a class="page-link"
+                                                 href="/listLookup.movie?curPage=${hashMap.naviStart-1}" data-value="${hashMap.naviStart-1}">Previous</a>
                 </li>
-            </c:forEach>
-            <li class="page-item nextBtn"><a class="page-link" href="/listLookup.movie?curPage=${hashMap.naviEnd+1}">Next</a>
-            </li>
+                <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
+                    <li class="page-item"><a class="page-link"
+                                             href="/listLookup.movie?curPage=${pageNum}" data-value="${pageNum}">${pageNum}</a>
+                    </li>
+                </c:forEach>
+                <li class="page-item nextBtn"><a class="page-link"
+                                                 href="/listLookup.movie?curPage=${hashMap.naviEnd+1}" data-value="${hashMap.naviEnd+1}">Next</a>
+                </li>
+            </c:if>
+            <c:if test="${not empty s_type}">
+                <li class="page-item prevBtn"><a class="page-link"
+                                                 href="/search.movie?s_type=${s_type}&curPage=${hashMap.naviStart-1}&val=${val}" data-value="${hashMap.naviStart-1}">Previous</a>
+                </li>
+                <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
+                    <li class="page-item"><a class="page-link"
+                                             href="/search.movie?s_type=${s_type}&curPage=${pageNum}&val=${val}" data-value="${pageNum}">${pageNum}</a>
+                    </li>
+                </c:forEach>
+                <li class="page-item nextBtn"><a class="page-link"
+                                                 href="/search.movie?s_type=${s_type}&curPage=${hashMap.naviEnd+1}&val=${val}"data-value="${hashMap.naviEnd+1}">Next</a>
+                </li>
+            </c:if>
         </ul>
     </nav>
+    <div class="searchDiv">
+        <form method="get" class="searchForm" action="/search.movie">
+            <input type="text" id="searchInput" class = "searchInput" name="val" placeholder="검색">
+            <input type="hidden" name = 's_type' value="movieNm">
+            <input type="hidden" name = 'curPage' value="1">
+            <button type="button" id ="searchBtn" class = "searchBtn">검색</button>
+        </form>
+    </div>
 </div>
 <footer class="py-5 text-light">
     <div class="container">
@@ -581,7 +620,7 @@
                 <h5>장르</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">코믹</a>
+                        <a href="#" class="nav-link p-0">코미디</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="#" class="nav-link p-0">액션</a>
@@ -698,14 +737,120 @@
     }
 
     let nextBtn = ${hashMap.nextBtn};
-    if (!nextBtn) {
+    if (nextBtn === false) {
         $(".nextBtn").addClass("disabled");
     }
 
-    $(".selectByCategory").on("click", function (){
+    $(".selectByCategory").on("click", function () {
         let val = $(this).val();
-        location.href = "/search.movie?genreAlt="+val;
+        location.href = "/search.movie?s_type=genreAlt&curPage=1&val=" + val;
     });
+
+    $(".searchBtn").on("click", function (){
+        let val = $(this).siblings($(".searchInput")).val();
+        if(val!==""){
+            let searchForm = $(this).parent(".searchForm");
+            searchForm.submit();
+        }
+        if(val===""){
+            alert("검색어를 입력하세요.");
+        }
+    });
+    function showList(data){
+        $.each(data, function (index, item){
+            let movie = $("<div>").addClass("movie col-6 col-lg-4");
+            let movieImgDiv = $("<div>").addClass("movieImgDiv");
+            let img = $("<img src='/NoImg.webp'>");
+            let movieNameDiv = $("<div>").addClass("movieNameDiv");
+            let movieName = $("<span>").addClass("movieName");
+            let movieNameAnchor = $("<a>").attr("href", "").html(item.movieNm); // 수정 필요
+            let directors = $("<span>").addClass("directors");
+            let categoryDiv = $("<div>").addClass("categoryDiv");
+            let movieCategory = $("<span>").addClass("movieCategory").html(item.genreAlt);
+            let avgPointDiv = $("<div>").add("avgPointDiv");
+            let movieAvgPoint = $("<span>").addClass("movieAvgPoint").html("5.0"); // 수정 필요
+
+            movieImgDiv.append(img);
+            movieName.append(movieNameAnchor);
+            movieNameDiv.append(movieName);
+            movieNameDiv.append(directors);
+            categoryDiv.append(movieCategory);
+            avgPointDiv.append(movieAvgPoint);
+
+            movie.append(movieImgDiv);
+            movie.append(movieNameDiv);
+            movie.append(categoryDiv);
+            movie.append(avgPointDiv);
+
+            $(".movieLi").append(movie);
+        });
+    }
+
+    $("#orderByRecentMovie").on("click", function (){
+        var s_type = "${s_type}";
+        var val = "${val}";
+        $.ajax({
+            url : "/orderBy.recent.movie?s_type="+s_type+"&curPage=1&val="+val,
+            dataType : "json",
+            success : function (data) {
+                $(".movieLi").empty();
+                showList(data);
+
+                let num;
+                for(let i =1; i<13; i++){
+                    num = $(".pagination>li:eq(i)>a").attr("data-value");
+                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.recent.movie?s_type="+s_type+"&curPage="+num+"&val="+val);
+                }
+            },
+            error : function () {
+                console.log(e);
+            }
+        });
+    });
+
+    $("#orderByReviewCount").on("click", function (){
+        var s_type = "${s_type}";
+        var val = "${val}";
+        $.ajax({
+            url : "/orderBy.reviewCount.movie?s_type="+s_type+"&curPage=1&val="+val,
+            dataType : "json",
+            success : function (data) {
+                $(".movieLi").empty();
+                showList(data);
+
+                let num;
+                for(let i =1; i<13; i++){
+                    num = $(".pagination>li:eq(i)>a").attr("data-value");
+                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.reviewCount.movie?s_type="+s_type+"&curPage="+num+"&val="+val);
+                }
+            },
+            error : function () {
+                console.log(e);
+            }
+        });
+    });
+    $("#orderByHighAveragePoint").on("click", function (){
+        var s_type = "${s_type}";
+        var val = "${val}";
+        $.ajax({
+            url : "/orderBy.avgPoint.movie?s_type="+s_type+"&curPage=1&val="+val,
+            dataType : "json",
+            success : function (data) {
+                $(".movieLi").empty();
+                showList(data);
+
+                let num;
+                for(let i =1; i<13; i++){
+                    num = $(".pagination>li:eq(i)>a").attr("data-value");
+                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.avgPoint.movie?s_type="+s_type+"&curPage="+num+"&val="+val);
+                }
+            },
+            error : function (e) {
+                console.log(e);
+            }
+        });
+    });
+
 </script>
 </body>
 </html>

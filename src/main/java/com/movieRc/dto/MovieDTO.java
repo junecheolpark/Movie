@@ -77,4 +77,17 @@ public class MovieDTO {
    public void setDirectors(String directors) {
       this.directors = directors;
    }
+
+   @Override
+   public String toString() {
+      return "MovieDTO{" +
+              "movieCd='" + movieCd + '\'' +
+              ", movieNm='" + movieNm + '\'' +
+              ", movieNmEn='" + movieNmEn + '\'' +
+              ", prdtYear='" + prdtYear + '\'' +
+              ", nationAlt='" + nationAlt + '\'' +
+              ", genreAlt='" + genreAlt + '\'' +
+              ", directors='" + directors + '\'' +
+              '}';
+   }
 }
