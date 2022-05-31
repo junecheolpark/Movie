@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -202,6 +203,7 @@
             font-size: 0.7em;
             text-align: right;
         }
+
         .searchDiv {
             height: 1%;
             display: flex;
@@ -345,7 +347,9 @@
                 display: none;
             }
         }
-
+        #navibar {
+            background-color: black;
+        }
         @media (min-width: 1000px) {
             #navibar {
                 display: none;
@@ -428,8 +432,8 @@
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search" name="val">
-                        <input type="hidden" name = 's_type' value="movieNm">
-                        <input type="hidden" name = 'curPage' value="1">
+                        <input type="hidden" name='s_type' value="movieNm">
+                        <input type="hidden" name='curPage' value="1">
                         <button class="searchBtn btn btn-outline-success" type="button">Search</button>
                     </form>
                 </div>
@@ -495,9 +499,9 @@
                                         type="search"
                                         placeholder="Search"
                                         aria-label="Search"
-                                        name = "val">
-                                <input type="hidden" name = 's_type' value="movieNm">
-                                <input type="hidden" name = 'curPage' value="1">
+                                        name="val">
+                                <input type="hidden" name='s_type' value="movieNm">
+                                <input type="hidden" name='curPage' value="1">
                                 <button class="searchBtn btn btn-outline-success" type="button">Search</button>
                             </form>
                         </div>
@@ -562,7 +566,13 @@
                             <span class="movieCategory">${movieDTO.genreAlt}</span>
                         </div>
                         <div class="avgPointDiv">
-                            <span class="movieAvgPoint">5.0</span>
+                            <span class="movieAvgPoint">
+                                <c:forEach items="${avgPoints}" var="i">
+                                    <c:if test="${i.key eq movieDTO.movieCd}">
+                                        <fmt:formatNumber value="${i.value}" type="pattern" pattern="0.00"/>
+                                    </c:if>
+                                </c:forEach>
+                            </span>
                         </div>
                     </div>
                 </c:forEach>
@@ -578,38 +588,44 @@
         <ul class="pagination d-flex justify-content-center">
             <c:if test="${empty s_type}">
                 <li class="page-item prevBtn"><a class="page-link"
-                                                 href="/listLookup.movie?curPage=${hashMap.naviStart-1}" data-value="${hashMap.naviStart-1}">Previous</a>
+                                                 href="/listLookup.movie?curPage=${hashMap.naviStart-1}"
+                                                 data-value="${hashMap.naviStart-1}">Previous</a>
                 </li>
                 <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
                     <li class="page-item"><a class="page-link"
-                                             href="/listLookup.movie?curPage=${pageNum}" data-value="${pageNum}">${pageNum}</a>
+                                             href="/listLookup.movie?curPage=${pageNum}"
+                                             data-value="${pageNum}">${pageNum}</a>
                     </li>
                 </c:forEach>
                 <li class="page-item nextBtn"><a class="page-link"
-                                                 href="/listLookup.movie?curPage=${hashMap.naviEnd+1}" data-value="${hashMap.naviEnd+1}">Next</a>
+                                                 href="/listLookup.movie?curPage=${hashMap.naviEnd+1}"
+                                                 data-value="${hashMap.naviEnd+1}">Next</a>
                 </li>
             </c:if>
             <c:if test="${not empty s_type}">
                 <li class="page-item prevBtn"><a class="page-link"
-                                                 href="/search.movie?s_type=${s_type}&curPage=${hashMap.naviStart-1}&val=${val}" data-value="${hashMap.naviStart-1}">Previous</a>
+                                                 href="/search.movie?s_type=${s_type}&curPage=${hashMap.naviStart-1}&val=${val}"
+                                                 data-value="${hashMap.naviStart-1}">Previous</a>
                 </li>
                 <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
                     <li class="page-item"><a class="page-link"
-                                             href="/search.movie?s_type=${s_type}&curPage=${pageNum}&val=${val}" data-value="${pageNum}">${pageNum}</a>
+                                             href="/search.movie?s_type=${s_type}&curPage=${pageNum}&val=${val}"
+                                             data-value="${pageNum}">${pageNum}</a>
                     </li>
                 </c:forEach>
                 <li class="page-item nextBtn"><a class="page-link"
-                                                 href="/search.movie?s_type=${s_type}&curPage=${hashMap.naviEnd+1}&val=${val}"data-value="${hashMap.naviEnd+1}">Next</a>
+                                                 href="/search.movie?s_type=${s_type}&curPage=${hashMap.naviEnd+1}&val=${val}"
+                                                 data-value="${hashMap.naviEnd+1}">Next</a>
                 </li>
             </c:if>
         </ul>
     </nav>
     <div class="searchDiv">
         <form method="get" class="searchForm" action="/search.movie">
-            <input type="text" id="searchInput" class = "searchInput" name="val" placeholder="검색">
-            <input type="hidden" name = 's_type' value="movieNm">
-            <input type="hidden" name = 'curPage' value="1">
-            <button type="button" id ="searchBtn" class = "searchBtn">검색</button>
+            <input type="text" id="searchInput" class="searchInput" name="val" placeholder="검색">
+            <input type="hidden" name='s_type' value="movieNm">
+            <input type="hidden" name='curPage' value="1">
+            <button type="button" id="searchBtn" class="searchBtn">검색</button>
         </form>
     </div>
 </div>
@@ -746,36 +762,52 @@
         location.href = "/search.movie?s_type=genreAlt&curPage=1&val=" + val;
     });
 
-    $(".searchBtn").on("click", function (){
+    $(".searchBtn").on("click", function () {
         let val = $(this).siblings($(".searchInput")).val();
-        if(val!==""){
+        if (val !== "") {
             let searchForm = $(this).parent(".searchForm");
             searchForm.submit();
         }
-        if(val===""){
+        if (val === "") {
             alert("검색어를 입력하세요.");
         }
     });
-    function showList(data){
-        $.each(data, function (index, item){
+
+    function showList(data) {
+        $.each(data, function (index, item) {
             let movie = $("<div>").addClass("movie col-6 col-lg-4");
             let movieImgDiv = $("<div>").addClass("movieImgDiv");
             let img = $("<img src='/NoImg.webp'>");
             let movieNameDiv = $("<div>").addClass("movieNameDiv");
             let movieName = $("<span>").addClass("movieName");
             let movieNameAnchor = $("<a>").attr("href", "").html(item.movieNm); // 수정 필요
-            let directors = $("<span>").addClass("directors");
+            let directors = $("<span>").addClass("directors").html(item.directors);
+            console.log(item);
+            if(item.directors == null){
+                let directors = $("<span>").addClass("directors").html("등록된 감독이 없습니다.");
+            }
             let categoryDiv = $("<div>").addClass("categoryDiv");
             let movieCategory = $("<span>").addClass("movieCategory").html(item.genreAlt);
-            let avgPointDiv = $("<div>").add("avgPointDiv");
-            let movieAvgPoint = $("<span>").addClass("movieAvgPoint").html("5.0"); // 수정 필요
+            let avgPointDiv = $("<div>").addClass("avgPointDiv");
+
+            $.ajax({
+                url : "/findAvgPoint.movie?movieCd=" + item.movieCd,
+                dataType : "text",
+                success : function (avg) {
+                   avg = avg.padEnd(4, ".00");
+                   let movieAvgPoint = $("<span>").addClass("movieAvgPoint").html(avg);
+                   avgPointDiv.append(movieAvgPoint);
+                },
+                error : function (e) {
+                    console.log(e);
+                }
+            })
 
             movieImgDiv.append(img);
             movieName.append(movieNameAnchor);
             movieNameDiv.append(movieName);
             movieNameDiv.append(directors);
             categoryDiv.append(movieCategory);
-            avgPointDiv.append(movieAvgPoint);
 
             movie.append(movieImgDiv);
             movie.append(movieNameDiv);
@@ -786,66 +818,66 @@
         });
     }
 
-    $("#orderByRecentMovie").on("click", function (){
+    $("#orderByRecentMovie").on("click", function () {
         var s_type = "${s_type}";
         var val = "${val}";
         $.ajax({
-            url : "/orderBy.recent.movie?s_type="+s_type+"&curPage=1&val="+val,
-            dataType : "json",
-            success : function (data) {
+            url: "/orderBy.recent.movie?s_type=" + s_type + "&curPage=1&val=" + val,
+            dataType: "json",
+            success: function (data) {
                 $(".movieLi").empty();
                 showList(data);
 
                 let num;
-                for(let i =1; i<13; i++){
+                for (let i = 1; i < 13; i++) {
                     num = $(".pagination>li:eq(i)>a").attr("data-value");
-                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.recent.movie?s_type="+s_type+"&curPage="+num+"&val="+val);
+                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.recent.movie?s_type=" + s_type + "&curPage=" + num + "&val=" + val);
                 }
             },
-            error : function () {
+            error: function () {
                 console.log(e);
             }
         });
     });
 
-    $("#orderByReviewCount").on("click", function (){
+    $("#orderByReviewCount").on("click", function () {
         var s_type = "${s_type}";
         var val = "${val}";
         $.ajax({
-            url : "/orderBy.reviewCount.movie?s_type="+s_type+"&curPage=1&val="+val,
-            dataType : "json",
-            success : function (data) {
+            url: "/orderBy.reviewCount.movie?s_type=" + s_type + "&curPage=1&val=" + val,
+            dataType: "json",
+            success: function (data) {
                 $(".movieLi").empty();
                 showList(data);
 
                 let num;
-                for(let i =1; i<13; i++){
+                for (let i = 1; i < 13; i++) {
                     num = $(".pagination>li:eq(i)>a").attr("data-value");
-                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.reviewCount.movie?s_type="+s_type+"&curPage="+num+"&val="+val);
+                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.reviewCount.movie?s_type=" + s_type + "&curPage=" + num + "&val=" + val);
                 }
             },
-            error : function () {
+            error: function () {
                 console.log(e);
             }
         });
     });
-    $("#orderByHighAveragePoint").on("click", function (){
+    $("#orderByHighAveragePoint").on("click", function () {
         var s_type = "${s_type}";
         var val = "${val}";
         $.ajax({
-            url : "/orderBy.avgPoint.movie?s_type="+s_type+"&curPage=1&val="+val,
-            dataType : "json",
-            success : function (data) {
+            url: "/orderBy.avgPoint.movie?s_type=" + s_type + "&curPage=1&val=" + val,
+            dataType: "json",
+            success: function (data) {
                 $(".movieLi").empty();
                 showList(data);
 
                 let num;
-                for(let i =1; i<13; i++){
+                for (let i = 1; i < 13; i++) {
                     num = $(".pagination>li:eq(i)>a").attr("data-value");
-                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.avgPoint.movie?s_type="+s_type+"&curPage="+num+"&val="+val);
+                    $(".pagination>li:eq(i)>a").attr("href", "/orderBy.avgPoint.movie?s_type=" + s_type + "&curPage=" + num + "&val=" + val);
                 }
             },
-            error : function (e) {
+            error: function (e) {
                 console.log(e);
             }
         });

@@ -305,13 +305,13 @@ public class MovieDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
             while (resultSet.next()) {
-                String movieCd = resultSet.getString(2);
-                movieNm = resultSet.getString(3);
-                String movieNmen = resultSet.getString(4);
-                String prdtYear = resultSet.getString(5);
-                String nationAlt = resultSet.getString(6);
-                String genreAlt = resultSet.getString(7);
-                String directors = resultSet.getString(8);
+                String movieCd = resultSet.getString(1);
+                movieNm = resultSet.getString(2);
+                String movieNmen = resultSet.getString(3);
+                String prdtYear = resultSet.getString(4);
+                String nationAlt = resultSet.getString(5);
+                String genreAlt = resultSet.getString(6);
+                String directors = resultSet.getString(7);
 
                 arrayList.add(new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt, directors));
             }
@@ -391,8 +391,9 @@ public class MovieDAO {
                 "            and genreAlt like ?" +
                 "            order by 8 desc) c)" +
                 "where num between ? and ?";
+
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, genreAlt);
+            preparedStatement.setString(1, "%"+genreAlt+"%");
             preparedStatement.setInt(2, start);
             preparedStatement.setInt(3, end);
 
@@ -423,8 +424,9 @@ public class MovieDAO {
                 "            and movieNm like ?" +
                 "            order by 8 desc) c)" +
                 "where num between ? and ?";
+
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, movieNm);
+            preparedStatement.setString(1, "%"+movieNm+"%");
             preparedStatement.setInt(2, start);
             preparedStatement.setInt(3, end);
 

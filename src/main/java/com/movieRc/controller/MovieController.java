@@ -2,6 +2,7 @@ package com.movieRc.controller;
 
 import com.google.gson.Gson;
 import com.movieRc.dao.MovieDAO;
+import com.movieRc.dao.ReviewDAO;
 import com.movieRc.dto.MovieDTO;
 import com.movieRc.util.Pagination;
 
@@ -35,6 +36,7 @@ public class MovieController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String uri = request.getRequestURI();
         MovieDAO movieDAO = new MovieDAO();
+        ReviewDAO reviewDAO = new ReviewDAO();
         Pagination pagination = new Pagination();
         System.out.println("요청 uri : " +uri);
 
@@ -46,10 +48,15 @@ public class MovieController extends HttpServlet {
                 int start = (int) hashMap.get("postStart");
                 int end = (int) hashMap.get("postEnd");
                 ArrayList<MovieDTO> arrayList = movieDAO.selectAll(start, end);
+                HashMap<String, Integer> avgPoints = new HashMap<>();
 
+                for(int i = 0; i <arrayList.size(); i++){
+                     avgPoints = reviewDAO.getAvgPointHashMap(avgPoints, arrayList.get(i).getMovieCd());
+                }
                 request.setAttribute("totalCount", totalCount);
                 request.setAttribute("hashMap", hashMap);
                 request.setAttribute("arrayList", arrayList);
+                request.setAttribute("avgPoints", avgPoints);
                 request.getRequestDispatcher("/movie/listLookup.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -85,10 +92,18 @@ public class MovieController extends HttpServlet {
 
                     arrayList = movieDAO.selectByMovieNm(val, start, end);
                 }
+
+                HashMap<String, Integer> avgPoints = new HashMap<>();
+
+                for(int i = 0; i <arrayList.size(); i++){
+                    avgPoints = reviewDAO.getAvgPointHashMap(avgPoints, arrayList.get(i).getMovieCd());
+                }
+
                 request.setAttribute("totalCount", totalCount);
                 request.setAttribute("s_type", s_type);
                 request.setAttribute("val", val);
                 request.setAttribute("hashMap", hashMap);
+                request.setAttribute("avgPoints", avgPoints);
                 request.setAttribute("arrayList", arrayList);
                 request.getRequestDispatcher("/movie/listLookup.jsp").forward(request, response);
 
@@ -198,7 +213,6 @@ public class MovieController extends HttpServlet {
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
             HashMap<String, Object> hashMap = new HashMap<>();
             int totalCount = 0;
-            System.out.println(s_type + " : " +val);
 
             try{
                 if(s_type.equals("")){
@@ -231,15 +245,20 @@ public class MovieController extends HttpServlet {
                     arrayList = movieDAO.selectByMovieNm_OrderByAvgPoint(val,start,end);
                 }
 
-//                request.setAttribute("totalCount", totalCount);
-//                request.setAttribute("hashMap", hashMap);
-//                request.setAttribute("arrayList", arrayList);
-//                request.setAttribute("s_type", s_type);
-//                request.setAttribute("val", val);
-//                request.getRequestDispatcher("/movie/listLookup.jsp").forward(request, response);
                 Gson gson = new Gson();
                 String rs = gson.toJson(arrayList);
                 response.getWriter().append(rs);
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        } else if (uri.equals("/findAvgPoint.movie")){
+            String movieCd = request.getParameter("movieCd");
+            try{
+                int avg = reviewDAO.getAvgPoint(movieCd);
+                String rs = String.valueOf(avg);
+                response.getWriter().append(rs);
+
             } catch (Exception e){
                 e.printStackTrace();
             }
