@@ -783,7 +783,7 @@
             let movieNameAnchor = $("<a>").attr("href", "").html(item.movieNm); // 수정 필요
             let directors = $("<span>").addClass("directors").html(item.directors);
             console.log(item);
-            if(item.directors == null){
+            if(item.directors.length===0){
                 let directors = $("<span>").addClass("directors").html("등록된 감독이 없습니다.");
             }
             let categoryDiv = $("<div>").addClass("categoryDiv");
