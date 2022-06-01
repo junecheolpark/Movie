@@ -1,17 +1,19 @@
-package com.review.dto;
+package com.movieRc.dto;
 // 리뷰 DTO
 public class ReviewDTO {
 private int seq_review;
 private String user_nickname;
 private String r_content;
 private String r_date;
+private int r_grade;
 private String movieCd;
 private String user_id;
 private String user_category;
 
+
 public ReviewDTO() {}
 
-public ReviewDTO(int seq_review, String user_nickname, String r_content, String r_date, String movieCd,
+public ReviewDTO(int seq_review, String user_nickname, String r_content, String r_date, int r_grade, String movieCd,
 		String user_id, String user_category) {
 	super();
 	this.seq_review = seq_review;
@@ -21,6 +23,7 @@ public ReviewDTO(int seq_review, String user_nickname, String r_content, String 
 	this.movieCd = movieCd;
 	this.user_id = user_id;
 	this.user_category = user_category;
+	this.r_grade = r_grade;
 }
 
 public int getSeq_review() {
@@ -79,11 +82,21 @@ public void setUser_category(String user_category) {
 	this.user_category = user_category;
 }
 
+
+
+public int getR_grade() {
+	return r_grade;
+}
+
+public void setR_grade(int r_grade) {
+	this.r_grade = r_grade;
+}
+
 @Override
 public String toString() {
 	return seq_review + " : " + user_nickname + " : " + r_content
 			+ " : " + r_date + " : " + movieCd + " : " + user_id + " : "
-			+ user_category;
+			+ user_category + " : " + r_grade;
 }
 
 
