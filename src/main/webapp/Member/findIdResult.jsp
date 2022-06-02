@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<title>비밀번호 찾기</title>
+<title>아이디 찾기</title>
 <style>
 body {
 	background-color: black;
@@ -140,7 +143,6 @@ a {
 }
 </style>
 </head>
-
 <body>
 	<!-- Header -->
 	<header class="mb-3 border-bottom">
@@ -249,7 +251,61 @@ a {
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-5">
-				
+				<c:if test="${rs eq true}">
+					<div class="card card-custom">
+						<div class="card-header">
+							<h4>아이디 찾기</h4>
+						</div>
+						<div class="card-body">
+							<div class="form-group p-2 d-flex justify-content-center">
+								<p>회원님의 아이디는 ${user_id} 입니다.</p>
+							</div>
+							<div class="row p-3 justify-content-center">
+								<div
+									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+									<button type="button" class="btn btn-dark w-100" id="loginBtn">로그인</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script>
+						$("#loginBtn").on("click", function() {
+							location.href = "/Member/login.jsp";
+						})
+					</script>
+				</c:if>
+				<c:if test="${rs eq false}">
+					<div class="card card-custom">
+						<div class="card-header">
+							<h4>아이디 찾기</h4>
+						</div>
+						<div class="card-body">
+							<div class="form-group p-2 d-flex justify-content-center">
+								<p>등록된 정보가 없습니다.</p>
+							</div>
+							<div class="row p-3 justify-content-center">
+								<div
+									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+									<button type="button" class="btn btn-dark w-100" id="againBtn">다시
+										찾기</button>
+								</div>
+								<div
+									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+									<button type="button" class="btn btn-dark w-100" id="signupBtn">회원가입</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script>
+						$("#againBtn").on("click", function() {
+							location.href = "/Member/findId.jsp";
+						})
+
+						$("#signupBtn").on("click", function() {
+							location.href = "/Member/signup.jsp";
+						})
+					</script>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -350,8 +406,10 @@ a {
                             </ul> -->
 			</div>
 		</div>
-
 	</footer>
-</body>
 
+	<script>
+		
+	</script>
+</body>
 </html>
