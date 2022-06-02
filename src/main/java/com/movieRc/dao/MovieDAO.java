@@ -446,4 +446,26 @@ public class MovieDAO {
             return arrayList;
         }
     }
+
+    public MovieDTO getMovieDTO_byMovieCd(String movieCd) throws Exception {
+        String sql = "select * from tbl_movie where moviecd = ?";
+
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, movieCd);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                movieCd = resultSet.getString(1);
+                String movieNm = resultSet.getString(2);
+                String movieNmen = resultSet.getString(3);
+                String prdtYear = resultSet.getString(4);
+                String nationAlt = resultSet.getString(5);
+                String genreAlt = resultSet.getString(6);
+                String directors = resultSet.getString(7);
+
+                return new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt, directors);
+            }
+            return null;
+        }
+    }
 }
