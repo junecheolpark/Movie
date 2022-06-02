@@ -15,7 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <title>MypageModify</title>
+    <title>MypagePopup</title>
 
     <style>
         body {
@@ -318,221 +318,82 @@
         <div class="contents row text-black">
             <div class="contentsBox">
                 <div class="contentsModifyBox">
-                    <div class="contentsImgBox">
-                        <img class="profileImg" src="/Movie/images/profileImg.png">
-                    </div>
-                    <br><p>${loginSession.nickname}</p>
                     <div class="contentsModify">
                         <div class="container w-50">
-                            <form id="imgChangeForm" action="/imgModifyProc.file" method="post" enctype="multipart/form-data">
-                                <div class="row p-2">
-                                    <h2>내 정보 수정</h2>
-                                    <div class="col-12">
-                                        <label for="profileImg" class="form-label">프로필 사진</label><br>
-                                        <input type="file" name="file">
-                                        <button type="submit" class="btn btn-outline-info">프로필 사진 변경</button>
-                                    </div>
-                                </div>
-                             </form>
-                             <form id="modifyForm" action="/modifyProc.mem" method="post">
-                                <div class="row p-2">
-                                    <div class="col-12">
-                                        <label for="nickname" class="form-label">닉네임</label>
-                                    </div>
-                                    <div class="col-8 mb-2">
-                                        <input type="text" class="form-control" id="nickname" name="nickname" value="${dto.getNickname()}" readonly>
-                                    </div>
-                                    <div class="col-4 mb-2">
-                                        <button type="button" id="checkNicknameBtn" class="btn btn-outline-warning w-100">닉네임 확인</button>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-12 ">
-                                        <label for="password" class="form-label">비밀번호</label>
-                                    </div>
-                                    <div class="col-12 mb-2">
-                                        <input type="password" class="form-control" id="pw" name="pw" readonly>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-12 ">
-                                        <label for="pwCheck" class="form-label">비밀번호 확인</label>
-                                    </div>
-                                    <div class="col-12 mb-2">
-                                        <input type="password" class="form-control" id="pwCheck" readonly>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-12"><label for="phone" class="form-label">휴대폰 번호</label></div>
-                                    <div class="col-4 mb-2">
-                                        <select class="form-select" id="phone1" readonly>
-                                            <option value="010" selected>010</option>
-                                            <option value="011">011</option>
-                                            <option value="016">016</option>
-                                            <option value="017">017</option>
-                                            <option value="018">018</option>
-                                            <option value="019">019</option>
-                                         </select>
-                                    </div>
-                                    <div class="col-4 mb-2">
-                                        <input type="text" class="form-control" id="phone2" readonly>
-                                    </div>
-                                    <div class="col-4 mb-2">
-                                        <input type="text" class="form-control" id="phone3" readonly>
-                                    </div>
-                                    <div class="col d-none">
-                                        <input type="text" id="phone" name="phone">
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col-12"><label for="phone" class="form-label">주소</label></div>
-                                    <div class="col">
-                                        <input type="text" class="form-control" id="postCode" name="postCode" value="${dto.getPostCode()}" placeholder="우편번호" readonly>
-                                    </div>
-                                    <div class="col">
-                                        <button type="button" class="btn btn-outline-primary w-100" id="btnPostCode">우편번호 찾기</button>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col">
-                                        <input type="text" class="form-control" id="roadAddr" name="roadAddr" value="${dto.getRoadAddr()}" placeholder="도로명주소" readonly>
-                                    </div>
-                                </div>
-                                <div class="row p-2">
-                                    <div class="col mb-2">
-                                        <input type="text" class="form-control" id="detailAddr" name="detailAddr" value="${dto.getDetailAddr()}" placeholder="상세주소" readonly>
-                                    </div>
-                                    <div class="col mb-2">
-                                        <input type="text" class="form-control" id="extraAddr" name="extraAddr" value="${dto.getExtraAddr()}" placeholder="읍/면/동" readonly>
-                                    </div>
-                                </div>
-								<div class="row justify-content-center btn-before">
-									<div class="col-4 d-flex justify-content-end">
-										<button type="button" class="btn btn-secondary" id="backBtn">뒤로가기</button>
+						  <form id="checkIdForm" action="/checkId.mem" method="get">
+								<div class='container'>
+									<div class="row m-3 justify-content-center">
+										<div class="col-6 m-2">
+											<input type="text" class="form-control" id="nickname" value="${nickname}" name="nickname" placeholder="nickname 입력">
+										</div>
+										<div class="col-3 m-2">
+											<button type="button" class='btn btn-success' id="checkNickname">중복확인</button>
+										</div>
 									</div>
-									<div class="col-4 d-flex justify-content-start">
-										<button type="button" class="btn btn-primary" id="modifyBtn">수정</button>
+									<div class="row m-2 justify-content-start">
+										<div class="col-4">
+											<span>확인결과 : </span>
+										</div>
+										<div class="col-8">
+											<c:if test="${rs eq 'ok'}">
+												<span>사용 가능한 닉네임입니다.</span>
+											</c:if>
+											<c:if test="${rs eq 'no'}">
+												<span>사용 불가한 닉네임입니다.</span>
+											</c:if>
+										</div>
+									</div>
+									<div class="row m-2 justify-content-center">
+										<div class="col-4 d-flex justify-content-end">
+											<button type="button" class="btn btn-primary" id="useBtn" disabled>사용</button>
+										</div>
+										<div class="col-4 d-flex justify-content-start">
+											<button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
+										</div>
 									</div>
 								</div>
-								<div class="row justify-content-center btn-after d-none">
-									<div class="col-4 d-flex justify-content-end">
-										<button type="button" class="btn btn-secondary" id="cancelBtn">취소</button>
-									</div>
-									<div class="col-4 d-flex justify-content-start">
-										<button type="button" class="btn btn-primary" id="completeBtn">수정완료</button>
-									</div>
-								</div>		
-                            </form>
-                        </div>
-						<script>
-							// 뒤로가기버튼을 눌렀을때 index로 돌아가기
-							$("#backBtn").on("click", function() {
-								location.href = "/";
-							});
+							</form>
+							<script>
+								// 중복확인 버튼을 눌렀을 때 nickname값이 유효한 값이 체크 후에 서버로 중복확인 요청
+								$("#checkNickname").on("click", function(){
+									let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
+									if(!regexNickname.test($("#nickname").val())){
+										alert("형식에 맞지 않는 닉네임입니다.");
+										return; // return 을 만나면 그 즉시 함수가 종료 
+									}
+									$("#checkNicknameForm").submit();
+								})	
 							
-							// 닉네임 확인 버튼 누르면 팝업창 띄우기
-							document.getElementById("checkNicknameBtn").onclick = function(){
-								// 팝업창을 띄우기 위해 필요한 3가지 값 
-								// 1. jsp 경로값 (팝업창을 꾸며주는 jsp 별도로 필요)
-								// 2. 팝업창의 이름값 
-								// 3. 팝업창의 크기, 위치
-								let url = "/nicknameCheckPopup.mem";
-								let name = "닉네임 중복검사";
-								let option = "width=600, height=300, left=500, top=300";
-								window.open(url, name, option);
-							}
+								let useBtn = document.getElementById("useBtn");
 							
-							// 수정버튼을 눌렀을때
-							$("#modifyBtn").on("click", function() {
-								$("input").not("#id").attr("readonly", false); // 닉네임를 제외한 input readonly 제거
-								$("#btnPostCode").attr("disabled", false); // 우편번호찾기 버튼에 걸린 disabled 제거
-								$(".btn-before").css("display", "none"); // 기존의 버튼들 감춰주기
-								$(".btn-after").removeClass("d-none"); // 취소, 완료버튼 보여주기
-							});
-					
-							// 수정화면에서 취소 버튼을 눌렀을때 
-							$("#cancelBtn").on("click", function() {
-								location.href = "/myPage.mem";
-							});
-							
-							// 수정완료버튼 눌렀을 때 
-							$("#completeBtn").on("click", function(){
-								// 닉네임, 전화번호, 주소 빈값/유효한 값인지 확인 
-								let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
-								let regexPhone = /[0-9]{11}/; // 휴대전화 정규식
-								
-								// phone번호 합쳐주는 작업
-								// select박스에서 선택된 값을 가져오는 방법(selected된 옵션의 value값 가져옴)
-								let phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
-								$("#phone").val(phone);
-								
-								
-								// 유효성 검사
-								if(!regexNickname.test($("#nickname").val())){
-									alert("형식에 맞지않는 닉네임입니다.");
-									return;
-								}else if(!regexPhone.test(phone)){ // 숫자 데이터에 대한 별도의 형변환이 필요없음
-									alert("형식에 맞지않는 휴대폰번호입니다.");
-									return;
-								}else if($("#postCode").val() === "" || $("#roadAddr").val() === ""){ // 빈값확인
-									alert("주소를 입력해 주세요.");
-									return;
+								console.log("${rs}");
+								if("${rs}" === "ok"){ // 사용 가능한 닉네임이라면
+									useBtn.disabled = false; // disabled 속성 해지
+								}else{
+									useBtn.disabled = true; // disabled 속성 적용 
 								}
 								
-								$("#modifyForm").submit();
-							})
 							
-					
-							// 휴대폰 번호 셋팅
-							let phone = "${dto.getPhone()}";
-							let phone1 = phone.slice(0, 3);
-							let phone2 = phone.slice(3, 7);
-							let phone3 = phone.slice(7);
-					
-							// 셀렉트 박스에 default selected값 주기
-							$("#phone1").val(phone1).prop("selected", true);
-							$("#phone2").val(phone2);
-							$("#phone3").val(phone3);
-					
-							// 다음 우편번호 api 띄우기
-							$("#btnPostCode").on("click",function() {new daum.Postcode({
-								oncomplete : function(data) {
-								var roadAddr = data.roadAddress; // 도로명 주소 변수
-								var extraRoadAddr = ''; // 참고 항목 변수
-					
-																if (data.bname !== ''
-																		&& /[동|로|가]$/g
-																				.test(data.bname)) {
-																	extraRoadAddr += data.bname;
-																}
-																// 건물명이 있고, 공동주택일 경우 추가한다
-																if (data.buildingName !== ''
-																		&& data.apartment === 'Y') {
-																	extraRoadAddr += (extraRoadAddr !== '' ? ', '
-																			+ data.buildingName
-																			: data.buildingName);
-																}
-																// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-																if (extraRoadAddr !== '') {
-																	extraRoadAddr = ' ('
-																			+ extraRoadAddr + ')';
-																}
-					
-																// 우편번호와 주소 정보를 해당 필드에 넣는다.
-																$("#postCode").val(data.zonecode);
-																$("#roadAddr").val(roadAddr);
-					
-																// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-																if (roadAddr !== '') {
-																	$("#extraAddr").val(
-																			extraRoadAddr);
-																} else {
-																	$("#extraAddr").val("");
-																}
-															}
-														}).open();
-											})
-						</script>
+								useBtn.onclick = function(){ // 사용버튼 클릭	
+									let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
+									if(!regexId.test($("#nickname").val())){
+										alert("형식에 맞지 않는 닉네임입니다.");
+										useBtn.disabled = true;
+										return; // return 을 만나면 그 즉시 함수가 종료 
+									}
+									
+									// 1. 팝업창을 열어줬던 부모창(opener)의 nickname input칸에 사용자가 입력한 nickname를 전달.
+									// 2. 팝업창을 닫음.
+									// 왼쪽은 부모창(회원가입)의 nickname input요소     오른쪽은 팝업창의 nickname input요소 
+									opener.document.getElementById("nickname").value = document.getElementById("nickname").value;
+									self.close(); // 내 자신 창을 닫겠다. 
+								}
+								
+								document.getElementById("cancelBtn").onclick = function(){
+									self.close(); // 취소버튼 클릭 시 팝업 창닫기
+								}
+							</script>
+                        </div>
                     </div>
                 </div>
             </div>

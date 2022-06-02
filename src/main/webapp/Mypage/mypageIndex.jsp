@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <title>MypageIndex</title>
+    <title>Mypage</title>
 
     <style>
         body {
@@ -145,11 +145,11 @@
                 display: none;
             }
         }
-        /* 내가 추가한 스타일 */
+        /* Contents */
         .contents{
             background-color: rgb(237, 241, 244);
         }
-        .box1{
+        .contentsBox{
             width: 1500px;
             height: 195px;
             background-color: white;
@@ -160,7 +160,7 @@
             transform: translateX(-50%);
             text-align: center;
         }
-        .box2{
+        .contentsImgBox{
             width: 80px;
             height: 80px;
             background-color: rgb(237, 241, 244);
@@ -176,11 +176,11 @@
             height: 100%;
             object-fit: cover;
         }
-        .box1 > .btn{
+        .contentsBox > .btn{
             float: right;
             margin: 5px;
         }
-        .box3{
+        .contentsBox2{
             width: 1500px;
             height: 1150px;
             background-color: white;
@@ -190,10 +190,10 @@
             left: 50%;
             transform: translateX(-50%);
         }
-        .box4{
+        .contentsmyWrite{
             margin: 20px;
         }
-        .box5{
+        .contentsmyWriteBox{
             width: 100%;
             height: 1070px;
             border: 1px solid black;
@@ -331,27 +331,35 @@
     <!-- Contents -->
     <div class="contents">
         <div class="contents row text-black">
-            <div class="box1">
-                <div class="box2">
+            <div class="contentsBox">
+                <div class="contentsImgBox">
                     <img class="profileImg" src="/Movie/images/profileImg.png">
                 </div>
-                <br><p>신난 라이언</p>
+                <br><p>${loginSession.nickname}</p>
                 <button type="button" class="btn btn-outline-danger" id="mb_delet">회원 탈퇴</button>
                 <button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
                 <button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
             </div>
-            <div class="box3">
-                <div class="box4">
+            <div class="contentsBox2">
+                <div class="contentsmyWrite">
                     <a href="/" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
                     <a href="/" class="myWrite" id="i_c_inquiry"><strong>작성댓글</strong></a>
                     <a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
                 </div>
-                <div class="box5">
+                <div class="contentsmyWriteBox">
 
                 </div>
             </div>
         </div>
     </div>
+    <script>
+    	$("#i_logout").on("click", function(){ // 로그아웃 요청
+    		location.href = "\logoutProc.mem";
+    	})
+    	$("#i_modify").on("click", function(){ // 내 정보 수정 요청
+			location.href = "/Mypage/mypageModify.jsp;
+		});
+    </script>
 
 
     <!-- Footer -->
