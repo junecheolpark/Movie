@@ -20,6 +20,7 @@
     <style>
         body {
             height: 4000px;
+            min-width: 640px;
         }
 
         * {
@@ -115,24 +116,6 @@
             border-radius: 10px;
         }
 
-        @media screen and (max-width: 992px) {
-            .review {
-                height: 9%;
-            }
-
-            .reviewTitleDiv1 {
-                display: flex;
-            }
-
-            .reviewId {
-                flex-basis: 50%;
-            }
-
-            .reviewPoint {
-                flex-basis: 50%;
-            }
-        }
-
         .movieDiv {
             display: flex;
             height: 50%;
@@ -150,20 +133,8 @@
         .movieDiv img {
             width: 90%;
             height: 90%;
-        }
-
-        @media screen and (max-width: 992px) {
-            .movieDiv img {
-                height: 28%;
-                width: 28%;
-            }
-        }
-
-        @media screen and (max-width: 800px) {
-            .movieDiv img {
-                height: 108px;
-                width: 76px;
-            }
+            min-width: 140px;
+            min-height: 200px;
         }
 
         .reviewDiv {
@@ -216,7 +187,7 @@
         }
 
         .reviewTitle {
-            height: 20%;
+            height: 30%;
             display: flex;
         }
 
@@ -241,23 +212,9 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+
         .reviewContentDiv {
-            height: 60%;
-        }
-        @media screen and (max-width:992px) {
-            .reviewContentDiv {
-                display: flex;
-                align-items: center;
-            }
-            .reviewContent {
-                flex-basis: 80%;
-            }
-            .reviewLike {
-                height: 80% !important;
-                flex-basis: 20%;
-                align-items: center;
-                justify-content: center;
-            }
+            height: 70%;
         }
 
         .reviewContent {
@@ -271,6 +228,7 @@
             padding: 5px;
             margin: 5px;
         }
+
         .reviewLike {
             height: 20%;
             display: flex;
@@ -278,13 +236,66 @@
             gap: 10px;
             padding: 5px;
             margin: 5px;
+            font-size: 0.7em;
+            color: silver;
+            align-items: center;
+
         }
 
         .reviewLike button {
             height: 30px;
+            border: none;
+            background-color: white;
         }
 
-        #noResult {
+        .reviewLike .likeBtn:hover {
+            color: blue;
+        }
+
+        .reviewLike .hateBtn:hover {
+            color: red;
+        }
+
+
+        @media screen and (max-width: 700px) {
+            #selectionDiv1 {
+                gap: 20px;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .movieDiv img {
+                height: 108px;
+                width: 76px;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            .review {
+                display: grid;
+                grid-template-columns: repeat(10, 10%);
+                grid-template-rows: repeat(10, 10%);
+                height: 9%;
+            }
+
+            .movieDiv {
+                grid-row: 1/11;
+                grid-column: 1/6;
+                height: 100%;
+                border: none;
+            }
+
+            .reviewPoint {
+                display: flex;
+                gap: 5px;
+            }
+
+            .reviewDiv {
+                grid-row: 1/11;
+                grid-column: 7/11;
+                height: 100%;
+            }
+
         }
 
         /*
@@ -603,13 +614,17 @@
                                             <div class="productTitle"><a
                                                     href="##">${movie.value['movieDTO'].movieNm}</a></div>
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
-                                            <div class="productAvgPoint"><fmt:formatNumber value="${movie.value['avg']}"
-                                                                                           type="pattern"
-                                                                                           pattern="0.00"/> (${movie.value['count']})</div>
-
+                                            <div class="productAvgPoint">
+                                                <div class="avgPointStar"></div>
+                                                <div class="avgPointNum" data-value='${movie.value['avg']}'>
+                                                    <fmt:formatNumber value="${movie.value['avg']}"
+                                                                      type="pattern"
+                                                                      pattern="0.00"/> (${movie.value['count']})
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="productDiv2">
-                                            <span class="directors">${movie.value.directors}</span>
+                                            <span class="directors">${movie.value['movieDTO'].directors}</span>
                                         </div>
                                     </div>
                                 </c:if>
@@ -622,7 +637,11 @@
                                             ${reviewDTO.user_nickname}
                                     </div>
                                     <div class="reviewPoint">
-                                        <fmt:formatNumber value="${reviewDTO.r_grade}" type="pattern" pattern="0.00"/>
+                                        <div class="reviewPointStar"></div>
+                                        <div class="reviewPointNum" data-value='${reviewDTO.r_grade}'>
+                                            <fmt:formatNumber value="${reviewDTO.r_grade}" type="pattern"
+                                                              pattern="0.00"/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="reviewTitleDiv2">
@@ -636,8 +655,17 @@
                                         ${reviewDTO.r_content}
                                 </div>
                                 <div class="reviewLike">
-                                    <button>좋아요</button>
-                                    <button>싫어요</button>
+                                    <c:forEach items="${likes}" var="like">
+                                        <c:if test="${reviewDTO.seq_review eq like.key}">
+                                            <input type="hidden" value ='${like.value['status']}' class="likeStatus">
+                                            <span class="likeSpan">${like.value['like']}</span>
+                                            <button type='button' class='likeBtn' value="${reviewDTO.seq_review}">좋아요
+                                            </button>
+                                            <span class="hateSpan">${like.value['hate']}</span>
+                                            <button type="button" class="hateBtn" value="${reviewDTO.seq_review}">싫어요
+                                            </button>
+                                        </c:if>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -806,13 +834,14 @@
     </div>
 </footer>
 <script>
+    console.log("${loginSession.user_id}");
+
     $(".selectByCategory").on("click", function () {
         let val = $(this).val();
-        if(val==='전체'){
+        if (val === '전체') {
             location.href = "/toReviewList.re?curPage=1";
         } else {
             location.href = "/show.re?s_type=genreAlt&curPage=1&val=" + val;
-
         }
     });
 
@@ -825,6 +854,194 @@
     if (!nextBtn) {
         $(".nextBtn").addClass("disabled");
     }
+
+    $.each($(".productAvgPoint .avgPointNum"), function () {
+        let val = $(this).attr("data-value");
+        val = Math.round(val);
+
+        for (let i = 0; i < val; i++) {
+            $(this).siblings('.avgPointStar')[0].append('★');
+        }
+
+        for (let i = 0; i < 5 - val; i++) {
+            $(this).siblings('.avgPointStar')[0].append('☆');
+        }
+    });
+
+    $.each($(".reviewPoint .reviewPointNum"), function () {
+        let val = $(this).attr("data-value");
+        val = Math.round(val);
+
+        for (let i = 0; i < val; i++) {
+            $(this).siblings('.reviewPointStar')[0].append('★');
+        }
+
+        for (let i = 0; i < 5 - val; i++) {
+            $(this).siblings('.reviewPointStar')[0].append('☆');
+        }
+    });
+
+    $.each($(".likeStatus"), function (){
+        let val = $(this).val();
+        if(val === '1'){
+            $(this).siblings(".likeBtn").addClass('active');
+            $(this).siblings(".likeBtn").css("color", "blue");
+        } else if (val === '2') {
+            $(this).siblings(".hateBtn").addClass('active');
+            $(this).siblings(".hateBtn").css("color", "red");
+        }
+    });
+
+    $(".likeBtn").on("click", function (a) {
+        let user_category = "${loginSession.user_category}";
+        let user_id = "${loginSession.user_id}";
+        let seq_review = $(this).val();
+        let likeSpan = $(this).siblings(".likeSpan");
+        let hateSapn = $(this).siblings(".hateSpan");
+
+        if(user_id!==""){
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                $(this).css("color", "black");
+                $(this).siblings(".likeStatus").val("0");
+                let form = $("<form>")
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
+                seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
+                form.append(user_id);
+                form.append(user_category);
+                form.append(seq_review);
+                $("body").append(form);
+                let data = form.serialize();
+
+                $.ajax({
+                    data: 'json',
+                    url: '/likeCancle.reviewList.likeR',
+                    data: data,
+                    method: 'post',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        likeSpan.html(data.like);
+                        hateSapn.html(data.hate);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+
+                });
+            } else {
+                $(this).addClass('active');
+                $(this).css('color', 'blue');
+                $(this).siblings(".hateBtn").removeClass('active');
+                $(this).siblings(".hateBtn").css('color', 'black');
+
+                let form = $("<form>")
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
+                seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
+                form.append(user_id);
+                form.append(user_category);
+                form.append(seq_review);
+                $("body").append(form);
+                let data = form.serialize();
+
+                $.ajax({
+                    data: 'json',
+                    url: '/like.reviewList.likeR',
+                    data: data,
+                    method: 'post',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        likeSpan.html(data.like);
+                        hateSapn.html(data.hate);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+
+                });
+            }
+        } else {
+            alert("회원에게만 제공되는 기능입니다.");
+        }
+    });
+
+
+    $(".hateBtn").on("click", function (a) {
+        let user_category = "${loginSession.user_category}";
+        let user_id = "${loginSession.user_id}";
+        let seq_review = $(this).val();
+        let likeSpan = $(this).siblings(".likeSpan");
+        let hateSapn = $(this).siblings(".hateSpan");
+
+        if(user_id!==""){
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                $(this).css("color", "black");
+                $(this).siblings(".likeStatus").val("0");
+                let form = $("<form>")
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
+                seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
+                form.append(user_id);
+                form.append(user_category);
+                form.append(seq_review);
+                $("body").append(form);
+                let data = form.serialize();
+
+                $.ajax({
+                    data: 'json',
+                    url: '/hateCancle.reviewList.likeR',
+                    data: data,
+                    method: 'post',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        likeSpan.html(data.like);
+                        hateSapn.html(data.hate);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+
+                });
+            } else {
+                $(this).addClass('active');
+                $(this).css('color', 'red');
+                $(this).siblings(".likeBtn").removeClass('active');
+                $(this).siblings(".likeBtn").css('color', 'black');
+
+                let form = $("<form>")
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
+                seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
+                form.append(user_id);
+                form.append(user_category);
+                form.append(seq_review);
+                $("body").append(form);
+                let data = form.serialize();
+
+                $.ajax({
+                    data: 'json',
+                    url: '/hate.reviewList.likeR',
+                    data: data,
+                    method: 'post',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        likeSpan.html(data.like);
+                        hateSapn.html(data.hate);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+
+                });
+            }
+        } else {
+            alert("회원에게만 제공되는 기능입니다.");
+        }
+    });
 </script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package com.movieRc.controller;
 
-import com.google.gson.Gson;
 import com.movieRc.dao.MovieDAO;
 import com.movieRc.dao.ReviewDAO;
 import com.movieRc.dto.MovieDTO;

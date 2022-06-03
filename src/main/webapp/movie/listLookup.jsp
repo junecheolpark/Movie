@@ -20,6 +20,7 @@
     <style>
         body {
             height: 4000px;
+            min-width: 640px;
         }
 
         * {
@@ -133,15 +134,12 @@
         }
 
         .movie div {
-            padding-left: 80px;
-            padding-right: 80px;
+            padding-left: 70px;
+            padding-right: 70px;
         }
 
-        @media screen and (max-width: 992px) {
-            .movie {
-                height: 33.3%;
-                width: 50%;
-            }
+        .avgPointImg {
+            padding: 1px;
         }
 
         .movie .movieImgDiv {
@@ -191,20 +189,26 @@
 
         .movieCategory {
             width: 300px;
-            height: 10%;
             color: silver;
             font-size: 0.8em;
+            display: block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            text-align: right;
+            text-align: left;
+        }
+
+
+        .avgPointDiv {
+            display: flex;
+            color: silver;
+            font-size: 0.7em;
         }
 
         .movieAvgPoint {
             height: 8%;
-            color: silver;
-            font-size: 0.7em;
             text-align: right;
+            flex-basis: 70px;
         }
 
         .searchDiv {
@@ -229,6 +233,58 @@
             flex-basis: 30%;
         }
 
+
+        @media screen and (max-width: 700px) {
+            #selectionDiv1 {
+                gap: 20px;
+            }
+
+            .movieCategory {
+                width: 50px;
+            }
+
+        }
+        @media screen and (max-width: 992px) {
+            .movie {
+                display: grid;
+                grid-template-columns: repeat(10, 10%);
+                grid-template-rows: repeat(10, 10%);
+            }
+
+            .movie div {
+                padding: 0px;
+            }
+
+            .movieImgDiv {
+                grid-column: 1/4;
+                grid-row: 1/11;
+            }
+
+            .movieNameDiv {
+                grid-column: 5/10;
+                grid-row: 2/3;
+            }
+
+            .categoryDiv {
+                grid-column: 5/10;
+                grid-row: 3/4;
+            }
+
+            .avgPointDiv {
+                grid-column: 5/10;
+                grid-row: 4/5;
+            }
+
+        }
+
+
+        @media screen and (max-width: 992px) {
+            .movie {
+                height: 33.3%;
+                width: 50%;
+            }
+        }
+
         a {
             text-decoration: none;
         }
@@ -237,7 +293,6 @@
         .contents {
             height: 500px;
         } */
-
         #navLogo {
             width: 90%;
             height: 90%;
@@ -361,7 +416,7 @@
             }
         }
 
-        .pagination{
+        .pagination {
             margin: 20px;
         }
     </style>
@@ -572,13 +627,17 @@
                             <span class="movieCategory">${movieDTO.genreAlt}</span>
                         </div>
                         <div class="avgPointDiv">
-                            <span class="movieAvgPoint">
-                                <c:forEach items="${points}" var="i">
-                                    <c:if test="${i.key eq movieDTO.movieCd}">
-                                        <fmt:formatNumber value="${i.value['avg']}" type="pattern" pattern="0.00"/> (${i.value['count']})
-                                    </c:if>
-                                </c:forEach>
+                            <span class="avgPointImg">
+
                             </span>
+                            <c:forEach items="${points}" var="i">
+                                <c:if test="${i.key eq movieDTO.movieCd}">
+                                        <span class="movieAvgPoint" data-value='${i.value['avg']}'>
+                                            <fmt:formatNumber value="${i.value['avg']}" type="pattern" pattern="0.00"/> (${i.value['count']})
+                                        </span>
+                                </c:if>
+                            </c:forEach>
+
                         </div>
                     </div>
                 </c:forEach>
@@ -781,7 +840,7 @@
 
     $(".selectByCategory").on("click", function () {
         let val = $(this).val();
-        if(val==='전체'){
+        if (val === '전체') {
             location.href = "/listLookup.movie?curPage=1";
         } else {
             location.href = "/search.movie?s_type=genreAlt&curPage=1&val=" + val;
@@ -812,16 +871,30 @@
 
     $(function () {
         console.log(orderBy);
-        if(orderBy==='recent'){
+        if (orderBy === 'recent') {
             $('#orderByRecentMovie').css("color", "silver");
         }
-        if(orderBy==='reviewCount'){
+        if (orderBy === 'reviewCount') {
             $('#orderByReviewCount').css("color", "silver");
         }
-        if(orderBy==='avgPoint'){
+        if (orderBy === 'avgPoint') {
             $('#orderByHighAveragePoint').css("color", "silver");
         }
     });
+
+    $.each($(".movie .movieAvgPoint"), function () {
+        let points = $(this).attr('data-value');
+        points = Math.round(points);
+
+        for (let i = 0; i < points; i++) {
+            $(this).siblings('.avgPointImg')[0].append('★');
+        }
+
+        for (let i = 0; i < 5 - points; i++) {
+            $(this).siblings('.avgPointImg')[0].append('☆');
+        }
+    })
+
 
     <%--function showList(data) {--%>
     <%--    $.each(data, function (index, item) {--%>

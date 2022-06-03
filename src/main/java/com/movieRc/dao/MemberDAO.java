@@ -1,4 +1,4 @@
-package com.movie.dao;
+package com.movieRc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import com.movieRc.dto.MemberDTO;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
-import com.movie.dto.MemberDTO;
 
 public class MemberDAO {
 	private BasicDataSource bds;

@@ -1,4 +1,4 @@
-package com.movie.utils;
+package com.movieRc.util;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

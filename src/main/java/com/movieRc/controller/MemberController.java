@@ -1,7 +1,6 @@
-package com.movie.controller;
+package com.movieRc.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.movie.dao.MemberDAO;
-import com.movie.dto.MemberDTO;
-import com.movie.utils.EncryptionUtils;
+import com.movieRc.dao.MemberDAO;
+import com.movieRc.util.EncryptionUtils;
+import com.movieRc.dto.MemberDTO;
 
 @WebServlet("*.mem")
 public class MemberController extends HttpServlet {
