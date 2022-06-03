@@ -148,21 +148,14 @@ section#container {
 	background: #ddf;
 }
 
-div.content {
+div.body-wishList {
 	background: #eee;
-}
-
-div.content>.row>.col-4 {
-	height: 300px;
-}
-
-section#container, div.content, aside#aside {
-	padding: 10px;
-}
-
-div.content {
 	width: 80%;
 	float: right;
+}
+
+section#container, div.body-wishList, aside#aside {
+	padding: 10px;
 }
 
 aside#aside {
@@ -182,7 +175,7 @@ section#container::after {
 /* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
         https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
 @media screen and (max-width: 650px) {
-	div.content, aside#aside {
+	div.body-wishList, aside#aside {
 		width: calc(100% - 20px);
 		float: none;
 	}
@@ -196,14 +189,14 @@ section#container::after {
 	margin: 0;
 }
 
-#box {
+#profileBox {
 	background: white;
 	border-radius: 50%;
 	width: 200px;
 	height: 200px;
 }
 
-#box>img {
+#profileBox>img {
 	width: 100%;
 	height: 100%;
 }
@@ -214,14 +207,23 @@ section#container::after {
 	width: 80%;
 }
 
-#imgBox {
+.wishBox {
+	height : 300px;
+}
+
+.imgBox {
+	height: 70%;
+}
+.imgBox>img{
 	width: 80%;
 	height: 80%;
 }
 
-#imgText {
-	height: 20%;
+.imgText {
+	height: 30%;
 }
+
+
 </style>
 </head>
 <body>
@@ -331,7 +333,7 @@ section#container::after {
 			<section id="container">
 				<aside id="aside" class="p-3">
 					<div class="row justify-content-center" id="profile">
-						<div class="col-12 mt-4" id="box">
+						<div class="col-12 mt-4" id="profileBox">
 							<img src="images/오구3.gif">
 						</div>
 
@@ -350,24 +352,25 @@ section#container::after {
 						<button type="button" class="profileBtn btn btn-secondary mb-3">내가 쓴 리뷰</button>
 					</div>
 				</aside>
-				<div class="content">
-					<div class="row p-3">
-						<div class="col-8">
+				<div class="body-wishList">
+					<div class="row p-3 body-wishList-header">
+						<div class="col-7">
 							<span class="fs-4">내가 찜한 영화</span>
-							<span class="fs-6 text-secondary">${totalCnt}건</span>
+							<span id="wishCnt" class="fs-6 text-secondary">${totalCnt}건</span>
 						</div>
-						<div class="col-2">
-							<select class="form-select" aria-label="Default select example">
-								<option selected>등록순</option>
-								<option value="1">이름순(영문)</option>
-								<option value="2">이름순(국문)</option>
+						<div class="col-3">
+							<select id="selectBox" class="form-select">
+								<option value="1" selected>등록순</option>
+								<option value="2">이름순(영문)</option>
+								<option value="3">이름순(국문)</option>
 							</select>
 						</div>
 						<div class="col-2">
-							<button type="button" class="btn btn-secondary">확인</button>
+							<button type="button" class="btn btn-secondary" id="selectBtn">확인</button>
 						</div>
 					</div>
-
+					
+					<div class="body-wishList-content">
 					<c:choose>
 						<c:when test="${wishList.size() == 0}">
 							<div class="row">
@@ -376,30 +379,24 @@ section#container::after {
 						</c:when>
 						
 						<c:otherwise>
-							<c:set var="i" value="0"></c:set>
-							<c:set var="j" value="3"></c:set>
-							<c:forEach items="${wishList}" var="wishList">
-								<c:if test="${i%j == 0}">
-									<div class="row p-3">
-								</c:if>
-								<div class="col-4">
-									<div class="imgBox">
-										<img class="posters" src="images/어벤져스.jpg">
-									</div>
-									<div class="imgText">
-										<p>${wishList.movieNm} ${wishList.movieNmEn}</p>
-						                <p>${wishList.prdtYear}년 개봉</p>
-										<button type="button" class="btn btn-secondary">리뷰보기</button>
-										<button type="button" class="btn btn-secondary">삭제하기</button>
-									</div>
-								</div>
-								<c:if test="${i%j == j-1}">
-									</div>
-								</c:if>
-								<c:set var="i" value="${i+1}"></c:set>
-							</c:forEach>
+							<div class="row p-3">
+                        		<c:forEach items="${wishList}" var="wishList">
+                            		<div class="wishBox col-4 mb-3">
+                                		<div class="imgBox">
+                                			<img class="posters" src="">
+                                		</div>
+                                		<div class="imgText">
+                                			<p class="mb-0">${wishList.movieNm} ${wishList.movieNmEn}</p>
+                                    		<p class="mb-0 text-secondary">${wishList.prdtYear}년 개봉</p>
+                                			<button type="button" class="btn btn-secondary">리뷰보기</button>
+                                			<button type="button" class="deleteWish btn btn-secondary" value="${wishList.seq_basket}">삭제하기</button>
+			                			</div>
+                            		</div>
+                        		</c:forEach>
+                    		</div>
 						</c:otherwise>						
 					</c:choose>
+					</div>
 				</div>
 			</section>
 		</div>
@@ -506,7 +503,125 @@ section#container::after {
 	</footer>
 
 	<script>
+	
+		function sortWish(option){
+			let url;
+			if(option == 1){ //등록순
+				url = "/sortbyAdd.wish";
+			}else if(option == 2){ // 영어이름순
+				url = "/sortbyNameEn.wish";
+			}else if(option == 3){ // 한글이름순
+				url = "/sortbyName.wish";
+			}
+			 $.ajax({
+				url: url
+				, type : "get"
+				, success: function(data){
+					let list = JSON.parse(data);
+					$(".body-wishList-header").empty();
+					
+					let headCol1 = $("<div>").addClass("col-7");
+					let span1 = $("<span>").addClass("fs-4").html("내가 찜한 영화");
+					let span2 = $("<span>").addClass("fs-6 text-secondary").attr("id", "wishCnt").html(list.length + "건");
+					headCol1.append(span1, " ", span2);
+					
+					let headCol2 = $("<div>").addClass("col-3");
+					let selectBox = $("<select>").addClass("form-select").attr("id", "selectBox");
+					
+					let opt1 = $("<option>").html("등록순").val(1);
+					let opt2 = $("<option>").html("이름순(영문)").val(2);
+					let opt3 = $("<option>").html("이름순(국문)").val(3);
+					
+					selectBox.append(opt1, opt2, opt3);
+					headCol2.append(selectBox);
+					
+					let headCol3 = $("<div>").addClass("col-2");
+					let btn = $("<button>").addClass("btn btn-secondary").attr("id", "selectBtn").html("확인");
+					headCol3.append(btn);
+					
+					let rs = $(".body-wishList-header").append(headCol1, headCol2, headCol3);
+					$(".body-wishList").append(rs);
+					
+					//console.log($("#selectBox > option[value='"+option+"']"));
+					$("#selectBox > option[value='"+option+"']").attr("selected", true);
+					
+					console.log(data);
+ 					makeList(data);
+				}, error: function(e){
+					console.log(e);
+				}
+			}) 
+		}
+	
+		/* 정렬 */
+		$(".body-wishList").on("click", "#selectBtn", function(){
+			let option = $("#selectBox").val();
+			sortWish(option);
+		})
 		
+		/* 찜 목록 삭제 */
+		$(".body-wishList-content").on("click", ".deleteWish", function(){
+			let answer = confirm("정말 해당 영화를 찜 목록에서 삭제하시겠습니까?");
+			if(answer){
+				let seq_basket = $(this).val();
+				console.log(seq_basket);
+				
+				$.ajax({
+					url: "/delete.wish"
+					, type : "post"
+					, data : {seq_basket: seq_basket}
+					, success : function(data){
+						if(data === "fail"){
+							alert("찜 영화 삭제에 실패했습니다.");
+						}else{
+							let list = JSON.parse(data);
+							
+							$("#wishCnt").html(list.length + "건");							
+							alert("삭제가 완료되었습니다.");
+							makeList(data);
+						}
+					}, error : function(e){
+						console.log(e);
+					}
+				})
+			}
+		})
+		
+		/* 정렬 목록 만드는 함수 */
+		function makeList(data){
+			let list = JSON.parse(data);
+			$(".body-wishList-content").empty();
+			if(list.length == 0){
+				
+				let p = $("<p>").addClass("text-center fs-5 text-secondary").html("찜한 영화가 존재하지 않습니다.");
+				let div = $("<div>").addClass("row");
+				div.append(p);
+	
+				let rs = $(".body-wishList-content").append(div);
+				$(".body-wishList").append(rs);
+				
+			}else{
+				let row = $("<div>").addClass("row p-3");
+				for(let wishList of list){
+					
+					let col = $("<div>").addClass("wishBox col-4 mb-3");
+					let imgBox = $("<div>").addClass("imgBox");
+					let img = $("<img>").addClass("posters").attr("src", "");
+					let imgText = $("<div>").addClass("imgText");
+					let p1 = $("<p>").addClass("mb-0").html(wishList.movieNm + " " + wishList.movieNmEn);
+					let p2 = $("<p>").addClass("mb-0 text-secondary").html(wishList.prdtYear + "년 개봉");
+					let button1 = $("<button>").addClass("btn btn-secondary").html("리뷰보기");
+					let button2 = $("<button>").addClass("deleteWish btn btn-secondary").html("삭제하기").val(wishList.seq_basket);
+					
+					imgBox.append(img);
+					imgText.append(p1, p2, button1, " ", button2);
+					col.append(imgBox, imgText);
+					row.append(col);
+				}
+				let rs = $(".body-wishList-content").append(row);
+				$(".body-wishList").append(rs);
+			}
+		}
 	</script>
 </body>
 </html>

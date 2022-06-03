@@ -54,7 +54,7 @@ public class BasketDAO {
 
 	// 찜 목록에서 삭제
 	public int delete(int seq_basket) throws Exception{
-		String sql="";
+		String sql="delete from tbl_basket where seq_basket = ?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
 			
@@ -112,7 +112,7 @@ public class BasketDAO {
 		}
 	}
 	// 찜 목록 정렬(이름(영문)순)
-	public ArrayList<BasketDTO> selectByLatest(String user_id) throws Exception{
+	public ArrayList<BasketDTO> selectByNameEn(String user_id) throws Exception{
 		String sql = "select * from tbl_basket where user_id = ? order by movieNmEn";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){

@@ -52,7 +52,8 @@ public class BasketController extends HttpServlet {
 			request.getRequestDispatcher("/Basket/wishlist.jsp").forward(request, response);
 		}else if(uri.equals("/delete.wish")) { // 찜 목록 삭제
 			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginSession");
-			String user_id = dto.getUser_id();
+//			String user_id = dto.getUser_id();
+			String user_id = "abc123";
 			int seq_basket = Integer.parseInt(request.getParameter("seq_basket"));
 			BasketDAO dao = new BasketDAO();
 			try {
@@ -62,11 +63,60 @@ public class BasketController extends HttpServlet {
 					Gson gson = new Gson();
 					String wishList = gson.toJson(list);
 					response.getWriter().append(wishList);
-					
-					int totalCnt = dao.getListCnt();
 				}else {
 					response.getWriter().append("fail");
 				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else if(uri.equals("/sortbyAdd.wish")) {
+			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginSession");
+			//String user_id = dto.getUser_id();
+			String user_id = "abc123";
+			
+			BasketDAO dao = new BasketDAO();
+			try {
+				ArrayList<BasketDTO> list = dao.selectByAdd(user_id);
+				System.out.println(list.toString());
+				Gson gson = new Gson();
+				String wishList = gson.toJson(list);
+				System.out.println(wishList);
+				response.getWriter().append(wishList);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else if(uri.equals("/sortbyName.wish")) {
+			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginSession");
+			//String user_id = dto.getUser_id();
+			String user_id = "abc123";
+			
+			BasketDAO dao = new BasketDAO();
+			try {
+				ArrayList<BasketDTO> list = dao.selectByName(user_id);
+				System.out.println(list.toString());
+				Gson gson = new Gson();
+				String wishList = gson.toJson(list);
+				System.out.println(wishList);
+				response.getWriter().append(wishList);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else if(uri.equals("/sortbyNameEn.wish")) {
+			MemberDTO dto = (MemberDTO)request.getSession().getAttribute("loginSession");
+			//String user_id = dto.getUser_id();
+			String user_id = "abc123";
+			
+			BasketDAO dao = new BasketDAO();
+			try {
+				ArrayList<BasketDTO> list = dao.selectByNameEn(user_id);
+				System.out.println(list.toString());
+				Gson gson = new Gson();
+				String wishList = gson.toJson(list);
+				System.out.println(wishList);
+				response.getWriter().append(wishList);
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
