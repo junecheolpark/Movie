@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.*"%>
+<%
+Object obj = request.getAttribute("l_hate");
+
+List<HashMap<String, String>> l_hate = null;
+if (obj != null)
+	l_hate = (List<HashMap<String, String>>) obj;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,6 +215,14 @@ body {
 
 /* -----------------------------------------------------------*/
 /* 리플 박스 */
+#btnLikeUp2 {
+	display: none;
+}
+
+#btnHateUp2 {
+	display: none;
+}
+
 .reply_box {
 	background-color: white;
 	border-radius: 10px;
@@ -236,7 +252,7 @@ body {
 }
 
 /* 별점 reply */
-  #r_grade_star2{
+#r_grade_star2 {
 	display: none;
 }
 
@@ -250,6 +266,7 @@ body {
 	text-align: center;
 	width: em;
 }
+
 .reply-star-rating {
 	/* border: solid 1px #ccc; */
 	display: inline-flex;
@@ -263,23 +280,23 @@ body {
 
 .reply-star-rating1 #r_star {
 	color: #ccc;
-}	
+}
+
 .reply-star-rating input {
- 	 display: none;
+	display: none;
 }
 
 .reply-star-rating label {
- 	 color: #ccc;
- 	 cursor: pointer;
+	color: #ccc;
+	cursor: pointer;
 }
 
-.reply-star-rating :checked~label {
-  	color: rgb(0, 0, 0);
+.reply-star-rating :checked ~label {
+	color: rgb(0, 0, 0);
 }
 
-.reply-star-rating label:hover,
-.reply-star-rating label:hover~label {
- 	 color: #fc0;
+.reply-star-rating label:hover, .reply-star-rating label:hover ~label {
+	color: #fc0;
 }
 
 /* -----------------------------------------------------------*/
@@ -420,9 +437,6 @@ body {
 	</header>
 
 	<!-- Contents -->
-
-
-
 	<div class="container">
 		<div class="row pt-4">
 			<!-- 왼쪽 영화이미지 -->
@@ -431,7 +445,7 @@ body {
 					<img src="images/movie.jpg" width="100%" height="100%">
 				</div>
 				<div class="col ">
-					<p class="m_genre mb-1 mt-1">장르: 액션</p>
+					<p class="m_genre mb-1 mt-1">장르: 액션${l_hate}</p>
 					<p class="m_name my-1">범죄도시(the roundup)</p>
 					<p class="m_genre mb-1 mt-1">개봉: 2022 감독: 이상용</p>
 				</div>
@@ -469,22 +483,21 @@ body {
 					<div class="row container r_grade_box mb-1">
 						<!-- 별점 -->
 						<div class="col-6 r_grade">
-					        평균 <label for="star" class="star">&#9733;</label> ${average}(${cnt}명) 별점주기 <span class="star-rating" id="r_grade_star">
-					            <input type="radio" class="inputStar" id="5-stars" name="r_grade" value="5" /> <label for="5-stars"
-					                class="star">&#9733;</label>
-					            <input type="radio" class="inputStar" id="4-stars" name="r_grade" value="4" /> <label for="4-stars"
-					                class="star">&#9733;</label>
-					            <input type="radio" class="inputStar" id="3-stars" name="r_grade" value="3" /> <label for="3-stars"
-					                class="star">&#9733;</label>
-					            <input type="radio" class="inputStar" id="2-stars" name="r_grade" value="2" /> <label for="2-stars"
-					                class="star">&#9733;</label>
-					            <input type="radio" class="inputStar" id="1-star" name="r_grade" value="1" /> <label for="1-star"
-					                class="star">&#9733;</label>
-					        </span>
-					    </div>
-						<div class="col-5 pe-5 text-end">
-							<a href="#">&#9786공감순</a> <a href="#">&#9734높은평점순</a> <a href="#">&#9734낮은평점순</a> <a href="#">&#9737최신순</a>
+							평균 <label for="star" class="star">&#9733;</label> ${average}(${cnt}명) 별점주기 <span class="star-rating" id="r_grade_star">
+								<input type="radio" class="inputStar" id="5-stars" name="r_grade" value="5" /> <label for="5-stars" class="star">&#9733;</label>
+								<input type="radio" class="inputStar" id="4-stars" name="r_grade" value="4" /> <label for="4-stars" class="star">&#9733;</label>
+								<input type="radio" class="inputStar" id="3-stars" name="r_grade" value="3" /> <label for="3-stars" class="star">&#9733;</label>
+								<input type="radio" class="inputStar" id="2-stars" name="r_grade" value="2" /> <label for="2-stars" class="star">&#9733;</label>
+								<input type="radio" class="inputStar" id="1-star" name="r_grade" value="1" /> <label for="1-star" class="star">&#9733;</label>
+							</span>
 						</div>
+						<c:if test="${not empty reviewList}" var="review">
+							<div class="col-5 pe-5 text-end">
+								<a href="#">&#9786공감순</a> <a href="#" class="highGrade">&#9734높은평점순</a> <a href="#" class="lowGrade">>&#9734낮은평점순</a> <a
+									href="#" class="newGrade">&#9737최신순</a>
+
+							</div>
+						</c:if>
 					</div>
 					<!-- 댓글 입력창 -->
 					<div class="row align-items-center comment_box">
@@ -526,7 +539,7 @@ body {
 	</c:if>
 	<c:if test="${not empty reviewList}">
 		<c:forEach items="${reviewList}" var="review">
-		<from id="like_comentForm" action="/r_modify.re" method="post">
+			<from id="like_comentForm" action="/r_modify.re" method="post">
 			<div class="container">
 				<div class="row pt-4">
 					<div class="col text-end"></div>
@@ -578,18 +591,15 @@ body {
 											</c:if>
 										</span>
 										<!-- 별점 수정시 아직 미완 -->
-								<span class="reply-star-rating " id="r_grade_star2">
-                                    <input type="radio" class="inputStar" id="5-${review.seq_review}" name="r_grade" value="5" />
-                                    <label for="5-${review.seq_review}" class="star">&#9733;</label>
-                                    <input type="radio" class="inputStar" id="4-${review.seq_review}" name="r_grade" value="4" />
-                                    <label for="4-${review.seq_review}" class="star">&#9733;</label>
-                                    <input type="radio" class="inputStar" id="3-${review.seq_review}" name="r_grade" value="3" />
-                                    <label for="3-${review.seq_review}" class="star">&#9733;</label>
-                                    <input type="radio" class="inputStar" id="2-${review.seq_review}" name="r_grade" value="2" />
-                                    <label for="2-${review.seq_review}" class="star">&#9733;</label>
-                                    <input type="radio" class="inputStar" id="1${review.seq_review}" name="r_grade" value="1" />
-                                    <label for="1${review.seq_review}" class="star">&#9733;</label>
-                                </span>
+										<span class="reply-star-rating " id="r_grade_star2"> <input type="radio" class="inputStar"
+											id="5-${review.seq_review}" name="r_grade" value="5" /> <label for="5-${review.seq_review}" class="star">&#9733;</label>
+											<input type="radio" class="inputStar" id="4-${review.seq_review}" name="r_grade" value="4" /> <label
+											for="4-${review.seq_review}" class="star">&#9733;</label> <input type="radio" class="inputStar"
+											id="3-${review.seq_review}" name="r_grade" value="3" /> <label for="3-${review.seq_review}" class="star">&#9733;</label>
+											<input type="radio" class="inputStar" id="2-${review.seq_review}" name="r_grade" value="2" /> <label
+											for="2-${review.seq_review}" class="star">&#9733;</label> <input type="radio" class="inputStar"
+											id="1${review.seq_review}" name="r_grade" value="1" /> <label for="1${review.seq_review}" class="star">&#9733;</label>
+										</span>
 									</div>
 									<div class="col-1 mt-1 text-end r_report">
 										<a href="#"> <img src="images/report.png" height="80%">
@@ -622,15 +632,26 @@ body {
 									</div>
 								</div>
 
-								<div class="row mt-1">
+								<div class="row mt-1 likeBox">
 									<div class="col-lg-7 col-md-5 ms-2">${review.r_date}</div>
-									<div class="col-lg-2 col-md-3 m-1 like_round">
-										<a href="#"> <img src="images/like.png">
-										</a> 123
+
+									<div class="row col-lg-2 col-md-3 m-1 like_round">
+										<div class="col-4 m-0">
+											<input type="image" id="btnLikeUp" class="" value="${review.seq_review}" src="images/likebefore.png"> <input
+												type="image" id="btnLikeUp2" class="" value="${review.seq_review}" src="images/like.png">
+										</div>
+										<div class="col m-0">
+											<span class="">123</span>
+										</div>
 									</div>
-									<div class="col-lg-2 col-md-3 m-1 like_round">
-										<a href="#"> <img src="images/hate.png" height="70%">
-										</a> 123
+									<div class="row col-lg-2 col-md-3 m-1 like_round">
+										<div class="col-4 m-0">
+											<input type="image" id="btnHateUp" class="mt-1" value="${review.seq_review}" src="images/hatebefor.png" height="65%">
+											<input type="image" id="btnHateUp2" class="mt-1" value="${review.seq_review}" src="images/hate.png" height="65%">
+										</div>
+										<div class="col m-0">
+											<span class="">123</span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -641,8 +662,136 @@ body {
 			</from>
 		</c:forEach>
 		<script>
-		//삭제
-	
+			//빨간색 좋아요 눌렀을때
+			$(".likeBox").on("click", "#btnLikeUp", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review", seq_review);
+				let r_like_check = 1;
+				console.log("r_like_check", r_like_check);
+				//버튼 보이기 숨기기
+				$(e.target).css("display", "none");
+				$(e.target).next().css("display", "block");
+
+				$.ajax({
+					url : "/l_modify.like",
+					type : "post",
+					data : {
+						seq_review : seq_review,
+						r_like_check : r_like_check
+					},
+					success : function(data) {
+						console.log(data);
+						if (data === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("좋아요!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+
+			});
+
+			//빨간색 싫어요 눌렀을때
+			$(".likeBox").on("click", "#btnHateUp", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review", seq_review);
+				let r_like_check = 2;
+				console.log("r_like_check", r_like_check);
+				//버튼 보이기 숨기기
+				$(e.target).css("display", "none");
+				$(e.target).next().css("display", "block");
+
+				$.ajax({
+					url : "/l_modify.like",
+					type : "post",
+					data : {
+						seq_review : seq_review,
+						r_like_check : r_like_check
+					},
+					success : function(data) {
+						console.log(data);
+						if (data === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("싫어요!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+			})
+
+			//파란색 좋아요 눌렀을때
+			$(".likeBox").on("click", "#btnLikeUp2", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review", seq_review);
+				let r_like_check = 0;
+				console.log("r_like_check", r_like_check);
+				//버튼 보이기 숨기기
+				$(e.target).css("display", "none");
+				$(e.target).prev().css("display", "block");
+
+				$.ajax({
+					url : "/l_modify.like",
+					type : "post",
+					data : {
+						seq_review : seq_review,
+						r_like_check : r_like_check
+					},
+					success : function(data) {
+						console.log(data);
+						if (data === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("좋아요!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+
+			});
+
+			//파란색 싫어요 눌렀을때
+			$(".likeBox").on("click", "#btnHateUp2", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review", seq_review);
+				let r_like_check = 0;
+				console.log("r_like_check", r_like_check);
+				//버튼 보이기 숨기기
+				$(e.target).css("display", "none");
+				$(e.target).prev().css("display", "block");
+
+				$.ajax({
+					url : "/l_modify.like",
+					type : "post",
+					data : {
+						seq_review : seq_review,
+						r_like_check : r_like_check
+					},
+					success : function(data) {
+						console.log(data);
+						if (data === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("싫어요!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+			})
+
 			// 댓글 수정 버튼에게 이벤트 부여
 			$(".body-review").on(
 					"click",
@@ -659,59 +808,63 @@ body {
 						// textarea 포커스
 						$(e.target).parent().parent().parent().prev().children(
 								"textarea").focus();
-						 // 별점 수정
-				        $(e.target).parent().parent().parent().parent().parent().find("#r_grade_star2").css("display", "inline-flex");
-				        $(e.target).parent().parent().parent().parent().parent().find("#r_grade_star1").css("display", "none");
+						// 별점 수정
+						$(e.target).parent().parent().parent().parent()
+								.parent().find("#r_grade_star2").css("display",
+										"inline-flex");
+						$(e.target).parent().parent().parent().parent()
+								.parent().find("#r_grade_star1").css("display",
+										"none");
 
 					});
 			/**/
 			// 수정 버튼 눌렀을때
-		$(".body-review").on(
-				"click",
-				".btnSave",
-				function(e) {
-					//let movieCd = "${movie.movieCd}";
-					//let movieCd = "${review.movieCd}";
-					//console.log("movieCd:", movieCd);
-					let seq_review = $(e.target).val();
-					console.log("seq_review :", seq_review)
-					let r_content = $(e.target).parent().parent().prev()
-							.children("textarea").val();
-					console.log("r_content: ", r_content);
-					let r_grade = $(e.target).parent().parent().parent()
-							.parent().find("#r_grade_star2").children(
-									'input[name=r_grade]:checked').val()
-					console.log("r_grade : ", r_grade);
-					if (r_content === "") {
-						alert("리뷰를 입력해 주세요!");
-						return;
-					} else if (r_grade === undefined) {
-						alert("별점를 입력해 주세요!");
-						return;
-					}
-
-					$.ajax({
-						url : "/r_modify.re",
-						type : "post",
-						data : {
-							seq_review : seq_review,
-							r_content : r_content,
-							r_grade : r_grade
-						},
-						success : function(rs) {
-							console.log(rs);
-							if (rs === "fail") {
-								alert("댓글 수정에 실패했습니다.");
-							} else {
-								alert("댓글 수정에 성공!");
-								refreshMemList();
-							}
-						},
-						error : function(e) {
-							console.log(e);
+			$(".body-review").on(
+					"click",
+					".btnSave",
+					function(e) {
+						//let movieCd = "${movie.movieCd}";
+						//let movieCd = "${review.movieCd}";
+						//console.log("movieCd:", movieCd);
+						let seq_review = $(e.target).val();
+						console.log("seq_review :", seq_review)
+						let r_content = $(e.target).parent().parent().prev()
+								.children("textarea").val();
+						console.log("r_content: ", r_content);
+						let r_grade = $(e.target).parent().parent().parent()
+								.parent().find("#r_grade_star2").children(
+										'input[name=r_grade]:checked').val()
+						console.log("r_grade : ", r_grade);
+						if (r_content === "") {
+							alert("리뷰를 입력해 주세요!");
+							return;
+						} else if (r_grade === undefined) {
+							alert("별점를 입력해 주세요!");
+							return;
 						}
-					})
-				});
+
+						$.ajax({
+							url : "/r_modify.re",
+							type : "post",
+							data : {
+								seq_review : seq_review,
+								r_content : r_content,
+								r_grade : r_grade
+							},
+							success : function(rs) {
+								console.log(rs);
+								if (rs === "fail") {
+									alert("댓글 수정에 실패했습니다.");
+								} else {
+									alert("댓글 수정에 성공!");
+									refreshMemList();
+								}
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+					});
 			// 삭제 버튼 눌렀을때
 			$(".body-review").on("click", ".delete-review", function(e) {
 				//let movieCd = "${movie.movieCd}";
@@ -741,11 +894,9 @@ body {
 				})
 			});
 			//리로드
-			function refreshMemList(){
+			function refreshMemList() {
 				location.reload();
 			}
-				
-			
 		</script>
 	</c:if>
 	<!-- ---------------------------------------------------------------------------------------------------------------------- -->
@@ -841,19 +992,36 @@ body {
 
 	</footer>
 	<script>
-	$("#btnWrite").on("click", function() {
-		let grade = $("#r_grade_star").children(
-        'input[name=r_grade]:checked').val();
-    console.log(grade);
-		if ($("#r_content").val() === "") {
-			alert("리뷰를 입력해 주세요!");
-			return;
-		}else if (grade === undefined) {
-            alert("별점를 입력해 주세요!");
-            return;
-        }
-		document.getElementById("movie_comment_write").submit();
-	})
+		$(".lowGrade").on("click", function() { // 낮은 평점
+			location.href = "/lowGrade.re";
+		});
+
+		$(".highGrade").on("click", function() { // 높은 평점
+			location.href = "/highGrade.re";
+		});
+		$(".newGrade").on("click", function() { // 높은 평점
+			location.href = "/detailView.re";
+		});
+
+		$("#btnWrite").on(
+				"click",
+				function() {
+					let grade = $("#r_grade_star").children(
+							'input[name=r_grade]:checked').val();
+					console.log(grade);
+					if ($("#r_content").val() === "") {
+						alert("리뷰를 입력해 주세요!");
+						return;
+					} else if (grade === undefined) {
+						alert("별점를 입력해 주세요!");
+						return;
+					}
+					document.getElementById("movie_comment_write").submit();
+				})
+		//리로드
+		function refreshMemList() {
+			location.reload();
+		}
 	</script>
 
 </body>

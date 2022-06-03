@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -29,6 +30,9 @@ public class ReviewDAO {
 		}
 	}
 	
+	public Connection getConnection() throws Exception {
+		return bds.getConnection();
+	}
 	//영화번호를 통한 tbl_review 조회
 	public ArrayList<ReviewDTO> selectAll(String movieCd) throws Exception{
 		String sql = "select * from tbl_review where movieCd = ? order by 1 desc";
@@ -52,27 +56,96 @@ public class ReviewDAO {
 			return list;			
 		}
 	}
-	
+	//높은 평점순 
+		public ArrayList<ReviewDTO> highGrade(String movieCd) throws Exception{
+			String sql = "select * from tbl_review where movieCd = ? order by r_grade desc";
+			try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setString(1, movieCd);
+				ResultSet rs = pstmt.executeQuery();
+				
+				ArrayList<ReviewDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq_review = rs.getInt("seq_review");
+					String user_nickname = rs.getString("user_nickname");
+					String r_content = rs.getString("r_content");
+					String r_date= getStringDate(rs.getDate("r_date"));
+					int r_grade= rs.getInt("r_grade");
+					String user_id = rs.getString("user_id");
+					String user_category = rs.getString("user_category");
+					list.add(new ReviewDTO(seq_review, user_nickname, r_content, r_date,  r_grade, movieCd, user_id, user_category));
+				}
+				return list;			
+			}
+		}
+		//낮은 평점순
+				public ArrayList<ReviewDTO> lowGrade(String movieCd) throws Exception{
+					String sql = "select * from tbl_review where movieCd = ? order by r_grade";
+					try(Connection con = bds.getConnection();
+						PreparedStatement pstmt = con.prepareStatement(sql)){
+						
+						pstmt.setString(1, movieCd);
+						ResultSet rs = pstmt.executeQuery();
+						
+						ArrayList<ReviewDTO> list = new ArrayList<>();
+						while(rs.next()) {
+							int seq_review = rs.getInt("seq_review");
+							String user_nickname = rs.getString("user_nickname");
+							String r_content = rs.getString("r_content");
+							String r_date= getStringDate(rs.getDate("r_date"));
+							int r_grade= rs.getInt("r_grade");
+							String user_id = rs.getString("user_id");
+							String user_category = rs.getString("user_category");
+							list.add(new ReviewDTO(seq_review, user_nickname, r_content, r_date,  r_grade, movieCd, user_id, user_category));
+						}
+						return list;			
+					}
+				}
+
+
 	
 	//리뷰작성
-	public int write(ReviewDTO dto) throws Exception{
-		String sql = "insert into tbl_review values(seq_review.nextval, ?,?,sysdate,?,?,?,?)";
-		
-		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+		public int write(ReviewDTO dto) throws Exception{
+			String sql = "insert into tbl_review values(seq_review.nextval, ?,?,sysdate,?,?,?,?)";
 
-			pstmt.setString(1, dto.getUser_nickname());
-			pstmt.setString(2, dto.getR_content());
-			pstmt.setInt(3, dto.getR_grade());
-			pstmt.setString(4, dto.getMovieCd());
-			pstmt.setString(5, dto.getUser_id());
-			pstmt.setString(6, dto.getUser_category());
 			
+			try(Connection con =getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql)){
 
-			int rs = pstmt.executeUpdate();
-			return rs;
+				pstmt.setString(1, dto.getUser_nickname());
+				pstmt.setString(2, dto.getR_content());
+				pstmt.setInt(3, dto.getR_grade());
+				pstmt.setString(4, dto.getMovieCd());
+				pstmt.setString(5, dto.getUser_id());
+				pstmt.setString(6, dto.getUser_category());
+				
+
+				int rs = pstmt.executeUpdate();
+				
+				return rs;
+			}
 		}
-	}
+		
+		public int writeSelect(String user_id, String r_content) throws Exception{
+			String sql = "select seq_review from tbl_review where user_id = ? and r_content=? order by 1 desc";
+
+			
+			try(Connection con =getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql)){
+
+				pstmt.setString(1, user_id);
+				pstmt.setString(2, r_content);
+
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+					int seq_review = rs.getInt(1);
+					return seq_review;
+				}
+				return 0;
+			}
+		}
+
 	//수정
 	public int modify(String r_content, int r_grade, int seq_review) throws Exception {
 		String sql = "update tbl_review set r_content=?, r_grade=? where seq_review = ?";
@@ -133,6 +206,41 @@ public class ReviewDAO {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		return sdf.format(date);
 	}
+
+
+	public HashMap<String, Integer> getAvgPointHashMap (HashMap<String, Integer> hashMap, String movieCd) throws Exception {
+		String sql = "select a.*, nvl(b.avg, 0)" +
+				"      from tbl_movie a," +
+				"           (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
+				" where a.movieCd = b.movieCd(+)" +
+				"   and a.movieCd = ?";
+		try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+			preparedStatement.setString(1, movieCd);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next()){
+				hashMap.put(movieCd, resultSet.getInt(8));
+			}
+			return hashMap;
+		}
+	}
+
+	public int getAvgPoint(String movieCd) throws Exception {
+		String sql = "select a.*, nvl(b.avg, 0)" +
+				"      from tbl_movie a," +
+				"           (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
+				" where a.movieCd = b.movieCd(+)" +
+				"   and a.movieCd = ?";
+		try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+			preparedStatement.setString(1, movieCd);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next()){
+				return resultSet.getInt(8);
+			} return 0;
+		}
+	}
+
 	
 	
 	

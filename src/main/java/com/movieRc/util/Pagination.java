@@ -41,7 +41,7 @@ public class Pagination {
     // 게시판쪽애서도 활용할 수 있을 거 같아서 별도의 클래스로 만들었어요
     public HashMap<String, Object> getPageNavi(int totalCnt,  int recordPerPage, int naviCntPerPage, int curPage) throws Exception {
         // 총 페이지 수
-        totalPage = totalCnt / recordPerPage + (totalPage % recordPerPage == 0 ? 0 : 1);
+        totalPage = totalCnt / recordPerPage + (totalCnt % recordPerPage == 0 ? 0 : 1);
         // 페이징 처리
         if (curPage < 1) curPage = 1;
         else if (curPage > totalPage) curPage = totalPage;
@@ -49,10 +49,11 @@ public class Pagination {
         // 네비 시작점, 끝점
         naviStart = ((curPage - 1) / naviCntPerPage) * naviCntPerPage + 1;
         naviEnd = naviStart + naviCntPerPage - 1;
+        if(naviEnd>totalPage) naviEnd = totalPage;
 
         // prev, next 버튼
         prevBtn = (naviStart != 1);
-        nextBtn = (naviEnd != totalPage);
+        nextBtn = (naviEnd == totalPage ? false : true);
 
         // 게시글 시작점, 끝점
         postStart = (curPage - 1) * recordPerPage + 1;
@@ -60,6 +61,7 @@ public class Pagination {
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("totalCnt", totalCnt);
+        hashMap.put("totalPage", totalPage);
         hashMap.put("naviStart", naviStart);
         hashMap.put("naviEnd", naviEnd);
         hashMap.put("prevBtn", prevBtn);
