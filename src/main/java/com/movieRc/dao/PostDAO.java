@@ -1,0 +1,227 @@
+package com.movieRc.dao;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
+import com.movieRc.dto.PostDTO;
+
+public class PostDAO {
+	private BasicDataSource bds;
+
+	public PostDAO() {
+		try {
+			Context iCtx = new InitialContext();
+			Context envCtx = (Context) iCtx.lookup("java:comp/env");
+			bds = (BasicDataSource) envCtx.lookup("jdbc/bds");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Connection getConnection() throws Exception {
+		return bds.getConnection();
+	}
+
+	//view_count함수
+	public void updateView_count(int seq_board) throws Exception{
+		String sql = "update tbl_post set p_view_count = p_view_count+1 where seq_post = ?";
+
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setInt(1, seq_board);
+			pstmt.executeUpdate();
+		}
+	}
+	
+	public PostDTO getPost(int seq_board) throws Exception {
+		String sql = "select * from tbl_post where seq_post =? ";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setInt(1, seq_board);
+			pstmt.executeUpdate();
+
+			ResultSet rs = pstmt.executeQuery();
+
+			rs.next();
+			int seq_Post = rs.getInt("seq_Post");
+			String user_nickname = rs.getString("user_nickname");
+			String p_title = rs.getString("p_title");
+			String p_content = rs.getString("p_content");
+			String p_date = getStringDate(rs.getDate("p_date"));
+			int p_view_count = rs.getInt("p_view_count");
+			String user_id = rs.getString("user_id");
+			String user_category = rs.getString("user_category");
+			return new PostDTO(seq_Post, user_nickname, p_title, p_content, p_date, p_view_count, user_id,
+					user_category);
+		}
+	}
+
+	public ArrayList<PostDTO> myPost(String user_nickname1) throws Exception {
+		String sql = "select * from tbl_post where user_nickname =? ";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setString(1, user_nickname1);
+			pstmt.executeUpdate();
+
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<PostDTO> list = new ArrayList<PostDTO>();
+			while (rs.next()) {
+				int seq_Post = rs.getInt("seq_Post");
+				String user_nickname = rs.getString("user_nickname");
+				String p_title = rs.getString("p_title");
+				String p_content = rs.getString("p_content");
+				String p_date = getStringDate(rs.getDate("p_date"));
+				int p_view_count = rs.getInt("p_view_count");
+				String user_id = rs.getString("user_id");
+				String user_category = rs.getString("user_category");
+				list.add(new PostDTO(seq_Post, user_nickname, p_title, p_content, p_date, p_view_count, user_id,
+						user_category));
+			}
+			return list;
+		}
+
+	}
+
+	// 현재가지고있는 시퀀스의 다음순서
+	public int getNewSeq() throws Exception {
+		String sql = "select SEQ_POST.nextval from dual";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			int seq_post = rs.getInt(1);
+			return seq_post;
+		}
+	}
+
+	// 시퀀스번호,유저닉네임,제목,내용,뷰카운트,유저아이디,유저카테고리
+	public int write(PostDTO dto) throws Exception {
+		String sql = "insert into tbl_post values(?,?,?,?,sysdate,?,?,?)";
+
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setInt(1, dto.getSeq_post());
+			pstmt.setString(2, dto.getUser_nickname());
+			pstmt.setString(3, dto.getP_title());
+			pstmt.setString(4, dto.getP_content());
+			pstmt.setInt(5, dto.getP_view_count());
+			pstmt.setString(6, dto.getUser_id());
+			pstmt.setString(7, dto.getUser_category());
+
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
+
+	public String getStringDate(Date date) {
+		// 1900년 02월 02일 00시 00분 00초
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+		return sdf.format(date);
+	}
+
+	public ArrayList<PostDTO> selectAll(int start, int end) throws Exception {
+
+		String sql = "select * from (select tbl_Post.*, row_number() over(order by seq_post desc) as num from tbl_post)"
+				+ " where num between ? and ?";
+
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<PostDTO> list = new ArrayList<>();
+			while (rs.next()) {
+				int seq_Post = rs.getInt("seq_Post");
+				String user_nickname = rs.getString("user_nickname");
+				String p_title = rs.getString("p_title");
+				String p_content = rs.getString("p_content");
+				String p_date = getStringDate(rs.getDate("p_date"));
+				int p_view_count = rs.getInt("p_view_count");
+				String user_id = rs.getString("user_id");
+				String user_category = rs.getString("user_category");
+				list.add(new PostDTO(seq_Post, user_nickname, p_title, p_content, p_date, p_view_count, user_id,
+						user_category));
+			}
+			return list;
+		}
+	}
+
+	public HashMap<String, Object> getPageNavi(int curPage) throws Exception {
+		String sql = "select count(*) as totalCnt from tbl_post";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+
+			int totalCnt = rs.getInt("totalCnt"); // 전체 게시글의 개수
+			int recordCntPerPage = 10; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
+			int naviCntPerPage = 5; // 네비바에 몇개 단위로 페이징을 구성할지
+			int pageTotalCnt = 0; // 총 몇 페이지가 나올지
+
+			/*
+			 * 현재 DB에 148개의 게시글 148개의 게시글 기준으로 10개씩 페이징을 해준다면 총 15개의 페이지가 나와야함. *
+			 * pageTotalCtn = 15;
+			 * 
+			 * 148 / 10 = 14페이지 + 1 = 15페이지 140 / 10 = 14 + 1 = 15... -> 올바르지 않은 값이 됨
+			 * 
+			 * 총 페이지의 개수를 구하는 것.
+			 */
+			if (totalCnt % recordCntPerPage > 0) { // 나머지가 생김(10의 배수가 아님x)
+				pageTotalCnt = totalCnt / recordCntPerPage + 1;
+			} else {
+				pageTotalCnt = totalCnt / recordCntPerPage;
+			}
+
+			/*
+			 * 현재 페이지는 반드시 1 이상 현재 페이지는 총 페이지의 개수를 넘어갈 수 없음
+			 */
+			if (curPage < 1) { // 현재 페이지가 0이거나 혹은 음수일때
+				curPage = 1; // 무조건 첫페이지로 맞춰주기
+			} else if (curPage > pageTotalCnt) { // 현재 페이지가 총 페이지 수보다 크다면
+				curPage = pageTotalCnt; // 무조건 마지막 페이지로 맞춰주기
+			}
+
+			int startNavi = ((curPage - 1) / naviCntPerPage) * naviCntPerPage + 1;
+			int endNavi = startNavi + naviCntPerPage - 1;
+
+			// endNavi가 전체페이지를 넘어갈 수 없음
+			if (pageTotalCnt < endNavi) { // endNavi가 전체 페이지수보다 크다면
+				endNavi = pageTotalCnt; // endNavi를 마지막 페이지로 수정해주겠다.
+			}
+
+			// < > 모양을 넣어줄지 여부에 대한 검사
+			boolean needPrev = true; // startNavi가 1일때 needPrev가 false
+			boolean needNext = true; // endNavi가 마지막 페이지(전체 페이지)와 같을때 needNext가 false
+
+			if (startNavi == 1) {
+				needPrev = false;
+			}
+			if (endNavi == pageTotalCnt) {
+				needNext = false;
+			}
+
+			// map -> key, value
+			// 제네릭 <키에 대한 자료형, 값에 대한 자료형>
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("startNavi", startNavi);
+			map.put("endNavi", endNavi);
+			map.put("needPrev", needPrev);
+			map.put("needNext", needNext);
+
+			return map;
+		}
+
+	}
+}

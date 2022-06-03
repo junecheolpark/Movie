@@ -1,4 +1,4 @@
-package com.movie.dto;
+package com.movieRc.dto;
 
 public class MemberDTO {
 	private String user_id;
