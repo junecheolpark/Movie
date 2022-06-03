@@ -102,6 +102,20 @@ a {
 	background-color: white;
 }
 
+#user_name {
+	border-radius: 10px;
+}
+
+#user_phone {
+	border-radius: 10px;
+}
+
+#findIdBtn{
+	background-color: blueviolet;
+	color: white;
+	border-radius: 8px;
+}
+
 /* Footer */
 .nav-link {
 	color: gray;
@@ -204,7 +218,7 @@ a {
 					<div class="col-2">
 						<a href="/"
 							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-							<img id="navLogo" src="images/logo3.png">
+							<img id="navLogo" src="/resources/images/logo3.png">
 						</a>
 					</div>
 
@@ -221,10 +235,11 @@ a {
 
 							<div class="col-2">
 								<a href="" class="align-items-center "> <img
-									class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
+									class="img-fluid" id="cartIcon"
+									src="/resources/images/basket.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
 								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
-									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
+									class="img-fluid" id="myPageIcon"
+									src="/resources/images/myPage.png"> <!-- <p class="text-light" id="myPage">마이페이지</p> -->
 								</a>
 							</div>
 							<div class="col-5">
@@ -258,28 +273,21 @@ a {
 								<p>이름*</p>
 								<div>
 									<input type="text" class="form-control" id="user_name"
-										name="user_name">
+										name="user_name" placeholder="이름">
 								</div>
-								<div class="form-text">회원정보에 등록한 이름을 입력해주세요.</div>
 							</div>
 							<div class="form-group p-2">
 								<p>전화번호*</p>
 								<div>
 									<input type="text" class="form-control" id="user_phone"
-										name="user_phone">
+										name="user_phone" placeholder="'-' 없이 입력">
 								</div>
-								<div class="form-text">가입할 때 등록하셨던 전화번호를 - 없이 입력해 주세요.</div>
 							</div>
 							<div class="row p-3 justify-content-center">
 								<div
-									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
-									<button type="button" class="btn btn-warning w-100"
+									class="col-5 d-flex justify-content-center">
+									<button type="button" class="btn w-100"
 										id="findIdBtn">아이디 찾기</button>
-								</div>
-								<div
-									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
-									<button type="button" class="btn btn-danger w-100"
-										id="cancleBtn">취소</button>
 								</div>
 							</div>
 						</div>
@@ -345,25 +353,25 @@ a {
 						<div class="snsIcon1">
 							<a href="https://www.kakaocorp.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="kakaoIcon" src="images/kakaotalk.png">
+								id="kakaoIcon" src="/resources/images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
 							<a href="https://twitter.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="twitterIcon" src="images/twitter.png">
+								id="twitterIcon" src="/resources/images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
 							<a href="https://www.instagram.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="instagramIcon" src="images/instagram.png">
+								id="instagramIcon" src="/resources/images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
 							<a href="https://www.facebook.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="facebookIcon" src="images/facebook.png">
+								id="facebookIcon" src="/resources/images/facebook.png">
 							</a>
 						</div>
 					</div>
@@ -393,14 +401,10 @@ a {
 				alert("이름을 입력해 주세요.");
 				return;
 			} else if ($("#user_phone").val().length != 11) {
-				alert("전화번호를 정확하게 입력 해주세요.");
+				alert("전화번호를 정확하게 입력해 주세요.");
 				return;
 			}
 			$("#findIdForm").submit();
-		})
-		
-		$("#cancleBtn").on("click", function(){
-			location.href = "/Member/login.jsp";
 		})
 	</script>
 </body>
