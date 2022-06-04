@@ -116,7 +116,7 @@ a {
 }
 
 /* header 반응형 */
-@media ( max-width : 1180px) {
+@media ( max-width : 767px) {
 	#navLogo {
 		display: none;
 	}
@@ -137,48 +137,41 @@ a {
 	}
 }
 
-@media ( min-width : 1180px) {
+@media (min-width : 768px) {
 	#navibar {
 		display: none;
 	}
 }
+/* header 반응형 끝 */
 
 /* contents 영역 */
 section#container {
-	background: #ddf;
+	/* background: #f6f6f6f8; */
+	background: white;
 }
 
 div.body-wishList {
-	background: #eee;
+	/* background: #eee; */
 	width: 80%;
 	float: right;
 }
 
-section#container, div.body-wishList, aside#aside {
+section#container, div.body-wishList, aside#aside, aside#asideSM {
 	padding: 10px;
 }
 
-aside#aside {
-	background: #fef;
-	/* position: fixed;
-            width: 17%; */
+aside#aside, aside#asideSM {
+	background: black;
 	width: 20%;
 	float: left;
+	/* border: 1px solid black; */
+	border-radius: 20px;
 }
 
 section#container::after {
 	content: "";
 	display: block;
 	clear: both;
-}
-
-/* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
-        https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
-@media screen and (max-width: 650px) {
-	div.body-wishList, aside#aside {
-		width: calc(100% - 20px);
-		float: none;
-	}
 }
 
 #aside #profile {
@@ -207,22 +200,72 @@ section#container::after {
 	width: 80%;
 }
 
-.wishBox {
-	height : 300px;
-}
-
 .imgBox {
-	height: 70%;
+	width: 150px;
+	height: 200px;
 }
 .imgBox>img{
-	width: 80%;
-	height: 80%;
+	width: 100%;
+	height: 100%;
+}
+/* contents 영역 끝 */
+
+/* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
+        https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
+/* 반응형 시작 */
+@media screen and (max-width: 1200px) {
+	aside#aside{
+		width: 25%;
+	}
+	div.body-wishList{
+		width: 75%;
+	}
 }
 
-.imgText {
-	height: 30%;
+@media screen and (max-width: 1024px) {
+	aside#aside{
+		display: none;
+	}
+	div.body-wishList{
+		width: 100%;
+	}
+	
+	aside#asideSM{
+		display: block;
+		width: 100%;
+	}
 }
 
+@media screen and (min-width: 1024px) {
+	aside#asideSM{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	aside#asideSM div#profileBox {
+		display: none;
+		width: 50%
+	}
+	aside#asideSM div#profileBtnBox {
+		display: none;
+	}
+	/* aside#asideSM div#profileBtnBoxSM {
+		display: block;
+	} */
+	
+	div.body-wishList {
+		width: 100%;
+		float: none;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	aside#asideSM div#profileBtnBoxSM {
+		display: none;
+	}
+} 
+/* 반응형 끝 */
 
 </style>
 </head>
@@ -230,7 +273,7 @@ section#container::after {
 	<!-- Header -->
 	<header class="mb-3 border-bottom">
 		<div class="container">
-			<nav id="navibar" class="navbar navbar-expand-lg navbar-dark"
+			<nav id="navibar" class="navbar navbar-expand-md navbar-dark"
 				aria-label="Main navigation">
 				<div class="container-fluid">
 					<!-- toggle button -->
@@ -273,7 +316,7 @@ section#container::after {
 				</div>
 			</nav>
 
-			<nav id="menu" class="navbar navbar-expand-lg w-100 navbar-dark"
+			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark"
 				aria-label="Main navigation">
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
@@ -331,27 +374,82 @@ section#container::after {
 	<div class="container">
 		<div class="contents">
 			<section id="container">
-				<aside id="aside" class="p-3">
+				<aside id="aside" class="p-3 mt-3">
 					<div class="row justify-content-center" id="profile">
 						<div class="col-12 mt-4" id="profileBox">
 							<img src="images/오구3.gif">
+							<%-- <tr>
+		                    	<td class="col-2 text-center align-middle">
+		                            <p class="fw-bold">첨부파일</p>
+		                        </td>
+		                        <td class="col-10" colspan="3">
+		                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
+		                        </td>
+		                        <td>
+		                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
+		                        </td>
+		                    </tr> --%>
 						</div>
 
 						<div class="col-12 d-flex justify-content-center">
-							<h4>${loginSession.user_nickname}님</h4>
+							<h4 class="text-light">${loginSession.user_nickname} 님</h4>
 						</div>
 
 						<div class="col-12 d-flex justify-content-center">
-							<p>어서오세요!</p>
+							<p class="text-light">어서오세요!</p>
 						</div>
 					</div>
 
-					<div class="row justify-content-center">
-						<button type="button" class="profileBtn btn btn-secondary my-3">정보 수정</button>
-						<button type="button" class="profileBtn btn btn-secondary mb-3">내가 쓴 게시글</button>
-						<button type="button" class="profileBtn btn btn-secondary mb-3">내가 쓴 리뷰</button>
+					<div class="row justify-content-center" id="profileBtnBox">
+						<button type="button" class="profileBtn btn btn-warning my-3">정보 수정</button>
+						<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 게시글</button>
+						<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 리뷰</button>
 					</div>
 				</aside>
+				
+				<aside id="asideSM" class="p-3 mt-3">
+					<div class="row pt-3 justify-content-center" id="profile">
+						<div class="col-4 me-5 mt-3" id="profileBox">
+							<img src="images/오구3.gif">
+							<%-- <tr>
+		                    	<td class="col-2 text-center align-middle">
+		                            <p class="fw-bold">첨부파일</p>
+		                        </td>
+		                        <td class="col-10" colspan="3">
+		                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
+		                        </td>
+		                        <td>
+		                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
+		                        </td>
+		                    </tr> --%>
+						</div>
+						
+						<div class="col-6" id="profileBtnBox">
+							<h4 class="text-light">${loginSession.user_nickname} 님</h4>
+							<button type="button" class="profileBtn btn btn-warning my-3">정보 수정</button>
+							<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 게시글</button>
+							<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 리뷰</button>
+						</div>
+						
+						<div class="row" id="profileBtnBoxSM">
+							<div class="col-12">
+								<h4 class="text-light">${loginSession.user_nickname} 님</h4>
+							</div>
+							<div class="col-4 px-0 d-flex justify-content-center">
+								<button type="button" class="profileBtn btn btn-warning btn-sm">정보 수정</button>
+							</div>
+							<div class="col-4 px-0 d-flex justify-content-center">
+								<button type="button" class="profileBtn btn btn-warning btn-sm">내가 쓴 게시글</button>
+							</div>
+							<div class="col-4 px-0 d-flex justify-content-center">
+								<button type="button" class="profileBtn btn btn-warning btn-sm">내가 쓴 리뷰</button>
+							</div>
+						</div>
+						
+						
+					</div>
+				</aside>
+				
 				<div class="body-wishList">
 					<div class="row p-3 body-wishList-header">
 						<div class="col-7">
@@ -371,31 +469,33 @@ section#container::after {
 					</div>
 					
 					<div class="body-wishList-content">
-					<c:choose>
-						<c:when test="${wishList.size() == 0}">
-							<div class="row">
-								<p class="text-center fs-5 text-secondary">찜한 영화가 존재하지 않습니다.</p>
-							</div>
-						</c:when>
-						
-						<c:otherwise>
-							<div class="row p-3">
-                        		<c:forEach items="${wishList}" var="wishList">
-                            		<div class="wishBox col-4 mb-3">
-                                		<div class="imgBox">
-                                			<img class="posters" src="">
-                                		</div>
-                                		<div class="imgText">
-                                			<p class="mb-0">${wishList.movieNm} ${wishList.movieNmEn}</p>
-                                    		<p class="mb-0 text-secondary">${wishList.prdtYear}년 개봉</p>
-                                			<button type="button" class="btn btn-secondary">리뷰보기</button>
-                                			<button type="button" class="deleteWish btn btn-secondary" value="${wishList.seq_basket}">삭제하기</button>
-			                			</div>
-                            		</div>
-                        		</c:forEach>
-                    		</div>
-						</c:otherwise>						
-					</c:choose>
+						<c:choose>
+							<c:when test="${wishList.size() == 0}">
+								<div class="row">
+									<p class="text-center fs-5 text-secondary">찜한 영화가 존재하지 않습니다.</p>
+								</div>
+							</c:when>
+							
+							<c:otherwise>
+								<div class="row p-3">
+	                        		<c:forEach items="${wishList}" var="wishList">
+	                            		<div class="wishBox col-sm-6 col-md-4 mb-3">
+	                                		<div class="imgBox">
+	                                			<img class="posters" src="">
+	                                		</div>
+	                                		<div class="imgText">
+	                                			<p class="mb-0">${wishList.movieNm} ${wishList.movieNmEn}</p>
+	                                    		<p class="mb-0 text-secondary">${wishList.prdtYear}년 개봉</p>
+				                			</div>
+				                			<div class="imgBtn">
+				                				<button type="button" class="btn btn-warning mb-2">리뷰보기</button>
+	                                			<button type="button" class="deleteWish btn btn-secondary mb-2" value="${wishList.seq_basket}">삭제하기</button>
+				                			</div>
+	                            		</div>
+	                        		</c:forEach>
+	                    		</div>
+							</c:otherwise>						
+						</c:choose>
 					</div>
 				</div>
 			</section>
@@ -424,10 +524,8 @@ section#container::after {
 						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">로그인</a></li>
 						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">회원가입</a></li>
 						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">마이페이지</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">아이디
-								찾기</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">비밀번호
-								찾기</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">아이디 찾기</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">비밀번호 찾기</a></li>
 					</ul>
 				</div>
 
@@ -436,8 +534,7 @@ section#container::after {
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">리뷰</a></li>
 						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">자유게시판</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">찜
-								목록</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">찜 목록</a></li>
 					</ul>
 				</div>
 
@@ -448,8 +545,7 @@ section#container::after {
 							지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
 						</p>
 						<div class="d-flex w-100 gap-2">
-							<label for="newsletter1" class="visually-hidden">Email
-								address</label> <input id="newsletter1" type="text" class="form-control"
+							<label for="newsletter1" class="visually-hidden">Email address</label> <input id="newsletter1" type="text" class="form-control"
 								placeholder="Email address">
 							<button class="btn btn-primary" type="button">영화 추천받기</button>
 						</div>
@@ -458,26 +554,26 @@ section#container::after {
 					<div class="snsBox">
 						<div class="snsIcon1">
 							<a href="https://www.kakaocorp.com/"
-								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="kakaoIcon" src="images/kakaotalk.png">
+								class="d-flex align-items-center mb-2 mb-lg-0">
+								<img id="kakaoIcon" src="images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
 							<a href="https://twitter.com/"
-								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="twitterIcon" src="images/twitter.png">
+								class="d-flex align-items-center mb-2 mb-lg-0">
+								<img id="twitterIcon" src="images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
 							<a href="https://www.instagram.com/"
-								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="instagramIcon" src="images/instagram.png">
+								class="d-flex align-items-center mb-2 mb-lg-0">
+								<img id="instagramIcon" src="images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
 							<a href="https://www.facebook.com/"
-								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="facebookIcon" src="images/facebook.png">
+								class="d-flex align-items-center mb-2 mb-lg-0">
+								<img id="facebookIcon" src="images/facebook.png">
 							</a>
 						</div>
 					</div>
@@ -610,12 +706,14 @@ section#container::after {
 					let imgText = $("<div>").addClass("imgText");
 					let p1 = $("<p>").addClass("mb-0").html(wishList.movieNm + " " + wishList.movieNmEn);
 					let p2 = $("<p>").addClass("mb-0 text-secondary").html(wishList.prdtYear + "년 개봉");
-					let button1 = $("<button>").addClass("btn btn-secondary").html("리뷰보기");
-					let button2 = $("<button>").addClass("deleteWish btn btn-secondary").html("삭제하기").val(wishList.seq_basket);
+					let imgBtn = $("<div>").addClass("imgBtn");
+					let button1 = $("<button>").addClass("btn btn btn-warning mb-2").html("리뷰보기");
+					let button2 = $("<button>").addClass("deleteWish btn btn-secondary mb-2").html("삭제하기").val(wishList.seq_basket);
 					
 					imgBox.append(img);
-					imgText.append(p1, p2, button1, " ", button2);
-					col.append(imgBox, imgText);
+					imgText.append(p1, p2);
+					imgBtn.append(button1, " ", button2);
+					col.append(imgBox, imgText, imgBtn);
 					row.append(col);
 				}
 				let rs = $(".body-wishList-content").append(row);
