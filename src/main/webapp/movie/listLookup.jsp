@@ -610,7 +610,7 @@
                 <c:forEach items="${arrayList}" var="movieDTO">
                     <div class="movie col-6 col-lg-4">
                         <div class="movieImgDiv">
-                            <img src="<c:url value="/images/NoImg.webp"/>">
+                            <a href=""><img src="<c:url value="/images/NoImg.webp"/>"></a>
                         </div>
                         <div class="movieNameDiv">
                             <span class="movieName">
