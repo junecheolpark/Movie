@@ -17,22 +17,22 @@ public class HomeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect("/index.jsp");
 //
-//
+
 //		테스트용
-//		String id = "abc123";
-//		String pw = "abc123";
-//
-//		MemberDAO memberDAO = new MemberDAO();
-//		try{
-//			MemberDTO memberDTO = memberDAO.checkLogin(id,pw);
-//			System.out.println(memberDTO);
-//			HttpSession httpSession = request.getSession();
-//			httpSession.setAttribute("loginSession", memberDTO);
-//			request.getRequestDispatcher("/listLookup.movie").forward(request,response);
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		String id = "abc123";
+		String pw = "abc123";
+
+		MemberDAO memberDAO = new MemberDAO();
+		try{
+			MemberDTO memberDTO = memberDAO.checkLogin(id,pw);
+			System.out.println(memberDTO);
+			HttpSession httpSession = request.getSession();
+			httpSession.setAttribute("loginSession", memberDTO);
+			request.getRequestDispatcher("/listLookup.movie").forward(request,response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	
