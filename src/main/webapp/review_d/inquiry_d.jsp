@@ -637,11 +637,26 @@ body {
 
 									<div class="row col-lg-2 col-md-3 m-1 like_round">
 										<div class="col-4 m-0">
-											<input type="image" id="btnLikeUp" class="" value="${review.seq_review}" src="images/likebefore.png"> <input
-												type="image" id="btnLikeUp2" class="" value="${review.seq_review}" src="images/like.png">
+										
+										<c:forEach items="${like_list}" var="like">
+										<%-- 	<c:choose>    
+												<c:when test="">
+												
+												</c:when>    
+												<c:otherwise>
+												</c:otherwise>
+											</c:choose> --%>
+										</c:forEach>
+										
+											<input type="image" id="btnLikeUp" class="" value="${review.seq_review}" src="images/likebefore.png"> 
+											<input type="image" id="btnLikeUp2" class="" value="${review.seq_review}" src="images/like.png">
 										</div>
 										<div class="col m-0">
-											<span class="">123</span>
+											<c:forEach items="${like_list}" var="like">
+												<c:if test="${review.seq_review eq like.seq_review}">
+													<span class="">${like.l_count}</span>
+												</c:if>
+											</c:forEach>
 										</div>
 									</div>
 									<div class="row col-lg-2 col-md-3 m-1 like_round">
@@ -650,7 +665,11 @@ body {
 											<input type="image" id="btnHateUp2" class="mt-1" value="${review.seq_review}" src="images/hate.png" height="65%">
 										</div>
 										<div class="col m-0">
-											<span class="">123</span>
+											<c:forEach items="${hate_list}" var="hate">
+												<c:if test="${review.seq_review eq hate.seq_review}">
+													<span class="">${hate.l_count}</span>
+												</c:if>
+											</c:forEach>
 										</div>
 									</div>
 								</div>
@@ -662,6 +681,8 @@ body {
 			</from>
 		</c:forEach>
 		<script>
+
+		
 			//빨간색 좋아요 눌렀을때
 			$(".likeBox").on("click", "#btnLikeUp", function(e) {
 				let seq_review = $(e.target).val();

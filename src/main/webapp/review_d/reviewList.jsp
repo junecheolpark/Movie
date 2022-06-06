@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: jangseoksu
-  Date: 2022/05/30
-  Time: 11:11 AM
+  Date: 2022/06/02
+  Time: 12:40 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -46,7 +46,11 @@
             margin-right: 5%;
         }
 
-        #titleContainer {
+        a {
+            text-decoration: none;
+        }
+
+        #titleDiv {
             height: 2%;
             width: 100%;
             align-items: center;
@@ -58,30 +62,31 @@
             border-radius: 8px;
         }
 
-        #titleDiv {
-
-        }
-
-        #titleDiv #title {
+        #title {
             font-size: 1.5em;
             font-weight: bold;
         }
 
-        #titleDiv #movieNum {
+        #reviewCount {
+            font-size: 0.8em;
+            color: silver;
+        }
+
+        #titleExplain {
             font-size: 0.8em;
             color: silver;
         }
 
         #selectionDiv1 {
             margin-top: 20px;
-            height: 1%;
+            height: 2%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 60px;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+            border-radius: 8px;
             background-color: #503396;
+            margin-bottom: 20px;
         }
 
         #selectionDiv1 button {
@@ -95,142 +100,160 @@
             color: silver;
         }
 
-        #selectionDiv2 {
-            height: 1%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            background-color: #503396;
-            padding: 10px;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        #selectionDiv2 button {
-            background-color: #503396;
-            color: white;
-            border: none;
-            font-size: 0.8em;
-        }
-
-        #selectionDiv2 button:hover {
-            color: silver;
-        }
-
-        #movieDiv {
+        #reviewDiv {
             height: 90%;
-            margin-bottom: 20px;
         }
 
-        .movieLi {
-            height: 19.8%;
-            width: 100%;
-        }
-
-        .movie {
-            height: 50%;
-            width: 33%;
-        }
-
-        .movie div {
-            padding-left: 70px;
-            padding-right: 70px;
-        }
-
-        .avgPointImg {
-            padding: 1px;
-        }
-
-        .movie .movieImgDiv {
-            height: 72%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .movieNameDiv {
-            height: 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px;
-            gap: 10px;
-        }
-
-        .movieNameDiv a {
-            flex-basis: 200px;
-            color: black;
-            text-decoration: none;
-        }
-
-        .movieName {
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .directors {
-            display: block;
-            flex-basis: 100px;
-            color: silver;
-            font-size: 0.8em;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .movie .movieImgDiv img {
+        .reviewLi {
             height: 100%;
+        }
+
+        .review {
+            height: 19%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid silver;
             border-radius: 10px;
         }
 
-        .movieCategory {
-            width: 300px;
+        .movieDiv {
+            display: flex;
+            height: 50%;
+            margin-bottom: 4px;
+            border-bottom: silver 1px solid;
+            padding: 7px;
+            align-items: center;
+        }
+
+        .movieImgDiv {
+            flex-basis: 40%;
+            padding: 5px;
+        }
+
+        .movieDiv img {
+            width: 90%;
+            height: 90%;
+            min-width: 140px;
+            min-height: 200px;
+        }
+
+        .reviewDiv {
+            height: 50%;
+            padding: 10px;
+        }
+
+        .product {
+            flex-basis: 60%;
+            display: flex;
+        }
+
+        .productDiv1 {
+            flex-basis: 70%;
+            padding: 5px;
+        }
+
+        .productDiv2 {
+            padding: 5px;
+            flex-basis: 30%;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .product .productDiv1 .productTitle {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .product .productDiv1 .productCategory {
+            font-size: 0.8em;
+            color: silver;
+        }
+
+        .product .productDiv1 .productAvgPoint {
+            font-size: 0.8em;
+            color: silver;
+        }
+
+        .productDiv2 .directors {
+            font-size: 0.8em;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .reviewTitle {
+            height: 30%;
+            display: flex;
+        }
+
+        .reviewTitleDiv1 {
+            flex-basis: 70%;
+        }
+
+        .reviewTitleDiv2 {
+            flex-basis: 30%;
+        }
+
+        .reviewPoint {
+            color: silver;
+            font-size: 0.8em;
+        }
+
+        .reviewWrittenDate {
             color: silver;
             font-size: 0.8em;
             display: block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            text-align: left;
         }
 
+        .reviewContentDiv {
+            height: 70%;
+        }
 
-        .avgPointDiv {
+        .reviewContent {
+            border: 1px solid silver;
+            border-radius: 10px;
+            height: 80%;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .reviewLike {
+            height: 20%;
             display: flex;
-            color: silver;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 5px;
+            margin: 5px;
             font-size: 0.7em;
+            color: silver;
+            align-items: center;
+
         }
 
-        .movieAvgPoint {
-            height: 8%;
-            text-align: right;
-            flex-basis: 70px;
-        }
-
-        .searchDiv {
-            height: 1%;
-            display: flex;
-            justify-content: center;
-            margin: 20px;
-            margin-top: 30px;
-        }
-
-        #searchBtn {
-            background-color: #037b94;
-            color: white;
+        .reviewLike button {
+            height: 30px;
             border: none;
-            border-radius: 8px;
-            flex-basis: 70%;
+            background-color: white;
         }
 
-        #searchInput {
-            border-radius: 8px;
-            margin-right: 5px;
-            flex-basis: 30%;
+        .reviewLike .likeBtn:hover {
+            color: blue;
+        }
+
+        .reviewLike .hateBtn:hover {
+            color: red;
         }
 
 
@@ -238,61 +261,48 @@
             #selectionDiv1 {
                 gap: 20px;
             }
-
-            .movieCategory {
-                width: 50px;
-            }
-
         }
+
+        @media screen and (max-width: 800px) {
+            .movieDiv img {
+                height: 108px;
+                width: 76px;
+            }
+        }
+
         @media screen and (max-width: 992px) {
-            .movie {
+            .review {
                 display: grid;
                 grid-template-columns: repeat(10, 10%);
                 grid-template-rows: repeat(10, 10%);
+                height: 9%;
             }
 
-            .movie div {
-                padding: 0px;
-            }
-
-            .movieImgDiv {
-                grid-column: 1/4;
+            .movieDiv {
                 grid-row: 1/11;
+                grid-column: 1/6;
+                height: 100%;
+                border: none;
             }
 
-            .movieNameDiv {
-                grid-column: 5/10;
-                grid-row: 2/3;
+            .reviewPoint {
+                display: flex;
+                gap: 5px;
             }
 
-            .categoryDiv {
-                grid-column: 5/10;
-                grid-row: 3/4;
+            .reviewDiv {
+                grid-row: 1/11;
+                grid-column: 7/11;
+                height: 100%;
             }
 
-            .avgPointDiv {
-                grid-column: 5/10;
-                grid-row: 4/5;
-            }
-
-        }
-
-
-        @media screen and (max-width: 992px) {
-            .movie {
-                height: 33.3%;
-                width: 50%;
-            }
-        }
-
-        a {
-            text-decoration: none;
         }
 
         /*
-        .contents {
-            height: 500px;
-        } */
+    .contents {
+        height: 500px;
+    } */
+
         #navLogo {
             width: 90%;
             height: 90%;
@@ -486,15 +496,13 @@
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
-                    <form class="searchForm d-flex" method="get" action="/search.movie">
+                    <form class="searchForm d-flex" action="" method="get">
                         <input
-                                class="searchInput form-control me-2"
+                                class="form-control me-2"
                                 type="search"
                                 placeholder="Search"
-                                aria-label="Search" name="val">
-                        <input type="hidden" name='s_type' value="movieNm">
-                        <input type="hidden" name='curPage' value="1">
-                        <button class="searchBtn btn btn-outline-success" type="button">Search</button>
+                                aria-label="Search">
+                        <button class="btn btn-outline-success" type="button">Search</button>
                     </form>
                 </div>
             </div>
@@ -543,52 +551,43 @@
                         </div>
 
                         <div class="col-2">
-                            <a href="#" class="align-items-center ">
+                            <a href="" class="align-items-center ">
                                 <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                             </a>
-                            <a href="#" class="align-items-center">
+                            <a href="" class="align-items-center">
                                 <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                             </a>
                         </div>
                         <div class="col-5">
-                            <form class="searchForm d-flex" method="get" action="/search.movie">
+                            <form class="d-flex">
                                 <input
-                                        class="searchInput form-control me-2"
+                                        class="form-control me-2"
                                         type="search"
                                         placeholder="Search"
-                                        aria-label="Search"
-                                        name="val">
-                                <input type="hidden" name='s_type' value="movieNm">
-                                <input type="hidden" name='curPage' value="1">
-                                <button class="searchBtn btn btn-outline-success" type="button">Search</button>
+                                        aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </nav>
     </div>
 </header>
 <div id="container">
-    <div id="titleContainer">
-        <div id="titleDiv">
-            <span id="title">
-                <c:if test="${empty s_type}">
-                    전체 영화
-                </c:if>
-                <c:if test="${s_type eq 'genreAlt'}">
-                    ${val} 영화
-                </c:if>
-                <c:if test="${s_type eq 'movieNm'}">
-                    "${val}" 검색 결과 조회
-                </c:if>
-            </span>
-            <span id="movieNum">
-                (${totalCount})</span></div>
+    <div id="titleDiv">
+        <div class="title">
+            <span id='title'>
+            <c:if test="${empty s_type}">
+                전체 영화 리뷰
+            </c:if>
+            <c:if test="${s_type eq 'genreAlt'}">
+                ${val} 영화 리뷰
+            </c:if>
+            </span><span id='reviewCount'>(${totalCnt})</span></div>
+        <div id="titleExplain">최근에 작성된 리뷰를 확인해보세요!<br/>의외로 재밌는 작품을 찾으실지도 모릅니다!</div>
     </div>
     <div id="selectionDiv1">
         <button type="button" class="selectByCategory" value="전체">전체</button>
@@ -599,116 +598,123 @@
         <button type="button" class="selectByCategory" value="호러">호러</button>
         <button type="button" class="selectByCategory" value="기타">기타</button>
     </div>
-    <div id="selectionDiv2">
-        <button type="button" id="orderByRecentMovie">최신 영화 순</button>
-        <button type="button" id="orderByReviewCount">리뷰 많은 순</button>
-        <button type="button" id="orderByHighAveragePoint">높은 평점 순</button>
-    </div>
-    <div id="movieDiv">
-        <div class="movieLi row">
+    <div id="reviewDiv">
+        <div class="reviewLi row d-flex justify-content-center">
             <c:if test="${not empty arrayList}">
-                <c:forEach items="${arrayList}" var="movieDTO">
-                    <div class="movie col-6 col-lg-4">
-                        <div class="movieImgDiv">
-                            <img src="<c:url value="/images/NoImg.webp"/>">
-                        </div>
-                        <div class="movieNameDiv">
-                            <span class="movieName">
-                                 <a href="">${movieDTO.movieNm}</a>
-                            </span>
-                            <c:if test="${not empty movieDTO.directors}">
-                                <span class="directors">${movieDTO.directors}</span>
-                            </c:if>
-                            <c:if test="${empty movieDTO.directors}">
-                                <span class="directors">등록된 감독이 없습니다</span>
-                            </c:if>
-                        </div>
-                        <div class="categoryDiv">
-                            <span class="movieCategory">${movieDTO.genreAlt}</span>
-                        </div>
-                        <div class="avgPointDiv">
-                            <span class="avgPointImg">
-
-                            </span>
-                            <c:forEach items="${points}" var="i">
-                                <c:if test="${i.key eq movieDTO.movieCd}">
-                                        <span class="movieAvgPoint" data-value="${i.value['avg']}">
-                                            <fmt:formatNumber value="${i.value['avg']}" type="pattern" pattern="0.00"/> (${i.value['count']})
-                                        </span>
+                <c:forEach items="${arrayList}" var="reviewDTO">
+                    <div class="review col-11 col-lg-5">
+                        <div class="movieDiv">
+                            <c:forEach items="${movies}" var="movie">
+                                <c:if test="${reviewDTO.movieCd eq movie.key}">
+                                    <div class="movieImgDiv">
+                                        <a href="##"><img src="/images/NoImg.webp"></a>
+                                    </div>
+                                    <div class="product">
+                                        <div class="productDiv1">
+                                            <div class="productTitle"><a
+                                                    href="##">${movie.value['movieDTO'].movieNm}</a></div>
+                                            <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
+                                            <div class="productAvgPoint">
+                                                <div class="avgPointStar"></div>
+                                                <div class="avgPointNum" data-value='${movie.value}'>
+                                                    <fmt:formatNumber value="${movie.value['avg']}"
+                                                                      type="pattern"
+                                                                      pattern="0.00"/> (${movie.value['count']})
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="productDiv2">
+                                            <span class="directors">${movie.value['movieDTO'].directors}</span>
+                                        </div>
+                                    </div>
                                 </c:if>
                             </c:forEach>
-
+                        </div>
+                        <div class="reviewDiv">
+                            <div class="reviewTitle">
+                                <div class="reviewTitleDiv1">
+                                    <div class="reviewId">
+                                            ${reviewDTO.user_nickname}
+                                    </div>
+                                    <div class="reviewPoint">
+                                        <div class="reviewPointStar"></div>
+                                        <div class="reviewPointNum" data-value='${reviewDTO.r_grade}'>
+                                            <fmt:formatNumber value="${reviewDTO.r_grade}" type="pattern"
+                                                              pattern="0.00"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="reviewTitleDiv2">
+                                    <div class="reviewWrittenDate">
+                                            ${reviewDTO.r_date}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reviewContentDiv">
+                                <div class="reviewContent">
+                                        ${reviewDTO.r_content}
+                                </div>
+                                <div class="reviewLike">
+                                    <c:forEach items="${likes}" var="like">
+                                        <c:if test="${reviewDTO.seq_review eq like.key}">
+                                            <input type="hidden" value ="${like.value['status']}" class="likeStatus">
+                                            <span class="likeSpan">${like.value['like']}</span>
+                                            <button type='button' class='likeBtn' value="${reviewDTO.seq_review}">좋아요
+                                            </button>
+                                            <span class="hateSpan">${like.value['hate']}</span>
+                                            <button type="button" class="hateBtn" value="${reviewDTO.seq_review}">싫어요
+                                            </button>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>
             </c:if>
             <c:if test="${empty arrayList}">
-                <div class="col-12">
-                    조회 결과가 없습니다.
+                <div class="noResult d-flex justify-content-center">
+                    조회된 결과가 없습니다.
                 </div>
             </c:if>
         </div>
     </div>
     <nav aria-label="PageNav">
         <ul class="pagination d-flex justify-content-center">
-            <c:if test="${not empty orderBy}">
+            <c:if test="${empty s_type}">
                 <li class="page-item prevBtn"><a class="page-link"
-                                                 href="/orderBy.${orderBy}.movie?s_type=${s_type}&curPage=${hashMap.naviStart-1}&val=${val}"
+                                                 href="/toReviewList.re?curPage=${hashMap.naviStart-1}"
                                                  data-value="${hashMap.naviStart-1}">Previous</a>
                 </li>
                 <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
                     <li class="page-item"><a class="page-link"
-                                             href="/orderBy.${orderBy}.movie?s_type=${s_type}&curPage=${pageNum}&val=${val}"
+                                             href="/toReviewList.re?curPage=${pageNum}"
                                              data-value="${pageNum}">${pageNum}</a>
                     </li>
                 </c:forEach>
                 <li class="page-item nextBtn"><a class="page-link"
-                                                 href="/orderBy.${orderBy}.movie?s_type=${s_type}&curPage=${hashMap.naviEnd+1}&val=${val}"
+                                                 href="/toReviewList.re?curPage=${hashMap.naviEnd+1}"
                                                  data-value="${hashMap.naviEnd+1}">Next</a>
                 </li>
             </c:if>
-            <c:if test="${empty orderBy && empty s_type}">
+            <c:if test="${s_type eq 'genreAlt'}">
                 <li class="page-item prevBtn"><a class="page-link"
-                                                 href="listLookup.movie?curPage=${hashMap.naviStart-1}"
+                                                 href="/show.re?s_type=${s_type}&curPage=${hashMap.naviStart-1}&val=${val}"
                                                  data-value="${hashMap.naviStart-1}">Previous</a>
                 </li>
                 <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
                     <li class="page-item"><a class="page-link"
-                                             href="listLookup.movie?curPage=${pageNum}"
+                                             href="/show.re?s_type=${s_type}&curPage=${pageNum}&val=${val}"
                                              data-value="${pageNum}">${pageNum}</a>
                     </li>
                 </c:forEach>
                 <li class="page-item nextBtn"><a class="page-link"
-                                                 href="listLookup.movie?curPage=${hashMap.naviEnd+1}"
-                                                 data-value="${hashMap.naviEnd+1}">Next</a>
-                </li>
-            </c:if>
-            <c:if test="${empty orderBy && not empty s_type}">
-                <li class="page-item prevBtn"><a class="page-link"
-                                                 href="/search.movie?s_type=${s_type}&curPage=${hashMap.naviStart-1}&val=${val}"
-                                                 data-value="${hashMap.naviStart-1}">Previous</a>
-                </li>
-                <c:forEach var="pageNum" begin="${hashMap.naviStart}" end="${hashMap.naviEnd}" step="1">
-                    <li class="page-item"><a class="page-link"
-                                             href="/search.movie?s_type=${s_type}&curPage=${pageNum}&val=${val}"
-                                             data-value="${pageNum}">${pageNum}</a>
-                    </li>
-                </c:forEach>
-                <li class="page-item nextBtn"><a class="page-link"
-                                                 href="/search.movie?s_type=${s_type}&curPage=${hashMap.naviEnd+1}&val=${val}"
+                                                 href="/show.re?s_type=${s_type}&curPage=${hashMap.naviEnd+1}&val=${val}"
                                                  data-value="${hashMap.naviEnd+1}">Next</a>
                 </li>
             </c:if>
         </ul>
     </nav>
-    <div class="searchDiv">
-        <form method="get" class="searchForm" action="/search.movie">
-            <input type="text" id="searchInput" class="searchInput" name="val" placeholder="검색">
-            <input type="hidden" name='s_type' value="movieNm">
-            <input type="hidden" name='curPage' value="1">
-            <button type="button" id="searchBtn" class="searchBtn">검색</button>
-        </form>
-    </div>
 </div>
 <footer class="py-5 text-light">
     <div class="container">
@@ -791,7 +797,7 @@
                         <a
                                 href="https://www.kakaocorp.com/"
                                 class="d-flex align-items-center mb-2 mb-lg-0">
-                            <img id="kakaoIcon" src="/images/kakaotalk.png">
+                            <img id="kakaoIcon" src="/images/">
                         </a>
                     </div>
                     <div class="snsIcon2">
@@ -828,6 +834,17 @@
     </div>
 </footer>
 <script>
+    console.log("${loginSession.user_id}");
+
+    $(".selectByCategory").on("click", function () {
+        let val = $(this).val();
+        if (val === '전체') {
+            location.href = "/toReviewList.re?curPage=1";
+        } else {
+            location.href = "/show.re?s_type=genreAlt&curPage=1&val=" + val;
+        }
+    });
+
     let prevBtn = ${hashMap.prevBtn};
     if (!prevBtn) {
         $(".prevBtn").addClass("disabled");
@@ -838,227 +855,193 @@
         $(".nextBtn").addClass("disabled");
     }
 
-    $(".selectByCategory").on("click", function () {
+    $.each($(".productAvgPoint .avgPointNum"), function () {
+        let val = $(this).attr("data-value");
+        val = Math.round(val);
+
+        for (let i = 0; i < val; i++) {
+            $(this).siblings('.avgPointStar')[0].append('★');
+        }
+
+        for (let i = 0; i < 5 - val; i++) {
+            $(this).siblings('.avgPointStar')[0].append('☆');
+        }
+    });
+
+    $.each($(".reviewPoint .reviewPointNum"), function () {
+        let val = $(this).attr("data-value");
+        val = Math.round(val);
+
+        for (let i = 0; i < val; i++) {
+            $(this).siblings('.reviewPointStar')[0].append('★');
+        }
+
+        for (let i = 0; i < 5 - val; i++) {
+            $(this).siblings('.reviewPointStar')[0].append('☆');
+        }
+    });
+
+    $.each($(".likeStatus"), function (){
         let val = $(this).val();
-        if (val === '전체') {
-            location.href = "/listLookup.movie?curPage=1";
+        if(val === '1'){
+            $(this).siblings(".likeBtn").addClass('active');
+            $(this).siblings(".likeBtn").css("color", "blue");
+        } else if (val === '2') {
+            $(this).siblings(".hateBtn").addClass('active');
+            $(this).siblings(".hateBtn").css("color", "red");
+        }
+    });
+
+    $(".likeBtn").on("click", function (a) {
+        let user_category = "${loginSession.user_category}";
+        let user_id = "${loginSession.user_id}";
+        let seq_review = $(this).val();
+        let likeSpan = $(this).siblings(".likeSpan");
+        let hateSapn = $(this).siblings(".hateSpan");
+
+        if(user_id!==""){
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                $(this).css("color", "black");
+                $(this).siblings(".likeStatus").val("0");
+                let form = $("<form>")
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
+                seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
+                form.append(user_id);
+                form.append(user_category);
+                form.append(seq_review);
+                $("body").append(form);
+                let data = form.serialize();
+
+                $.ajax({
+                    data: 'json',
+                    url: '/likeCancle.reviewList.likeR',
+                    data: data,
+                    method: 'post',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        likeSpan.html(data.like);
+                        hateSapn.html(data.hate);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+
+                });
+            } else {
+                $(this).addClass('active');
+                $(this).css('color', 'blue');
+                $(this).siblings(".hateBtn").removeClass('active');
+                $(this).siblings(".hateBtn").css('color', 'black');
+
+                let form = $("<form>")
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
+                seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
+                form.append(user_id);
+                form.append(user_category);
+                form.append(seq_review);
+                $("body").append(form);
+                let data = form.serialize();
+
+                $.ajax({
+                    data: 'json',
+                    url: '/like.reviewList.likeR',
+                    data: data,
+                    method: 'post',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        likeSpan.html(data.like);
+                        hateSapn.html(data.hate);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+
+                });
+            }
         } else {
-            location.href = "/search.movie?s_type=genreAlt&curPage=1&val=" + val;
+            alert("회원에게만 제공되는 기능입니다.");
         }
     });
 
-    $(".searchBtn").on("click", function () {
-        let val = $(this).siblings($(".searchInput")).val();
-        if (val !== "") {
-            let searchForm = $(this).parent(".searchForm");
-            searchForm.submit();
-        }
-        if (val === "") {
-            alert("검색어를 입력하세요.");
+
+    $(".hateBtn").on("click", function (a) {
+        let user_category = "${loginSession.user_category}";
+        let user_id = "${loginSession.user_id}";
+        let seq_review = $(this).val();
+        let likeSpan = $(this).siblings(".likeSpan");
+        let hateSapn = $(this).siblings(".hateSpan");
+
+        if(user_id!==""){
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                $(this).css("color", "black");
+                $(this).siblings(".likeStatus").val("0");
+                let form = $("<form>")
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
+                seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
+                form.append(user_id);
+                form.append(user_category);
+                form.append(seq_review);
+                $("body").append(form);
+                let data = form.serialize();
+
+                $.ajax({
+                    data: 'json',
+                    url: '/hateCancle.reviewList.likeR',
+                    data: data,
+                    method: 'post',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        likeSpan.html(data.like);
+                        hateSapn.html(data.hate);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+
+                });
+            } else {
+                $(this).addClass('active');
+                $(this).css('color', 'red');
+                $(this).siblings(".likeBtn").removeClass('active');
+                $(this).siblings(".likeBtn").css('color', 'black');
+
+                let form = $("<form>")
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
+                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
+                seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
+                form.append(user_id);
+                form.append(user_category);
+                form.append(seq_review);
+                $("body").append(form);
+                let data = form.serialize();
+
+                $.ajax({
+                    data: 'json',
+                    url: '/hate.reviewList.likeR',
+                    data: data,
+                    method: 'post',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        likeSpan.html(data.like);
+                        hateSapn.html(data.hate);
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+
+                });
+            }
+        } else {
+            alert("회원에게만 제공되는 기능입니다.");
         }
     });
-    $("#orderByRecentMovie").on("click", function () {
-        location.href = "/orderBy.recent.movie?s_type=${s_type}&curPage=1&val=${val}";
-    });
-    $("#orderByReviewCount").on("click", function () {
-        location.href = "/orderBy.reviewCount.movie?s_type=${s_type}&curPage=1&val=${val}";
-    });
-    $("#orderByHighAveragePoint").on("click", function () {
-        location.href = "/orderBy.avgPoint.movie?s_type=${s_type}&curPage=1&val=${val}";
-    });
-
-    let orderBy = "${orderBy}";
-
-    $(function () {
-        console.log(orderBy);
-        if (orderBy === 'recent') {
-            $('#orderByRecentMovie').css("color", "silver");
-        }
-        if (orderBy === 'reviewCount') {
-            $('#orderByReviewCount').css("color", "silver");
-        }
-        if (orderBy === 'avgPoint') {
-            $('#orderByHighAveragePoint').css("color", "silver");
-        }
-    });
-
-    $.each($(".movie .movieAvgPoint"), function () {
-        let points = $(this).attr('data-value');
-        points = Math.round(points);
-
-        for (let i = 0; i < points; i++) {
-            $(this).siblings('.avgPointImg')[0].append('★');
-        }
-
-        for (let i = 0; i < 5 - points; i++) {
-            $(this).siblings('.avgPointImg')[0].append('☆');
-        }
-    })
-
-
-    <%--function showList(data) {--%>
-    <%--    $.each(data, function (index, item) {--%>
-    <%--        let movie = $("<div>").addClass("movie col-6 col-lg-4");--%>
-    <%--        let movieImgDiv = $("<div>").addClass("movieImgDiv");--%>
-    <%--        let img = $("<img src='/images/NoImg.webp'>");--%>
-    <%--        let movieNameDiv = $("<div>").addClass("movieNameDiv");--%>
-    <%--        let movieName = $("<span>").addClass("movieName");--%>
-    <%--        let movieNameAnchor = $("<a>").attr("href", "").html(item.movieNm); // 수정 필요--%>
-    <%--        let directors = $("<span>").addClass("directors").html(item.directors);--%>
-    <%--        if(item.directors===""){--%>
-    <%--            let directors = $("<span>").addClass("directors").html("등록된 감독이 없습니다.");--%>
-    <%--        }--%>
-    <%--        let categoryDiv = $("<div>").addClass("categoryDiv");--%>
-    <%--        let movieCategory = $("<span>").addClass("movieCategory").html(item.genreAlt);--%>
-    <%--        let avgPointDiv = $("<div>").addClass("avgPointDiv");--%>
-
-    <%--        $.ajax({--%>
-    <%--            url : "/findAvgPoint.movie?movieCd=" + item.movieCd,--%>
-    <%--            dataType : "text",--%>
-    <%--            success : function (avg) {--%>
-    <%--               avg = avg.padEnd(4, ".00");--%>
-    <%--               let movieAvgPoint = $("<span>").addClass("movieAvgPoint").html(avg);--%>
-    <%--               avgPointDiv.append(movieAvgPoint);--%>
-    <%--            },--%>
-    <%--            error : function (e) {--%>
-    <%--                console.log(e);--%>
-    <%--            }--%>
-    <%--        })--%>
-
-    <%--        movieImgDiv.append(img);--%>
-    <%--        movieName.append(movieNameAnchor);--%>
-    <%--        movieNameDiv.append(movieName);--%>
-    <%--        movieNameDiv.append(directors);--%>
-    <%--        categoryDiv.append(movieCategory);--%>
-
-    <%--        movie.append(movieImgDiv);--%>
-    <%--        movie.append(movieNameDiv);--%>
-    <%--        movie.append(categoryDiv);--%>
-    <%--        movie.append(avgPointDiv);--%>
-
-    <%--        $(".movieLi").append(movie);--%>
-    <%--    });--%>
-    <%--}--%>
-
-    <%--function pagination(uri,s_type,val, totalCnt, postPerPage, naviCntPerPage, curPage){--%>
-    <%--    let totalPage = Math.ceil(totalCnt/postPerPage);--%>
-
-    <%--    if(curPage<1) {--%>
-    <%--        curPage =1--%>
-    <%--    } else if (curPage > totalPage) {--%>
-    <%--        curPage = totalPage;--%>
-    <%--    }--%>
-
-    <%--    let naviStart = Math.floor((curPage-1)/naviCntPerPage) * naviCntPerPage +1;--%>
-    <%--    let naviEnd = naviStart + naviCntPerPage - 1;--%>
-    <%--    if(naviEnd>totalPage){--%>
-    <%--        naviEnd = totalPage;--%>
-    <%--    }--%>
-    <%--    naviStart = Number(naviStart);--%>
-    <%--    naviEnd = Number(naviEnd);--%>
-
-    <%--    let prevBtn = (naviStart!==1);--%>
-    <%--    let nextBtn = (naviEnd!==totalPage);--%>
-
-    <%--    let prevBtnLi = $("<li>").addClass("page-item prevBtn");--%>
-    <%--    let prevBtnA = $("<a>").addClass("page-link").attr("href", uri+".movie?s_type="+s_type+"&curPage="+naviStart-1+"&val"+val).html("Previous");--%>
-    <%--    prevBtnLi.append(prevBtnA);--%>
-    <%--    $(".pagination").append(prevBtnLi);--%>
-
-    <%--    let navLi--%>
-    <%--    let navA;--%>
-
-    <%--    for(let i = naviStart; i<naviEnd+1; i++){--%>
-    <%--       navLi = $("<li>").addClass("page-item");--%>
-    <%--       navA = $("<a>").addClass("page-link").attr("href", uri+".movie?s_type="+s_type+"&curPage="+i+"&val"+val).html(i);--%>
-    <%--       navLi.append(navA);--%>
-    <%--       $(".pagination").append(navLi);--%>
-    <%--    }--%>
-    <%--    let nextBtnLi = $("<li>").addClass("page-item nextBtn");--%>
-    <%--    let nextBtnA = $("<a>").addClass("page-link").attr("href", uri+".movie?s_type="+s_type+"&curPage="+naviEnd+1+"&val"+val).html("Next");--%>
-    <%--    nextBtnLi.append(nextBtnA);--%>
-    <%--    $(".pagination").append(nextBtnLi);--%>
-
-    <%--    if (!prevBtn) {--%>
-    <%--        $(".prevBtn").addClass("disabled");--%>
-    <%--    }--%>
-    <%--    if (!nextBtn) {--%>
-    <%--        $(".nextBtn").addClass("disabled");--%>
-    <%--    }--%>
-    <%--}--%>
-
-    <%--$("#orderByRecentMovie").on("click", function () {--%>
-    <%--    var s_type = "${s_type}";--%>
-    <%--    var val = "${val}";--%>
-    <%--    $.ajax({--%>
-    <%--        url: "/orderBy.recent.movie?s_type=" + s_type + "&curPage=1&val=" + val,--%>
-    <%--        dataType: "json",--%>
-    <%--        success: function (data) {--%>
-    <%--            $(".movieLi").empty();--%>
-    <%--            showList(data);--%>
-
-    <%--            $(".pagination").empty();--%>
-
-    <%--            $.ajax({--%>
-    <%--                url : "getCount.movie?s_type=" + s_type + "&curPage=1&val=" + val,--%>
-    <%--                dataType : "json",--%>
-    <%--                success : function (data) {--%>
-    <%--                    pagination("orderBy.recent",s_type,val,data.num,30,10,data.curPage);--%>
-    <%--                },--%>
-    <%--                error : function (e) {--%>
-    <%--                    console.log(e);--%>
-    <%--                }--%>
-    <%--            });--%>
-
-    <%--        },--%>
-    <%--        error: function () {--%>
-    <%--            console.log(e);--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
-
-    <%--$("#orderByReviewCount").on("click", function () {--%>
-    <%--    var s_type = "${s_type}";--%>
-    <%--    var val = "${val}";--%>
-    <%--    $.ajax({--%>
-    <%--        url: "/orderBy.reviewCount.movie?s_type=" + s_type + "&curPage=1&val=" + val,--%>
-    <%--        dataType: "json",--%>
-    <%--        success: function (data) {--%>
-    <%--            $(".movieLi").empty();--%>
-    <%--            showList(data);--%>
-    <%--            $(".pagination").empty();--%>
-    <%--            let num;--%>
-    <%--            for (let i = 1; 0 < 12; i++) {--%>
-    <%--                num = $(".pagination>li:eq(i)>a").attr("data-value");--%>
-    <%--                $(".pagination>li:eq(i)>a").attr("href", "/orderBy.reviewCount.movie?s_type=" + s_type + "&curPage=" + num + "&val=" + val);--%>
-    <%--            }--%>
-    <%--        },--%>
-    <%--        error: function () {--%>
-    <%--            console.log(e);--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
-    <%--$("#orderByHighAveragePoint").on("click", function () {--%>
-    <%--    var s_type = "${s_type}";--%>
-    <%--    var val = "${val}";--%>
-    <%--    $.ajax({--%>
-    <%--        url: "/orderBy.avgPoint.movie?s_type=" + s_type + "&curPage=1&val=" + val,--%>
-    <%--        dataType: "json",--%>
-    <%--        success: function (data) {--%>
-    <%--            $(".movieLi").empty();--%>
-    <%--            showList(data);--%>
-    <%--            let num;--%>
-    <%--            for (let i = 0; i < 12; i++) {--%>
-    <%--                num = $(".pagination>li:eq(i)>a").attr("data-value");--%>
-    <%--                $(".pagination>li:eq(i)>a").attr("href", "/orderBy.avgPoint.movie?s_type=" + s_type + "&curPage=" + num + "&val=" + val);--%>
-    <%--            }--%>
-    <%--        },--%>
-    <%--        error: function (e) {--%>
-    <%--            console.log(e);--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
-
 </script>
 </body>
 </html>

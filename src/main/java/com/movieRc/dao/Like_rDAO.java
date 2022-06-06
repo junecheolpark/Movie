@@ -1,12 +1,10 @@
 package com.movieRc.dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,6 +12,7 @@ import javax.naming.InitialContext;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.movieRc.dto.Like_rDTO;
+import com.movieRc.dto.Like_r_countDTO;
 
 public class Like_rDAO {
 
@@ -33,20 +32,21 @@ public class Like_rDAO {
 		return basicDataSource.getConnection();
 	}
 	//좋아요 갯수
-	public ArrayList<Integer> like_count() throws Exception{
-		String sql = "select count(*) as ,seq_review from tbl_like_r where r_like_check = 1 group by seq_review";
+	public ArrayList<Like_r_countDTO> like_count() throws Exception{
+		String sql = "select *from tbl_like_r a LEFT OUTER JOIN (select count(*)as l_count ,seq_review from tbl_like_r where r_like_check = 1 group by seq_review) b on(a.seq_review = b.seq_review) order by 4";
 		try(Connection con =getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 	
 
 			ResultSet rs = pstmt.executeQuery(sql);
-			ArrayList<Integer> like_list = new ArrayList<>(); 
+			ArrayList<Like_r_countDTO> like_list = new ArrayList<>(); 
 			
 			while(rs.next()) {
-				int l_count = rs.getInt(1);
-				int seq_review = rs.getInt(2);
-				like_list.add(seq_review);
+				int l_count = rs.getInt(6);
+				int seq_review = rs.getInt(4);
+				String user_id = rs.getString(3);
+				like_list.add(new Like_r_countDTO(l_count, seq_review, user_id));
 			} 
 			return like_list;
 		}
@@ -54,19 +54,19 @@ public class Like_rDAO {
 	}
 
 	//싫어요 갯수
-			public ArrayList<Like_rDTO> hate_count() throws Exception{
-				String sql = "select count(*)as l_count ,seq_review from tbl_like_r where r_like_check = 2 group by seq_review";
-				List<HashMap<String, String>> l_hate = new ArrayList<HashMap<String, String>>();
+			public ArrayList<Like_r_countDTO> hate_count() throws Exception{
+				String sql = "select *from tbl_like_r a LEFT OUTER JOIN (select count(*)as l_count ,seq_review from tbl_like_r where r_like_check = 2 group by seq_review) b on(a.seq_review = b.seq_review) order by 4";
 				try(Connection con =getConnection();
 						PreparedStatement pstmt = con.prepareStatement(sql)){
 					
 					ResultSet rs = pstmt.executeQuery();
 					
-					ArrayList<Like_rDTO> hate_list = new ArrayList<>(); 
+					ArrayList<Like_r_countDTO> hate_list = new ArrayList<>(); 
 					while(rs.next()) {
 						int l_count = rs.getInt("l_count");
 						int seq_review = rs.getInt("seq_review");
-						hate_list.add(new Like_rDTO(0,0,null,seq_review, null, l_count));
+						String user_id = rs.getString("user_id");
+						hate_list.add(new Like_r_countDTO(l_count, seq_review, user_id));
 					} 
 					return hate_list;
 				}
@@ -110,7 +110,7 @@ public class Like_rDAO {
 	
 //	라이크 테이블에 insert
 	public int like_insert (Like_rDTO dto) throws Exception{
-		String sql = "insert into tbl_like_r values(seq_like.nextval, ?, ?, ?,?,?)";
+		String sql = "insert into tbl_like_r values(seq_like.nextval, ?, ?, ?,?)";
 		
 		try(Connection con =getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
@@ -118,16 +118,122 @@ public class Like_rDAO {
 			pstmt.setString(2, dto.getUser_id());
 			pstmt.setInt(3, dto.getSeq_review());
 			pstmt.setString(4, dto.getUser_category());
-			pstmt.setInt(5, dto.getL_count());
-
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
-	
-	
-	
-	
-	
-	
+
+    public int check(String id, String user_category, int seq_review) throws Exception{
+        String sql = "select count(*) from tbl_like_r where user_id = ? and user_category = ? and seq_review = ?";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, user_category);
+            preparedStatement.setInt(3, seq_review);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+
+            return resultSet.getInt(1);
+        }
+    }
+
+    public int insertLike(String id, String user_category, int seq_review) throws Exception{
+        String sql = "insert into tbl_like_r values(seq_like.nextval, 1, ?, ?, ?)";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
+            preparedStatement.setString(1,id);
+            preparedStatement.setString(2,user_category);
+            preparedStatement.setInt(3,seq_review);
+
+            return preparedStatement.executeUpdate();
+        }
+    }
+    public int insertHate(String id, String user_category, int seq_review) throws Exception{
+        String sql = "insert into tbl_like_r values(seq_like.nextval, 2, ?, ?, ?)";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
+            preparedStatement.setString(1,id);
+            preparedStatement.setString(2,user_category);
+            preparedStatement.setInt(3,seq_review);
+
+            return preparedStatement.executeUpdate();
+        }
+    }
+
+    public int changeToLike(String id, String user_category, int seq_review) throws Exception {
+        String sql = "update tbl_like_r set r_like_check = 1 where user_id = ? and user_category = ? and seq_review = ?";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, user_category);
+            preparedStatement.setInt(3, seq_review);
+
+            return preparedStatement.executeUpdate();
+        }
+    }
+
+    public int changeToHate(String id, String user_category, int seq_review) throws Exception {
+        String sql = "update tbl_like_r set r_like_check = 2 where user_id = ? and user_category = ? and seq_review = ?";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, user_category);
+            preparedStatement.setInt(3, seq_review);
+
+            return preparedStatement.executeUpdate();
+        }
+    }
+
+    public int getStatus(String id, String user_category, int seq_review) throws Exception {
+        String sql = "select r_like_check from tbl_like_r where user_id = ? and user_category = ? and seq_review = ?";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, user_category);
+            preparedStatement.setInt(3, seq_review);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+
+            if(resultSet.next()){
+                return resultSet.getInt(1);
+            } else return 0;
+        }
+    }
+    public int countLike(int seq_review) throws Exception {
+        String sql = "select count(*) from tbl_like_r where seq_review = ? and r_like_check = 1";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, seq_review);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            return resultSet.getInt(1);
+
+        }
+    }
+    public int countHate(int seq_review) throws Exception {
+        String sql = "select count(*) from tbl_like_r where seq_review = ? and r_like_check = 2";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, seq_review);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            return resultSet.getInt(1);
+
+        }
+    }
+
+    public int delete(String user_id, String user_category, int seq_review) throws Exception {
+        String sql = "delete from tbl_like_r where seq_review =? and user_id =? and user_category=?";
+        try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setInt(1, seq_review);
+            preparedStatement.setString(2, user_id);
+            preparedStatement.setString(3, user_category);
+
+            return preparedStatement.executeUpdate();
+        }
+    }
 }

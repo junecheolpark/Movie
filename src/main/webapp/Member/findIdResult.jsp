@@ -1,61 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<title>아이디 찾기</title>
-<style>
-.card {
-	width: 60%;
-	border: none;
-	border-bottom: 1px solid rgba(0, 0, 0, .125);
-}
-
-.card-header {
-	background-color: white;
-}
-</style>
-</head>
-<body>
-	<div class="container">
-		<div class="row justify-content-center">
-			<form action="" method="post">
-				<div class="card card-custom">
-					<div class="col card-header">
-						<h4>아이디 찾기</h4>
-					</div>
-					<div class="card-body">
-						<div class="form-group p-2">
-							<p>이름*</p>
-							<div>
-								<input type="text" class="form-control" id="user_name">
-							</div>
-							<div class="form-text">회원정보에 등록한 이름을 입력해주세요.</div>
-						</div>
-						<div class="form-group p-2">
-							<p>이메일*</p>
-							<div>
-								<input type="text" class="form-control" id="user_email">
-							</div>
-							<div class="form-text">
-								가입할 때 사용하셨던 이메일을 입력해주세요. <br> 소설 계정으로 가입하셨을 때는 해당 SNS의 이메일을
-								입력해주세요.
-							</div>
-						</div>
-						<div class="row p-3 justify-content-center">
-							<div
-								class="col-12 col-md-6 col-lg-6 d-flex justify-content-center">
-								<button type="button" class="btn btn-info rounded w-100">아이디
-									찾기</button>
-=======
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>아이디 찾기</title>
 <style>
@@ -284,16 +236,10 @@ a {
 										placeholder="Search" aria-label="Search">
 									<button class="btn btn-outline-success" type="submit">Search</button>
 								</form>
->>>>>>> c4c624d4464883811b18e885f5f80d43b5365de8
 							</div>
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
-			</form>
-		</div>
-	</div>
-=======
 			</nav>
 		</div>
 		</nav>
@@ -305,43 +251,61 @@ a {
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-5">
-				<form id="findIdForm" action="/findId.mem" method="post">
+				<c:if test="${rs eq true}">
 					<div class="card card-custom">
 						<div class="card-header">
 							<h4>아이디 찾기</h4>
 						</div>
 						<div class="card-body">
-							<div class="form-group p-2">
-								<p>이름*</p>
-								<div>
-									<input type="text" class="form-control" id="user_name"
-										name="user_name">
-								</div>
-								<div class="form-text">회원정보에 등록한 이름을 입력해주세요.</div>
-							</div>
-							<div class="form-group p-2">
-								<p>전화번호*</p>
-								<div>
-									<input type="text" class="form-control" id="user_phone"
-										name="user_phone">
-								</div>
-								<div class="form-text">가입할 때 등록하셨던 전화번호를 - 없이 입력해 주세요.</div>
+							<div class="form-group p-2 d-flex justify-content-center">
+								<p>회원님의 아이디는 ${user_id} 입니다.</p>
 							</div>
 							<div class="row p-3 justify-content-center">
 								<div
 									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
-									<button type="button" class="btn btn-warning w-100"
-										id="findIdBtn">아이디 찾기</button>
-								</div>
-								<div
-									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
-									<button type="button" class="btn btn-danger w-100"
-										id="cancleBtn">취소</button>
+									<button type="button" class="btn btn-dark w-100" id="loginBtn">로그인</button>
 								</div>
 							</div>
 						</div>
 					</div>
-				</form>
+					<script>
+						$("#loginBtn").on("click", function() {
+							location.href = "/Member/login.jsp";
+						})
+					</script>
+				</c:if>
+				<c:if test="${rs eq false}">
+					<div class="card card-custom">
+						<div class="card-header">
+							<h4>아이디 찾기</h4>
+						</div>
+						<div class="card-body">
+							<div class="form-group p-2 d-flex justify-content-center">
+								<p>등록된 정보가 없습니다.</p>
+							</div>
+							<div class="row p-3 justify-content-center">
+								<div
+									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+									<button type="button" class="btn btn-dark w-100" id="againBtn">다시
+										찾기</button>
+								</div>
+								<div
+									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+									<button type="button" class="btn btn-dark w-100" id="signupBtn">회원가입</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script>
+						$("#againBtn").on("click", function() {
+							location.href = "/Member/findId.jsp";
+						})
+
+						$("#signupBtn").on("click", function() {
+							location.href = "/Member/signup.jsp";
+						})
+					</script>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -445,21 +409,7 @@ a {
 	</footer>
 
 	<script>
-		$("#findIdBtn").on("click", function() {
-			if ($("#user_name").val() === "") {
-				alert("이름을 입력해 주세요.");
-				return;
-			} else if ($("#user_phone").val().length != 11) {
-				alert("전화번호를 정확하게 입력 해주세요.");
-				return;
-			}
-			$("#findIdForm").submit();
-		})
 		
-		$("#cancleBtn").on("click", function(){
-			location.href = "/Member/login.jsp";
-		})
 	</script>
->>>>>>> c4c624d4464883811b18e885f5f80d43b5365de8
 </body>
 </html>

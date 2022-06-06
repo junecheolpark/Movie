@@ -18,7 +18,7 @@ public class MovieDTO {
       this.movieNmEn = movieNmEn;
       this.prdtYear = prdtYear;
       this.nationAlt = nationAlt;
-      this.genreAlt = genreAlt;
+      this.genreAlt = genreAlt; 
       this.directors = directors;
    }
 

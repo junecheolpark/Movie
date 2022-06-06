@@ -19,9 +19,9 @@ public class MemberDTO {
 	}
 
 	public MemberDTO(String user_id, String user_category, String user_k, String user_pw, String user_nickname,
-			String user_name, int user_birth, String user_phone, String postcode, String roadAddr, String detailAddr,
-			String extraAddr, String grade) {
-		
+					 String user_name, int user_birth, String user_phone, String postcode, String roadAddr, String detailAddr,
+					 String extraAddr, String grade) {
+		super();
 		this.user_id = user_id;
 		this.user_category = user_category;
 		this.user_k = user_k;
@@ -36,6 +36,7 @@ public class MemberDTO {
 		this.extraAddr = extraAddr;
 		this.grade = grade;
 	}
+
 
 	public String getUser_id() {
 		return user_id;

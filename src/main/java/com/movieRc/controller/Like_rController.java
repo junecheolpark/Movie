@@ -46,7 +46,7 @@ public class Like_rController extends HttpServlet {
 			Like_rDAO ldao = new Like_rDAO();
 			ReviewDAO rdao = new ReviewDAO();
 			try {
-
+				//같은 seq_review에 같은 아이디값이 있다면
 				int rs = ldao.select_seq_check(user_id, seq_review);
 				System.out.println(rs);
 				if (rs > 0) {// 0보다 크면 seq가 존재하므로 업데이트
@@ -61,7 +61,7 @@ public class Like_rController extends HttpServlet {
 					}
 				} else {// 아니라면 존재하지 않으므로 insert후 업데이트
 						// tbl_like_r insert
-					int l_rs = ldao.like_insert(new Like_rDTO(0, 0, user_id, seq_review, user_category,2));
+					int l_rs = ldao.like_insert(new Like_rDTO(0, 0, user_id, seq_review, user_category));
 					if (l_rs > 0) {// 생성
 						
 						int rs1 = ldao.like_update(r_like_check, user_id, seq_review);
@@ -75,8 +75,9 @@ public class Like_rController extends HttpServlet {
 						}
 					}
 				}
-				/*
 				
+				/*
+				response.sendRedirect("/detailView.re");
 				*/
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -1,20 +1,15 @@
 package com.movieRc.dao;
 
-import com.movieRc.dto.MovieDTO;
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
 import com.movieRc.dto.MovieDTO;
 
 public class MovieDAO {
@@ -99,85 +94,87 @@ public class MovieDAO {
 	}
 
 	public ArrayList<MovieDTO> searchByGenre(String genreAlt, int start, int end) throws Exception {
-        String sql = "select *" +
-                "from (select a.*, rownum as num" +
-                "      from (select * from tbl_movie where genreAlt like ? order by 1 desc) a)" +
-                "where num between ? and ?";
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, "%" + genreAlt + "%");
-            preparedStatement.setInt(2, start);
-            preparedStatement.setInt(3, end);
+		String sql = "select *" + "from (select a.*, rownum as num"
+				+ "      from (select * from tbl_movie where genreAlt like ? order by 1 desc) a)"
+				+ "where num between ? and ?";
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setString(1, "%" + genreAlt + "%");
+			preparedStatement.setInt(2, start);
+			preparedStatement.setInt(3, end);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<MovieDTO> arrayList = new ArrayList<>();
+			ResultSet resultSet = preparedStatement.executeQuery();
+			ArrayList<MovieDTO> arrayList = new ArrayList<>();
 
-            while (resultSet.next()){
-                String movieCd = resultSet.getString(2);
-                String movieNm = resultSet.getString(3);
-                String movieNmen = resultSet.getString(4);
-                String prdtYear = resultSet.getString(5);
-                String nationAlt = resultSet.getString(6);
-                String genreAlt1 = resultSet.getString(7);
-                String directors = resultSet.getString(8);
+			while (resultSet.next()) {
+				String movieCd = resultSet.getString(2);
+				String movieNm = resultSet.getString(3);
+				String movieNmen = resultSet.getString(4);
+				String prdtYear = resultSet.getString(5);
+				String nationAlt = resultSet.getString(6);
+				String genreAlt1 = resultSet.getString(7);
+				String directors = resultSet.getString(8);
 
-                arrayList.add(new MovieDTO(movieCd,movieNm,movieNmen,prdtYear,nationAlt,genreAlt1,directors));
-            } return arrayList;
-        }
-    }
+				arrayList.add(new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt1, directors));
+			}
+			return arrayList;
+		}
+	}
 
-	public ArrayList<MovieDTO> searchByGenreEtc(String genreAlt, int start, int end) throws Exception{
-		String sql = "select*" +
-                "from (select a.*, rownum as num" +
-                "      from (select * from tbl_movie where not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러') order by 1 desc) a)" +
-                "where num between ? and ?";
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+	public ArrayList<MovieDTO> searchByGenreEtc(String genreAlt, int start, int end) throws Exception {
+		String sql = "select*" + "from (select a.*, rownum as num"
+				+ "      from (select * from tbl_movie where not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러') order by 1 desc) a)"
+				+ "where num between ? and ?";
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setInt(1, start);
+			preparedStatement.setInt(2, end);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<MovieDTO> arrayList = new ArrayList<>();
-            while (resultSet.next()) {
-                String movieCd = resultSet.getString(1);
-                String movieNm = resultSet.getString(2);
-                String movieNmen = resultSet.getString(3);
-                String prdtYear = resultSet.getString(4);
-                String nationAlt = resultSet.getString(5);
-                genreAlt = resultSet.getString(6);
-                String directors = resultSet.getString(7);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			ArrayList<MovieDTO> arrayList = new ArrayList<>();
+			while (resultSet.next()) {
+				String movieCd = resultSet.getString(1);
+				String movieNm = resultSet.getString(2);
+				String movieNmen = resultSet.getString(3);
+				String prdtYear = resultSet.getString(4);
+				String nationAlt = resultSet.getString(5);
+				genreAlt = resultSet.getString(6);
+				String directors = resultSet.getString(7);
 
-                arrayList.add(new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt, directors));
-            }
-            return arrayList;
-        }
+				arrayList.add(new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt, directors));
+			}
+			return arrayList;
+		}
 
 	}
 
 	public ArrayList<MovieDTO> searchByGenreEtc(int start, int end) throws Exception {
 
-        String sql = "select*" +
-                "from (select a.*, rownum as num" +
-                "      from (select * from tbl_movie where not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러') order by 1 desc) a)" +
-                "where num between ? and ?";
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+		String sql = "select*" + "from (select a.*, rownum as num"
+				+ "      from (select * from tbl_movie where not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러') order by 1 desc) a)"
+				+ "where num between ? and ?";
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setInt(1, start);
+			preparedStatement.setInt(2, end);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<MovieDTO> arrayList = new ArrayList<>();
+			ResultSet resultSet = preparedStatement.executeQuery();
+			ArrayList<MovieDTO> arrayList = new ArrayList<>();
 
-            while (resultSet.next()){
-                String movieCd = resultSet.getString(2);
-                String movieNm = resultSet.getString(3);
-                String movieNmen = resultSet.getString(4);
-                String prdtYear = resultSet.getString(5);
-                String nationAlt = resultSet.getString(6);
-                String genreAlt1 = resultSet.getString(7);
-                String directors = resultSet.getString(8);
+			while (resultSet.next()) {
+				String movieCd = resultSet.getString(2);
+				String movieNm = resultSet.getString(3);
+				String movieNmen = resultSet.getString(4);
+				String prdtYear = resultSet.getString(5);
+				String nationAlt = resultSet.getString(6);
+				String genreAlt1 = resultSet.getString(7);
+				String directors = resultSet.getString(8);
 
-                arrayList.add(new MovieDTO(movieCd,movieNm,movieNmen,prdtYear,nationAlt,genreAlt1,directors));
-            } return arrayList;
-        }
-    }
+				arrayList.add(new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt1, directors));
+			}
+			return arrayList;
+		}
+	}
 
 	public int countAllbyMovieNm(String movieNm) throws Exception {
 		String sql = "select count(*) from tbl_movie where movieNm like ?";
@@ -459,4 +456,73 @@ public class MovieDAO {
 			return arrayList;
 		}
 	}
+
+	public MovieDTO getMovieDTO_byMovieCd(String movieCd) throws Exception {
+		String sql = "select * from tbl_movie where moviecd = ?";
+
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setString(1, movieCd);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				movieCd = resultSet.getString(1);
+				String movieNm = resultSet.getString(2);
+				String movieNmen = resultSet.getString(3);
+				String prdtYear = resultSet.getString(4);
+				String nationAlt = resultSet.getString(5);
+				String genreAlt = resultSet.getString(6);
+				String directors = resultSet.getString(7);
+
+				return new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt, directors);
+			}
+			return null;
+		}
+	}
+
+	public int deleteAll() throws Exception {
+		String sql = "delete from tbl_movie";
+
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+			int rs = preparedStatement.executeUpdate();
+			return rs;
+		}
+	}
+	
+	public int insert(List<MovieDTO> dtos){
+		String sql = "insert into tbl_movie values(?,?,?,?,?,?,?)";
+		int rs = 0;
+		try (Connection con = getConnection();
+				PreparedStatement pstm = con.prepareStatement(sql)) {
+
+			for(int i=0; i<dtos.size();i++) {
+				MovieDTO dto = dtos.get(i);
+				pstm.setString(1,  dto.getMovieCd());
+				pstm.setString(2,  dto.getMovieNm());
+				pstm.setString(3,  dto.getMovieNmEn());
+				pstm.setString(4,  dto.getPrdtYear());
+				pstm.setString(5,  dto.getNationAlt());
+				pstm.setString(6,  dto.getGenreAlt());
+				pstm.setString(7,  dto.getDirectors());
+				
+				pstm.addBatch(); // 모든 dto들의 배열 메모리에 대기
+				
+			}
+			int[] result = pstm.executeBatch(); //쿼리 결과값 배열 저장
+			
+			for(int i=0; i<result.length; i++){
+				if(result[0]==-2) {//성공이면 -2 rs값증가
+					rs++;
+				}
+			}
+
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
 }

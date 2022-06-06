@@ -1,19 +1,21 @@
 package com.movieRc.controller;
 
-import com.google.gson.Gson;
-import com.movieRc.dao.MovieDAO;
-import com.movieRc.dao.ReviewDAO;
-import com.movieRc.dto.MovieDTO;
-import com.movieRc.util.Pagination;
-
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.movieRc.dao.MovieDAO;
+import com.movieRc.dao.ReviewDAO;
+import com.movieRc.dto.MovieDTO;
+import com.movieRc.util.Pagination;
 
 
 @WebServlet("*.movie")
@@ -38,7 +40,7 @@ public class MovieController extends HttpServlet {
         MovieDAO movieDAO = new MovieDAO();
         ReviewDAO reviewDAO = new ReviewDAO();
         Pagination pagination = new Pagination();
-        System.out.println("요청 uri : " +uri);
+        System.out.println("요청 uri : " + uri);
 
         if (uri.equals("/listLookup.movie")) {
             int curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -48,15 +50,23 @@ public class MovieController extends HttpServlet {
                 int start = (int) hashMap.get("postStart");
                 int end = (int) hashMap.get("postEnd");
                 ArrayList<MovieDTO> arrayList = movieDAO.selectAll(start, end);
-                HashMap<String, Integer> avgPoints = new HashMap<>();
+                double avg = 0;
+                int count = 0;
+                HashMap<String, HashMap> hashMap1 = new HashMap<>();
+                HashMap<String, Object> points;
 
-                for(int i = 0; i <arrayList.size(); i++){
-                     avgPoints = reviewDAO.getAvgPointHashMap(avgPoints, arrayList.get(i).getMovieCd());
+                for (int i = 0; i < arrayList.size(); i++) {
+                    points = new HashMap<>();
+                    avg = reviewDAO.getAvgPoint(arrayList.get(i).getMovieCd());
+                    count = reviewDAO.countByMovieCd(arrayList.get(i).getMovieCd());
+                    points.put("avg", avg);
+                    points.put("count", count);
+                    hashMap1.put(arrayList.get(i).getMovieCd(), points);
                 }
                 request.setAttribute("totalCount", totalCount);
                 request.setAttribute("hashMap", hashMap);
                 request.setAttribute("arrayList", arrayList);
-                request.setAttribute("avgPoints", avgPoints);
+                request.setAttribute("points", hashMap1);
                 request.getRequestDispatcher("/movie/listLookup.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -93,17 +103,25 @@ public class MovieController extends HttpServlet {
                     arrayList = movieDAO.selectByMovieNm(val, start, end);
                 }
 
-                HashMap<String, Integer> avgPoints = new HashMap<>();
+                double avg = 0;
+                int count = 0;
+                HashMap<String, HashMap> hashMap1 = new HashMap<>();
+                HashMap<String, Object> points;
 
-                for(int i = 0; i <arrayList.size(); i++){
-                    avgPoints = reviewDAO.getAvgPointHashMap(avgPoints, arrayList.get(i).getMovieCd());
+                for (int i = 0; i < arrayList.size(); i++) {
+                    points = new HashMap<>();
+                    avg = reviewDAO.getAvgPoint(arrayList.get(i).getMovieCd());
+                    count = reviewDAO.countByMovieCd(arrayList.get(i).getMovieCd());
+                    points.put("avg", avg);
+                    points.put("count", count);
+                    hashMap1.put(arrayList.get(i).getMovieCd(), points);
                 }
 
                 request.setAttribute("totalCount", totalCount);
                 request.setAttribute("s_type", s_type);
                 request.setAttribute("val", val);
                 request.setAttribute("hashMap", hashMap);
-                request.setAttribute("avgPoints", avgPoints);
+                request.setAttribute("points", hashMap1);
                 request.setAttribute("arrayList", arrayList);
                 request.getRequestDispatcher("/movie/listLookup.jsp").forward(request, response);
 
@@ -119,8 +137,8 @@ public class MovieController extends HttpServlet {
             HashMap<String, Object> hashMap = new HashMap<>();
             int totalCount = 0;
 
-            try{
-                if(s_type.equals("")){
+            try {
+                if (s_type.equals("")) {
                     totalCount = movieDAO.CountAll();
                     hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                     int start = (int) hashMap.get("postStart");
@@ -150,14 +168,33 @@ public class MovieController extends HttpServlet {
                     arrayList = movieDAO.selectByMovieNm(val, start, end);
                 }
 
-                Gson gson = new Gson();
-                String rs = gson.toJson(arrayList);
-                response.getWriter().append(rs);
+                double avg = 0;
+                int count = 0;
+                HashMap<String, HashMap> hashMap1 = new HashMap<>();
+                HashMap<String, Object> points;
 
-            } catch (Exception e){
+                for (int i = 0; i < arrayList.size(); i++) {
+                    points = new HashMap<>();
+                    avg = reviewDAO.getAvgPoint(arrayList.get(i).getMovieCd());
+                    count = reviewDAO.countByMovieCd(arrayList.get(i).getMovieCd());
+                    points.put("avg", avg);
+                    points.put("count", count);
+                    hashMap1.put(arrayList.get(i).getMovieCd(), points);
+                }
+
+                request.setAttribute("totalCount", totalCount);
+                request.setAttribute("s_type", s_type);
+                request.setAttribute("val", val);
+                request.setAttribute("hashMap", hashMap);
+                request.setAttribute("points", hashMap1);
+                request.setAttribute("arrayList", arrayList);
+                request.setAttribute("orderBy", "recent");
+                request.getRequestDispatcher("/movie/listLookup.jsp").forward(request, response);
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (uri.equals("/orderBy.reviewCount.movie")){
+        } else if (uri.equals("/orderBy.reviewCount.movie")) {
 
             String s_type = request.getParameter("s_type");
             String val = request.getParameter("val");
@@ -166,13 +203,13 @@ public class MovieController extends HttpServlet {
             HashMap<String, Object> hashMap = new HashMap<>();
             int totalCount = 0;
 
-            try{
-                if(s_type.equals("")){
+            try {
+                if (s_type.equals("")) {
                     totalCount = movieDAO.CountAll();
                     hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                     int start = (int) hashMap.get("postStart");
                     int end = (int) hashMap.get("postEnd");
-                    arrayList = movieDAO.selectAll_OrderByReviewCount(start,end);
+                    arrayList = movieDAO.selectAll_OrderByReviewCount(start, end);
 
                 } else if (s_type.equals("genreAlt")) {
                     if (val.equals("기타")) {
@@ -180,32 +217,51 @@ public class MovieController extends HttpServlet {
                         hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                         int start = (int) hashMap.get("postStart");
                         int end = (int) hashMap.get("postEnd");
-                        arrayList = movieDAO.selectEtcGenre_OrderByReviewCount(start,end);
+                        arrayList = movieDAO.selectEtcGenre_OrderByReviewCount(start, end);
 
                     } else {
                         totalCount = movieDAO.countAllByGenre(val);
                         hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                         int start = (int) hashMap.get("postStart");
                         int end = (int) hashMap.get("postEnd");
-                        arrayList = movieDAO.selectByGenre_OrderByReviewCount(val,start,end);
+                        arrayList = movieDAO.selectByGenre_OrderByReviewCount(val, start, end);
                     }
                 } else if (s_type.equals("movieNm")) {
                     totalCount = movieDAO.countAllbyMovieNm(val);
                     hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                     int start = (int) hashMap.get("postStart");
                     int end = (int) hashMap.get("postEnd");
-                    arrayList = movieDAO.selectByMovieNm_OrderByReviewCount(val,start,end);
+                    arrayList = movieDAO.selectByMovieNm_OrderByReviewCount(val, start, end);
                 }
 
-                Gson gson = new Gson();
-                String rs = gson.toJson(arrayList);
-                response.getWriter().append(rs);
+                double avg = 0;
+                int count = 0;
+                HashMap<String, HashMap> hashMap1 = new HashMap<>();
+                HashMap<String, Object> points;
 
-            } catch (Exception e){
+                for (int i = 0; i < arrayList.size(); i++) {
+                    points = new HashMap<>();
+                    avg = reviewDAO.getAvgPoint(arrayList.get(i).getMovieCd());
+                    count = reviewDAO.countByMovieCd(arrayList.get(i).getMovieCd());
+                    points.put("avg", avg);
+                    points.put("count", count);
+                    hashMap1.put(arrayList.get(i).getMovieCd(), points);
+                }
+
+                request.setAttribute("totalCount", totalCount);
+                request.setAttribute("s_type", s_type);
+                request.setAttribute("val", val);
+                request.setAttribute("hashMap", hashMap);
+                request.setAttribute("points", hashMap1);
+                request.setAttribute("arrayList", arrayList);
+                request.setAttribute("orderBy", "reviewCount");
+                request.getRequestDispatcher("/movie/listLookup.jsp").forward(request, response);
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-        } else if (uri.equals("/orderBy.avgPoint.movie")){
+        } else if (uri.equals("/orderBy.avgPoint.movie")) {
 
             String s_type = request.getParameter("s_type");
             String val = request.getParameter("val");
@@ -214,8 +270,8 @@ public class MovieController extends HttpServlet {
             HashMap<String, Object> hashMap = new HashMap<>();
             int totalCount = 0;
 
-            try{
-                if(s_type.equals("")){
+            try {
+                if (s_type.equals("")) {
                     totalCount = movieDAO.CountAll();
                     hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                     int start = (int) hashMap.get("postStart");
@@ -228,40 +284,118 @@ public class MovieController extends HttpServlet {
                         hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                         int start = (int) hashMap.get("postStart");
                         int end = (int) hashMap.get("postEnd");
-                        arrayList = movieDAO.selectEtcGenre_OrderByAvgPoint(start,end);
+                        arrayList = movieDAO.selectEtcGenre_OrderByAvgPoint(start, end);
 
                     } else {
                         totalCount = movieDAO.countAllByGenre(val);
                         hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                         int start = (int) hashMap.get("postStart");
                         int end = (int) hashMap.get("postEnd");
-                        arrayList = movieDAO.selectByGenre_OrderByAvgPoint(val,start,end);
+                        arrayList = movieDAO.selectByGenre_OrderByAvgPoint(val, start, end);
                     }
                 } else if (s_type.equals("movieNm")) {
                     totalCount = movieDAO.countAllbyMovieNm(val);
                     hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
                     int start = (int) hashMap.get("postStart");
                     int end = (int) hashMap.get("postEnd");
-                    arrayList = movieDAO.selectByMovieNm_OrderByAvgPoint(val,start,end);
+                    arrayList = movieDAO.selectByMovieNm_OrderByAvgPoint(val, start, end);
                 }
 
-                Gson gson = new Gson();
-                String rs = gson.toJson(arrayList);
-                response.getWriter().append(rs);
+                double avg = 0;
+                int count = 0;
+                HashMap<String, HashMap> hashMap1 = new HashMap<>();
+                HashMap<String, Object> points;
 
-            } catch (Exception e){
+                for (int i = 0; i < arrayList.size(); i++) {
+                    points = new HashMap<>();
+                    avg = reviewDAO.getAvgPoint(arrayList.get(i).getMovieCd());
+                    count = reviewDAO.countByMovieCd(arrayList.get(i).getMovieCd());
+                    points.put("avg", avg);
+                    points.put("count", count);
+                    hashMap1.put(arrayList.get(i).getMovieCd(), points);
+                }
+
+                request.setAttribute("totalCount", totalCount);
+                request.setAttribute("s_type", s_type);
+                request.setAttribute("val", val);
+                request.setAttribute("hashMap", hashMap);
+                request.setAttribute("points", hashMap1);
+                request.setAttribute("arrayList", arrayList);
+                request.setAttribute("orderBy", "avgPoint");
+                request.getRequestDispatcher("/movie/listLookup.jsp").forward(request, response);
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (uri.equals("/findAvgPoint.movie")){
-            String movieCd = request.getParameter("movieCd");
-            try{
-                int avg = reviewDAO.getAvgPoint(movieCd);
-                String rs = String.valueOf(avg);
-                response.getWriter().append(rs);
-
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+//        } else if (uri.equals("/findAvgPoint.movie")){
+//            String movieCd = request.getParameter("movieCd");
+//            try{
+//                int avg = reviewDAO.getAvgPoint(movieCd);
+//                String rs = String.valueOf(avg);
+//                response.getWriter().append(rs);
+//
+//            } catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        } else if (uri.equals("/getCount.movie")){
+//            String s_type = request.getParameter("s_type");
+//            String val = request.getParameter("val");
+//            Integer curPage = Integer.valueOf(request.getParameter("curPage"));
+//            HashMap<String, Integer> hashMap = new HashMap<>();
+//            int totalCnt = 0;
+//            try{
+//                if(s_type.equals("")){
+//                    totalCnt = movieDAO.CountAll();
+//                } else if(s_type.equals("genreAlt")){
+//                    if(val.equals("기타")){
+//                        totalCnt = movieDAO.countAllEtcGenre();
+//                    } else {
+//                        totalCnt = movieDAO.countAllByGenre(val);
+//                    }
+//                } else if (s_type.equals("movieNm")){
+//                    totalCnt = movieDAO.countAllbyMovieNm(val);
+//                }
+//
+//                hashMap.put("num", totalCnt);
+//                hashMap.put("curPage", curPage);
+//                Gson gson = new Gson();
+//                String rs = gson.toJson(hashMap);
+//                response.getWriter().append(rs);
+//
+//            } catch (Exception e){
+//                e.printStackTrace();
+//            }
+        }else if(uri.equals("/lib.movie")) {
+        	MovieDAO dao = new MovieDAO();
+        	
+          String[] movieList = request.getParameterValues("lib");
+          List<MovieDTO> dtos = new ArrayList<MovieDTO>();
+          for(int i=0; i<movieList.length; i++) {
+        	  String[] tmp = movieList[i].split("/");
+        	  
+        	  
+        	  MovieDTO dto = new MovieDTO(tmp[0],tmp[1],tmp[2],tmp[3],tmp[4],tmp[5],tmp[6]);
+        	  dtos.add(dto);
+          }
+          
+      
+        	 int rs = dao.insert(dtos);
+        	 
+        	 if(rs == dtos.size()) {
+        		 jsResponse("db 저장 성공","lib.do?mommand=list",response);
+        	 }else {
+        		 jsResponse("db 저장 실패","lib.do?mommand=list",response);
+        	 }
+           
         }
     }
+    private void jsResponse(String msg, String url, HttpServletResponse response)throws IOException{
+    	String alert = "<Script type='text/javascript'>"
+    			+"alert('"+msg+"');"
+    			+"location.href='"+url+"';"
+    			+"</script>";
+    	PrintWriter out = response.getWriter();
+    	out.print(alert);
+    }
 }
+
