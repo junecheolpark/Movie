@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -269,7 +270,7 @@
                     <!-- logo -->
                     <div class="col-2">
                         <a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-                            <img id="navLogo" src="/movie/images/logo3.png">
+                            <img id="navLogo" src="/images/logo3.png">
                         </a>
                     </div>
 
@@ -288,11 +289,11 @@
 
                             <div class="col-2">
                                 <a href="" class="align-items-center ">
-                                    <img class="img-fluid" id="cartIcon" src="\Movie\images\찜.png">
+                                    <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                     <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                                 </a>
                                 <a href="" class="align-items-center">
-                                    <img class="img-fluid" id="myPageIcon" src="\Movie\images\마이페이지.png">
+                                    <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                     <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                                 </a>
                             </div>
@@ -319,18 +320,18 @@
             <div class="contentsBox">
                 <div class="contentsModifyBox">
                     <div class="contentsImgBox">
-                        <img class="profileImg" src="/Movie/images/profileImg.png">
+                        <img class="profileImg" src="/files/${file_dto.sys_name}">
                     </div>
                     <br><p>${loginSession.nickname}</p>
                     <div class="contentsModify">
                         <div class="container w-50">
-                            <form id="imgChangeForm" action="/imgModifyProc.file" method="post" enctype="multipart/form-data">
+                            <form id="imgChangeForm" action="/upload1.file" method="post" enctype="multipart/form-data">
                                 <div class="row p-2">
                                     <h2>내 정보 수정</h2>
                                     <div class="col-12">
                                         <label for="profileImg" class="form-label">프로필 사진</label><br>
-                                        <input type="file" name="file">
-                                        <button type="submit" class="btn btn-outline-info">프로필 사진 변경</button>
+                                        <input type="file" name="photo">
+                                        <button type="button" id="changeProfile" class="btn btn-outline-info">프로필 사진 변경</button>
                                     </div>
                                 </div>
                              </form>
@@ -387,10 +388,10 @@
                                 <div class="row p-2">
                                     <div class="col-12"><label for="phone" class="form-label">주소</label></div>
                                     <div class="col">
-                                        <input type="text" class="form-control" id="postCode" name="postCode" value="${dto.getPostCode()}" placeholder="우편번호" readonly>
+                                        <input type="text" class="form-control" id="postcode" name="postcode" value="${dto.getPostCode()}" placeholder="우편번호" readonly>
                                     </div>
                                     <div class="col">
-                                        <button type="button" class="btn btn-outline-primary w-100" id="btnPostCode">우편번호 찾기</button>
+                                        <button type="button" class="btn btn-outline-primary w-100" id="btnPostcode">우편번호 찾기</button>
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -425,27 +426,33 @@
                             </form>
                         </div>
 						<script>
-							// 뒤로가기버튼을 눌렀을때 index로 돌아가기
+							// 프로필 변경 사진버튼을 눌렀을때
+							$("#changeProfile").on("click", function() {
+								$("#imgChangeForm").submit;
+							});
+							
+							
+							// 뒤로가기버튼을 눌렀을때 mypageIndex로 돌아가기
 							$("#backBtn").on("click", function() {
-								location.href = "/";
+								location.href = "/Mypage/mypageIndex.jsp";
 							});
 							
 							// 닉네임 확인 버튼 누르면 팝업창 띄우기
 							document.getElementById("checkNicknameBtn").onclick = function(){
-								// 팝업창을 띄우기 위해 필요한 3가지 값 
+								// 팝업창을 띄우기 위해 필요한 3가지 값
 								// 1. jsp 경로값 (팝업창을 꾸며주는 jsp 별도로 필요)
-								// 2. 팝업창의 이름값 
+								// 2. 팝업창의 이름값
 								// 3. 팝업창의 크기, 위치
-								let url = "/nicknameCheckPopup.mem";
+								let url = "/Mypage/mypagePopup.jsp";
 								let name = "닉네임 중복검사";
-								let option = "width=600, height=300, left=500, top=300";
+								let option = "width=1500, height=900, left=80, top=300";
 								window.open(url, name, option);
 							}
 							
 							// 수정버튼을 눌렀을때
 							$("#modifyBtn").on("click", function() {
 								$("input").not("#id").attr("readonly", false); // 닉네임를 제외한 input readonly 제거
-								$("#btnPostCode").attr("disabled", false); // 우편번호찾기 버튼에 걸린 disabled 제거
+								$("#btnPostcode").attr("disabled", false); // 우편번호찾기 버튼에 걸린 disabled 제거
 								$(".btn-before").css("display", "none"); // 기존의 버튼들 감춰주기
 								$(".btn-after").removeClass("d-none"); // 취소, 완료버튼 보여주기
 							});
@@ -474,7 +481,7 @@
 								}else if(!regexPhone.test(phone)){ // 숫자 데이터에 대한 별도의 형변환이 필요없음
 									alert("형식에 맞지않는 휴대폰번호입니다.");
 									return;
-								}else if($("#postCode").val() === "" || $("#roadAddr").val() === ""){ // 빈값확인
+								}else if($("#postcode").val() === "" || $("#roadAddr").val() === ""){ // 빈값확인
 									alert("주소를 입력해 주세요.");
 									return;
 								}
@@ -495,7 +502,7 @@
 							$("#phone3").val(phone3);
 					
 							// 다음 우편번호 api 띄우기
-							$("#btnPostCode").on("click",function() {new daum.Postcode({
+							$("#btnPostcode").on("click",function() {new daum.Postcode({
 								oncomplete : function(data) {
 								var roadAddr = data.roadAddress; // 도로명 주소 변수
 								var extraRoadAddr = ''; // 참고 항목 변수
@@ -519,7 +526,7 @@
 																}
 					
 																// 우편번호와 주소 정보를 해당 필드에 넣는다.
-																$("#postCode").val(data.zonecode);
+																$("#postcode").val(data.zonecode);
 																$("#roadAddr").val(roadAddr);
 					
 																// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
