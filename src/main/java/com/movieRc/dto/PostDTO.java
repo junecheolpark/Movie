@@ -6,20 +6,20 @@ public class PostDTO {
  private String p_title;
  private String p_content;
  private String p_date;
- private int p_veiw_count;
+ private int p_view_count;
  private String user_id;
  private String user_category;
  
  public PostDTO() {}
  
-public PostDTO(int seq_post, String user_nickname, String p_title, String p_content, String p_date, int p_veiw_count,
+public PostDTO(int seq_post, String user_nickname, String p_title, String p_content, String p_date, int p_view_count,
 		String user_id, String user_category) {
 	this.seq_post = seq_post;	
 	this.user_nickname = user_nickname;
 	this.p_title = p_title;
 	this.p_content = p_content;
 	this.p_date = p_date;
-	this.p_veiw_count = p_veiw_count;
+	this.p_view_count = p_view_count;
 	this.user_id = user_id;
 	this.user_category = user_category;
 }
@@ -53,11 +53,11 @@ public String getP_date() {
 public void setP_date(String p_date) {
 	this.p_date = p_date;
 }
-public int getP_veiw_count() {
-	return p_veiw_count;
+public int getP_view_count() {
+	return p_view_count;
 }
-public void setP_veiw_count(int p_veiw_count) {
-	this.p_veiw_count = p_veiw_count;
+public void setP_view_count(int p_view_count) {
+	this.p_view_count = p_view_count;
 }
 public String getUser_id() {
 	return user_id;
@@ -74,7 +74,7 @@ public void setUser_category(String user_category) {
 @Override
 public String toString() {
 	return "PostDTO [seq_post=" + seq_post + ", user_nickname=" + user_nickname + ", p_title=" + p_title
-			+ ", p_content=" + p_content + ", p_date=" + p_date + ", p_veiw_count=" + p_veiw_count + ", user_id="
+			+ ", p_content=" + p_content + ", p_date=" + p_date + ", p_veiw_count=" + p_view_count + ", user_id="
 			+ user_id + ", user_category=" + user_category + "]";
 }
  

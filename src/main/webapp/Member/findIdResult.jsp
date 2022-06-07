@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +9,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<title>로그인</title>
+<title>아이디 찾기</title>
 <style>
 body {
 	background-color: black;
@@ -105,19 +105,6 @@ a {
 	background-color: white;
 }
 
-#user_id {
-	border-radius: 10px;
-}
-
-#user_pw {
-	border-radius: 10px;
-}
-
-#kakaoLogin {
-	height: 100%;
-	width: 100%;
-}
-
 /* Footer */
 .nav-link {
 	color: gray;
@@ -156,7 +143,6 @@ a {
 }
 </style>
 </head>
-
 <body>
 	<!-- Header -->
 	<header class="mb-3 border-bottom">
@@ -265,56 +251,97 @@ a {
 	<!-- Contents -->
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-5 col-md-10">
-				<form id="loginForm" action="/loginProc.mem" method="post">
+			<div class="col-lg-6">
+				<c:set var="doneLoop" value="false" />
+				<c:forEach items="${list}" var="dto" varStatus="status">
+					<c:if test="${not doneLoop}">
+						<c:if
+							test="${dto.user_name eq param.user_name && dto.user_k ne null}">
+							<div class="card card-custom">
+								<div class="card-header">
+									<h4>아이디 찾기</h4>
+								</div>
+								<div class="card-body">
+									<div class="form-group p-2 d-flex justify-content-center">
+										<p class="text-center">카카오 회원가입 회원입니다. 카카오로 로그인 해주세요.</p>
+									</div>
+									<div class="row p-3 justify-content-center">
+										<div
+											class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+											<button type="button" class="btn btn-dark w-100"
+												id="againBtn">뒤로가기</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<script>
+								$("#againBtn").on("click", function() {
+									location.href = "/Member/login.jsp";
+								})
+							</script>
+							<c:set var="doneLoop" value="true" />
+						</c:if>
+					</c:if>
+					<c:if test="${not doneLoop}">
+						<c:if test="${dto.user_name eq  param.user_name && rs eq true}">
+							<div class="card card-custom">
+								<div class="card-header">
+									<h4>아이디 찾기</h4>
+								</div>
+								<div class="card-body">
+									<div class="row p-2 justify-content-center">
+										<p class="col-12 d-flex justify-content-center">회원님의 아이디는 ${user_id} 입니다.</p>
+									</div>
+									<div class="row p-3 justify-content-center">
+										<div
+											class="col-6 d-flex justify-content-center">
+											<button type="button" class="btn btn-dark w-100"
+												id="loginBtn">로그인</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<script>
+								$("#loginBtn").on("click", function() {
+									location.href = "/Member/login.jsp";
+								})
+							</script>
+							<c:set var="doneLoop" value="true" />
+						</c:if>
+					</c:if>
+				</c:forEach>
+				<c:if test="${rs eq false}">
 					<div class="card card-custom">
 						<div class="card-header">
-							<h4>로그인</h4>
+							<h4>아이디 찾기</h4>
 						</div>
 						<div class="card-body">
-							<div class="form-group p-2">
-								<p>ID*</p>
-								<div>
-									<input type="text" class="form-control" id="user_id"
-										name="user_id" placeholder="ID">
-								</div>
-							</div>
-							<div class="form-group p-2">
-								<p>PW*</p>
-								<div>
-									<input type="password" class="form-control " id="user_pw"
-										name="user_pw" placeholder="PW">
-								</div>
+							<div class="form-group p-2 d-flex justify-content-center">
+								<p class="text-center">등록된 정보가 없습니다.</p>
 							</div>
 							<div class="row p-3 justify-content-center">
-								<div class="col-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-dark w-100" id="loginBtn">로그인</button>
+								<div
+									class="col-5 d-flex justify-content-center">
+									<button type="button" class="btn btn-dark w-100" id="againBtn">다시
+										찾기</button>
 								</div>
-								<div class="col-5 flex justify-content-start">
-									<img id="kakaoLogin" src="/resources/images/kakao_login.png">
-								</div>
-							</div>
-							<div class="row p-3">
-								<div class="col text-center">
-									<p class="m-0">
-										계정이 없으신가요? <a href="/Member/signup.jsp"
-											class="text-decoration-none"><strong>회원가입</strong></a>을해보세요
-									</p>
-									<br>
-									<p class="m-0">
-										아이디를 잊으셨나요? <a href="/Member/findId.jsp"
-											class="text-decoration-none"><strong>아이디찾기</strong></a>
-									</p>
-									<br>
-									<p class="m-0">
-										비밀번호를 잊으셨나요? <a href="/Member/findPw.jsp"
-											class="text-decoration-none"><strong>비밀번호찾기</strong></a>
-									</p>
+								<div
+									class="col-5 d-flex justify-content-center">
+									<button type="button" class="btn btn-dark w-100" id="signupBtn">회원가입</button>
 								</div>
 							</div>
 						</div>
 					</div>
-				</form>
+					<script>
+						$("#againBtn").on("click", function() {
+							location.href = "/Member/findId.jsp";
+						})
+
+						$("#signupBtn").on("click", function() {
+							location.href = "/Member/signup.jsp";
+						})
+					</script>
+				</c:if>
 			</div>
 		</div>
 	</div>
@@ -416,123 +443,5 @@ a {
 			</div>
 		</div>
 	</footer>
-	<script>
-		// 일반 로그인
-		let regexId = /^[a-zA-Z][\w]+@[a-zA-Z]+\.(com|net|co\.kr|or\.kr)$/;
-		let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,12}/;
-		
-		$("#loginBtn").on("click", function(){
-			if($("#user_id").val() === "") {
-				alert("아이디를 입력해 주세요.");
-				$('#user_id').focus();
-				return;
-			} else if (!regexId.test($("#user_id").val())){
-				alert("아이디를 정확히 입력해 주세요.")
-				$('#user_id').focus();
-				return;
-			} else if($("#user_pw").val() === ""){
-				alert("비밀번호를 입력해 주세요.");
-				$('#user_pw').focus();
-				return;
-			} else if (!regexPw.test($("#user_pw").val())){
-				alert("비밀번호를 정확히 입력해 주세요.")
-				$('#user_id').focus();
-				return;
-			}
-			$("#loginForm").submit();
-		})
-		
-		// 카카오 로그인
-		$("#kakaoLogin").on("click", function(){
-			kakaoLogin();
-		})
-		
-		// 카카오 로그인
-		Kakao.init('23a01cb0d87a6404d4df1ec97cf82ec7');		
-		function kakaoLogin() {
-			
-		    Kakao.Auth.login({
-		        success: function(response) {
-		            Kakao.API.request({ // 사용자 정보 가져오기 
-		                url: '/v2/user/me',
-		                success: function(response) {
-		                	$.ajax({
-		                    	url : '/kakaoTokenCheck.ka', // ID중복체크를 통해 회원가입 유무를 결정한다.
-		    					type : "post",    					
-		    					data : {"user_k": response.id},
-		    					dataType: "json",
-		    					success : function(data){   
-									  for(let dto of data) {
-										console.log(dto.user_k);
-										console.log(response.id);
-										if(response.id == dto.user_k && dto.user_k != null  && response.properties.nickname == dto.user_name){
-			    							// 존재하는 경우 로그인 처리
-			    							createHiddenLoginForm(response.id, response.properties.nickname);	
-			    							break;
-			    						} else if (response.id == dto.user_k && dto.user_k != null && response.properties.nickname != dto.user_name){
-			    							// 정보수정
-			    							alert("잘못된 정보입니다. 일반 로그인 또는 회원가입을 진행해 주세요.");
-			    							location.href = "/Member/login.jsp";
-			    							break;
-			    						}  else{
-			    							// 회원가입
-			    							createHiddenSignupForm(response.id, response.properties.nickname,response.kakao_account.email);				
-			    						}	 
-									}		 		
-		    					},
-		    					error: function(request, status, error){
-		    							console.log(error);		    		                
-		    		                }
-		    				});
-		                }
-		            });
-		        },
-		        fail: function(error) {
-		            alert(error);
-		        }
-		    });
-		}
-		
-		// 로그인
-		function createHiddenLoginForm(user_k, user_name){		
-			var frm = document.createElement('form');
-			frm.setAttribute('method', 'post');
-			frm.setAttribute('action', '/kakaoLogin.ka');
-			var token = document.createElement('input');
-			token.setAttribute('type','hidden');
-			token.setAttribute('name','user_k');
-			token.setAttribute('value',user_k);
- 			var name = document.createElement('input');
- 			name.setAttribute('type','hidden');
- 			name.setAttribute('name','user_name');
- 			name.setAttribute('value', user_name);
-			frm.append(token, name);
-			document.body.append(frm);
-			frm.submit();	
-		}
-		
-		// 회원가입
-		function createHiddenSignupForm(user_k, user_name, user_id){		
-			var frm = document.createElement('form');
-			frm.setAttribute('method', 'post');
-			frm.setAttribute('action', '/kakaoSignup.ka');
-			var token = document.createElement('input');
-			token.setAttribute('type','hidden');
-			token.setAttribute('name','user_k');
-			token.setAttribute('value',user_k);
- 			var name = document.createElement('input');
- 			name.setAttribute('type','hidden');
- 			name.setAttribute('name','user_name');
- 			name.setAttribute('value', user_name);
- 			var id = document.createElement('input');
- 			id.setAttribute('type','hidden');
- 			id.setAttribute('name','user_id');
- 			id.setAttribute('value', user_id);
-			frm.append(token, name, id);
-			document.body.append(frm);
-			frm.submit();	
-		}
-	</script>
 </body>
-
 </html>

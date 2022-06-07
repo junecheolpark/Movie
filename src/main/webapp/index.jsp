@@ -12,10 +12,14 @@
 </head>
 <body>
 <button id="test">test</button>
+<button id="test2">test2</button>
 </body>
 <script>
     $("#test").on("click", function (){
         location.href = "/listLookup.movie?curPage=1";
+    })
+    $("#test2").on("click", function (){
+        location.href = "/test.movie";
     })
 </script>
 </html>

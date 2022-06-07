@@ -42,12 +42,13 @@ public class MovieDAO {
     public ArrayList<MovieDTO> selectAll(int start, int end) throws Exception {
         String sql = "select * from" +
                 "             (select rownum as num, a.* from" +
-                "                                            (select * from tbl_movie order by 1 desc) a)" +
-                "where num between ? and ?";
+                "                                            (select * from tbl_movie order by 1 desc) a" +
+                "              where rownum <= ?)" +
+                "where num >=?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(1, end);
+            preparedStatement.setInt(2, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -90,12 +91,13 @@ public class MovieDAO {
     public ArrayList<MovieDTO> searchByGenre(String genreAlt, int start, int end) throws Exception {
         String sql = "select *" +
                 "from (select a.*, rownum as num" +
-                "      from (select * from tbl_movie where genreAlt like ? order by 1 desc) a)" +
-                "where num between ? and ?";
+                "      from (select * from tbl_movie where genreAlt like ? order by 1 desc) a" +
+                "      where rownum <= ?)" +
+                "where num >= ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, "%" + genreAlt + "%");
-            preparedStatement.setInt(2, start);
-            preparedStatement.setInt(3, end);
+            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(3, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -117,11 +119,12 @@ public class MovieDAO {
     public ArrayList<MovieDTO> searchByGenreEtc(int start, int end) throws Exception {
         String sql = "select*" +
                 "from (select a.*, rownum as num" +
-                "      from (select * from tbl_movie where not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러') order by 1 desc) a)" +
-                "where num between ? and ?";
+                "      from (select * from tbl_movie where not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러') order by 1 desc) a" +
+                "      where rownum <= ?)" +
+                "where num >= ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(1, end);
+            preparedStatement.setInt(2, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -155,12 +158,13 @@ public class MovieDAO {
     public ArrayList<MovieDTO> selectByMovieNm(String movieNm, int start, int end) throws Exception {
         String sql = "select*" +
                 "from (select a.*, rownum as num" +
-                "      from (select * from tbl_movie where movieNm like ? order by 1 desc) a)" +
-                "where num between ? and ?";
+                "      from (select * from tbl_movie where movieNm like ? order by 1 desc) a" +
+                "      where rownum <= ?)" +
+                "where num >= ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, "%" + movieNm + "%");
-            preparedStatement.setInt(2, start);
-            preparedStatement.setInt(3, end);
+            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(3, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -189,11 +193,12 @@ public class MovieDAO {
                 "                        from tbl_review" +
                 "                        group by movieCd) b" +
                 "                  where a.moviecd = b.moviecd(+))" +
-                "            order by 8 desc) c)" +
-                "where num between ? and ?";
+                "            order by 8 desc) c " +
+                "            where rownum <= ?)" +
+                "where num >= ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(1, end);
+            preparedStatement.setInt(2, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -224,11 +229,12 @@ public class MovieDAO {
                 "                        group by movieCd) b" +
                 "                  where a.moviecd = b.moviecd(+)" +
                 "                  and not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러'))" +
-                "            order by 8 desc) c)" +
-                "where num between ? and ?";
+                "            order by 8 desc) c" +
+                "            where rownum <= ?)" +
+                "where num >=?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(1, end);
+            preparedStatement.setInt(2, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -259,12 +265,13 @@ public class MovieDAO {
                 "                        group by movieCd) b" +
                 "                  where a.moviecd = b.moviecd(+)" +
                 "                  and genreAlt like ?)" +
-                "            order by 8 desc) c)" +
-                "where num between ? and ?";
+                "            order by 8 desc) c" +
+                "            where rownum <= ?)" +
+                "where num >= ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, "%" + genreAlt + "%");
-            preparedStatement.setInt(2, start);
-            preparedStatement.setInt(3, end);
+            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(3, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -295,12 +302,13 @@ public class MovieDAO {
                 "                        group by movieCd) b" +
                 "                  where a.moviecd = b.moviecd(+)" +
                 "                  and movieNm like ?)" +
-                "            order by 8 desc) c)" +
-                "where num between ? and ?";
+                "            order by 8 desc) c " +
+                "            where rownum <= ?)" +
+                "where num >= ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, "%" + movieNm + "%");
-            preparedStatement.setInt(2, start);
-            preparedStatement.setInt(3, end);
+            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(3, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -327,11 +335,12 @@ public class MovieDAO {
                 "            from tbl_movie a," +
                 "                 (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
                 "            where a.movieCd = b.movieCd(+)" +
-                "            order by 8 desc) c)" +
-                "where num between ? and ?";
+                "            order by 8 desc) c" +
+                "            where rownum <= ?)" +
+                "where num >= ? ";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(1, end);
+            preparedStatement.setInt(2, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -358,11 +367,12 @@ public class MovieDAO {
                 "                 (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
                 "            where a.movieCd = b.movieCd(+)" +
                 "            and not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러')" +
-                "            order by 8 desc) c)" +
-                "where num between ? and ?";
+                "            order by 8 desc) c" +
+                "            where rownum <= ?)" +
+                "where num >= ?";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(1, end);
+            preparedStatement.setInt(2, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -389,13 +399,14 @@ public class MovieDAO {
                 "                 (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
                 "            where a.movieCd = b.movieCd(+)" +
                 "            and genreAlt like ?" +
-                "            order by 8 desc) c)" +
-                "where num between ? and ?";
+                "            order by 8 desc) c" +
+                "            where rownum <= ?)" +
+                "where num >= ?";
 
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, "%"+genreAlt+"%");
-            preparedStatement.setInt(2, start);
-            preparedStatement.setInt(3, end);
+            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(3, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -422,13 +433,14 @@ public class MovieDAO {
                 "                 (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
                 "            where a.movieCd = b.movieCd(+)" +
                 "            and movieNm like ?" +
-                "            order by 8 desc) c)" +
-                "where num between ? and ?";
+                "            order by 8 desc) c" +
+                "            where rownum <= ?)" +
+                "where num >= ?";
 
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, "%"+movieNm+"%");
-            preparedStatement.setInt(2, start);
-            preparedStatement.setInt(3, end);
+            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(3, start);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<MovieDTO> arrayList = new ArrayList<>();
@@ -444,6 +456,28 @@ public class MovieDAO {
                 arrayList.add(new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt, directors));
             }
             return arrayList;
+        }
+    }
+
+    public MovieDTO getMovieDTO_byMovieCd(String movieCd) throws Exception {
+        String sql = "select * from tbl_movie where moviecd = ?";
+
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, movieCd);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                movieCd = resultSet.getString(1);
+                String movieNm = resultSet.getString(2);
+                String movieNmen = resultSet.getString(3);
+                String prdtYear = resultSet.getString(4);
+                String nationAlt = resultSet.getString(5);
+                String genreAlt = resultSet.getString(6);
+                String directors = resultSet.getString(7);
+
+                return new MovieDTO(movieCd, movieNm, movieNmen, prdtYear, nationAlt, genreAlt, directors);
+            }
+            return null;
         }
     }
 }

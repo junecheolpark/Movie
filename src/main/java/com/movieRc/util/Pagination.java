@@ -55,7 +55,7 @@ public class Pagination {
 
         // prev, next 버튼
         prevBtn = (naviStart != 1);
-        nextBtn = (naviEnd == totalPage ? false : true);
+        nextBtn = (naviEnd != totalPage);
 
         // 게시글 시작점, 끝점
         postStart = (curPage - 1) * recordPerPage + 1;
