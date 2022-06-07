@@ -299,7 +299,7 @@ public class PostController extends HttpServlet {
 						System.out.println("좋아요");
 					}
 					String a= Integer.toString(rs);
-					System.out.println("rs :" +rs);
+				;
 					System.out.println("rs :" +a);
 						response.getWriter().append(a);
 					
@@ -334,7 +334,7 @@ public class PostController extends HttpServlet {
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
 						System.out.println("좋아요");
 					}
-					System.out.println("rs :" +rs);
+				
 					String a= Integer.toString(rs);
 					
 					System.out.println("a :" +a);
