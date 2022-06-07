@@ -26,9 +26,9 @@ public class Pagination {
 
     public Pagination() {
         try {
-            Context context = new InitialContext();
-            Context envContext = (Context) context.lookup("java:comp/env");
-            basicDataSource = (BasicDataSource) envContext.lookup("jdbc/bds");
+//            Context context = new InitialContext();
+//            Context envContext = (Context) context.lookup("java:comp/env");
+//            basicDataSource = (BasicDataSource) envContext.lookup("jdbc/bds");
         } catch (Exception e) {
             e.printStackTrace();
         }

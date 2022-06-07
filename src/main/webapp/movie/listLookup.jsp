@@ -614,7 +614,7 @@
                         </div>
                         <div class="movieNameDiv">
                             <span class="movieName">
-                                 <a href="">${movieDTO.movieNm}</a>
+                                 <a href="/detailView.re?movieCd=${movieDTO.movieCd}">${movieDTO.movieNm}</a>
                             </span>
                             <c:if test="${not empty movieDTO.directors}">
                                 <span class="directors">${movieDTO.directors}</span>
