@@ -1,4 +1,4 @@
-package com.movie.controller;
+package com.movieRc.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,13 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.movie.dao.KakaoDAO;
-import com.movie.dao.MemberDAO;
-import com.movie.dto.MemberDTO;
-import com.movie.utils.EncryptionUtils;
+import com.movieRc.dao.KakaoDAO;
+import com.movieRc.dao.MemberDAO;
+import com.movieRc.dto.MemberDTO;
+import com.movieRc.utils.EncryptionUtils;
 
 @WebServlet("*.ka")
 public class KakaoController extends HttpServlet {
