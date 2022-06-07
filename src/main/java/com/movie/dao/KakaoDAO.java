@@ -1,4 +1,4 @@
-package com.movieRc.dao;
+package com.movie.dao;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

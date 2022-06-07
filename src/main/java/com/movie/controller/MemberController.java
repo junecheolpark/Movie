@@ -1,4 +1,4 @@
-package com.movieRc.controller;
+package com.movie.controller;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.movieRc.dao.MemberDAO;
+import com.movie.dao.MemberDAO;
 import com.movieRc.util.EncryptionUtils;
 import com.movieRc.dto.MemberDTO;
 

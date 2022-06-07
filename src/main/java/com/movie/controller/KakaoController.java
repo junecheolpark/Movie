@@ -1,4 +1,4 @@
-package com.movieRc.controller;
+package com.movie.controller;
 
 import java.io.IOException;
 
