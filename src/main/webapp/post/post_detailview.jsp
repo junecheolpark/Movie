@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-=======
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
->>>>>>> 200b674de53675da09a90a49e0f7e676d4c55105
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,30 +13,21 @@
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous" />
-<<<<<<< HEAD
-=======
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
->>>>>>> 200b674de53675da09a90a49e0f7e676d4c55105
 <style>
 #container {
 	margin: auto;
 	background-color: antiquewhite;
 	width: 900px;
-<<<<<<< HEAD
-	height: 1000px;
-}
-
-=======
 	
 }
 
 .modal-content{
 text-align: left;}
->>>>>>> 200b674de53675da09a90a49e0f7e676d4c55105
 #content-box {
 	background-color: rgb(255, 254, 248);
 	height: 500px;
@@ -54,11 +42,7 @@ text-align: left;}
 	margin: auto;
 }
 
-<<<<<<< HEAD
-#p_c_input {
-=======
 #comment_post {
->>>>>>> 200b674de53675da09a90a49e0f7e676d4c55105
 	margin: auto;
 	width: 600px;
 	height: 80px;
@@ -66,19 +50,6 @@ text-align: left;}
 	resize: none;
 }
 
-<<<<<<< HEAD
-#submit {
-	width: 70px;
-	height: 70px;
-	border-radius: 10px;
-}
-
-.comment-box {
-	margin: auto;
-	background-color: white;
-	width: 650px;
-	height: 140px;
-=======
 .comment-box {
 	margin: auto;
 	margin: 20px
@@ -87,7 +58,6 @@ text-align: left;}
 #submit {
 	width: 70px;
 	height: 70px;
->>>>>>> 200b674de53675da09a90a49e0f7e676d4c55105
 	border-radius: 10px;
 }
 
@@ -138,8 +108,6 @@ div {
 	width: 150px;
 	margin: auto;
 }
-<<<<<<< HEAD
-=======
 
 /* 댓글 스타일  */
 /* 평점, 리뷰등록 */
@@ -277,34 +245,10 @@ div {
 .reply-star-rating label:hover, .reply-star-rating label:hover ~label {
 	color: #fc0;
 }
->>>>>>> 200b674de53675da09a90a49e0f7e676d4c55105
 </style>
 </head>
 
 <body>
-<<<<<<< HEAD
-	<div id="container">
-		<div id="content-box">
-			<div class="row">
-				<div class="col">
-					<h4>title</h4>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-2">닉네임</div>
-				<div class="col-7"></div>
-				<div class="col-3">작성일,조회수</div>
-			</div>
-			<div class="row">
-				<div class="col-8">게시글번호</div>
-				<div class="col">
-					<div class="row">
-						<div class="col-5 click">
-							<img src="/img/like.png" alt="좋아요" id="like" /> 123
-						</div>
-						<div class="col-5 click">
-							<img src="/img/hate.png" alt="싫어요" id="hate" /> 3211
-=======
 
 	<div id="container">
 
@@ -326,87 +270,63 @@ div {
 				<div class="col">
 					<div class="row">
 						<div class="col-5 click">
-							<button id="p_likebefore"><img src="resources/images/likebefore.png" alt="좋아요" id="like" /></button>
-							<button id="p_like" style="display:none;"><img src="resources/images/like.png" alt="좋아요" id="like" /></button>
+							<button id="p_likebefore" value=${dto.seq_post }><img src="resources/images/likebefore.png" alt="좋아요" id="like" /></button>
+							<button id="p_like" style="display:none;" value=${dto.seq_post }><img src="resources/images/like.png" alt="좋아요" id="like" /></button>
 							
 						</div>
 						<div class="col-5 click">
-						<button id="p_hatebefore"><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
-							<button id="p_hate" style="display:none;"><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
->>>>>>> 200b674de53675da09a90a49e0f7e676d4c55105
+						<button id="p_hatebefore" value=${dto.seq_post }><img src="resources/images/hatebefore.png" alt="싫어요" id="hate" /></button>
+							<button id="p_hate" style="display:none;" value=${dto.seq_post }><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
 						</div>
 					</div>
+					<script>
+					/* 싫어요  */
+					$("#p_hatebefore").on("click",function(){
+						
+						$("#p_hatebefore").css("display", "none");
+						$("#p_hate").css("display","block");
+					})
+					$("#p_hate").on("click",function(){
+						$("#p_hate").css("display","none");
+						$("#p_hatebefore").css("display", "block");
+						
+					})
+					/*좋아요  */
+					$("#p_likebefore").on("click",function(){
+						
+						
+						
+						
+						let seq_post = $("#p_likebefore").val();
+						console.log(seq_post);
+						$.ajax({
+							url : "/pLike.po?seq_post="+ seq_post,
+							type : "get",			
+							success : function(data) {
+									if(data==="true"){
+										console.log("좋아요 성공")
+										$("#p_likebefore").css("display", "none");
+										$("#p_like").css("display","block");
+									}else{
+										console.log("좋아요 실패")
+										
+									}
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+						
+					})
+					$("#p_like").on("click",function(){
+						$("#p_like").css("display","none");
+						$("#p_likebefore").css("display", "block");
+						
+					})
+					</script>
 				</div>
 			</div>
 			<div class="row">
-<<<<<<< HEAD
-				<div class="col" id="content">내용</div>
-			</div>
-			<div id="user-box">
-				<div class="row">
-					<div class="col">
-						<button class="btn-warning btn">수정</button>
-					</div>
-					<div class="col">
-						<button class="btn-danger btn">삭제</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br /> <br /> <br />
-		<div id="input-box">
-			<div class="row">
-				<div class="col">공감순 높은평점순 낮은평점순 최신순</div>
-			</div>
-			<div class="row input">
-				<div class="col-10">
-					<textarea name="p_c_input" id="p_c_input" class="form-control"
-						cols="50" rows="2" placeholder="댓글을 입력해주세요."></textarea>
-				</div>
-				<div class="col-2">
-					<button type="submit" id="submit" class="btn btn-info">
-						리뷰<br />등록
-					</button>
-				</div>
-			</div>
-		</div>
-		<br />
-		<br />
-		<div class="comment-box">
-			<div class="row">
-				<div class="col-2">
-					<img src="/img/images.png" alt="profile" id="profile" />
-				</div>
-				<div class="col-10">
-					<div class="row">
-						<div class="col-2">닉네임</div>
-						<div class="col-8"></div>
-						<div class="col-2">
-							<img src="/img/report.png" alt="reoirt" id="report" />
-						</div>
-					</div>
-					<div class="row comment-text">
-						<div class="col-10">텍스트</div>
-						<div class="col-2"></div>
-					</div>
-					<div class="row">
-						<div class="col-2">작성일</div>
-						<div class="col-5"></div>
-						<div class="col-2 click">
-							<img src="/img/like.png" alt="좋아요" id="like" /> 123
-						</div>
-						<div class="col-2 click">
-							<img src="/img/hate.png" alt="싫어요" id="hate" /> 3211
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br />
-	</div>
-
-	<script></script>
-=======
 				<div class="col" id="content"><strong>내용:</strong>${dto.p_content }</div>
 			</div>
 
@@ -560,7 +480,7 @@ div {
 
 														<button type="button" class="btn btnModify" id=""
 															data-bs-toggle="dropdown" aria-expanded="true">
-															<img src="resources/images/hate.png" width="50%;">
+															<img src="resources/images/modify.png" width="50%;">
 														</button>
 														<ul class="dropdown-menu"
 															aria-labelledby="dropdownMenuButton1">
@@ -630,7 +550,7 @@ div {
 	</div>
 	<script>
 			//싫어요 좋아요버튼 post
-			$("#p_likebefore").on("click",function(e){
+			/* $("#p_likebefore").on("click",function(e){
 				let seq_post = "${dto.seq_post}";
 				$.ajax({
 					url : "/pLike.po?seq_post="+ seq_post,
@@ -646,7 +566,7 @@ div {
 						console.log(e);
 					}
 				})
-			})
+			}) */
 
 			//모달 입력후 메세지 보냈을경우
 			$("#sendMessage").on("click",function(e) {
@@ -848,6 +768,5 @@ div {
 
 
 
->>>>>>> 200b674de53675da09a90a49e0f7e676d4c55105
 </body>
 </html>

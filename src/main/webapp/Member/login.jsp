@@ -278,6 +278,9 @@ a {
 									<input type="text" class="form-control" id="user_id"
 										name="user_id" placeholder="ID">
 								</div>
+								<div class="form-text">
+									*이메일 형식으로 입력해 주세요.
+								</div>
 							</div>
 							<div class="form-group p-2">
 								<p>PW*</p>

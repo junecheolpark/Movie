@@ -278,9 +278,13 @@ a {
 							</div>
 						</div>
 						<div class="row p-3 justify-content-center">
-							<div class="col-12 flex justify-content-center">
+							<div class="col-12c ol-md-5 col-lg-5 flex justify-content-start">
 								<button type="button" class="btn btn-dark rounded w-100"
 									id="mypageBtn">마이페이지</button>
+							</div>
+							<div class="col-12 col-md-5 col-lg-5 d-flex justify-content-end">
+								<button type="button" class="btn btn-dark rounded w-100"
+									id="postBtn">게시판</button>
 							</div>
 						</div>
 					</div>
@@ -404,7 +408,12 @@ a {
 				
 				// 마이페이지
 				$("#mypageBtn").on("click", function() {
-					location.href = "/myPage.mem"; // 로그아웃 처리
+					location.href = "/myPage.mem"; 
+				})
+				
+				// 게시판
+				$("#postBtn").on("click", function() {
+					location.href = "/post/post.jsp"; 
 				})
 			</script>
 		</c:when>
