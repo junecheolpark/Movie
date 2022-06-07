@@ -85,10 +85,8 @@ public class ReviewController extends HttpServlet {
 
             try {
 
-                /**/ // 임시로
-                String movieCd = "movieCd";
-                /**/
-
+            	String movieCd = request.getParameter("movieCd");
+            	System.out.println(movieCd);
                 // 평점 몇명했는지
                 int cnt = reviewDAO.r_grade_count();
                 request.setAttribute("cnt", cnt);
@@ -103,14 +101,17 @@ public class ReviewController extends HttpServlet {
                 ArrayList<Like_r_countDTO> like_list = like_rDAO.like_count();
                 //싫어요 갯수
                 ArrayList<Like_r_countDTO> hate_list = like_rDAO.hate_count();
-
+                //like_r 전체조회
                 ArrayList<Like_rDTO> all_list = like_rDAO.selectAll();
-//				System.out.println("all_list" + all_list);
+                //tbl_movie조회
+                MovieDTO moviedto = movieDAO.selectBySeq(movieCd);
 
                 request.setAttribute("reviewList", list);
                 request.setAttribute("like_list", like_list);
                 request.setAttribute("hate_list", hate_list);
                 request.setAttribute("all_list", all_list);
+                request.setAttribute("moviedto", moviedto);
+                
 
 
             } catch (Exception e) {
@@ -157,64 +158,95 @@ public class ReviewController extends HttpServlet {
                 e.printStackTrace();
             }
         } else if (uri.equals("/lowGrade.re")) { // 낮은 평점순
-            String movieCd = "movieCd";
-            System.out.println("movieCd : " + movieCd);
-            try {
+        	  HttpSession session = request.getSession();//임시
+              MemberDTO dto = (MemberDTO) session.getAttribute("loginSession");
 
-                // 평점 몇명했는지
-                int cnt = reviewDAO.r_grade_count();
-                request.setAttribute("cnt", cnt);
-                // 평균
-                Double average = reviewDAO.r_grade_average();
-                request.setAttribute("average", average);
+              if (dto == null) {
+                  System.out.println("아이디 값 임의로 설정");
+                  String user_id = "asd123";
+                  String user_pw = "asd123";
+                  System.out.println(user_id + " : " + user_pw);
+              } else {
+                  String user_id = dto.getUser_id();
+                  String user_pw = dto.getUser_pw();
+                  System.out.println(user_id + " : " + user_pw);
+              }
 
-                // 게시글에 해당하는 댓글을 가져와 담아주는 작업
-                ArrayList<ReviewDTO> list = reviewDAO.lowGrade(movieCd);
+              try {
 
-                ArrayList<Like_r_countDTO> like_list = like_rDAO.like_count();
-                System.out.println("like_list" + like_list);
+              	String movieCd = request.getParameter("movieCd");
+              	System.out.println(movieCd);
+                  // 평점 몇명했는지
+                  int cnt = reviewDAO.r_grade_count();
+                  request.setAttribute("cnt", cnt);
+                  // 평균
+                  Double average = reviewDAO.r_grade_average();
+                  request.setAttribute("average", average);
+                  // 게시글에 해당하는 댓글을 가져와 담아주는 작업
+                  ArrayList<ReviewDTO> list = reviewDAO.selectAll(movieCd);
+//  				System.out.println("list" + list);
 
-                ArrayList<Like_r_countDTO> hate_list = like_rDAO.hate_count();
+                  //좋아요갯수
+                  ArrayList<Like_r_countDTO> like_list = like_rDAO.like_count();
+                  //싫어요 갯수
+                  ArrayList<Like_r_countDTO> hate_list = like_rDAO.hate_count();
+                  //like_r 전체조회
+                  ArrayList<Like_rDTO> all_list = like_rDAO.selectAll();
+                  //tbl_movie조회
+                  MovieDTO moviedto = movieDAO.selectBySeq(movieCd);
 
-                ArrayList<Like_rDTO> all_list = like_rDAO.selectAll();
-//				System.out.println("all_list" + all_list);
-
-                request.setAttribute("reviewList", list);
-                request.setAttribute("like_list", like_list);
-                request.setAttribute("hate_list", hate_list);
-                request.setAttribute("all_list", all_list);
+                  request.setAttribute("reviewList", list);
+                  request.setAttribute("like_list", like_list);
+                  request.setAttribute("hate_list", hate_list);
+                  request.setAttribute("all_list", all_list);
+                  request.setAttribute("moviedto", moviedto);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             request.getRequestDispatcher("/review_d/inquiry_d.jsp").forward(request, response);
         } else if (uri.equals("/highGrade.re")) { // 높은평점순
-            String movieCd = "movieCd";
-            System.out.println("movieCd : " + movieCd);
-            try {
+        	  HttpSession session = request.getSession();//임시
+              MemberDTO dto = (MemberDTO) session.getAttribute("loginSession");
 
-                // 평점 몇명했는지
-                int cnt = reviewDAO.r_grade_count();
-                request.setAttribute("cnt", cnt);
-                // 평균
-                Double average = reviewDAO.r_grade_average();
-                request.setAttribute("average", average);
+              if (dto == null) {
+                  System.out.println("아이디 값 임의로 설정");
+                  String user_id = "asd123";
+                  String user_pw = "asd123";
+                  System.out.println(user_id + " : " + user_pw);
+              } else {
+                  String user_id = dto.getUser_id();
+                  String user_pw = dto.getUser_pw();
+                  System.out.println(user_id + " : " + user_pw);
+              }
 
-                // 게시글에 해당하는 댓글을 가져와 담아주는 작업
-                ArrayList<ReviewDTO> list = reviewDAO.highGrade(movieCd);
+              try {
 
-                ArrayList<Like_r_countDTO> like_list = like_rDAO.like_count();
-                System.out.println("like_list" + like_list);
+              	String movieCd = request.getParameter("movieCd");
+              	System.out.println(movieCd);
+                  // 평점 몇명했는지
+                  int cnt = reviewDAO.r_grade_count();
+                  request.setAttribute("cnt", cnt);
+                  // 평균
+                  Double average = reviewDAO.r_grade_average();
+                  request.setAttribute("average", average);
+                  // 게시글에 해당하는 댓글을 가져와 담아주는 작업
+                  ArrayList<ReviewDTO> list = reviewDAO.selectAll(movieCd);
+//  				System.out.println("list" + list);
 
-                ArrayList<Like_r_countDTO> hate_list = like_rDAO.hate_count();
-                System.out.println("hate_list" + hate_list);
+                  //좋아요갯수
+                  ArrayList<Like_r_countDTO> like_list = like_rDAO.like_count();
+                  //싫어요 갯수
+                  ArrayList<Like_r_countDTO> hate_list = like_rDAO.hate_count();
+                  //like_r 전체조회
+                  ArrayList<Like_rDTO> all_list = like_rDAO.selectAll();
+                  //tbl_movie조회
+                  MovieDTO moviedto = movieDAO.selectBySeq(movieCd);
 
-                ArrayList<Like_rDTO> all_list = like_rDAO.selectAll();
-//				System.out.println("all_list" + all_list);
-
-                request.setAttribute("reviewList", list);
-                request.setAttribute("like_list", like_list);
-                request.setAttribute("hate_list", hate_list);
-                request.setAttribute("all_list", all_list);
+                  request.setAttribute("reviewList", list);
+                  request.setAttribute("like_list", like_list);
+                  request.setAttribute("hate_list", hate_list);
+                  request.setAttribute("all_list", all_list);
+                  request.setAttribute("moviedto", moviedto);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -225,7 +257,7 @@ public class ReviewController extends HttpServlet {
             MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("loginSession");
             String id = null;
             String user_category = null;
-
+            
             if (memberDTO != null) {
                 id = memberDTO.getUser_id();
                 user_category = memberDTO.getUser_category();
@@ -275,12 +307,17 @@ public class ReviewController extends HttpServlet {
                     likeHashMap.put("status", status);
                     likes.put(String.valueOf(review_seq), likeHashMap);
                 }
-
+              
+                
                 request.setAttribute("likes", likes);
                 request.setAttribute("movies", movies);
                 request.setAttribute("totalCnt", totalCnt);
                 request.setAttribute("arrayList", arrayList);
                 request.setAttribute("hashMap", hashMap);
+                System.out.println(arrayList);
+                movieCd = request.getParameter("movieCd");
+                MovieDTO moviedto = movieDAO.selectBySeq(movieCd);
+                request.setAttribute("moviedto", moviedto);
                 request.getRequestDispatcher("/review_d/reviewList.jsp").forward(request, response);
 
             } catch (Exception e) {
@@ -322,6 +359,7 @@ public class ReviewController extends HttpServlet {
                         arrayList = reviewDAO.selectAllgenreEtc(start, end);
 
                         for (int i = 0; i < arrayList.size(); i++) {
+
                             hashMap1 = new HashMap<>();
                             movieCd = arrayList.get(i).getMovieCd();
                             movieDTO = movieDAO.getMovieDTO_byMovieCd(movieCd);

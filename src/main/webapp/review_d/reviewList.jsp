@@ -492,20 +492,20 @@
                     <a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="cart">찜한 영화</p>
                     </a>
-                    <a href="/myPage.mem" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                    <a href="/Mypage/mypageIndex.jsp" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
-                    <form class="searchForm d-flex"  method="get" action="/search.movie">
+                    <form class="searchForm d-flex" method="get" action="/search.movie">
                         <input
-                                class="form-control me-2"
+                                class="searchInput form-control me-2"
                                 type="search"
-                                name = 'val'
+                                name='val'
                                 placeholder="Search"
                                 aria-label="Search">
-                        <input type="hidden" name='s_type' value="movieNm">
                         <input type="hidden" name='curPage' value="1">
-                        <button class="btn btn-outline-success" type="button">Search</button>
+                        <input type="hidden" name='s_type' value="movieNm">
+                        <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </div>
@@ -558,23 +558,22 @@
                                 <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                             </a>
-                            <a href="/myPage.mem" class="align-items-center">
+                            <a href="/Mypage/mypageIndex.jsp" class="align-items-center">
                                 <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                             </a>
                         </div>
                         <div class="col-5">
-                            <form class="searchForm d-flex"  method="get" action="/search.movie">
+                            <form class="searchForm d-flex" method="get" action="/search.movie">
                                 <input
-                                        class="form-control me-2"
+                                        class="searchInput form-control me-2"
                                         type="search"
                                         placeholder="Search"
                                         aria-label="Search"
-                                        name = 'val'>
-                                <input type="hidden" name='s_type' value="movieNm">
+                                        name='val'>
                                 <input type="hidden" name='curPage' value="1">
-                                <button type="button" id="searchBtn" class="searchBtn">검색</button>
-                                <button class="btn btn-outline-success" type="submit">Search</button>
+                                <input type="hidden" name='s_type' value="movieNm">
+                                <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
                     </div>
@@ -614,12 +613,14 @@
                             <c:forEach items="${movies}" var="movie">
                                 <c:if test="${reviewDTO.movieCd eq movie.key}">
                                     <div class="movieImgDiv">
-                                        <a href="/detailView.re?movieCd=${movieDTO.movieCd}"><img src="/images/NoImg.webp"></a>
+                                        <a href="/detailView.re?movieCd=${movieDTO.movieCd}"><img
+                                                src="/images/NoImg.webp"></a>
                                     </div>
                                     <div class="product">
                                         <div class="productDiv1">
                                             <div class="productTitle"><a
-                                                    href="/detailView.re?movieCd=${movieDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a></div>
+                                                    href="/detailView.re?movieCd=${reviewDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a>
+                                            </div>
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
                                             <div class="productAvgPoint">
                                                 <div class="avgPointStar"></div>
@@ -664,7 +665,7 @@
                                 <div class="reviewLike">
                                     <c:forEach items="${likes}" var="like">
                                         <c:if test="${reviewDTO.seq_review eq like.key}">
-                                            <input type="hidden" value ="${like.value['status']}" class="likeStatus">
+                                            <input type="hidden" value="${like.value['status']}" class="likeStatus">
                                             <span class="likeSpan">${like.value['like']}</span>
                                             <button type='button' class='likeBtn' value="${reviewDTO.seq_review}">좋아요
                                             </button>
@@ -757,7 +758,7 @@
                         <a href=/signup.mem" class="nav-link p-0">회원가입</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="/myPage.mem" class="nav-link p-0">마이페이지</a>
+                        <a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
@@ -841,7 +842,6 @@
     </div>
 </footer>
 <script>
-    console.log("${loginSession.user_id}");
 
     $(".selectByCategory").on("click", function () {
         let val = $(this).val();
@@ -852,14 +852,11 @@
         }
     });
 
-    $(".searchBtn").on("click", function () {
-        let val = $(this).siblings($(".searchInput")).val();
-        if (val !== "") {
-            let searchForm = $(this).parent(".searchForm");
-            searchForm.submit();
-        }
-        if (val === "") {
-            alert("검색어를 입력하세요.");
+    const searchForm = $(".searchForm");
+    searchForm.on("submit", function (event) {
+        if ($(this).children(".searchInput").val() === "") {
+            event.preventDefault();
+            alert("검색어를 입력하세요");
         }
     });
 
@@ -899,9 +896,9 @@
         }
     });
 
-    $.each($(".likeStatus"), function (){
+    $.each($(".likeStatus"), function () {
         let val = $(this).val();
-        if(val === '1'){
+        if (val === '1') {
             $(this).siblings(".likeBtn").addClass('active');
             $(this).siblings(".likeBtn").css("color", "blue");
         } else if (val === '2') {
@@ -917,7 +914,7 @@
         let likeSpan = $(this).siblings(".likeSpan");
         let hateSapn = $(this).siblings(".hateSpan");
 
-        if(user_id!==""){
+        if (user_id !== "") {
             if ($(this).hasClass('active')) {
                 $(this).removeClass('active');
                 $(this).css("color", "black");
@@ -984,7 +981,7 @@
         let likeSpan = $(this).siblings(".likeSpan");
         let hateSapn = $(this).siblings(".hateSpan");
 
-        if(user_id!==""){
+        if (user_id !== "") {
             if ($(this).hasClass('active')) {
                 $(this).removeClass('active');
                 $(this).css("color", "black");

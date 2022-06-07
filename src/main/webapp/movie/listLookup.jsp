@@ -482,7 +482,7 @@
                     <a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="cart">찜한 영화</p>
                     </a>
-                    <a href="/myPage.mem" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                    <a href="/myPage.mem " class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
@@ -492,9 +492,9 @@
                                 type="search"
                                 placeholder="Search"
                                 aria-label="Search" name="val">
-                        <input type="hidden" name='s_type' value="movieNm">
-                        <input type="hidden" name='curPage' value="1">
-                        <button class="searchBtn btn btn-outline-success" type="button">Search</button>
+                        <input type="hidden" name = 'curPage' value="1">
+                        <input type="hidden" name = 's_type' value="movieNm">
+                        <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </div>
@@ -547,7 +547,7 @@
                                 <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                             </a>
-                            <a href="/myPage.mem" class="align-items-center">
+                            <a href="/Mypage/mypageIndex.jsp" class="align-items-center">
                                 <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                             </a>
@@ -560,9 +560,9 @@
                                         placeholder="Search"
                                         aria-label="Search"
                                         name="val">
-                                <input type="hidden" name='s_type' value="movieNm">
-                                <input type="hidden" name='curPage' value="1">
-                                <button class="searchBtn btn btn-outline-success" type="button">Search</button>
+                                <input type="hidden" name = 'curPage' value="1">
+                                <input type="hidden" name = 's_type' value="movieNm">
+                                <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
                     </div>
@@ -704,9 +704,7 @@
     <div class="searchDiv">
         <form method="get" class="searchForm" action="/search.movie">
             <input type="text" id="searchInput" class="searchInput" name="val" placeholder="검색">
-            <input type="hidden" name='s_type' value="movieNm">
-            <input type="hidden" name='curPage' value="1">
-            <button type="button" id="searchBtn" class="searchBtn">검색</button>
+            <button type="submit" id="searchBtn" class="searchBtn">검색</button>
         </form>
     </div>
 </div>
@@ -744,7 +742,7 @@
                         <a href="/signup.mem" class="nav-link p-0">회원가입</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="/myPage.mem" class="nav-link p-0">마이페이지</a>
+                        <a href="/myPage.mem " class="nav-link p-0">마이페이지</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
@@ -828,6 +826,14 @@
     </div>
 </footer>
 <script>
+    const searchForm = $(".searchForm");
+    searchForm.on("submit", function (event) {
+        if ($(this).children(".searchInput").val() === "") {
+            event.preventDefault();
+            alert("검색어를 입력하세요");
+        }
+    });
+
     let prevBtn = ${hashMap.prevBtn};
     if (!prevBtn) {
         $(".prevBtn").addClass("disabled");
@@ -847,16 +853,6 @@
         }
     });
 
-    $(".searchBtn").on("click", function () {
-        let val = $(this).siblings($(".searchInput")).val();
-        if (val !== "") {
-            let searchForm = $(this).parent(".searchForm");
-            searchForm.submit();
-        }
-        if (val === "") {
-            alert("검색어를 입력하세요.");
-        }
-    });
     $("#orderByRecentMovie").on("click", function () {
         location.href = "/orderBy.recent.movie?s_type=${s_type}&curPage=1&val=${val}";
     });

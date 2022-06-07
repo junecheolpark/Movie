@@ -371,9 +371,16 @@ body {
 							<p class="text-light" id="myPage">마이페이지</p>
 						</a>
 
-						<form class="d-flex">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
+						<form class="searchForm d-flex" method="get" action="/search.movie">
+							<input
+									class="searchInput form-control me-2"
+									type="search"
+									placeholder="Search"
+									aria-label="Search"
+									name="val">
+							<input type="hidden" name = 'curPage' value="1">
+							<input type="hidden" name = 's_type' value="movieNm">
+							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
 
 					</div>
@@ -413,9 +420,16 @@ body {
 								</a>
 							</div>
 							<div class="col-5">
-								<form class="d-flex">
-									<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-									<button class="btn btn-outline-success" type="submit">Search</button>
+								<form class="searchForm d-flex" method="get" action="/search.movie">
+									<input
+											class="searchInput form-control me-2"
+											type="search"
+											placeholder="Search"
+											aria-label="Search"
+											name="val">
+									<input type="hidden" name = 'curPage' value="1">
+									<input type="hidden" name = 's_type' value="movieNm">
+									<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 								</form>
 							</div>
 
@@ -443,11 +457,12 @@ body {
 					<img src="images/movie.jpg" width="100%" height="100%">
 				</div>
 				<div class="col ">
-					<p class="m_genre mb-1 mt-1">장르: 액션</p>
+					<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
 					<p class="m_name my-1">
-						범죄도시<br>(the roundup)
+						${moviedto.movieNm}<br>(${moviedto.movieNmEn})
 					</p>
-					<p class="m_genre mb-1 mt-1">개봉: 2022 감독: 이상용</p>
+					<p class="m_genre mb-1 mt-1">개봉: ${moviedto.prdtYear} 감독: ${moviedto.directors}</p>
+					<p class="m_genre mb-1 mt-1">국가: ${moviedto.nationAlt}</p>
 				</div>
 			</div>
 
@@ -494,7 +509,9 @@ body {
 						<c:if test="${not empty reviewList}" var="review">
 							<div class="col-5 pe-5 text-end">
 								<%--<a href="#">&#9786공감순</a> --%>
-								<a href="#" class="highGrade">&#9734높은평점순</a> <a href="#" class="lowGrade">&#9734낮은평점순</a> <a href="#" class="newGrade">&#9737최신순</a>
+								<a href="/highGrade.re?movieCd=${moviedto.movieCd}" class="highGrade">&#9734높은평점순</a> 
+								<a href="/lowGrade.re?movieCd=${moviedto.movieCd}" class="lowGrade">&#9734낮은평점순</a> 
+								<a href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
 
 							</div>
 						</c:if>
@@ -798,6 +815,14 @@ body {
 			</from>
 		</c:forEach>
 		<script>
+			const searchForm = $(".searchForm");
+			searchForm.on("submit", function (event) {
+				if ($(this).children(".searchInput").val() === "") {
+					event.preventDefault();
+					alert("검색어를 입력하세요");
+				}
+			});
+
 			$("#Sign_in").on("click", function() { // 로그인하기 클릭시 로그인페이지로 이동
 				location.href = "/Member/login.jsp";
 			});
@@ -1129,6 +1154,7 @@ body {
 
 	</footer>
 	<script>
+	/*
 		$(".lowGrade").on("click", function() { // 낮은 평점
 			location.href = "/lowGrade.re";
 		});
@@ -1137,9 +1163,9 @@ body {
 			location.href = "/highGrade.re";
 		});
 		$(".newGrade").on("click", function() { // 높은 평점
-			location.href = "/detailView.re";
+			location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
 		});
-
+*/
 		$("#btnWrite").on(
 				"click",
 				function() {
