@@ -405,7 +405,9 @@
                                     class="form-control me-2"
                                     type="search"
                                     placeholder="Search"
-                                    aria-label="Search">
+                                    aria-label="Search" name = 'val'>
+                                <input type="hidden" name = 'curPage' value="1">
+                                <input type="hidden" name = 's_type' value="movieNm">
                                 <button class="btn btn-outline-success" type="button">Search</button>
                             </form>
                         </div>
@@ -465,12 +467,14 @@
                                     </a>
                                 </div>
                                 <div class="col-5">
-                                    <form class="d-flex">
+                                    <form class="searchForm d-flex">
                                         <input
                                             class="form-control me-2"
                                             type="search"
                                             placeholder="Search"
-                                            aria-label="Search">
+                                            aria-label="Search" name = 'val'>
+                                        <input type="hidden" name = 'curPage' value="1">
+                                        <input type="hidden" name = 's_type' value="movieNm">
                                         <button class="btn btn-outline-success" type="submit">Search</button>
                                     </form>
                                 </div>

@@ -9,7 +9,6 @@ public class BlacklistDTO {
 	
 	public BlacklistDTO() {}
 	public BlacklistDTO(String user_id, String user_category, String black_date, String black_reason, String black_YN) {
-		super();
 		this.user_id = user_id;
 		this.user_category = user_category;
 		this.black_date = black_date;

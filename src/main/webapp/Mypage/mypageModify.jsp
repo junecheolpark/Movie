@@ -241,9 +241,16 @@
                             <p class="text-light" id="myPage">마이페이지</p>
                         </a>
 
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        <form class="searchForm d-flex" method="get" action="/search.movie">
+                            <input
+                                    class="searchInput form-control me-2"
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"
+                                    name="val">
+                            <input type="hidden" name = 'curPage' value="1">
+                            <input type="hidden" name = 's_type' value="movieNm">
+                            <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                         </form>
 
                     </div>
@@ -298,10 +305,16 @@
                                 </a>
                             </div>
                             <div class="col-5">
-                                <form class="d-flex">
-                                    <input class="form-control me-2" type="search" placeholder="Search"
-                                        aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                <form class="searchForm d-flex" method="get" action="/search.movie">
+                                    <input
+                                            class="searchInput form-control me-2"
+                                            type="search"
+                                            placeholder="Search"
+                                            aria-label="Search"
+                                            name="val">
+                                    <input type="hidden" name = 'curPage' value="1">
+                                    <input type="hidden" name = 's_type' value="movieNm">
+                                    <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                                 </form>
                             </div>
                         </div>
@@ -426,6 +439,15 @@
                             </form>
                         </div>
 						<script>
+
+                            const searchForm = $(".searchForm");
+                            searchForm.on("submit", function (event) {
+                                if ($(this).children(".searchInput").val() === "") {
+                                    event.preventDefault();
+                                    alert("검색어를 입력하세요");
+                                }
+                            });
+
 							// 프로필 변경 사진버튼을 눌렀을때
 							$("#changeProfile").on("click", function() {
 								$("#imgChangeForm").submit;
