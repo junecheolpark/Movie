@@ -353,7 +353,7 @@
 	                <div class="contentsImgBox">
 	                    <img class="profileImg" src="/files/${file_dto.sys_name}">
 	                </div>
-	                <br><p>${loginSession.nickname}</p>
+	                <br><p>${loginSession.user_nickname}</p>
 	                <button type="button" class="btn btn-outline-danger" id="mb_delete">회원 탈퇴</button>
 	                <button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
 	                <button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
@@ -377,7 +377,7 @@
 		});
 
     	$("#i_logout").on("click", function(){ // 로그아웃 요청
-    		location.href = "/logoutProc.mem";
+    		location.href = "/logout.mem";
     	})
 
     	$("#i_modify").on("click", function(){ // 내 정보 수정 페이지 요청
