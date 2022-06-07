@@ -482,7 +482,7 @@
 
                     <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
+                            <a class="nav-link" href="/Member/login.jsp">로그인</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/signup.mem">회원가입</a>
@@ -496,7 +496,7 @@
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
-                    <form class="searchForm d-flex" action="" method="get">
+                    <form class="searchForm d-flex"  method="get" action="/search.movie">
                         <input
                                 class="form-control me-2"
                                 type="search"
@@ -542,7 +542,7 @@
                         <div class="col-5">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">로그인</a>
+                                    <a class="nav-link" href="/Member/login.jsp">로그인</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/signup.mem">회원가입</a>
@@ -561,7 +561,7 @@
                             </a>
                         </div>
                         <div class="col-5">
-                            <form class="d-flex">
+                            <form class="searchForm d-flex"  method="get" action="/search.movie">
                                 <input
                                         class="form-control me-2"
                                         type="search"
@@ -744,7 +744,7 @@
                 <h5>계정</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">로그인</a>
+                        <a href="/Member/login.jsp" class="nav-link p-0">로그인</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href=/signup.mem" class="nav-link p-0">회원가입</a>
@@ -753,10 +753,10 @@
                         <a href="/myPage.mem" class="nav-link p-0">마이페이지</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">아이디 찾기</a>
+                        <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">비밀번호 찾기</a>
+                        <a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a>
                     </li>
                 </ul>
             </div>
@@ -842,6 +842,17 @@
             location.href = "/toReviewList.re?curPage=1";
         } else {
             location.href = "/show.re?s_type=genreAlt&curPage=1&val=" + val;
+        }
+    });
+
+    $(".searchBtn").on("click", function () {
+        let val = $(this).siblings($(".searchInput")).val();
+        if (val !== "") {
+            let searchForm = $(this).parent(".searchForm");
+            searchForm.submit();
+        }
+        if (val === "") {
+            alert("검색어를 입력하세요.");
         }
     });
 

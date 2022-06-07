@@ -472,7 +472,7 @@
 
                     <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
+                            <a class="nav-link" href="/Member/login.jsp">로그인</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/signup.mem">회원가입</a>
@@ -534,7 +534,7 @@
                         <div class="col-5">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">로그인</a>
+                                    <a class="nav-link" href="/Member/login.jsp">로그인</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/signup.mem">회원가입</a>
@@ -738,7 +738,7 @@
                 <h5>계정</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">로그인</a>
+                        <a href="/Member/login.jsp" class="nav-link p-0">로그인</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="/signup.mem" class="nav-link p-0">회원가입</a>
@@ -747,10 +747,10 @@
                         <a href="/myPage.mem" class="nav-link p-0">마이페이지</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">아이디 찾기</a>
+                        <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">비밀번호 찾기</a>
+                        <a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a>
                     </li>
                 </ul>
             </div>
