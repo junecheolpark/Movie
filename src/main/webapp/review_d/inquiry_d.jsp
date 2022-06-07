@@ -479,13 +479,22 @@ body {
 		<div class="container">
 			<div class="row pt-4">
 				<!-- 좋아요 -->
-				<div class="row col">
-					<div class="col"></div>
-					<div class="col-lg-5 col-md-10 text-center like_round">
-						<span> <img src="images/heart.png"> ${m_like_count}
-						</span>
-					</div>
-				</div>
+				 <div class="row col">
+                    <div class="col p-0">
+                        <button class="border-0 px-4 like_round">
+                            <img src="images/star.png" >
+                            찜
+                        </button>
+                    </div>
+                    <div class="col-1">
+                      
+                    </div>
+                    <div class="col-lg-5 col-7 text-center like_round">
+                        <span><img src="images/heart.png"> ${m_like_count}
+                        </span>
+                    </div>
+                </div>
+				
 
 
 				<!-- 코멘트,댓글 -->

@@ -173,11 +173,12 @@ public class ReviewDAO {
     }
 
     // r_grade 합/ 평점 준사람
-    public Double r_grade_average() throws Exception {
-        String sql = "select TRUNC((sum(r_grade)/count(*)),2) from tbl_review";
+    public Double r_grade_average(String movieCd) throws Exception {
+        String sql = "select TRUNC((sum(r_grade)/count(*)),2) from tbl_review where movieCd=?";
         try (Connection con = bds.getConnection();
              PreparedStatement pstmt = con.prepareStatement(sql)) {
 
+        	pstmt.setString(1, movieCd);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 Double Average = rs.getDouble(1);

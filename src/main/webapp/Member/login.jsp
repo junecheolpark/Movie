@@ -275,14 +275,14 @@ a {
 								<p>ID*</p>
 								<div>
 									<input type="text" class="form-control" id="user_id"
-										name="user_id" placeholder="ID">
+										name="user_id" placeholder="ID" >
 								</div>
 							</div>
 							<div class="form-group p-2">
 								<p>PW*</p>
 								<div>
 									<input type="password" class="form-control " id="user_pw"
-										name="user_pw" placeholder="PW">
+										name="user_pw" placeholder="PW" >
 								</div>
 							</div>
 							<div class="row p-3 justify-content-center">
