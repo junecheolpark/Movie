@@ -300,15 +300,16 @@ div {
 							url : "/phate.po?seq_post="+ seq_post,
 							type : "get",			
 							success : function(data) {
-									if(data===0){
+								console.log(data);
+									if(data==0){
 										console.log("싫어요")
 										$("#p_hatebefore").css("display", "none");
 										$("#p_hate").css("display","block");
-									}else if(data===1){
+									}else if(data==1){
 										console.log("싫어요 취소")
 										$("#p_hate").css("display", "none");
 										$("#p_hatebefore").css("display","block")
-									}else if(data===2){
+									}else if(data==2){
 										console.log("좋아요 취소");
 										console.log("싫어요");
 										$("#p_likebefore").css("display","block");
@@ -333,15 +334,15 @@ div {
 							type : "get",			
 							success : function(data) {
 								console.log(data);
-									if(data===0){
+									if(data==0){
 										console.log("싫어요")
 										$("#p_hatebefore").css("display", "none");
 										$("#p_hate").css("display","block");
-									}else if(data===1){
+									}else if(data==1){
 										console.log("싫어요 취소")
 										$("#p_hate").css("display", "none");
 										$("#p_hatebefore").css("display","block")
-									}else if(data===2){
+									}else if(data==2){
 										console.log("좋아요 취소");
 										console.log("싫어요");
 										$("#p_likebefore").css("display","block");
@@ -364,15 +365,16 @@ div {
 							url : "/plike.po?seq_post="+ seq_post,
 							type : "get",			
 							success : function(data) {
-									if(data===0){
+								console.log(data);
+									if(data==0){
 										console.log("좋아요")
 										$("#p_likebefore").css("display", "none");
 										$("#p_like").css("display","block");
-									}else if(data===1){
+									}else if(data==1){
 										console.log("좋아요 취소")
 										$("#p_like").css("display", "none");
 										$("#p_likebefore").css("display","block")
-									}else if(data===2){
+									}else if(data==2){
 										console.log("싫어요 취소");
 										console.log("좋아요");
 										$("#p_hatebefore").css("display","block");
@@ -394,15 +396,16 @@ div {
 							url : "/phate.po?seq_post="+ seq_post,
 							type : "get",			
 							success : function(data) {
-								if(data===0){
+								console.log(data);
+								if(data==0){
 									console.log("좋아요")
 									$("#p_likebefore").css("display", "none");
 									$("#p_like").css("display","block");
-								}else if(data===1){
+								}else if(data==1){
 									console.log("좋아요 취소")
 									$("#p_like").css("display", "none");
 									$("#p_likebefore").css("display","block")
-								}else if(data===2){
+								}else if(data==2){
 									console.log("싫어요 취소");
 									console.log("좋아요");
 									$("#p_hatebefore").css("display","block");
