@@ -616,7 +616,7 @@
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
                                             <div class="productAvgPoint">
                                                 <div class="avgPointStar"></div>
-                                                <div class="avgPointNum" data-value='${movie.value['avg']}'>
+                                                <div class="avgPointNum" data-value='${movie.value}'>
                                                     <fmt:formatNumber value="${movie.value['avg']}"
                                                                       type="pattern"
                                                                       pattern="0.00"/> (${movie.value['count']})
@@ -657,7 +657,7 @@
                                 <div class="reviewLike">
                                     <c:forEach items="${likes}" var="like">
                                         <c:if test="${reviewDTO.seq_review eq like.key}">
-                                            <input type="hidden" value ='${like.value['status']}' class="likeStatus">
+                                            <input type="hidden" value ="${like.value['status']}" class="likeStatus">
                                             <span class="likeSpan">${like.value['like']}</span>
                                             <button type='button' class='likeBtn' value="${reviewDTO.seq_review}">좋아요
                                             </button>

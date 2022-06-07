@@ -1,17 +1,19 @@
 package com.movieRc.dao;
 
-import com.movieRc.dto.MovieDTO;
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import com.movieRc.dto.MovieDTO;
 
 public class MovieDAO {
+	
     private BasicDataSource basicDataSource;
 
     public MovieDAO() {
@@ -480,4 +482,49 @@ public class MovieDAO {
             return null;
         }
     }
+  public int deleteAll() throws Exception {
+		String sql = "delete from tbl_movie";
+
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+			int rs = preparedStatement.executeUpdate();
+			return rs;
+		}
+	}
+	
+	public int insert(List<MovieDTO> dtos){
+		String sql = "insert into tbl_movie values(?,?,?,?,?,?,?)";
+		int rs = 0;
+		try (Connection con = getConnection();
+				PreparedStatement pstm = con.prepareStatement(sql)) {
+
+			for(int i=0; i<dtos.size();i++) {
+				MovieDTO dto = dtos.get(i);
+				pstm.setString(1,  dto.getMovieCd());
+				pstm.setString(2,  dto.getMovieNm());
+				pstm.setString(3,  dto.getMovieNmEn());
+				pstm.setString(4,  dto.getPrdtYear());
+				pstm.setString(5,  dto.getNationAlt());
+				pstm.setString(6,  dto.getGenreAlt());
+				pstm.setString(7,  dto.getDirectors());
+				
+				pstm.addBatch(); // 모든 dto들의 배열 메모리에 대기
+				
+			}
+			int[] result = pstm.executeBatch(); //쿼리 결과값 배열 저장
+			
+			for(int i=0; i<result.length; i++){
+				if(result[0]==-2) {//성공이면 -2 rs값증가
+					rs++;
+				}
+			}
+
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
 }

@@ -1,14 +1,12 @@
 package com.movieRc.util;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import java.sql.Connection;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import java.io.PipedReader;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.HashMap;
+
+import org.apache.commons.dbcp2.BasicDataSource;
 
 public class Pagination {
     private int totalCnt;

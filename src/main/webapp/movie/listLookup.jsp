@@ -632,7 +632,7 @@
                             </span>
                             <c:forEach items="${points}" var="i">
                                 <c:if test="${i.key eq movieDTO.movieCd}">
-                                        <span class="movieAvgPoint" data-value='${i.value['avg']}'>
+                                        <span class="movieAvgPoint" data-value="${i.value['avg']}">
                                             <fmt:formatNumber value="${i.value['avg']}" type="pattern" pattern="0.00"/> (${i.value['count']})
                                         </span>
                                 </c:if>
