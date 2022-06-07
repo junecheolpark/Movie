@@ -3,6 +3,7 @@ package com.movieRc.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -216,8 +217,10 @@ public class MemberController extends HttpServlet {
 		}else if(uri.equals("/myPage.mem")) { // 마이페이지 요청
 			HttpSession session = request.getSession();
 			String user_id = ((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+			System.out.println("user_id : " + user_id);
 		
 			MemberDAO dao = new MemberDAO();
+			
 			try {
 				MemberDTO dto = dao.selectById(user_id);				
 				

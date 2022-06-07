@@ -50,12 +50,15 @@ public class fileController extends HttpServlet {
 			int maxSize = 1024 * 1024 * 100;
 			
 			MultipartRequest multi = new MultipartRequest(request,filePath,maxSize,"utf-8", new DefaultFileRenamePolicy());
-			
-			// 업로드된 파일의 원본파일명
-			String ori_name = multi.getOriginalFileName("file");	
-			
+						
 			// 실제 서버 경로에 업로드된 파일명
-			String sys_name = multi.getFilesystemName("file");
+			String sys_name = multi.getFilesystemName("file"); // member table애 저장할 profileImage컬럼/멤버필드에 들어갈 값이 됨. 
+			//  멤버 테이블의 지금 로그인한 사람의 아이디에 해당하는 멤버의 프로필이미지 컬럼을 sys__name으로 수정한다
+			// 수정 완료 후 modify.mem을 요청 
+			// /Mypage/mypageModify.jsp 에서 프로필 사진의 경로값을 
+			// 실제 프로필 사진이 저장된 서버 경로 + profileImage 멤버필드를 연결한 값을 경로로 잡아준다.
+			
+			// memberDTO,, memberDAO profileImage멤버필드 추가해서 모두 수정( 쿼리문도 수정)
 			
 		}
 	}
