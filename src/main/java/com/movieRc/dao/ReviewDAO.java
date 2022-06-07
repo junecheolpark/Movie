@@ -219,7 +219,10 @@ public class ReviewDAO {
 
     public HashMap<String, Integer> getAvgPointHashMap(HashMap<String, Integer> hashMap, String movieCd) throws Exception {
 
-        String sql = "select a.*, nvl(b.avg, 0)" + "      from tbl_movie a," + "           (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" + " where a.movieCd = b.movieCd(+)" + "   and a.movieCd = ?";
+        String sql = "select a.*, nvl(b.avg, 0)" +
+                     "      from tbl_movie a," +
+                     "           (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
+                     " where a.movieCd = b.movieCd(+)" + "   and a.movieCd = ?";
 
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, movieCd);
@@ -253,11 +256,15 @@ public class ReviewDAO {
 /*
     public ArrayList<ReviewDTO> selectAll(int start, int end) throws Exception {
 
-        String sql = "select * " + "from (select a.*, rownum as num from " + "(select * from tbl_review order by 1 desc) a)" + "where num between ? and ?";
+        String sql = "select *" +
+                     "from (select a.*, rownum as num" +
+                     "      from (select * from tbl_review order by 1 desc) a" +
+                     "      where rownum <= ?)" +
+                     "where num >= ?";
 
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(1, end);
+            preparedStatement.setInt(2, start);
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<ReviewDTO> arrayList = new ArrayList<>();
 
@@ -321,13 +328,14 @@ public class ReviewDAO {
                 "                 (select * from tbl_movie) b" +
                 "            where a.movieCd = b.movieCd(+)" +
                 "            and genreAlt like ?" +
-                "            order by 1 desc) c)" +
-                "where num between ? and ?";
+                "            order by 1 desc) c" +
+                "            where rownum <= ?)" +
+                "where num >=?";
 
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, "%"+genreAlt+"%");
-            preparedStatement.setInt(2, start);
-            preparedStatement.setInt(3, end);
+            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(3, start);
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<ReviewDTO> arrayList = new ArrayList<>();
 
@@ -351,16 +359,17 @@ public class ReviewDAO {
         String sql = "select *" +
                 "from (select c.*, rownum as num" +
                 "      from (select a.*, b.genreAlt" +
-                "            from tbl_review a,\n" +
+                "            from tbl_review a," +
                 "                 (select * from tbl_movie) b" +
                 "            where a.movieCd = b.movieCd(+)" +
                 "            and not regexp_like(genreAlt, '.*코미디|.*액션|.*멜로|.*sf|.*호러')" +
-                "            order by 1 desc) c)" +
-                "where num between ? and ?";
+                "            order by 1 desc) c" +
+                "            where rownum <= ?)" +
+                "where num >= ?";
 
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, start);
-            preparedStatement.setInt(2, end);
+            preparedStatement.setInt(1, end);
+            preparedStatement.setInt(2, start);
             ResultSet resultSet = preparedStatement.executeQuery();
             ArrayList<ReviewDTO> arrayList = new ArrayList<>();
 

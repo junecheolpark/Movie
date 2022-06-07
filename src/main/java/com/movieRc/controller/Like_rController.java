@@ -54,7 +54,6 @@ public class Like_rController extends HttpServlet {
 
                 Gson gson = new Gson();
                 String data = gson.toJson(likeHashMap);
-                System.out.println(data);
                 response.getWriter().append(data);
 
             } catch (Exception e) {
@@ -82,7 +81,6 @@ public class Like_rController extends HttpServlet {
 
                 Gson gson = new Gson();
                 String data = gson.toJson(likeHashMap);
-                System.out.println(data);
                 response.getWriter().append(data);
 
             } catch (Exception e) {
@@ -109,7 +107,6 @@ public class Like_rController extends HttpServlet {
 
                 Gson gson = new Gson();
                 String data = gson.toJson(likeHashMap);
-                System.out.println(data);
                 response.getWriter().append(data);
 
             } catch (Exception e) {
@@ -139,7 +136,6 @@ public class Like_rController extends HttpServlet {
 
                 Gson gson = new Gson();
                 String data = gson.toJson(likeHashMap);
-                System.out.println(data);
                 response.getWriter().append(data);
 
             } catch (Exception e) {

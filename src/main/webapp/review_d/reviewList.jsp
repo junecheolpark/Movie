@@ -905,11 +905,7 @@
                 $(this).css("color", "black");
                 $(this).siblings(".likeStatus").val("0");
                 let form = $("<form>")
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
                 seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
-                form.append(user_id);
-                form.append(user_category);
                 form.append(seq_review);
                 $("body").append(form);
                 let data = form.serialize();
@@ -936,12 +932,7 @@
                 $(this).siblings(".hateBtn").css('color', 'black');
 
                 let form = $("<form>")
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
                 seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
-                form.append(user_id);
-                form.append(user_category);
                 form.append(seq_review);
                 $("body").append(form);
                 let data = form.serialize();
@@ -981,11 +972,7 @@
                 $(this).css("color", "black");
                 $(this).siblings(".likeStatus").val("0");
                 let form = $("<form>")
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
                 seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
-                form.append(user_id);
-                form.append(user_category);
                 form.append(seq_review);
                 $("body").append(form);
                 let data = form.serialize();
@@ -1012,12 +999,7 @@
                 $(this).siblings(".likeBtn").css('color', 'black');
 
                 let form = $("<form>")
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
                 seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
-                form.append(user_id);
-                form.append(user_category);
                 form.append(seq_review);
                 $("body").append(form);
                 let data = form.serialize();

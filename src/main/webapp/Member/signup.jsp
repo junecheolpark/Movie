@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <title>회원가입</title>
 <style>
 body {
@@ -109,6 +113,11 @@ a {
 
 .card-footer {
 	background-color: white;
+}
+
+#kakaosingup {
+	height: 100%;
+	width: 100%;
 }
 
 /* Footer */
@@ -214,7 +223,7 @@ a {
 					<div class="col-2">
 						<a href="/"
 							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-							<img id="navLogo" src="images/logo3.png">
+							<img id="navLogo" src="/resources/images/logo3.png">
 						</a>
 					</div>
 
@@ -230,11 +239,12 @@ a {
 							</div>
 
 							<div class="col-2">
-								<a href="" class="align-items-center"> <img
-									class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
+								<a href="" class="align-items-center "> <img
+									class="img-fluid" id="cartIcon"
+									src="/resources/images/basket.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
 								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
-									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
+									class="img-fluid" id="myPageIcon"
+									src="/resources/images/myPage.png"> <!-- <p class="text-light" id="myPage">마이페이지</p> -->
 								</a>
 							</div>
 							<div class="col-5">
@@ -257,7 +267,7 @@ a {
 	<!-- Contents -->
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-5">
+			<div class="col-lg-6">
 				<form id="signupForm" action="/signupProc.mem" method="post">
 					<div class="card card-custom">
 						<div class="card-header">
@@ -269,18 +279,24 @@ a {
 									<p>이름*</p>
 								</div>
 								<div class="col-12">
-									<input type="text" class="form-control" id="user_name" name="user_name">
+									<input type="text" class="form-control" id="user_name"
+										name="user_name">
 								</div>
 							</div>
 							<div class="row p-2">
 								<div class="col-12">
 									<p>아이디*</p>
 								</div>
-								<div class="col-12 col-md-8 col-lg-8">
-									<input type="text" class="form-control" id="user_id" name="user_id" readonly>
+								<div class="col-8">
+									<input type="text" class="form-control" id="user_id"
+										name="user_id" readonly>
 								</div>
-								<div class="col-12 col-md-4 col-lg-4">
-									<button type="button" class="btn btn-warning w-100" id="checkId">아이디 확인</button>
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary w-100"
+										id="checkId">아이디 확인</button>
+								</div>
+								<div class="form-text">
+									이메일 형식으로 입력해 주세요.
 								</div>
 							</div>
 							<div class="row p-2">
@@ -288,7 +304,8 @@ a {
 									<p>비밀번호*</p>
 								</div>
 								<div class="col-12">
-									<input type="password" class="form-control " id="user_pw" name="user_pw">
+									<input type="password" class="form-control " id="user_pw"
+										name="user_pw">
 								</div>
 								<div class="form-text">
 									비밀번호는 6~12자 이내로 입력하세요.<br> (영어 대소문자, 숫자, ~!@#$%^&* 포함)
@@ -307,11 +324,13 @@ a {
 								<div class="col-12">
 									<p>닉네임*</p>
 								</div>
-								<div class="col-12 col-md-8 col-lg-8">
-									<input type="text" class="form-control" id="user_nickname" name="user_nickname" readonly>
+								<div class="col-8">
+									<input type="text" class="form-control" id="user_nickname"
+										name="user_nickname" readonly>
 								</div>
-								<div class="col-12 col-md-4 col-lg-4">
-									<button type="button" class="btn btn-warning w-100" id="checkNickname">닉네임 확인</button>
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary w-100"
+										id="checkNickname">닉네임 확인</button>
 								</div>
 								<div class="form-text">나를 표현할 닉네임을 4~8자 이내로 입력해 주세요.</div>
 							</div>
@@ -320,18 +339,36 @@ a {
 									<p>생년월일*</p>
 								</div>
 								<div class="col-12">
-									<input type="text" class="form-control" id="user_birth" name="user_birth">
+									<input type="text" class="form-control" id="user_birth"
+										name="user_birth">
 								</div>
-								<div class="form-text">8자리 숫자로 입력해 주세요. <br>예) 1999년 01월 01일 -> 19990101</div>
+								<div class="form-text">
+									8자리 숫자로 입력해 주세요. <br>예) 1999년 01월 01일 -> 19990101
+								</div>
 							</div>
 							<div class="row p-2">
 								<div class="col-12">
-									<p>전화번호*</p>
+									<label for="phone" class="form-label">휴대폰 번호</label>
 								</div>
-								<div class="col-12">
-									<input type="text" class="form-control" id="user_phone" name="user_phone">
+								<div class="col-4 mb-2">
+									<select class="form-select" id="phone1">
+										<option value="010" selected>010</option>
+										<option value="011">011</option>
+										<option value="016">016</option>
+										<option value="017">017</option>
+										<option value="018">018</option>
+										<option value="019">019</option>
+									</select>
 								</div>
-								<div class="form-text">전화번호는 - 없이 숫자만 입력해 주세요.</div>
+								<div class="col-4 mb-2">
+									<input type="text" class="form-control" id="phone2">
+								</div>
+								<div class="col-4 mb-2">
+									<input type="text" class="form-control" id="phone3">
+								</div>
+								<div class="col d-none">
+									<input type="text" id="user_phone" name="user_phone">
+								</div>
 							</div>
 							<div class="row p-2">
 								<div class="col">
@@ -360,8 +397,9 @@ a {
 								</div>
 							</div>
 							<div class="row p-3 justify-content-center">
-								<div class="col-12 col-md-4 col-lg-4 d-flex justify-content-end">
-									<button type="button" class="btn btn-dark rounded w-100" id="signupBtn">회원가입</button>
+								<div class="col-4 d-flex justify-content-center">
+									<button type="button" class="btn btn-dark w-100"
+										id="signupBtn">회원가입</button>
 								</div>
 							</div>
 						</div>
@@ -369,10 +407,9 @@ a {
 							<div class="text-center">
 								<span>또는</span>
 							</div>
-							<div class="row justify-content-center">
-								<div
-									class="col-12 col-md-4 col-lg-4 d-flex justify-content-center">
-									<a href="/kakao/kakaoSignup.jsp"><img src="/semi_project/images/kakao_singup.png"></a>
+							<div class="row p-3 justify-content-center">
+								<div class="col-12 d-flex justify-content-center">
+									<img id="kakaoSignup" src="/resources/images/kakao_signup.png">
 								</div>
 							</div>
 						</div>
@@ -382,87 +419,297 @@ a {
 		</div>
 	</div>
 	
+	<!-- Footer -->
+	<footer class="py-5 text-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-2">
+					<h5>장르</h5>
+					<ul class="nav flex-column">
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">코믹</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">액션</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">멜로</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">SF</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">호러</a></li>
+					</ul>
+				</div>
+
+				<div class="col-2">
+					<h5>계정</h5>
+					<ul class="nav flex-column">
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">로그인</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">회원가입</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">마이페이지</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">아이디
+								찾기</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">비밀번호
+								찾기</a></li>
+					</ul>
+				</div>
+
+				<div class="col-2">
+					<h5>기타</h5>
+					<ul class="nav flex-column">
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">리뷰</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">자유게시판</a></li>
+						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">찜
+								목록</a></li>
+					</ul>
+				</div>
+
+				<div class="col-4 offset-1">
+					<form>
+						<h5>영화 리뷰 플랫폼 - 영화 추천이</h5>
+						<p>
+							지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
+						</p>
+						<div class="d-flex w-100 gap-2">
+							<label for="newsletter1" class="visually-hidden">Email
+								address</label> <input id="newsletter1" type="text" class="form-control"
+								placeholder="Email address">
+							<button class="btn btn-primary" type="button">영화 추천받기</button>
+						</div>
+					</form>
+
+					<div class="snsBox">
+						<div class="snsIcon1">
+							<a href="https://www.kakaocorp.com/"
+								class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="kakaoIcon" src="/resources/images/kakaotalk.png">
+							</a>
+						</div>
+						<div class="snsIcon2">
+							<a href="https://twitter.com/"
+								class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="twitterIcon" src="/resources/images/twitter.png">
+							</a>
+						</div>
+						<div class="snsIcon3">
+							<a href="https://www.instagram.com/"
+								class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="instagramIcon" src="/resources/images/instagram.png">
+							</a>
+						</div>
+						<div class="snsIcon4">
+							<a href="https://www.facebook.com/"
+								class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="facebookIcon" src="/resources/images/facebook.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-center py-4 my-4 border-top">
+				<p>&copy; 영화 리뷰 플랫폼, 영화 추천이 All rights reserved.</p>
+				<!-- <ul class="list-unstyled d-flex">
+                                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                            트위터
+                                        </svg></a></li>
+                                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                            인스타그램
+                                        </svg></a></li>
+                                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                            페이스북
+                                        </svg></a></li>
+                            </ul> -->
+			</div>
+		</div>
+	</footer>
+
 	<script>
 		// 일반 가입
-		$("#signupBtn").on("click", function(){
+		$("#signupBtn").on("click", function() {
 			let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,12}/; // 비밀번호 정규식
 			let regexBirth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/; // 셍년월일 정규식
-			let regexPhone = /^[0-9]{2,3}[0-9]{3,4}[0-9]{4}/; // 전화번호 정규식
-			
-			if($("#user_id").val() === "") {
+			let regexPhone = /[0-9]{11}/; 
+			let user_phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
+			$("#user_phone").val(user_phone); // 전화번호 정규식
+
+			if ($("#user_name").val() === "") {
+				alert("이름을 입력해 주세요.");
+				$('#user_name').focus();
+				return;
+			} else if ($("#user_id").val() === "") {
 				alert("아이디를 입력해 주세요.");
+				$('#user_id').focus();
 				return;
-			} else if(!regexPw.test($("#user_pw").val())) {
+			} else if (!regexPw.test($("#user_pw").val())) {
 				alert("형식에 맞지않는 비밀번호입니다.");
+				$('#user_pw').focus();
 				return;
-			} else if($("#user_pw").val() !== $("#user_pwCheck").val()) {
+			} else if ($("#user_pw").val() !== $( "#user_pwCheck").val()) {
 				alert("비밀번호가 일치하지 않습니다.");
+				$('#user_pwCheck').focus();
 				return;
 			} else if ($("#user_nickname").val() === "") {
 				alert("닉네임을 입력해 주세요.");
+				$('#user_nickname').focus();
 				return;
-			} else if(!regexBirth.test($("#user_birth").val())){
+			} else if (!regexBirth.test($("#user_birth").val())) {
 				alert("형식에 맞지않는 생년월일입니다.");
+				$('#user_birth').focus();
 				return;
-			} else if(!regexPhone.test($("#user_phone").val())){
+			} else if (!regexPhone.test($("#user_phone").val())) {
 				alert("형식에 맞지않는 전화번호입니다.");
+				$('#user_phone').focus();
 				return;
-			} else if($("#postcode").val() === "" || $("#roadAddr").val() === "") {
+			} else if ($("#postcode").val() === ""
+					|| $("#roadAddr").val() === "") {
 				alert("주소를 입력해 주세요.");
+				$('#postcode').focus();
 				return;
 			}
-			
+
 			document.getElementById("signupForm").submit();
 		})
-		
+
 		// 아이디 팝업
-		$("#checkId").on("click", function(){
+		$("#checkId").on("click", function() {
 			let url = "/checkId.mem";
-			let name ="아이디 중복검사";
-			let option ="width=500, height=300, left=700, top=300";
+			let name = "아이디 중복검사";
+			let option = "width=500, height=300, left=700, top=300";
 			window.open(url, name, option);
 		})
-		
+
 		// 닉네임 팝업
-		$("#checkNickname").on("click", function(){
+		$("#checkNickname").on("click", function() {
 			let url = "/checkNickname.mem";
-			let name ="닉네임 중복검사";
-			let option ="width=500, height=300, left=700, top=300";
+			let name = "닉네임 중복검사";
+			let option = "width=500, height=300, left=700, top=300";
 			window.open(url, name, option);
 		})
-		
+
 		// 다음 우편번호 api
-		$("#btnPostCode").on("click", function(){
+		$("#btnPostCode").on("click",function() {
 			new daum.Postcode({
-	            oncomplete: function(data) {
-	                var roadAddr = data.roadAddress; // 도로명 주소 변수
-	                var extraRoadAddr = ''; // 참고 항목 변수
+				oncomplete : function(data) {
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 참고 항목 변수
 
-	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-	                    extraRoadAddr += data.bname;
-	                }
-	                // 건물명이 있고, 공동주택일 경우 추가한다
-	                if(data.buildingName !== '' && data.apartment === 'Y'){
-	                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-	                }
-	                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-	                if(extraRoadAddr !== ''){
-	                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-	                }
+					if (data.bname !== ''
+							&& /[동|로|가]$/g
+									.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다
+					if (data.buildingName !== ''
+							&& data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName
+								: data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' ('
+								+ extraRoadAddr + ')';
+					}
 
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	                $("#postcode").val(data.zonecode);
-	                $("#roadAddr").val(roadAddr);
-	                
-	                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-	                if(roadAddr !== ''){
-	                	$("#extraAddr").val(extraRoadAddr);
-	                } else {
-	                	$("#extraAddr").val("");
-	                }
-	            }
-	        }).open();
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					$("#postcode").val(data.zonecode);
+					$("#roadAddr").val(roadAddr);
+
+					// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+					if (roadAddr !== '') {
+						$("#extraAddr").val(
+								extraRoadAddr);
+					} else {
+						$("#extraAddr").val("");
+					}
+				}
+			}).open();
 		})
+		
+		// 카카오 로그인
+		$("#kakaoSignup").on("click", function(){
+			kakaoLogin();
+		})
+		
+		// 카카오 로그인
+		Kakao.init('23a01cb0d87a6404d4df1ec97cf82ec7');		
+		function kakaoLogin() {
+			
+		    Kakao.Auth.login({
+		        success: function(response) {
+		            Kakao.API.request({ // 사용자 정보 가져오기 
+		                url: '/v2/user/me',
+		                success: function(response) {
+		                	$.ajax({
+		                    	url : '/kakaoTokenCheck.ka', // ID중복체크를 통해 회원가입 유무를 결정한다.
+		    					type : "post",    					
+		    					data : {"user_k": response.id},
+		    					dataType: "json",
+		    					success : function(data){   
+									  for(let dto of data) {
+										console.log(dto.user_k);
+										console.log(response.id);
+										if(response.id == dto.user_k && dto.user_k != null  && response.properties.nickname == dto.user_name){
+			    							// 존재하는 경우 로그인 처리
+			    							createHiddenLoginForm(response.id, response.properties.nickname);	
+			    							break;
+			    						} else if (response.id == dto.user_k && dto.user_k != null && response.properties.nickname != dto.user_name){
+			    							// 정보수정
+			    							alert("카카오 회원가입 실패! 일반 회원가입으로 진행해 주세요.");
+			    							location.href = "/Member/signup.jsp";
+			    							break;
+			    						}  else{
+			    							// 회원가입
+			    							createHiddenSignupForm(response.id, response.properties.nickname,response.kakao_account.email);				
+			    						}	 
+									}		 		
+		    					},
+		    					error: function(request, status, error){
+		    							console.log(error);		    		                
+		    		                }
+		    				});
+		                }
+		            });
+		        },
+		        fail: function(error) {
+		            alert(error);
+		        }
+		    });
+		}
+		
+		// 로그인
+		function createHiddenLoginForm(user_k, user_name){		
+			var frm = document.createElement('form');
+			frm.setAttribute('method', 'post');
+			frm.setAttribute('action', '/kakaoLogin.ka');
+			var token = document.createElement('input');
+			token.setAttribute('type','hidden');
+			token.setAttribute('name','user_k');
+			token.setAttribute('value',user_k);
+ 			var name = document.createElement('input');
+ 			name.setAttribute('type','hidden');
+ 			name.setAttribute('name','user_name');
+ 			name.setAttribute('value', user_name);
+			frm.append(token, name);
+			document.body.append(frm);
+			frm.submit();	
+		}
+		
+		// 회원가입
+		function createHiddenSignupForm(user_k, user_name, user_id){		
+			var frm = document.createElement('form');
+			frm.setAttribute('method', 'post');
+			frm.setAttribute('action', '/kakaoSignup.ka');
+			var token = document.createElement('input');
+			token.setAttribute('type','hidden');
+			token.setAttribute('name','user_k');
+			token.setAttribute('value',user_k);
+ 			var name = document.createElement('input');
+ 			name.setAttribute('type','hidden');
+ 			name.setAttribute('name','user_name');
+ 			name.setAttribute('value', user_name);
+ 			var id = document.createElement('input');
+ 			id.setAttribute('type','hidden');
+ 			id.setAttribute('name','user_id');
+ 			id.setAttribute('value', user_id);
+			frm.append(token, name, id);
+			document.body.append(frm);
+			frm.submit();	
+		}
 	</script>
 </body>
 

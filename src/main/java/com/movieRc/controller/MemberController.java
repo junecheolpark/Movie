@@ -1,6 +1,7 @@
 package com.movieRc.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.movieRc.dao.MemberDAO;
-import com.movieRc.util.EncryptionUtils;
 import com.movieRc.dto.MemberDTO;
+import com.movieRc.util.EncryptionUtils;
 
 @WebServlet("*.mem")
 public class MemberController extends HttpServlet {
@@ -113,8 +114,8 @@ public class MemberController extends HttpServlet {
 			MemberDAO dao = new MemberDAO();
 
 			try {
-//				user_pw = EncryptionUtils.getSHA512(user_pw);
-//				System.out.println("암호화된 pw : " + user_pw);
+				user_pw = EncryptionUtils.getSHA512(user_pw);
+				System.out.println("암호화된 pw : " + user_pw);
 
 				MemberDTO dto = dao.checkLogin(user_id, user_pw);
 				if (dto != null) {
@@ -126,11 +127,12 @@ public class MemberController extends HttpServlet {
 					System.out.println("로그인 실패");
 					request.setAttribute("rs", false);
 				}
-				request.getRequestDispatcher("/detailView.re").forward(request, response);
+				request.getRequestDispatcher("/loginHome.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (uri.equals("/findId.mem")) { // 아이디 찾기
+			String user_k = request.getParameter("user_k");
 			String user_name = request.getParameter("user_name");
 			String user_phone = request.getParameter("user_phone");
 			System.out.println(user_name + " : " + user_phone);
@@ -142,6 +144,10 @@ public class MemberController extends HttpServlet {
 					System.out.println("아이디 찾기 성공");
 					request.setAttribute("rs", true);
 					request.setAttribute("user_id", user_id);
+
+					ArrayList<MemberDTO> list = dao.selectAll();
+					request.setAttribute("list", list);
+
 				} else {
 					System.out.println("아이디 찾기 실패");
 					request.setAttribute("rs", false);
@@ -151,17 +157,29 @@ public class MemberController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (uri.equals("/findPw.mem")) { // 비번 찾기
+			String user_k = request.getParameter("user_k");
 			String user_name = request.getParameter("user_name");
 			String user_id = request.getParameter("user_id");
 			System.out.println(user_name + " : " + user_id);
 
 			MemberDAO dao = new MemberDAO();
 			try {
-				String user_pw = dao.findId(user_name, user_id);
-				if (user_id != null) {
+				String user_pw = dao.findPw(user_name, user_id);
+				if (user_pw != null) {
 					System.out.println("비밀번호 찾기 성공");
 					request.setAttribute("rs", true);
-					request.setAttribute("user_pw", user_pw);
+
+					ArrayList<MemberDTO> list = dao.selectAll();
+					request.setAttribute("list", list);
+
+					String randomPassword = dao.randomPassword(7);
+					System.out.println("임시 비밀번호 : " + randomPassword);
+					request.setAttribute("ranPw", randomPassword);
+
+					randomPassword = EncryptionUtils.getSHA512(randomPassword);
+					System.out.println("암호화된 pw : " + randomPassword);
+
+					int rs = dao.pwUpdate(randomPassword, user_id);
 				} else {
 					System.out.println("비밀번호 찾기 실패");
 					request.setAttribute("rs", false);
@@ -170,6 +188,15 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (uri.equals("/logout.mem")) { // 로그아웃
+			HttpSession session = request.getSession();
+			System.out.println(session.getAttribute("loginSession"));
+
+			session.invalidate();
+			response.sendRedirect("/Member/login.jsp");
+
+			System.out.println("로그아웃 성공");
 		}
 	}
+
 }
