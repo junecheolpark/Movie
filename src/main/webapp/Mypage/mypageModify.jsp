@@ -433,7 +433,7 @@
 							
 							// 뒤로가기버튼을 눌렀을때 mypageIndex로 돌아가기
 							$("#backBtn").on("click", function() {
-								location.href = "/myPage.mem";
+								location.href = "/Mypage/mypageIndex.jsp";
 							});
 							
 							// 닉네임 확인 버튼 누르면 팝업창 띄우기
@@ -442,7 +442,7 @@
 								// 1. jsp 경로값 (팝업창을 꾸며주는 jsp 별도로 필요)
 								// 2. 팝업창의 이름값
 								// 3. 팝업창의 크기, 위치
-								let url = "/Mypage/mypagePopup.jsp";
+								let url = "/Member/checkNickname.jsp";
 								let name = "닉네임 중복검사";
 								let option = "width=1500, height=900, left=80, top=300";
 								window.open(url, name, option);
@@ -458,7 +458,7 @@
 					
 							// 수정화면에서 취소 버튼을 눌렀을때 
 							$("#cancelBtn").on("click", function() {
-								location.href = "/modify.mem";
+								location.href = "/Mypage/mypageModify.jsp";
 							});
 							
 							// 수정완료버튼 눌렀을 때 
