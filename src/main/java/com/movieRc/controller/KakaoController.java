@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import com.movieRc.dao.KakaoDAO;
 import com.movieRc.dao.MemberDAO;
 import com.movieRc.dto.MemberDTO;
-import com.movieRc.utils.EncryptionUtils;
+import com.movieRc.util.EncryptionUtils;
 
 @WebServlet("*.ka")
 public class KakaoController extends HttpServlet {
