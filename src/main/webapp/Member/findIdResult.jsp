@@ -207,7 +207,7 @@ a {
 					<div class="col-2">
 						<a href="/"
 							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-							<img id="navLogo" src="images/logo3.png">
+							<img id="navLogo" src="/resources/images/logo3.png">
 						</a>
 					</div>
 
@@ -224,10 +224,11 @@ a {
 
 							<div class="col-2">
 								<a href="" class="align-items-center "> <img
-									class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
+									class="img-fluid" id="cartIcon"
+									src="/resources/images/basket.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
 								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
-									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
+									class="img-fluid" id="myPageIcon"
+									src="/resources/images/myPage.png"> <!-- <p class="text-light" id="myPage">마이페이지</p> -->
 								</a>
 							</div>
 							<div class="col-5">
@@ -250,30 +251,65 @@ a {
 	<!-- Contents -->
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-5">
-				<c:if test="${rs eq true}">
-					<div class="card card-custom">
-						<div class="card-header">
-							<h4>아이디 찾기</h4>
-						</div>
-						<div class="card-body">
-							<div class="form-group p-2 d-flex justify-content-center">
-								<p>회원님의 아이디는 ${user_id} 입니다.</p>
-							</div>
-							<div class="row p-3 justify-content-center">
-								<div
-									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
-									<button type="button" class="btn btn-dark w-100" id="loginBtn">로그인</button>
+			<div class="col-lg-6">
+				<c:set var="doneLoop" value="false" />
+				<c:forEach items="${list}" var="dto" varStatus="status">
+					<c:if test="${not doneLoop}">
+						<c:if
+							test="${dto.user_name eq param.user_name && dto.user_k ne null}">
+							<div class="card card-custom">
+								<div class="card-header">
+									<h4>아이디 찾기</h4>
+								</div>
+								<div class="card-body">
+									<div class="form-group p-2 d-flex justify-content-center">
+										<p class="text-center">카카오 회원가입 회원입니다. 카카오로 로그인 해주세요.</p>
+									</div>
+									<div class="row p-3 justify-content-center">
+										<div
+											class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+											<button type="button" class="btn btn-dark w-100"
+												id="againBtn">뒤로가기</button>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<script>
-						$("#loginBtn").on("click", function() {
-							location.href = "/Member/login.jsp";
-						})
-					</script>
-				</c:if>
+							<script>
+								$("#againBtn").on("click", function() {
+									location.href = "/Member/login.jsp";
+								})
+							</script>
+							<c:set var="doneLoop" value="true" />
+						</c:if>
+					</c:if>
+					<c:if test="${not doneLoop}">
+						<c:if test="${dto.user_name eq  param.user_name && rs eq true}">
+							<div class="card card-custom">
+								<div class="card-header">
+									<h4>아이디 찾기</h4>
+								</div>
+								<div class="card-body">
+									<div class="row p-2 justify-content-center">
+										<p class="col-12 d-flex justify-content-center">회원님의 아이디는 ${user_id} 입니다.</p>
+									</div>
+									<div class="row p-3 justify-content-center">
+										<div
+											class="col-6 d-flex justify-content-center">
+											<button type="button" class="btn btn-dark w-100"
+												id="loginBtn">로그인</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<script>
+								$("#loginBtn").on("click", function() {
+									location.href = "/Member/login.jsp";
+								})
+							</script>
+							<c:set var="doneLoop" value="true" />
+						</c:if>
+					</c:if>
+				</c:forEach>
 				<c:if test="${rs eq false}">
 					<div class="card card-custom">
 						<div class="card-header">
@@ -281,16 +317,16 @@ a {
 						</div>
 						<div class="card-body">
 							<div class="form-group p-2 d-flex justify-content-center">
-								<p>등록된 정보가 없습니다.</p>
+								<p class="text-center">등록된 정보가 없습니다.</p>
 							</div>
 							<div class="row p-3 justify-content-center">
 								<div
-									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+									class="col-5 d-flex justify-content-center">
 									<button type="button" class="btn btn-dark w-100" id="againBtn">다시
 										찾기</button>
 								</div>
 								<div
-									class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
+									class="col-5 d-flex justify-content-center">
 									<button type="button" class="btn btn-dark w-100" id="signupBtn">회원가입</button>
 								</div>
 							</div>
@@ -366,25 +402,25 @@ a {
 						<div class="snsIcon1">
 							<a href="https://www.kakaocorp.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="kakaoIcon" src="images/kakaotalk.png">
+								id="kakaoIcon" src="/resources/images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
 							<a href="https://twitter.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="twitterIcon" src="images/twitter.png">
+								id="twitterIcon" src="/resources/images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
 							<a href="https://www.instagram.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="instagramIcon" src="images/instagram.png">
+								id="instagramIcon" src="/resources/images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
 							<a href="https://www.facebook.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="facebookIcon" src="images/facebook.png">
+								id="facebookIcon" src="/resources/images/facebook.png">
 							</a>
 						</div>
 					</div>
@@ -407,9 +443,5 @@ a {
 			</div>
 		</div>
 	</footer>
-
-	<script>
-		
-	</script>
 </body>
 </html>
