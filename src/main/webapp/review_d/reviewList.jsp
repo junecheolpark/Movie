@@ -503,8 +503,8 @@
                                 name='val'
                                 placeholder="Search"
                                 aria-label="Search">
-                        <input type="hidden" name = 'curPage' value="1">
-                        <input type="hidden" name = 's_type' value="movieNm">
+                        <input type="hidden" name='curPage' value="1">
+                        <input type="hidden" name='s_type' value="movieNm">
                         <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -571,8 +571,8 @@
                                         placeholder="Search"
                                         aria-label="Search"
                                         name='val'>
-                                <input type="hidden" name = 'curPage' value="1">
-                                <input type="hidden" name = 's_type' value="movieNm">
+                                <input type="hidden" name='curPage' value="1">
+                                <input type="hidden" name='s_type' value="movieNm">
                                 <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
@@ -619,7 +619,8 @@
                                     <div class="product">
                                         <div class="productDiv1">
                                             <div class="productTitle"><a
-                                                    href="/detailView.re?movieCd=${reviewDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a></div>
+                                                    href="/detailView.re?movieCd=${reviewDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a>
+                                            </div>
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
                                             <div class="productAvgPoint">
                                                 <div class="avgPointStar"></div>
@@ -852,8 +853,8 @@
     });
 
     const searchForm = $(".searchForm");
-    searchForm.on("submit", event => {
-        if(searchForm.find(".searchInput").val().trim() === ""){
+    searchForm.on("submit", function (event) {
+        if ($(this).children(".searchInput").val() === "") {
             event.preventDefault();
             alert("검색어를 입력하세요");
         }

@@ -621,13 +621,12 @@ section#container::after {
 
 	<script>
 		const searchForm = $(".searchForm");
-		searchForm.on("submit", event => {
-			if(searchForm.find(".searchInput").val().trim() === ""){
+		searchForm.on("submit", function (event) {
+			if ($(this).children(".searchInput").val() === "") {
 				event.preventDefault();
 				alert("검색어를 입력하세요");
 			}
 		});
-	
 		function sortWish(option){
 			let url;
 			if(option == 1){ //등록순
