@@ -253,8 +253,8 @@ public class ReviewDAO {
             return 0;
         }
     }
-/*
-    public ArrayList<ReviewDTO> selectAll(int start, int end) throws Exception {
+
+    public ArrayList<ReviewDTO> selectAll_ByPagination(int start, int end) throws Exception {
 
         String sql = "select *" +
                      "from (select a.*, rownum as num" +
@@ -284,7 +284,7 @@ public class ReviewDAO {
 
         }
     }
-*/
+
     public int countByGenre(String genreAlt) throws Exception {
         String sql = "select count(*)" +
                 "from (select a.*, b.*" +
