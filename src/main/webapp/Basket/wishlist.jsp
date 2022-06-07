@@ -273,66 +273,49 @@ section#container::after {
 	<!-- Header -->
 	<header class="mb-3 border-bottom">
 		<div class="container">
-			<nav id="navibar" class="navbar navbar-expand-md navbar-dark"
-				aria-label="Main navigation">
+			<!-- 접혔을 때 nav -->
+			<nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
 				<div class="container-fluid">
 					<!-- toggle button -->
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-						aria-controls="navbarNavDropdown" aria-expanded="false"
-						aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+						aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
 					<!-- 메뉴 -->
-					<div class="collapse navbar-collapse justify-content-end"
-						id="navbarNavDropdown">
+					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
-						</ul>
-
-						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
+							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">찜한 영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
 						</ul>
 
-
-						<a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="cart">찜한 영화</p>
-						</a> <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="myPage">마이페이지</p>
-						</a>
-
 						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 							<button class="btn btn-outline-success" type="submit">Search</button>
 						</form>
-
 					</div>
 				</div>
 			</nav>
-
-			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark"
-				aria-label="Main navigation">
+			<!-- 펼쳐졌을 때 nav -->
+			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
 						</ul>
 
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/"
-							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
+						<a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
 							<img id="navLogo" src="images/logo3.png">
 						</a>
 					</div>
@@ -341,25 +324,26 @@ section#container::after {
 						<div class="row">
 							<div class="col-5">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<li class="nav-item"><a class="nav-link" href="#">로그인</a>
+									<li class="nav-item">
+										<a class="nav-link" href="#">로그인</a>
 									</li>
-									<li class="nav-item"><a class="nav-link" href="#">회원가입</a>
+									<li class="nav-item">
+										<a class="nav-link" href="#">회원가입</a>
 									</li>
 								</ul>
 							</div>
 
 							<div class="col-2">
-								<a href="" class="align-items-center "> <img
-									class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
-								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
-									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
+								<a href="" class="align-items-center ">
+									<img class="img-fluid" id="cartIcon" src="images\찜.png">
+								</a>
+								<a href="" class="align-items-center">
+									<img class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
 								</a>
 							</div>
 							<div class="col-5">
 								<form class="d-flex">
-									<input class="form-control me-2" type="search"
-										placeholder="Search" aria-label="Search">
+									<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 									<button class="btn btn-outline-success" type="submit">Search</button>
 								</form>
 							</div>
@@ -371,136 +355,169 @@ section#container::after {
 	</header>
 
 	<!-- Contents -->
-	<div class="container">
-		<div class="contents">
-			<section id="container">
-				<aside id="aside" class="p-3 mt-3">
-					<div class="row justify-content-center" id="profile">
-						<div class="col-12 mt-4" id="profileBox">
-							<img src="images/오구3.gif">
-							<%-- <tr>
-		                    	<td class="col-2 text-center align-middle">
-		                            <p class="fw-bold">첨부파일</p>
-		                        </td>
-		                        <td class="col-10" colspan="3">
-		                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
-		                        </td>
-		                        <td>
-		                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
-		                        </td>
-		                    </tr> --%>
-						</div>
-
-						<div class="col-12 d-flex justify-content-center">
-							<h4 class="text-light">${loginSession.user_nickname} 님</h4>
-						</div>
-
-						<div class="col-12 d-flex justify-content-center">
-							<p class="text-light">어서오세요!</p>
-						</div>
-					</div>
-
-					<div class="row justify-content-center" id="profileBtnBox">
-						<button type="button" class="profileBtn btn btn-warning my-3">정보 수정</button>
-						<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 게시글</button>
-						<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 리뷰</button>
-					</div>
-				</aside>
-				
-				<aside id="asideSM" class="p-3 mt-3">
-					<div class="row pt-3 justify-content-center" id="profile">
-						<div class="col-4 me-5 mt-3" id="profileBox">
-							<img src="images/오구3.gif">
-							<%-- <tr>
-		                    	<td class="col-2 text-center align-middle">
-		                            <p class="fw-bold">첨부파일</p>
-		                        </td>
-		                        <td class="col-10" colspan="3">
-		                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
-		                        </td>
-		                        <td>
-		                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
-		                        </td>
-		                    </tr> --%>
-						</div>
-						
-						<div class="col-6" id="profileBtnBox">
-							<h4 class="text-light">${loginSession.user_nickname} 님</h4>
-							<button type="button" class="profileBtn btn btn-warning my-3">정보 수정</button>
-							<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 게시글</button>
-							<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 리뷰</button>
-						</div>
-						
-						<div class="row" id="profileBtnBoxSM">
-							<div class="col-12">
-								<h4 class="text-light">${loginSession.user_nickname} 님</h4>
-							</div>
-							<div class="col-4 px-0 d-flex justify-content-center">
-								<button type="button" class="profileBtn btn btn-warning btn-sm">정보 수정</button>
-							</div>
-							<div class="col-4 px-0 d-flex justify-content-center">
-								<button type="button" class="profileBtn btn btn-warning btn-sm">내가 쓴 게시글</button>
-							</div>
-							<div class="col-4 px-0 d-flex justify-content-center">
-								<button type="button" class="profileBtn btn btn-warning btn-sm">내가 쓴 리뷰</button>
-							</div>
-						</div>
-						
-						
-					</div>
-				</aside>
-				
-				<div class="body-wishList">
-					<div class="row p-3 body-wishList-header">
-						<div class="col-7">
-							<span class="fs-4">내가 찜한 영화</span>
-							<span id="wishCnt" class="fs-6 text-secondary">${totalCnt}건</span>
-						</div>
-						<div class="col-3">
-							<select id="selectBox" class="form-select">
-								<option value="1" selected>등록순</option>
-								<option value="2">이름순(영문)</option>
-								<option value="3">이름순(국문)</option>
-							</select>
-						</div>
-						<div class="col-2">
-							<button type="button" class="btn btn-secondary" id="selectBtn">확인</button>
-						</div>
-					</div>
-					
-					<div class="body-wishList-content">
-						<c:choose>
-							<c:when test="${wishList.size() == 0}">
-								<div class="row">
-									<p class="text-center fs-5 text-secondary">찜한 영화가 존재하지 않습니다.</p>
+	<c:choose>
+		<c:when test="${not empty loginSession}">
+			<div class="container">
+				<div class="contents">
+					<section id="container">
+						<aside id="aside" class="p-3 mt-3">
+							<div class="row justify-content-center" id="profile">
+								<div class="col-12 mt-4" id="profileBox">
+									<img src="images/오구3.gif">
+									<%-- <tr>
+				                    	<td class="col-2 text-center align-middle">
+				                            <p class="fw-bold">첨부파일</p>
+				                        </td>
+				                        <td class="col-10" colspan="3">
+				                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
+				                        </td>
+				                        <td>
+				                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
+				                        </td>
+				                    </tr> --%>
 								</div>
-							</c:when>
+		
+								<div class="col-12 d-flex justify-content-center">
+									<h4 class="text-light">${loginSession.user_nickname} 님</h4>
+								</div>
+		
+								<div class="col-12 d-flex justify-content-center">
+									<p class="text-light">어서오세요!</p>
+								</div>
+							</div>
+		
+							<div class="row justify-content-center" id="profileBtnBox">
+								<button type="button" class="profileBtn btn btn-warning my-3"><a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a></button>
+								<button type="button" class="profileBtn btn btn-warning mb-3"><a class="text-reset" href="">내가 쓴 게시글</a></button>
+								<button type="button" class="profileBtn btn btn-warning mb-3"><a class="text-reset" href="">내가 쓴 리뷰</a></button>
+							</div>
+						</aside>
+						
+						<aside id="asideSM" class="p-3 mt-3">
+							<div class="row pt-3 justify-content-center" id="profile">
+								<div class="col-4 me-5 mt-3" id="profileBox">
+									<img src="/files/${file_dto.sys_name}">
+									<%-- <tr>
+				                    	<td class="col-2 text-center align-middle">
+				                            <p class="fw-bold">첨부파일</p>
+				                        </td>
+				                        <td class="col-10" colspan="3">
+				                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
+				                        </td>
+				                        <td>
+				                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
+				                        </td>
+				                    </tr> --%>
+								</div>
+								
+								<div class="col-6" id="profileBtnBox">
+									<h4 class="text-light">${loginSession.user_nickname} 님</h4>
+									<button type="button" class="profileBtn btn btn-warning my-3"><a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a></button>
+									<button type="button" class="profileBtn btn btn-warning mb-3"><a class="text-reset" href="">내가 쓴 게시글</a></button>
+									<button type="button" class="profileBtn btn btn-warning mb-3"><a class="text-reset" href="">내가 쓴 리뷰</a></button>
+								</div>
+								
+								<div class="row" id="profileBtnBoxSM">
+									<div class="col-12">
+										<h4 class="text-light">${loginSession.user_nickname} 님</h4>
+									</div>
+									<div class="col-4 px-0 d-flex justify-content-center">
+										<button type="button" class="profileBtn btn btn-warning btn-sm"><a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a></button>
+									</div>
+									<div class="col-4 px-0 d-flex justify-content-center">
+										<button type="button" class="profileBtn btn btn-warning btn-sm"><a class="text-reset" href="">내가 쓴 게시글</a></button>
+									</div>
+									<div class="col-4 px-0 d-flex justify-content-center">
+										<button type="button" class="profileBtn btn btn-warning btn-sm"><a class="text-reset" href="">내가 쓴 리뷰</a></button>
+									</div>
+								</div>
+							</div>
+						</aside>
+						
+						<div class="body-wishList">
+							<div class="row p-3 body-wishList-header">
+								<div class="col-7">
+									<span class="fs-4">내가 찜한 영화</span>
+									<span id="wishCnt" class="fs-6 text-secondary">${totalCnt}건</span>
+								</div>
+								<div class="col-3">
+									<select id="selectBox" class="form-select">
+										<option value="1" selected>등록순</option>
+										<option value="2">이름순(영문)</option>
+										<option value="3">이름순(국문)</option>
+									</select>
+								</div>
+								<div class="col-2">
+									<button type="button" class="btn btn-secondary" id="selectBtn">확인</button>
+								</div>
+							</div>
 							
-							<c:otherwise>
-								<div class="row p-3">
-	                        		<c:forEach items="${wishList}" var="wishList">
-	                            		<div class="wishBox col-sm-6 col-md-4 mb-3">
-	                                		<div class="imgBox">
-	                                			<img class="posters" src="">
-	                                		</div>
-	                                		<div class="imgText">
-	                                			<p class="mb-0">${wishList.movieNm} ${wishList.movieNmEn}</p>
-	                                    		<p class="mb-0 text-secondary">${wishList.prdtYear}년 개봉</p>
-				                			</div>
-				                			<div class="imgBtn">
-				                				<button type="button" class="btn btn-warning mb-2">리뷰보기</button>
-	                                			<button type="button" class="deleteWish btn btn-secondary mb-2" value="${wishList.seq_basket}">삭제하기</button>
-				                			</div>
-	                            		</div>
-	                        		</c:forEach>
-	                    		</div>
-							</c:otherwise>						
-						</c:choose>
-					</div>
+							<div class="body-wishList-content">
+								<c:choose>
+									<c:when test="${wishList.size() == 0}">
+										<div class="row">
+											<p class="text-center fs-5 text-secondary">찜한 영화가 존재하지 않습니다.</p>
+										</div>
+									</c:when>
+									
+									<c:otherwise>
+										<div class="row p-3">
+			                        		<c:forEach items="${wishList}" var="wishList">
+			                            		<div class="wishBox col-sm-6 col-md-4 mb-3">
+			                                		<div class="imgBox">
+			                                			<img class="posters" src="">
+			                                		</div>
+			                                		<div class="imgText">
+			                                			<p class="mb-0">${wishList.movieNm} ${wishList.movieNmEn}</p>
+			                                    		<p class="mb-0 text-secondary">${wishList.prdtYear}년 개봉</p>
+						                			</div>
+						                			<div class="imgBtn">
+						                				<button type="button" class="btn btn-warning mb-2">리뷰보기</button>
+			                                			<button type="button" class="deleteWish btn btn-secondary mb-2" value="${wishList.seq_basket}">삭제하기</button>
+						                			</div>
+			                            		</div>
+			                        		</c:forEach>
+			                    		</div>
+									</c:otherwise>						
+								</c:choose>
+							</div>
+						</div>
+					</section>
 				</div>
-			</section>
-		</div>
-	</div>
+			</div>
+		</c:when>
+		
+		<c:otherwise>
+			<div class="container">
+				<div class="contents">
+					<section id="container">
+						<div class="body-wishList-content">
+	                        <div class="row">
+	                            <div class="col d-flex justify-content-center">
+	                                <strong class="fs-3">로그인이 필요해요!</strong>
+	                            </div>
+	                        </div>
+	                        <div class="row">
+	                            <div class="col-12 d-flex justify-content-center">
+	                                <p>로그인 하시면 나중에 보고 싶은 영화를 찜 해둘 수 있습니다!</p>
+	                            </div>
+	                            <div class="col-12 d-flex justify-content-center">
+	                                <p>지금 바로 로그인하시고, 확인해보세요!</p>
+	                            </div>
+	                        </div>
+	                        <div class="row btnBox">
+	                            <div class="col d-flex justify-content-center">
+	                                <button class="btn btn-primary me-2"><a class="text-reset" href="Member/signup.jsp">회원가입</a></button>
+	                                <button class="btn btn-info text-white"><a class="text-reset" href="Member/login.jsp">로그인하고 영화 찜하러 가기!</a></button>
+	                            </div>
+	                        </div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
+	
 
 
 	<!-- Footer -->

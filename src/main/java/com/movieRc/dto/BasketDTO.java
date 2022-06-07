@@ -12,7 +12,6 @@ public class BasketDTO {
 	public BasketDTO() {}
 	public BasketDTO(int seq_basket, String user_id, String movieCd, String movieNm, String movieNmEn, String prdtYear,
 			String user_category) {
-		super();
 		this.seq_basket = seq_basket;
 		this.user_id = user_id;
 		this.movieCd = movieCd;
