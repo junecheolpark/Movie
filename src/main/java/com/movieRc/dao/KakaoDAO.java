@@ -1,10 +1,13 @@
 package com.movieRc.dao;
+<<<<<<< HEAD:src/main/java/com/movie/dao/KakaoDAO.java
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+=======
+>>>>>>> e9d1af8 (수정):src/main/java/com/movieRc/dao/KakaoDAO.java
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
