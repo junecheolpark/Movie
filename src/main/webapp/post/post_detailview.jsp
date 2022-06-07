@@ -23,11 +23,12 @@
 	margin: auto;
 	background-color: antiquewhite;
 	width: 900px;
-	
 }
 
-.modal-content{
-text-align: left;}
+.modal-content {
+	text-align: left;
+}
+
 #content-box {
 	background-color: rgb(255, 254, 248);
 	height: 500px;
@@ -261,28 +262,167 @@ div {
 			</div>
 
 			<div class="row">
-				<div class="col-2"><span>닉네임:</span>${dto.user_nickname }</div>
+				<div class="col-2">
+					<span>닉네임:</span>${dto.user_nickname }</div>
 				<div class="col-6"></div>
 				<div class="col-4">${dto.p_date },<span>조회수:</span>${dto.p_view_count}</div>
 			</div>
 			<div class="row">
-				<div class="col-8"><span>글번호:</span>${dto.seq_post }</div>
+				<div class="col-8">
+					<span>글번호:</span>${dto.seq_post }</div>
 				<div class="col">
 					<div class="row">
 						<div class="col-5 click">
-							<button id="p_likebefore"><img src="resources/images/likebefore.png" alt="좋아요" id="like" /></button>
-							<button id="p_like" style="display:none;"><img src="resources/images/like.png" alt="좋아요" id="like" /></button>
-							
+							<button id="p_likebefore" value=${dto.seq_post }>
+								<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
+							</button>
+							<button id="p_like" style="display: none;" value=${dto.seq_post }>
+								<img src="resources/images/like.png" alt="좋아요" id="like" />
+							</button>
+
 						</div>
 						<div class="col-5 click">
-						<button id="p_hatebefore"><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
-							<button id="p_hate" style="display:none;"><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
+							<button id="p_hatebefore" value=${dto.seq_post }>
+								<img src="resources/images/hatebefore.png" alt="싫어요" id="hate" />
+							</button>
+							<button id="p_hate" style="display: none;" value=${dto.seq_post }>
+								<img src="resources/images/hate.png" alt="싫어요" id="hate" />
+							</button>
 						</div>
 					</div>
+					<script>
+					/* 싫어요  */
+					$("#p_hatebefore").on("click",function(){
+						
+						let seq_post = $("#p_hatebefore").val();
+						console.log(seq_post);
+						$.ajax({
+							url : "/phate.po?seq_post="+ seq_post,
+							type : "get",			
+							success : function(data) {
+									if(data===0){
+										console.log("싫어요")
+										$("#p_hatebefore").css("display", "none");
+										$("#p_hate").css("display","block");
+									}else if(data===1){
+										console.log("싫어요 취소")
+										$("#p_hate").css("display", "none");
+										$("#p_hatebefore").css("display","block")
+									}else if(data===2){
+										console.log("좋아요 취소");
+										console.log("싫어요");
+										$("#p_likebefore").css("display","block");
+										$("#p_like").css("display", "none");
+										$("#p_hatebefore").css("display", "none");
+										$("#p_hate").css("display","block");
+									}
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+						
+					})
+										
+					$("#p_hate").on("click",function(){
+						
+						let seq_post = $("#p_hate").val();
+						console.log(seq_post);
+						$.ajax({
+							url : "/phate.po?seq_post="+ seq_post,
+							type : "get",			
+							success : function(data) {
+								console.log(data);
+									if(data===0){
+										console.log("싫어요")
+										$("#p_hatebefore").css("display", "none");
+										$("#p_hate").css("display","block");
+									}else if(data===1){
+										console.log("싫어요 취소")
+										$("#p_hate").css("display", "none");
+										$("#p_hatebefore").css("display","block")
+									}else if(data===2){
+										console.log("좋아요 취소");
+										console.log("싫어요");
+										$("#p_likebefore").css("display","block");
+										$("#p_like").css("display", "none");
+										$("#p_hatebefore").css("display", "none");
+										$("#p_hate").css("display","block");
+									}
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+						
+					})
+					/*좋아요  */
+					$("#p_likebefore").on("click",function(){
+						let seq_post = $("#p_likebefore").val();
+						
+						$.ajax({
+							url : "/plike.po?seq_post="+ seq_post,
+							type : "get",			
+							success : function(data) {
+									if(data===0){
+										console.log("좋아요")
+										$("#p_likebefore").css("display", "none");
+										$("#p_like").css("display","block");
+									}else if(data===1){
+										console.log("좋아요 취소")
+										$("#p_like").css("display", "none");
+										$("#p_likebefore").css("display","block")
+									}else if(data===2){
+										console.log("싫어요 취소");
+										console.log("좋아요");
+										$("#p_hatebefore").css("display","block");
+										$("#p_hate").css("display", "none");
+										$("#p_likebefore").css("display", "none");
+										$("#p_like").css("display","block");
+									}
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+						
+					})
+					$("#p_like").on("click",function(){
+						let seq_post = $("#p_like").val();
+						
+						$.ajax({
+							url : "/phate.po?seq_post="+ seq_post,
+							type : "get",			
+							success : function(data) {
+								if(data===0){
+									console.log("좋아요")
+									$("#p_likebefore").css("display", "none");
+									$("#p_like").css("display","block");
+								}else if(data===1){
+									console.log("좋아요 취소")
+									$("#p_like").css("display", "none");
+									$("#p_likebefore").css("display","block")
+								}else if(data===2){
+									console.log("싫어요 취소");
+									console.log("좋아요");
+									$("#p_hatebefore").css("display","block");
+									$("#p_hate").css("display", "none");
+									$("#p_likebefore").css("display", "none");
+									$("#p_like").css("display","block");
+								}
+						},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+						
+					})
+					</script>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col" id="content"><strong>내용:</strong>${dto.p_content }</div>
+				<div class="col" id="content">
+					<strong>내용:</strong>${dto.p_content }</div>
 			</div>
 
 
@@ -379,7 +519,10 @@ div {
 														data-bs-whatever="@getbootstrap"
 														style="background-color: white; border: none;">
 														<img src="resources/images/report.png" height="80%">
-														<input id="seqReport" value=${post_comment.seq_post_comment} style="display:none;">
+														<input id="seqReport"
+															value=${post_comment.seq_post_comment
+															}
+															style="display: none;">
 													</button>
 													<div class="modal fade" id="exampleModal" tabindex="-1"
 														aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -396,11 +539,12 @@ div {
 																		<div class="mb-3">
 																			<label for="message-title" class="col-form-label">Title:</label>
 																			<input type="text" class="form-control"
-																				id="message-title" name="rp_title"/>
+																				id="message-title" name="rp_title" />
 																		</div>
 																		<div class="mb-3">
 																			<label for="message-text" class="col-form-label">Message:</label>
-																			<textarea class="form-control" id="message-text" name="rp_content"> </textarea>
+																			<textarea class="form-control" id="message-text"
+																				name="rp_content"> </textarea>
 																		</div>
 																	</div>
 																	<div class="modal-footer">
@@ -435,7 +579,7 @@ div {
 
 														<button type="button" class="btn btnModify" id=""
 															data-bs-toggle="dropdown" aria-expanded="true">
-															<img src="resources/images/hate.png" width="50%;">
+															<img src="resources/images/modify.png" width="50%;">
 														</button>
 														<ul class="dropdown-menu"
 															aria-labelledby="dropdownMenuButton1">
@@ -499,13 +643,13 @@ div {
 				<div class="col-2">
 					<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
 	<script>
 			//싫어요 좋아요버튼 post
-			$("#p_likebefore").on("click",function(e){
+			/* $("#p_likebefore").on("click",function(e){
 				let seq_post = "${dto.seq_post}";
 				$.ajax({
 					url : "/pLike.po?seq_post="+ seq_post,
@@ -521,7 +665,7 @@ div {
 						console.log(e);
 					}
 				})
-			})
+			}) */
 
 			//모달 입력후 메세지 보냈을경우
 			$("#sendMessage").on("click",function(e) {
