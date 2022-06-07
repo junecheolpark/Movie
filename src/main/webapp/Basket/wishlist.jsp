@@ -385,16 +385,16 @@ section#container::after {
 					</div>
 
 					<div class="row justify-content-center" id="profileBtnBox">
-						<button type="button" class="profileBtn btn btn-warning my-3">정보 수정</button>
-						<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 게시글</button>
-						<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 리뷰</button>
+						<button type="button" class="profileBtn btn btn-warning my-3"><a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a></button>
+						<button type="button" class="profileBtn btn btn-warning mb-3"><a class="text-reset" href="">내가 쓴 게시글</a></button>
+						<button type="button" class="profileBtn btn btn-warning mb-3"><a class="text-reset" href="">내가 쓴 리뷰</a></button>
 					</div>
 				</aside>
 				
 				<aside id="asideSM" class="p-3 mt-3">
 					<div class="row pt-3 justify-content-center" id="profile">
 						<div class="col-4 me-5 mt-3" id="profileBox">
-							<img src="images/오구3.gif">
+							<img src="/files/${file_dto.sys_name}">
 							<%-- <tr>
 		                    	<td class="col-2 text-center align-middle">
 		                            <p class="fw-bold">첨부파일</p>
@@ -410,9 +410,9 @@ section#container::after {
 						
 						<div class="col-6" id="profileBtnBox">
 							<h4 class="text-light">${loginSession.user_nickname} 님</h4>
-							<button type="button" class="profileBtn btn btn-warning my-3">정보 수정</button>
-							<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 게시글</button>
-							<button type="button" class="profileBtn btn btn-warning mb-3">내가 쓴 리뷰</button>
+							<button type="button" class="profileBtn btn btn-warning my-3"><a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a></button>
+							<button type="button" class="profileBtn btn btn-warning mb-3"><a class="text-reset" href="">내가 쓴 게시글</a></button>
+							<button type="button" class="profileBtn btn btn-warning mb-3"><a class="text-reset" href="">내가 쓴 리뷰</a></button>
 						</div>
 						
 						<div class="row" id="profileBtnBoxSM">
