@@ -500,8 +500,11 @@
                         <input
                                 class="form-control me-2"
                                 type="search"
+                                name = 'val'
                                 placeholder="Search"
                                 aria-label="Search">
+                        <input type="hidden" name='s_type' value="movieNm">
+                        <input type="hidden" name='curPage' value="1">
                         <button class="btn btn-outline-success" type="button">Search</button>
                     </form>
                 </div>
@@ -566,7 +569,11 @@
                                         class="form-control me-2"
                                         type="search"
                                         placeholder="Search"
-                                        aria-label="Search">
+                                        aria-label="Search"
+                                        name = 'val'>
+                                <input type="hidden" name='s_type' value="movieNm">
+                                <input type="hidden" name='curPage' value="1">
+                                <button type="button" id="searchBtn" class="searchBtn">검색</button>
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
