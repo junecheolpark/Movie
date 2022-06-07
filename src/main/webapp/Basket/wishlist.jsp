@@ -638,6 +638,7 @@ section#container::after {
 				alert("검색어를 입력하세요");
 			}
 		});
+
 		function sortWish(option){
 			let url;
 			if(option == 1){ //등록순
