@@ -470,7 +470,7 @@ a {
 			    							createHiddenLoginForm(response.id, response.properties.nickname);	
 			    							break;
 			    						} else if (response.id == dto.user_k && dto.user_k != null && response.properties.nickname != dto.user_name){
-			    							// 정보수정
+			    							// 정보 미일치시
 			    							alert("잘못된 정보입니다. 일반 로그인 또는 회원가입을 진행해 주세요.");
 			    							location.href = "/Member/login.jsp";
 			    							break;
