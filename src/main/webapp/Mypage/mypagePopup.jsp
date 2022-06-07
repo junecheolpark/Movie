@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -269,7 +270,7 @@
                     <!-- logo -->
                     <div class="col-2">
                         <a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-                            <img id="navLogo" src="/movie/images/logo3.png">
+                            <img id="navLogo" src="/images/logo3.png">
                         </a>
                     </div>
 
@@ -288,11 +289,11 @@
 
                             <div class="col-2">
                                 <a href="" class="align-items-center ">
-                                    <img class="img-fluid" id="cartIcon" src="\Movie\images\찜.png">
+                                    <img class="img-fluid" id="cartIcon" src="\images\찜.png">
                                     <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                                 </a>
                                 <a href="" class="align-items-center">
-                                    <img class="img-fluid" id="myPageIcon" src="\Movie\images\마이페이지.png">
+                                    <img class="img-fluid" id="myPageIcon" src="\images\마이페이지.png">
                                     <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                                 </a>
                             </div>
@@ -320,7 +321,7 @@
                 <div class="contentsModifyBox">
                     <div class="contentsModify">
                         <div class="container w-50">
-						  <form id="checkIdForm" action="/checkId.mem" method="get">
+						  <form id="checkIdForm" action="/checkNickname.mem" method="get">
 								<div class='container'>
 									<div class="row m-3 justify-content-center">
 										<div class="col-6 m-2">
