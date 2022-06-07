@@ -426,19 +426,22 @@ a {
 				alert("아이디를 입력해 주세요.");
 				$('#user_id').focus();
 				return;
-			} else if (!regexId.test($("#user_id").val())){
+			} 
+			/**/else if (!regexId.test($("#user_id").val())){
 				alert("아이디를 정확히 입력해 주세요.")
 				$('#user_id').focus();
 				return;
-			} else if($("#user_pw").val() === ""){
+			} /**/
+			else if($("#user_pw").val() === ""){
 				alert("비밀번호를 입력해 주세요.");
 				$('#user_pw').focus();
 				return;
-			} else if (!regexPw.test($("#user_pw").val())){
+			} 
+			/**/else if (!regexPw.test($("#user_pw").val())){
 				alert("비밀번호를 정확히 입력해 주세요.")
 				$('#user_id').focus();
 				return;
-			}
+			}/**/
 			$("#loginForm").submit();
 		})
 		

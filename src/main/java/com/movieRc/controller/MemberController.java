@@ -114,9 +114,10 @@ public class MemberController extends HttpServlet {
 			MemberDAO dao = new MemberDAO();
 
 			try {
-				user_pw = EncryptionUtils.getSHA512(user_pw);
-				System.out.println("암호화된 pw : " + user_pw);
-
+				/**/
+			user_pw = EncryptionUtils.getSHA512(user_pw);
+			System.out.println("암호화된 pw : " + user_pw);
+			/**/
 				MemberDTO dto = dao.checkLogin(user_id, user_pw);
 				if (dto != null) {
 					System.out.println("로그인 성공");

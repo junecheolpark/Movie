@@ -481,12 +481,8 @@
                     </ul>
 
                     <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">회원가입</a>
-                        </li>
+                       <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
                     </ul>
 
                     <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
@@ -607,7 +603,7 @@
                             <c:forEach items="${movies}" var="movie">
                                 <c:if test="${reviewDTO.movieCd eq movie.key}">
                                     <div class="movieImgDiv">
-                                        <a href="##"><img src="/images/NoImg.webp"></a>
+                                        <a href="/detailView.re?movieCd=${reviewDTO.movieCd}"><img src="/images/NoImg.webp"></a>
                                     </div>
                                     <div class="product">
                                         <div class="productDiv1">

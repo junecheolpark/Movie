@@ -354,14 +354,14 @@ body {
 					<!-- 메뉴 -->
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
 						</ul>
 
 						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
 						</ul>
 
 
@@ -440,7 +440,7 @@ body {
 			<!-- 왼쪽 영화이미지 -->
 			<div class="col-3 p-2 movie_box">
 				<div class="col movie_img">
-					<img src="images/movie.jpg" width="100%" height="100%">
+					<img src="images/NoImg.webp" width="100%" height="100%">
 				</div>
 				<div class="col ">
 					<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
@@ -473,7 +473,7 @@ body {
 				<div class="row col">
 					<div class="col"></div>
 					<div class="col-lg-5 col-md-10 text-center like_round">
-						<span> <img src="images/heart.png"> 458
+						<span> <img src="images/heart.png"> ${m_like_count}
 						</span>
 					</div>
 				</div>
@@ -495,9 +495,9 @@ body {
 						<c:if test="${not empty reviewList}" var="review">
 							<div class="col-5 pe-5 text-end">
 								<%--<a href="#">&#9786공감순</a> --%>
-								<a href="/highGrade.re?movieCd=${moviedto.movieCd}" class="highGrade">&#9734높은평점순</a> 
-								<a href="/lowGrade.re?movieCd=${moviedto.movieCd}" class="lowGrade">&#9734낮은평점순</a> 
-								<a href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
+								<a href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=high" class="highGrade">&#9734높은평점순</a> <a
+									href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=low" class="lowGrade">&#9734낮은평점순</a> <a
+									href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
 
 							</div>
 						</c:if>
@@ -510,6 +510,7 @@ body {
 									<textarea id="r_content" class="form-control" name="r_content" placeholder="댓글을 입력해주세요."></textarea>
 								</div>
 								<div class="col-2">
+									<input type="hidden" name="movieCd" value="${moviedto.movieCd}">
 									<button type="button" class="btn btnWrite" id="btnWrite">리뷰 등록</button>
 								</div>
 							</div>
@@ -543,11 +544,8 @@ body {
 				<div class="col-9 reply_box">
 					<!-- 댓글 출력 -->
 					<div class="row">
-						<div class="col-2 text">
-							<!-- 프로필 -->
-							<div class="Profile text-center mt-5">프로필</div>
-						</div>
-						<div class="col-10 text-center">
+						
+						<div class="col text-center pt-3">
 							<p>등록된 댓글이 없습니다.</p>
 						</div>
 					</div>
@@ -762,7 +760,7 @@ body {
 							<!-- 날짜 -->
 							<div class="row mt-1 likeBox">
 								<div class="col-lg-7 col-md-5 ms-2">
-										<span id="r_date">${review.r_date}</span>
+									<span id="r_date">${review.r_date}</span>
 								</div>
 
 								<div class="row col-lg-2 col-md-3 m-1 like_round">
@@ -1132,18 +1130,18 @@ body {
 
 	</footer>
 	<script>
-	/*
-		$(".lowGrade").on("click", function() { // 낮은 평점
-			location.href = "/lowGrade.re";
-		});
+		/*
+			$(".lowGrade").on("click", function() { // 낮은 평점
+				location.href = "/lowGrade.re";
+			});
 
-		$(".highGrade").on("click", function() { // 높은 평점
-			location.href = "/highGrade.re";
-		});
-		$(".newGrade").on("click", function() { // 높은 평점
-			location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
-		});
-*/
+			$(".highGrade").on("click", function() { // 높은 평점
+				location.href = "/highGrade.re";
+			});
+			$(".newGrade").on("click", function() { // 높은 평점
+				location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
+			});
+		 */
 		$("#btnWrite").on(
 				"click",
 				function() {
