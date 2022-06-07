@@ -177,11 +177,13 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 					fileName = multi.getFilesystemName(file); 
 					
 					Gson gson =new Gson();
-					String rs = filePath+"\\"+ fileName;
+					
+					String rs = "/Movie/files/"+ fileName;
+					response.setCharacterEncoding("utf-8");
 					/* String rs = gson.toJson(); */
 					System.out.println(rs);
 					/*
-					 * response.setCharacterEncoding("utf-8");
+					 
 					 * 
 					 * InputStream fileStream = multipartFile.getInputStream();
 					 * FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
