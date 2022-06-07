@@ -648,7 +648,7 @@ a {
 			    							createHiddenLoginForm(response.id, response.properties.nickname);	
 			    							break;
 			    						} else if (response.id == dto.user_k && dto.user_k != null && response.properties.nickname != dto.user_name){
-			    							// 정보수정
+			    							// 정보 미일치시
 			    							alert("카카오 회원가입 실패! 일반 회원가입으로 진행해 주세요.");
 			    							location.href = "/Member/signup.jsp";
 			    							break;

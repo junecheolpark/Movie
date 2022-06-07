@@ -482,27 +482,30 @@
 
                     <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
+                            <a class="nav-link" href="/Member/login.jsp">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">회원가입</a>
+                            <a class="nav-link" href="/signup.mem">회원가입</a>
                         </li>
                     </ul>
 
-                    <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                    <a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="cart">찜한 영화</p>
                     </a>
-                    <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                    <a href="/Mypage/mypageIndex.jsp" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
-                    <form class="searchForm d-flex" action="" method="get">
+                    <form class="searchForm d-flex" method="get" action="/search.movie" onsubmit="return search();">
                         <input
-                                class="form-control me-2"
+                                class="searchInput form-control me-2"
                                 type="search"
+                                name='val'
                                 placeholder="Search"
                                 aria-label="Search">
-                        <button class="btn btn-outline-success" type="button">Search</button>
+                        <input type="hidden" name = 'curPage' value="1">
+                        <input type="hidden" name = 's_type' value="movieNm">
+                        <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </div>
@@ -542,32 +545,35 @@
                         <div class="col-5">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">로그인</a>
+                                    <a class="nav-link" href="/Member/login.jsp">로그인</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">회원가입</a>
+                                    <a class="nav-link" href="/signup.mem">회원가입</a>
                                 </li>
                             </ul>
                         </div>
 
                         <div class="col-2">
-                            <a href="" class="align-items-center ">
+                            <a href="/wishlist.wish" class="align-items-center ">
                                 <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                             </a>
-                            <a href="" class="align-items-center">
+                            <a href="/Mypage/mypageIndex.jsp" class="align-items-center">
                                 <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                             </a>
                         </div>
                         <div class="col-5">
-                            <form class="d-flex">
+                            <form class="searchForm d-flex" method="get" action="/search.movie" onsubmit="return search();">
                                 <input
-                                        class="form-control me-2"
+                                        class="searchInput form-control me-2"
                                         type="search"
                                         placeholder="Search"
-                                        aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
+                                        aria-label="Search"
+                                        name='val'>
+                                <input type="hidden" name = 'curPage' value="1">
+                                <input type="hidden" name = 's_type' value="movieNm">
+                                <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
                     </div>
@@ -607,12 +613,19 @@
                             <c:forEach items="${movies}" var="movie">
                                 <c:if test="${reviewDTO.movieCd eq movie.key}">
                                     <div class="movieImgDiv">
-                                        <a href="##"><img src="/images/NoImg.webp"></a>
+                                        <a href="/detailView.re?movieCd=${movieDTO.movieCd}"><img
+                                                src="/images/NoImg.webp"></a>
                                     </div>
                                     <div class="product">
                                         <div class="productDiv1">
                                             <div class="productTitle"><a
-                                                    href="##">${movie.value['movieDTO'].movieNm}</a></div>
+<<<<<<< HEAD
+                                                    href="/detailView.re?movieCd=${reviewDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a></div>
+
+=======
+                                                    href="/detailView.re?movieCd=${movieDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a>
+                                            </div>
+>>>>>>> 7584681 (0607)
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
                                             <div class="productAvgPoint">
                                                 <div class="avgPointStar"></div>
@@ -657,7 +670,7 @@
                                 <div class="reviewLike">
                                     <c:forEach items="${likes}" var="like">
                                         <c:if test="${reviewDTO.seq_review eq like.key}">
-                                            <input type="hidden" value ="${like.value['status']}" class="likeStatus">
+                                            <input type="hidden" value="${like.value['status']}" class="likeStatus">
                                             <span class="likeSpan">${like.value['like']}</span>
                                             <button type='button' class='likeBtn' value="${reviewDTO.seq_review}">좋아요
                                             </button>
@@ -744,19 +757,19 @@
                 <h5>계정</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">로그인</a>
+                        <a href="/Member/login.jsp" class="nav-link p-0">로그인</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">회원가입</a>
+                        <a href=/signup.mem" class="nav-link p-0">회원가입</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">마이페이지</a>
+                        <a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">아이디 찾기</a>
+                        <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">비밀번호 찾기</a>
+                        <a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a>
                     </li>
                 </ul>
             </div>
@@ -771,7 +784,7 @@
                         <a href="#" class="nav-link p-0">자유게시판</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">찜 목록</a>
+                        <a href="/wishlist.wish" class="nav-link p-0">찜 목록</a>
                     </li>
                 </ul>
             </div>
@@ -845,6 +858,15 @@
         }
     });
 
+    function search() {
+        let val = $(this).children(".searchInput").val();
+
+        if (val === "") {
+            alert("검색어를 입력하세요.");
+            return false
+        }
+    }
+
     let prevBtn = ${hashMap.prevBtn};
     if (!prevBtn) {
         $(".prevBtn").addClass("disabled");
@@ -881,9 +903,9 @@
         }
     });
 
-    $.each($(".likeStatus"), function (){
+    $.each($(".likeStatus"), function () {
         let val = $(this).val();
-        if(val === '1'){
+        if (val === '1') {
             $(this).siblings(".likeBtn").addClass('active');
             $(this).siblings(".likeBtn").css("color", "blue");
         } else if (val === '2') {
@@ -899,7 +921,7 @@
         let likeSpan = $(this).siblings(".likeSpan");
         let hateSapn = $(this).siblings(".hateSpan");
 
-        if(user_id!==""){
+        if (user_id !== "") {
             if ($(this).hasClass('active')) {
                 $(this).removeClass('active');
                 $(this).css("color", "black");
@@ -966,7 +988,7 @@
         let likeSpan = $(this).siblings(".likeSpan");
         let hateSapn = $(this).siblings(".hateSpan");
 
-        if(user_id!==""){
+        if (user_id !== "") {
             if ($(this).hasClass('active')) {
                 $(this).removeClass('active');
                 $(this).css("color", "black");
