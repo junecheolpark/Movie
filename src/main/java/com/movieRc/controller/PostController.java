@@ -154,7 +154,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				
 			}else if(uri.equals("/SummerNoteImageFile.po")) {
 				
-				String filePath = request.getServletContext().getRealPath("files");
+				
+				
+				String filePath = request.getServletContext().getRealPath("files");//지정될 파일 경로
 				System.out.println("filePath : " + filePath);
 				
 				File dir = new File(filePath);
@@ -168,26 +170,31 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				try {
 					// 서버의 경로에 파일 저장하기 
 					MultipartRequest multi = new MultipartRequest(request,filePath,maxSize,"utf-8",new DefaultFileRenamePolicy());
-					
+					String ori_name = multi.getOriginalFileName("file1");
+			
 					Enumeration files = multi.getFileNames();
 					String file = (String)files.nextElement(); 
 					fileName = multi.getFilesystemName(file); 
 					
+					Gson gson =new Gson();
+					String rs = filePath+"\\"+ fileName;
+					/* String rs = gson.toJson(); */
+					System.out.println(rs);
+					/*
+					 * response.setCharacterEncoding("utf-8");
+					 * 
+					 * InputStream fileStream = multipartFile.getInputStream();
+					 * FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
+					 * jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+					 * jsonObject.addProperty("responseCode", "success");
+					 */
+					response.getWriter().append(rs);
 				}catch(Exception e){
 					e.printStackTrace();
 				}
 				
-			    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
-				String uploadPath = "/upload/" + fileName;
 				
-			    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
-				JSONObject jobj = new JSONObject();
-				jobj.put("url", uploadPath);
-				
-				response.setContentType("application/json"); // 데이터 타입을 json으로 설정하기 위한 세팅
-				System.out.println(jobj.toJSONString());
-				
-				
+			 
 			}else if(uri.equals("/search.po")) {
 				int searchValue=Integer.parseInt(request.getParameter("searchValue")) ;
 				String searchInput = request.getParameter("inputSearch");

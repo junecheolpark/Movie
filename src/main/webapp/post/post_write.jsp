@@ -25,9 +25,7 @@
 	rel="stylesheet" />
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote-lite.css">	
 
-	
 <style>
 #submit {
 	border-radius: 13px;
@@ -70,8 +68,7 @@
 			<input style="" type="text" id="content" name="content">
 		</form>
 	</div>
-	<script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
+
 	<script>
 		$(document).ready(function() {
 			$("#summernote").summernote();
@@ -94,6 +91,15 @@
 				            for (var i = files.length - 1; i >= 0; i--) {
 				            	sendFile(files[i], this);
 				            }
+				        },
+				        onPaste: function (e) {
+							var clipboardData = e.originalEvent.clipboardData;
+							if (clipboardData && clipboardData.items && clipboardData.items.length) {
+								var item = clipboardData.items[0];
+								if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+									e.preventDefault();
+								}
+							}
 				        }
 					}
 			})
@@ -103,13 +109,14 @@
       	$.ajax({
         	data: form_data,
         	type: "POST",
-        	url: './profileImage.mpf',
+        	url: '/SummerNoteImageFile.po',
         	cache: false,
         	contentType: false,
         	enctype: 'multipart/form-data',
         	processData: false,
         	success: function(img_name) {
           		$(el).summernote('editor.insertImage', img_name);
+          	
         	}
       	});
     }
