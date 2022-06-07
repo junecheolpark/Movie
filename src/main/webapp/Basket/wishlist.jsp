@@ -273,66 +273,49 @@ section#container::after {
 	<!-- Header -->
 	<header class="mb-3 border-bottom">
 		<div class="container">
-			<nav id="navibar" class="navbar navbar-expand-md navbar-dark"
-				aria-label="Main navigation">
+			<!-- 접혔을 때 nav -->
+			<nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
 				<div class="container-fluid">
 					<!-- toggle button -->
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-						aria-controls="navbarNavDropdown" aria-expanded="false"
-						aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+						aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
 					<!-- 메뉴 -->
-					<div class="collapse navbar-collapse justify-content-end"
-						id="navbarNavDropdown">
+					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
-						</ul>
-
-						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
+							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">찜한 영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
 						</ul>
 
-
-						<a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="cart">찜한 영화</p>
-						</a> <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="myPage">마이페이지</p>
-						</a>
-
 						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search">
+							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 							<button class="btn btn-outline-success" type="submit">Search</button>
 						</form>
-
 					</div>
 				</div>
 			</nav>
-
-			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark"
-				aria-label="Main navigation">
+			<!-- 펼쳐졌을 때 nav -->
+			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
 						</ul>
 
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/"
-							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
+						<a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
 							<img id="navLogo" src="images/logo3.png">
 						</a>
 					</div>
@@ -341,25 +324,26 @@ section#container::after {
 						<div class="row">
 							<div class="col-5">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<li class="nav-item"><a class="nav-link" href="#">로그인</a>
+									<li class="nav-item">
+										<a class="nav-link" href="#">로그인</a>
 									</li>
-									<li class="nav-item"><a class="nav-link" href="#">회원가입</a>
+									<li class="nav-item">
+										<a class="nav-link" href="#">회원가입</a>
 									</li>
 								</ul>
 							</div>
 
 							<div class="col-2">
-								<a href="" class="align-items-center "> <img
-									class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
-								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
-									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
+								<a href="" class="align-items-center ">
+									<img class="img-fluid" id="cartIcon" src="images\찜.png">
+								</a>
+								<a href="" class="align-items-center">
+									<img class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
 								</a>
 							</div>
 							<div class="col-5">
 								<form class="d-flex">
-									<input class="form-control me-2" type="search"
-										placeholder="Search" aria-label="Search">
+									<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 									<button class="btn btn-outline-success" type="submit">Search</button>
 								</form>
 							</div>
