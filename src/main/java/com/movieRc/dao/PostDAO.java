@@ -32,18 +32,151 @@ public class PostDAO {
 		return bds.getConnection();
 	}
 
-	//view_count함수
-	public void updateView_count(int seq_board) throws Exception{
-		String sql = "update tbl_post set p_view_count = p_view_count+1 where seq_post = ?";
+	// 제목별 검색 함수
+	public ArrayList<PostDTO> titleSearch(String title) throws Exception {
+		String sql = "select * from tbl_post where p_title like '%' || ? || '%'";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
+			pstmt.setString(1, title);
+			pstmt.executeUpdate();
+
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<PostDTO> list = new ArrayList<PostDTO>();
+			while (rs.next()) {
+				int seq_Post = rs.getInt("seq_Post");
+				String user_nickname = rs.getString("user_nickname");
+				String p_title = rs.getString("p_title");
+				String p_content = rs.getString("p_content");
+				String p_date = getStringDate(rs.getDate("p_date"));
+				int p_view_count = rs.getInt("p_view_count");
+				String user_id = rs.getString("user_id");
+				String user_category = rs.getString("user_category");
+				list.add(new PostDTO(seq_Post, user_nickname, p_title, p_content, p_date, p_view_count, user_id,
+						user_category));
+			}
+			return list;
+		}
+
+	}
+	public int delete(int seq_post) throws Exception{
+		String sql = "delete from tbl_post where seq_post = ?";
 		try(Connection con = bds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setInt(1, seq_post);
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
+	
+	
+	public PostDTO selectBySeq(int seq_post) throws Exception{
+		String sql = "SELECT * FROM TBL_POST WHERE seq_post = ?";
+
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+
+			pstmt.setInt(1, seq_post);
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+					int seq_Post = rs.getInt("seq_Post");
+					String user_nickname = rs.getString("user_nickname");
+					String p_title = rs.getString("p_title");
+					String p_content = rs.getString("p_content");
+					String p_date = getStringDate(rs.getDate("p_date"));
+					int p_view_count = rs.getInt("p_view_count");
+					String user_id = rs.getString("user_id");
+					String user_category = rs.getString("user_category");
+					PostDTO dto =new PostDTO(seq_Post, user_nickname, p_title, p_content, p_date, p_view_count, user_id,
+							user_category);
+							return dto;
+				}
+				return null;
+		}
+	}
+	
+	// 내용별 검색 함수
+	public ArrayList<PostDTO> contentSearch(String content) throws Exception {
+		String sql = "select * from tbl_post where p_content like '%' || ? || '%'";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setString(1, content);
+			pstmt.executeUpdate();
+
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<PostDTO> list = new ArrayList<PostDTO>();
+			while (rs.next()) {
+				int seq_Post = rs.getInt("seq_Post");
+				String user_nickname = rs.getString("user_nickname");
+				String p_title = rs.getString("p_title");
+				String p_content = rs.getString("p_content");
+				String p_date = getStringDate(rs.getDate("p_date"));
+				int p_view_count = rs.getInt("p_view_count");
+				String user_id = rs.getString("user_id");
+				String user_category = rs.getString("user_category");
+				list.add(new PostDTO(seq_Post, user_nickname, p_title, p_content, p_date, p_view_count, user_id,
+						user_category));
+			}
+			return list;
+		}
+
+	}
+
+	// 글쓴이별 검색 함수
+	public ArrayList<PostDTO> writerSearch(String user_nickname1) throws Exception {
+		String sql = "select * from tbl_post where user_nickname like  '%' || ? || '%'";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setString(1, user_nickname1);
+			pstmt.executeUpdate();
+
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<PostDTO> list = new ArrayList<PostDTO>();
+			while (rs.next()) {
+				int seq_Post = rs.getInt("seq_Post");
+				String user_nickname = rs.getString("user_nickname");
+				String p_title = rs.getString("p_title");
+				String p_content = rs.getString("p_content");
+				String p_date = getStringDate(rs.getDate("p_date"));
+				int p_view_count = rs.getInt("p_view_count");
+				String user_id = rs.getString("user_id");
+				String user_category = rs.getString("user_category");
+				list.add(new PostDTO(seq_Post, user_nickname, p_title, p_content, p_date, p_view_count, user_id,
+						user_category));
+			}
+			return list;
+		}
+
+	}
+
+	// 포스트 수정함수
+	public int postModify(int seq_post, String p_content) throws Exception {
+		String sql = "update tbl_post set p_content=? where seq_post = ?";
+
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setString(1, p_content);
+			pstmt.setInt(2, seq_post);
+
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+
+	}
+
+	// view_count함수
+	public void updateView_count(int seq_board) throws Exception {
+		String sql = "update tbl_post set p_view_count = p_view_count+1 where seq_post = ?";
+
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
 			pstmt.setInt(1, seq_board);
 			pstmt.executeUpdate();
 		}
 	}
-	
+
+	// 해당 글 번호 함수
 	public PostDTO getPost(int seq_board) throws Exception {
 		String sql = "select * from tbl_post where seq_post =? ";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -67,6 +200,7 @@ public class PostDAO {
 		}
 	}
 
+	// 내 글 보기 함수
 	public ArrayList<PostDTO> myPost(String user_nickname1) throws Exception {
 		String sql = "select * from tbl_post where user_nickname =? ";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -105,6 +239,38 @@ public class PostDAO {
 		}
 	}
 
+	// 선택안함 =0,좋아요=1,싫어요=2
+	public int postLike(String user_id, int seq_post, String user_category) throws Exception {
+		String sql = "select count(*) from tbl_like_p where user_id=? AND seq_post=? ";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, seq_post);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+
+			if (count == 1) {
+				sql = "update tbl_like_p set p_like_check=1 where user_id=? AND seq_post=?";
+				pstmt.setString(1, user_id);
+				pstmt.setInt(2, seq_post);
+				int rs1 = pstmt.executeUpdate();
+				return rs1;
+
+			} else {
+				sql = "insert into tbl_like_p values(seq_like.nextval,1,?,?,?)";
+
+				pstmt.setString(1, user_id);
+				pstmt.setInt(2, seq_post);
+				pstmt.setString(3, user_category);
+				int rs2 = pstmt.executeUpdate();
+
+				return rs2;
+
+			}
+		}
+
+	}
+
 	// 시퀀스번호,유저닉네임,제목,내용,뷰카운트,유저아이디,유저카테고리
 	public int write(PostDTO dto) throws Exception {
 		String sql = "insert into tbl_post values(?,?,?,?,sysdate,?,?,?)";
@@ -130,6 +296,7 @@ public class PostDAO {
 		return sdf.format(date);
 	}
 
+	// 모든 글 보기 함수
 	public ArrayList<PostDTO> selectAll(int start, int end) throws Exception {
 
 		String sql = "select * from (select tbl_Post.*, row_number() over(order by seq_post desc) as num from tbl_post)"
@@ -158,6 +325,7 @@ public class PostDAO {
 		}
 	}
 
+	// 글 목록 정리 함수
 	public HashMap<String, Object> getPageNavi(int curPage) throws Exception {
 		String sql = "select count(*) as totalCnt from tbl_post";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {

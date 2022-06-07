@@ -14,14 +14,20 @@
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 <style>
 #container {
 	margin: auto;
 	background-color: antiquewhite;
 	width: 900px;
-	height: 1000px;
+	
 }
 
+.modal-content{
+text-align: left;}
 #content-box {
 	background-color: rgb(255, 254, 248);
 	height: 500px;
@@ -243,34 +249,40 @@ div {
 </head>
 
 <body>
+
 	<div id="container">
+
 		<div id="content-box">
 			<div class="row">
-				<div class="col"></div>
-				<h4>${dto.p_title}</h4>
+				<div class="col">
+					<h4>제목 : ${dto.p_title}</h4>
+
+				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-2">${dto.user_nickname }</div>
-				<div class="col-7"></div>
-				<div class="col-3">${dto.p_date },${dto.p_view_count}</div>
+				<div class="col-2"><span>닉네임:</span>${dto.user_nickname }</div>
+				<div class="col-6"></div>
+				<div class="col-4">${dto.p_date },<span>조회수:</span>${dto.p_view_count}</div>
 			</div>
 			<div class="row">
-				<div class="col-8">${dto.seq_post }</div>
+				<div class="col-8"><span>글번호:</span>${dto.seq_post }</div>
 				<div class="col">
 					<div class="row">
 						<div class="col-5 click">
-							<img src="/images/like.png" alt="좋아요" id="like" /> 123
+							<button id="p_likebefore"><img src="resources/images/likebefore.png" alt="좋아요" id="like" /></button>
+							<button id="p_like" style="display:none;"><img src="resources/images/like.png" alt="좋아요" id="like" /></button>
+							
 						</div>
 						<div class="col-5 click">
-							<img src="../../resource/images/hate.png" alt="싫어요" id="hate" />
-							3211
+						<button id="p_hatebefore"><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
+							<button id="p_hate" style="display:none;"><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col" id="content">${dto.p_content }</div>
+				<div class="col" id="content"><strong>내용:</strong>${dto.p_content }</div>
 			</div>
 
 
@@ -286,17 +298,23 @@ div {
 						</div>
 
 						<script>
-                   			 $("#btnModify").on("click", function() { // 수정 페이지 요청
-                       		 location.href = "/modify.co?seq_post=${dto.seq_post}";
-                    		});
-                    		$("#btnDelete").on("click",function() { // 삭제 요청
-                        	let answer = confirm("지금 삭제하시면 복구가 불가합니다. 정말 삭제하시겠습니까?");
-                       		 console.log(answer);
-                      		if (answer) {
-                            location.href = "/deleteProc.co?seq_post=${dto.seq_post}";
-                      		  }
-                   			})
-               			 </script>
+							$("#btnModify")
+									.on(
+											"click",
+											function() { // 수정 페이지 요청
+												location.href = "/modify.po?seq_post=${dto.seq_post}";
+											});
+							$("#btnDelete")
+									.on(
+											"click",
+											function() { // 삭제 요청
+												let answer = confirm("지금 삭제하시면 복구가 불가합니다. 정말 삭제하시겠습니까?");
+												console.log(answer);
+												if (answer) {
+													location.href = "/deleteProc.po?seq_post=${dto.seq_post}";
+												}
+											})
+						</script>
 					</c:if>
 				</div>
 			</div>
@@ -353,10 +371,49 @@ div {
 
 										<div class="col-10">
 											<div class="row mb-1">
-												<div class="col-6 ms-2">${post_comment.user_nickname}</div>
+												<div class="col-10 ms-2">${post_comment.user_nickname}</div>
 												<div class="col-1 mt-1 text-end r_report">
-													<a href="#"> <img src="images/report.png" height="80%">
-													</a>
+													<!--report 모달창  -->
+													<button type="button" class="btn btn-report"
+														data-bs-toggle="modal" data-bs-target="#exampleModal"
+														data-bs-whatever="@getbootstrap"
+														style="background-color: white; border: none;">
+														<img src="resources/images/report.png" height="80%">
+														<input id="seqReport" value=${post_comment.seq_post_comment} style="display:none;">
+													</button>
+													<div class="modal fade" id="exampleModal" tabindex="-1"
+														aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<form id="reportForm">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLabel">Report</h5>
+																		<button type="button" class="btn-close"
+																			data-bs-dismiss="modal" aria-label="Close"></button>
+																	</div>
+																	<div class="modal-body">
+
+																		<div class="mb-3">
+																			<label for="message-title" class="col-form-label">Title:</label>
+																			<input type="text" class="form-control"
+																				id="message-title" name="rp_title"/>
+																		</div>
+																		<div class="mb-3">
+																			<label for="message-text" class="col-form-label">Message:</label>
+																			<textarea class="form-control" id="message-text" name="rp_content"> </textarea>
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary"
+																			data-bs-dismiss="modal">Close</button>
+																		<button id="sendMessage" type="button"
+																			class="btn btn-primary">Send message</button>
+																	</div>
+																</form>
+															</div>
+														</div>
+														<div></div>
+													</div>
 												</div>
 											</div>
 
@@ -378,7 +435,7 @@ div {
 
 														<button type="button" class="btn btnModify" id=""
 															data-bs-toggle="dropdown" aria-expanded="true">
-															<img src="images/hate.png" width="50%;">
+															<img src="resources/images/hate.png" width="50%;">
 														</button>
 														<ul class="dropdown-menu"
 															aria-labelledby="dropdownMenuButton1">
@@ -400,10 +457,10 @@ div {
 													<div class="col-4 m-0">
 														<input type="image" id="btnLikeUp" class=""
 															value="${post_comment.seq_post_comment}"
-															src="images/likebefore.png"> <input type="image"
-															id="btnLikeUp2" class=""
+															src="resources/images/likebefore.png"> <input
+															type="image" id="btnLikeUp2" class=""
 															value="${post_comment.seq_post_comment}"
-															src="/src/main/webapp/post/images/hate.png">
+															src="resources/images/like.png">
 													</div>
 													<div class="col m-0">
 														<span class="">123</span>
@@ -413,10 +470,10 @@ div {
 													<div class="col-4 m-0">
 														<input type="image" id="btnHateUp" class="mt-1"
 															value="${post_comment.seq_post_comment}"
-															src="/src/main/webapp/post/images/hate.png" height="65%"> <input
-															type="image" id="btnHateUp2" class="mt-1"
+															src="resources/images/hatebefore.png" height="65%">
+														<input type="image" id="btnHateUp2" class="mt-1"
 															value="${post_comment.seq_post_comment}"
-															src="images/hate.png" height="65%">
+															src="resources/images/hate.png" height="65%">
 													</div>
 													<div class="col m-0">
 														<span class="">123</span>
@@ -442,175 +499,227 @@ div {
 				<div class="col-2">
 					<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
 				</div>
-				<!--글쓴이와 로그인한 사용자가 같은 경우 수정 삭제 버튼 영역 -->
-
-				<!-- 수정 삭제 버튼 영역 끝 -->
+				
 			</div>
 		</div>
 	</div>
 	<script>
-		// 댓글 수정 버튼에게 이벤트 부여
-		$(".body-reply").on("click", ".modify-reply", function(e){
-			$(e.target).parent(".body-btnDefault-reply").css("display", "none"); // 수정삭제 버튼 감추기
-			$(e.target).parent().next(".body-btnAfter-reply").css("display", "block"); // 취소완료 버튼 보이기
-			// 댓글 수정가능하게끔 readonly 속성 풀어주기 
-			$(e.target).parent(".body-btnDefault-reply").prev().children("textarea").attr("readonly", false);
-			$(e.target).parent(".body-btnDefault-reply").prev().children("textarea").focus();
-		});
-		
-		// 댓글 수정 완료 버튼을 눌렀을때
-		$(".body-reply").on("click", ".complete-reply", function(e){
-			// 수정한 내용 (textarea value)
-			// 수정한 댓글의 seq (seq_reply)
-			// 게시글의 seq (seq_board)
-			let seq_reply = $(e.target).val();
-			let seq_post = "${dto.seq_post}";
-			// 부모의 형제(위쪽으로)요소 중 body-content-reply를 선택하는데 그 중 가장 첫번째 요소 선택
-			let content = $(e.target).parent(".body-btnAfter-reply").prevAll(".body-content-reply").first().children("textarea").val();
-			
-			$.ajax({
-				url : "/modifyProc.co"
-				, type : "post"
-				, data : {seq_post_comment: seq_post_comment, seq_post: seq_post, comment_content: comment_content}
-				, success : function(data){
-					console.log(data);
-					if(data === "fail"){
-						alert("댓글 수정에 실패했습니다.");
-					}else{
-						makeReply(data);
-					}
-				}, error : function(e){
-					console.log(e);
-				}
-			})
-		});
-		
-		// 댓글 취소 버튼에게 이벤트 부여
-		$(".body-reply").on("click", ".cancel-reply", function(e){
-			let seq_post = "${dto.seq_post}";
-			$.ajax({
-				url : "/getPostComment.co?seq_post="+seq_post
-				, type: "get"
-				, success: function(data){
-					makeReply(data);
-				}, error: function(e){
-					console.log(e);
-				}
-			})
-			
-		});
-		
-		// 댓글 삭제 버튼에게 이벤트 부여
-		$(".body-reply").on("click", ".delete-reply", function(e){
-			let answer = confirm("댓글을 정말 삭제하시겠습니까?");
-			if(answer){
-				let seq_reply = $(e.target).val();
-				
+			//싫어요 좋아요버튼 post
+			$("#p_likebefore").on("click",function(e){
+				let seq_post = "${dto.seq_post}";
 				$.ajax({
-					url : "/deleteProc.co"
-					, type : "post"
-					, data : {seq_post_comment: seq_post_comment, seq_post: "${dto.seq_post}"}
-					, success : function(data){
-						console.log(data);
-						
-						if(data === "fail"){
-							alert("댓글 삭제에 실패했습니다.");
-						}else{ // 댓글 삭제에 성공했다면 댓글 목록을 새롭게 다시 뿌려줌
-							makeReply(data);
-						}
-					}, error : function(e){
+					url : "/pLike.po?seq_post="+ seq_post,
+					type : "get",			
+					success : function(data) {
+							if(data==="true"){
+								console.log("좋아요 성공")
+							}else{
+								console.log("좋아요 실패")
+							}
+					},
+					error : function(e) {
 						console.log(e);
 					}
-						
+				})
+			})
+
+			//모달 입력후 메세지 보냈을경우
+			$("#sendMessage").on("click",function(e) {
+				
+				let seq_post = "${dto.seq_post}";
+						let seq_post_comment=$("#seqReport").val()
+						//  $("#message").val($("#message-text").val());
+						if ($("#message-title").val() === ""
+								|| $("#message-text").val() === "") {
+							alert("제목과 메세지를 제대로 입력하지 않았습니다.");
+							return;
+						}
+					
+						let rp_title =$("#message-title").val();
+						let rp_content =$("#message-text").val();
+						let data = $("#reportForm").serialize();
+						console.log(rp_title);
+						console.log(rp_content);
+						console.log(data);
+						$.ajax({
+							url : "/report.co",
+							type : "post",	
+							data : {
+								seq_post: seq_post,
+								seq_post_comment : seq_post_comment,
+								rp_title : rp_title,
+								rp_content : rp_content
+							},	
+							success : function() {
+								$("#exampleModal").modal('hide');
+								
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+
+					});
+		
+		$(".btn-report").on("click", function() {
+			/*모달 스크립트  */
+			var exampleModal = document.getElementById("exampleModal");
+			exampleModal.addEventListener("show.bs.modal", function(event) {
+				// Button that triggered the modal
+				var button = event.relatedTarget;
+				// Extract info from data-bs-* attributes
+				var recipient = button.getAttribute("data-bs-whatever");
+				// If necessary, you could initiate an AJAX request here
+				// and then do the updating in a callback.
+				//
+				// Update the modal's content.
+				var modalTitle = exampleModal.querySelector(".modal-title");
+				var modalBodyInput = exampleModal
+						.querySelector(".modal-body input");
+
+				modalTitle.textContent = "Report";
+		})
+		});
+		// 댓글 수정 버튼에게 이벤트 부여
+		$(".body-reply").on(
+				"click",
+				".modify-reply",
+				function(e) {
+					$(e.target).parent(".body-btnDefault-reply").css("display",
+							"none"); // 수정삭제 버튼 감추기
+					$(e.target).parent().next(".body-btnAfter-reply").css(
+							"display", "block"); // 취소완료 버튼 보이기
+					// 댓글 수정가능하게끔 readonly 속성 풀어주기 
+					$(e.target).parent(".body-btnDefault-reply").prev()
+							.children("textarea").attr("readonly", false);
+					$(e.target).parent(".body-btnDefault-reply").prev()
+							.children("textarea").focus();
+				});
+
+		// 댓글 수정 완료 버튼을 눌렀을때
+		$(".body-reply").on(
+				"click",
+				".complete-reply",
+				function(e) {
+					// 수정한 내용 (textarea value)
+					// 수정한 댓글의 seq (seq_reply)
+					// 게시글의 seq (seq_board)
+					let seq_reply = $(e.target).val();
+					let seq_post = "${dto.seq_post}";
+					// 부모의 형제(위쪽으로)요소 중 body-content-reply를 선택하는데 그 중 가장 첫번째 요소 선택
+					let content = $(e.target).parent(".body-btnAfter-reply")
+							.prevAll(".body-content-reply").first().children(
+									"textarea").val();
+
+					$.ajax({
+						url : "/modifyProc.co",
+						type : "post",
+						data : {
+							seq_post_comment : seq_post_comment,
+							seq_post : seq_post,
+							comment_content : comment_content
+						},
+						success : function(data) {
+							console.log(data);
+							if (data === "fail") {
+								alert("댓글 수정에 실패했습니다.");
+							} else {
+								refreshMemList();
+							}
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					})
+				});
+
+		// 댓글 취소 버튼에게 이벤트 부여
+		$(".body-reply").on("click", ".cancel-reply", function(e) {
+			let seq_post = "${dto.seq_post}";
+			$.ajax({
+				url : "/getPostComment.co?seq_post=" + seq_post,
+				type : "get",
+				success : function(data) {
+					refreshMemList();
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			})
+
+		});
+
+		// 댓글 삭제 버튼에게 이벤트 부여
+		$(".body-reply").on("click", ".delete-reply", function(e) {
+			let answer = confirm("댓글을 정말 삭제하시겠습니까?");
+			if (answer) {
+				let seq_reply = $(e.target).val();
+
+				$.ajax({
+					url : "/deleteProc.co",
+					type : "post",
+					data : {
+						seq_post_comment : seq_post_comment,
+						seq_post : "${dto.seq_post}"
+					},
+					success : function(data) {
+						console.log(data);
+
+						if (data === "fail") {
+							alert("댓글 삭제에 실패했습니다.");
+						} else { // 댓글 삭제에 성공했다면 댓글 목록을 새롭게 다시 뿌려줌
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+
 				})
 			}
-		});	
-	
+		});
+
 		// 댓글 등록
-		$("#btnSubmitReply").on("click", function(){
-			if($("#inputReply").val() === ""){ // 댓글 입력창이 비어있다면
+		$("#btnSubmitReply").on("click", function() {
+			if ($("#inputReply").val() === "") { // 댓글 입력창이 비어있다면
 				alert("입력된 댓글이 없습니다.");
 				return;
 			}
-			
+
 			// ajax를 이용해서 form 전송
 			let data = $("#formReply").serialize(); //전송할 수 있는 데이터로 변환
 			console.log(data);
 			$("#inputReply").val("");
-			
+
 			$.ajax({
-				url : "/insert.co"
-				, type : "post"
-				, data : data
+				url : "/insert.co",
+				type : "post",
+				data : data
 				// 만약 서버에서 응답해주는 값이 일반 text일 수도 있고
 				// json 형식일 수도 있다면 dataType을 명시하지 않는다.
-				, success: function(rs){
+				,
+				success : function(rs) {
 					console.log(rs);
-					if(rs === "fail"){ // 댓글등록에 실패했거나
+					if (rs === "fail") { // 댓글등록에 실패했거나
 						alert("댓글 등록에 실패했습니다.");
-					}else{ // json형식의 데이터가 넘어오거나(댓글리스트)
-						makeReply(rs);
+					} else { // json형식의 데이터가 넘어오거나(댓글리스트)
+						refreshMemList();
 					}
-				}, error: function(e){
+				},
+				error : function(e) {
 					console.log(e);
 				}
 			})
-			
+
 		})
-		
-		function makeReply(rs){
-			/* json 형식의 문자열을 JSON.parse()
-			함수를 통해서 자바스크립트 객체 형식으로 변환 */
-			let list = JSON.parse(rs); // 함수의 매개변수로 받아온 json 형식의 문자열 실제 json 타입으로 변환 
-			console.log(list);
-			
-			// 넘겨받은 최신 댓글 list를 실제 댓글 목록에 다시 뿌려주는 작업 
-			$(".body-reply").empty(); // 기존에 있던 댓글 모두 지워주는 작업
-			
-			// list = []; 댓글이 없는 상황을 만드는 테스트용 코드
-			if(list.length == 0){ // 댓글이 없다면 등록된 댓글이 없습니다 띄워주기.
-				let p = $("<p>").addClass("text-center").html("등록된 댓글이 없습니다.");
-				let div = $("<div>").addClass("col-12");
-				div.append(p);
-				$(".body-reply").append(div);
-			}else{ // 댓글이 있다면 댓글 목록 만들어서 append 해주기
-				for(let reply of list){
-					// 댓글 타이틀 부분 요소 만들기
-					let writer = $("<span>").addClass("writer-reply").html(reply.user_nickname);
-					let date = $("<span>").addClass("date-reply").html(reply.comment_date);
-					let header = $("<div>").addClass("col-12 body-header-reply");
-					header.append(writer, date);
-					
-					// 댓글 내용 요소 만들기
-					let textarea = $("<textarea>").attr({class: "form-control content-reply", readonly: true}).val(reply.comment_content);
-					let content = $("<div>").addClass("col-9 body-content-reply");
-					content.append(textarea);
-					
-					$(".body-reply").append(header, content); // 작성자와 같은지 여부 상관없이 댓글은 띄워주기
-					
-					// 댓글작성자 id와 로그인한 사람의 id가 같다면 수정삭제버튼 요소 만들기
-					if(reply.user_id === "${loginSession.user_id}"){
-						// 수정삭제 버튼 요소
-						let modifyBtn = $("<button>").addClass("btn btn-warning modify-reply").html("수정");
-						let deleteBtn = $("<button>").addClass("btn btn-danger delete-reply").html("삭제").val(reply.seq_post_comment);
-						let btn1 = $("<div>").addClass("col-3 body-btnDefault-reply");
-						btn1.append(modifyBtn, deleteBtn);
-						// 취소확인 버튼 요소
-						let cancelBtn = $("<button>").addClass("btn btn-secondary cancel-reply").html("취소");
-						let completeBtn = $("<button>").addClass("btn btn-primary complete-reply").html("완료").val(reply.seq_post_comment);
-						let btn2 = $("<div>").addClass("col-3 body-btnAfter-reply");
-						btn2.append(cancelBtn, completeBtn);
-						
-						$(".body-reply").append(btn1, btn2); //작성자와 같다면 실제 요소를 html영역에 추가하기 
-					}							
-				}
-			}
+
+		function refreshMemList() {
+			location.reload();
 		}
-		
-		  $("#btnBack").on("click", function() {
-				location.href = "/post.po?curPage=1";
-			});
-</script>
+		$("#btnBack").on("click", function() {
+			location.href = "/post.po?curPage=1";
+		});
+	</script>
 
 
 

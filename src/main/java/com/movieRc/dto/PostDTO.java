@@ -1,6 +1,7 @@
 package com.movieRc.dto;
 
 public class PostDTO {
+
 	private int seq_post;
 	private String user_nickname;
 	private String p_title;
@@ -97,5 +98,6 @@ public class PostDTO {
 				+ ", p_content=" + p_content + ", p_date=" + p_date + ", p_view_count=" + p_view_count + ", user_id="
 				+ user_id + ", user_category=" + user_category + "]";
 	}
+
 
 }

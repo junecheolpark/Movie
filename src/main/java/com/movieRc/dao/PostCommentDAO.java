@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.movieRc.dto.PostCommentDTO;
+import com.movieRc.dto.ReportDTO;
 
 public class PostCommentDAO {
 	private BasicDataSource bds;
@@ -31,6 +32,26 @@ public class PostCommentDAO {
 		return bds.getConnection();
 	}
 
+	
+	public int reportInsert(ReportDTO dto) throws Exception{//신고제목넣어야함
+		String sql = "insert into tbl_report values(seq_report.nextval,?,?,?,?,?,?,?)";
+		
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setString(1, dto.getCategory_check());
+				pstmt.setString(2, dto.getRp_content());
+				pstmt.setString(3, dto.getUser_id());
+				pstmt.setInt(4, dto.getSeq_review());
+				pstmt.setInt(5, dto.getSeq_comment());
+				pstmt.setInt(6,dto.getSeq_post());
+				pstmt.setString(7, dto.getUser_category());
+				
+				int rs = pstmt.executeUpdate();
+				return rs;
+			}
+		}
+		
 	public int modify(PostCommentDTO dto) throws Exception{
 		String sql = "update tbl_post_comment set comment_content=? where seq_comment = ?";
 		try(Connection con = bds.getConnection();

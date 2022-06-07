@@ -47,7 +47,7 @@ button {
 }
 
 .content-body {
-	height: 700px;
+	
 	background-color: rgb(255, 254, 248);
 }
 </style>
@@ -55,6 +55,7 @@ button {
 <body>
 
 	<div class="container">
+	
 		<div class="row">
 			<div class="col">
 				<h3>
@@ -64,14 +65,15 @@ button {
 		</div>
 		<div class="content-header">
 			<div class="row">
-				<div class="col-10"></div>
-				<div class="col-2">
-					<select class="form-select list"
-						aria-label="Default select example">
+				<div class="col-9"></div>
+				<div class="col-3">
+					<select class="form-select list" 
+						aria-label="Default select example" id="listItem">
 						<option value="1" selected>목록 10개</option>
 						<option value="2">목록 20개</option>
 						<option value="3">목록 30개</option>
 					</select>
+					<button class="btn btn-warning" id="btnList">출력</button>
 				</div>
 			</div>
 			<div class="row">
@@ -124,7 +126,7 @@ button {
 			</c:choose>
 		</div>
 		<div class="content-footer">
-			<hr />
+		
 			<!--검색-->
 			<div class="row">
 				<div class="col-2">
@@ -166,14 +168,13 @@ button {
 				<!--글 페이지 이동-->
 				<div class="col-2"></div>
 				<div class="col-8">
-					<select class="form-select search-method"
-						aria-label="Default select example">
-						<option selected>제목</option>
-						<option value="1">내용</option>
-						<option value="2">제목+내용</option>
+					<select class="form-select search-method" id="searchValue"
+						aria-label="Default select example" name="searchOption">
+						<option value="1" selected>제목</option>
+						<option value="2">내용</option>
 						<option value="3">글쓴이</option>
-					</select> <input type="text" class="form-control" />
-					<button class="btn btn-secondary">검색</button>
+					</select> <input type="text" id="inputSearch" name="searchInput" class="form-control" />
+					<button type="button" id="btnSearch" class="btn btn-secondary">검색</button>
 				</div>
 				<div class="col-2"></div>
 			</div>
@@ -181,6 +182,122 @@ button {
 	</div>
 
 	<script>
+	
+	//목록 개수별 나타내기
+	$("#btnList").on("click",function(){
+		let listItem= $("#listItem").val();
+		
+		$.ajax({
+			url:"/listItem.po?curPage=1&&listItem="+listItem,
+			type:"get",
+			dataType:"json",
+			success:function(data){
+				console.log(data[0] );
+				$(".content-body").empty();
+				if(data.length ==0){
+					let div_row= $("<div>").attr("class","row");
+					let div_col= $("<div>").attr("class","col").html("작성한 게시물이 없습니다.");
+					div_row.append(div_col);
+					$(".content-body").append(div_row);
+				}else{
+					for(let dto of data){
+						let div_row= $("<div>").attr("class","row");
+						let div_col1_1= $("<div>").attr("class","col-1");
+						let div_col1_2= $("<div>").attr("class","col-1");
+						let div_col1_3= $("<div>").attr("class","col-1");
+						let div_col2_1= $("<div>").attr("class","col-2");
+						let div_col2_2= $("<div>").attr("class","col-2");
+						let div_col5= $("<div>").attr("class","col-5");
+						let hr=$("<hr>");
+						
+						
+						let a=$("<a>").attr("href","/detailPost.po?seq_post=${dto.seq_post}").html(dto.p_title);
+						div_col5.append(a);
+						
+						console.log(dto.seq_post);
+						div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
+								div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
+						
+						$(".content-body").append(div_row);
+					}
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}
+		
+		})
+	})
+	
+	
+	//포스트 항목별 검색
+	$("#btnSearch").on("click", function() {
+		if ($("#inputSearch").val() === "") { // 댓글 입력창이 비어있다면
+			alert("입력된 글이 없습니다.");
+			return;
+		}
+
+		// ajax를 이용해서 search 
+		let searchValue=$("#searchValue").val()
+		let inputSearch =$("#inputSearch").val()
+		console.log(searchValue + " : " +inputSearch);
+		$("#inputSearch").val("");
+
+		$.ajax({
+			url : "/search.po?searchValue="+searchValue+"&&inputSearch="+inputSearch,
+			type : "get",
+			data:{
+				searchValue : searchValue,
+				inputSearch : inputSearch
+			},
+			dataType:"json"
+			// 만약 서버에서 응답해주는 값이 일반 text일 수도 있고
+			// json 형식일 수도 있다면 dataType을 명시하지 않는다.
+			,
+			success:function(data){
+				console.log(data);
+				$(".content-body").empty();
+				if(data.length ==0){
+					let div_row= $("<div>").attr("class","row");
+					let div_col= $("<div>").attr("class","col").html("작성한 게시물이 없습니다.");
+					div_row.append(div_col);
+					$(".content-body").append(div_row);
+				}else{
+					for(let dto of data){
+						let div_row= $("<div>").attr("class","row");
+						let div_col1_1= $("<div>").attr("class","col-1");
+						let div_col1_2= $("<div>").attr("class","col-1");
+						let div_col1_3= $("<div>").attr("class","col-1");
+						let div_col2_1= $("<div>").attr("class","col-2");
+						let div_col2_2= $("<div>").attr("class","col-2");
+						let div_col5= $("<div>").attr("class","col-5");
+						let hr=$("<hr>");
+						
+						
+						let a=$("<a>").attr("href","/detailPost.po?seq_post=${dto.seq_post}").html(dto.p_title);
+						div_col5.append(a);
+						
+						console.log(dto.seq_post);
+						div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
+								div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
+						
+						$(".content-body").append(div_row);
+						
+						
+						
+					}
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}
+		
+		})
+
+	})
+
+	
+	
 		$("#btn_write").on("click", function() {
 			location.href = "/write.po"
 		})
@@ -190,6 +307,7 @@ button {
 				type:"get",
 				dataType:"json",
 				success:function(data){
+					
 					$(".content-body").empty();
 					if(data.length ==0){
 						let div_row= $("<div>").attr("class","row");
@@ -206,9 +324,9 @@ button {
 							let div_col2_2= $("<div>").attr("class","col-2");
 							let div_col5= $("<div>").attr("class","col-5");
 							let hr=$("<hr>");
+						
 							
-							
-							let a=$("<a>").attr("href","/detailPost.po?seq_board=${dto.seq_post}").html(dto.p_title);
+							let a=$("<a>").attr("href","/detailPost.po?seq_post="+dto.seq_post).html(dto.p_title);
 							div_col5.append(a);
 							
 							console.log(dto.seq_post);

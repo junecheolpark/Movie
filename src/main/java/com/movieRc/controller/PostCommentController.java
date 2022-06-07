@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.movieRc.dao.PostCommentDAO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.PostCommentDTO;
+import com.movieRc.dto.ReportDTO;
 
 
 @WebServlet("*.co")
@@ -107,6 +108,22 @@ public class PostCommentController extends HttpServlet {
 					Gson gson = new Gson();
 					String result = gson.toJson(list);
 					response.getWriter().append(result);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}else if(uri.equals("/report.co")) { 
+				int seq_post = Integer.parseInt(request.getParameter("seq_post"));
+				int seq_post_comment=Integer.parseInt(request.getParameter("seq_post_comment")); 
+				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");
+				String rp_content =request.getParameter("rp_content");
+				String rp_title= request.getParameter("rp_title");
+				String user_id= dto1.getUser_id();
+				System.out.println(seq_post +"seq_P : seq_C " + seq_post_comment+ " : " + user_id + " U_id:  rp_title" +rp_title+ " : rp_content"+ rp_content);
+				
+				PostCommentDAO dao =new PostCommentDAO();
+				
+				try {
+				dao.reportInsert(new ReportDTO(0,"k",rp_content,user_id,0,seq_post_comment,seq_post,"kakao"));	
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
