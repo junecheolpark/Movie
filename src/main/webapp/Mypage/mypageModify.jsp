@@ -220,7 +220,7 @@ a {
 						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
+          
 					<!-- 메뉴 -->
 					<div class="collapse navbar-collapse justify-content-end"
 						id="navbarNavDropdown">
@@ -447,6 +447,7 @@ a {
 											placeholder="읍/면/동" readonly>
 									</div>
 								</div>
+
 								<div class="row justify-content-center btn-before">
 									<div class="col-4 d-flex justify-content-end">
 										<button type="button" class="btn btn-secondary" id="backBtn">뒤로가기</button>
@@ -466,6 +467,15 @@ a {
 							</form>
 						</div>
 						<script>
+
+                            const searchForm = $(".searchForm");
+                            searchForm.on("submit", function (event) {
+                                if ($(this).children(".searchInput").val() === "") {
+                                    event.preventDefault();
+                                    alert("검색어를 입력하세요");
+                                }
+                            });
+
 							// 프로필 변경 사진버튼을 눌렀을때
 							$("#changeProfile").on("click", function() {
 								$("#imgChangeForm").submit();

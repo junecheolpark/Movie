@@ -32,6 +32,23 @@ public class Like_rDAO {
 		return basicDataSource.getConnection();
 	}
 	
+	//그 영화의 좋아요 누른 수
+	public int like_allCount(String movieCd) throws Exception{
+		String sql = "select sum(r_like_check) from tbl_like_r join tbl_review using(seq_review) where movieCd=? and r_like_check = 1";
+		try(Connection con = getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setString(1, movieCd);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int m_like_count = rs.getInt(1);
+				return m_like_count;
+			}
+			return 0;
+		}
+	}
+	
 	//전체조회
 	public ArrayList<Like_rDTO> selectAll() throws Exception {
 		String sql = "select*from tbl_like_r order by 4";

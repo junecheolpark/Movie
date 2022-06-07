@@ -13,7 +13,6 @@ private String user_category;
 public Like_rDTO() {}
 
 public Like_rDTO(int seq_like, int r_like_check, String user_id, int seq_review, String user_category) {
-	super();
 	this.seq_like = seq_like;
 	this.r_like_check = r_like_check;
 	this.user_id = user_id;

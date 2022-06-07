@@ -22,21 +22,22 @@ public class Pagination {
     private boolean nextBtn;
 
 
-    private BasicDataSource basicDataSource;
+//    private BasicDataSource basicDataSource;
+//
+//    public Pagination() {
+//        try {
+//            Context context = new InitialContext();
+//            Context envContext = (Context) context.lookup("java:comp/env");
+//            basicDataSource = (BasicDataSource) envContext.lookup("jdbc/bds");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public Connection getConnection() throws Exception {
+//        return basicDataSource.getConnection();
+//    }
 
-    public Pagination() {
-        try {
-            Context context = new InitialContext();
-            Context envContext = (Context) context.lookup("java:comp/env");
-            basicDataSource = (BasicDataSource) envContext.lookup("jdbc/bds");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Connection getConnection() throws Exception {
-        return basicDataSource.getConnection();
-    }
 
     // 게시판쪽애서도 활용할 수 있을 거 같아서 별도의 클래스로 만들었어요
     public HashMap<String, Object> getPageNavi(int totalCnt,  int recordPerPage, int naviCntPerPage, int curPage) throws Exception {

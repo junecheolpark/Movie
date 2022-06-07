@@ -354,26 +354,28 @@ body {
 					<!-- 메뉴 -->
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
 						</ul>
 
 						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
 						</ul>
 
 
-						<a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+						<a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
 							<p class="text-light" id="cart">찜한 영화</p>
-						</a> <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+						</a> <a href="/Mypage/mypageIndex.jsp" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
 							<p class="text-light" id="myPage">마이페이지</p>
 						</a>
 
-						<form class="d-flex">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
+						<form class="searchForm d-flex" method="get" action="/search.movie">
+							<input class="searchInput form-control me-2" type="search" name='val' placeholder="Search" aria-label="Search"> 
+							<input type="hidden" name='curPage' value="1"> 
+							<input type="hidden" name='s_type' value="movieNm">
+							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
 
 					</div>
@@ -384,9 +386,9 @@ body {
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
 						</ul>
 
 					</div>
@@ -402,8 +404,8 @@ body {
 						<div class="row">
 							<div class="col-5">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="/signup.mem">회원가입</a></li>
 								</ul>
 							</div>
 
@@ -413,9 +415,16 @@ body {
 								</a>
 							</div>
 							<div class="col-5">
-								<form class="d-flex">
-									<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-									<button class="btn btn-outline-success" type="submit">Search</button>
+								<form class="searchForm d-flex" method="get" action="/search.movie">
+									<input
+											class="searchInput form-control me-2"
+											type="search"
+											placeholder="Search"
+											aria-label="Search"
+											name="val">
+									<input type="hidden" name = 'curPage' value="1">
+									<input type="hidden" name = 's_type' value="movieNm">
+									<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 								</form>
 							</div>
 
@@ -440,14 +449,15 @@ body {
 			<!-- 왼쪽 영화이미지 -->
 			<div class="col-3 p-2 movie_box">
 				<div class="col movie_img">
-					<img src="images/movie.jpg" width="100%" height="100%">
+					<img src="images/NoImg.webp" width="100%" height="100%">
 				</div>
 				<div class="col ">
-					<p class="m_genre mb-1 mt-1">장르: 액션</p>
+					<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
 					<p class="m_name my-1">
-						범죄도시<br>(the roundup)
+						${moviedto.movieNm}<br>(${moviedto.movieNmEn})
 					</p>
-					<p class="m_genre mb-1 mt-1">개봉: 2022 감독: 이상용</p>
+					<p class="m_genre mb-1 mt-1">개봉: ${moviedto.prdtYear} 감독: ${moviedto.directors}</p>
+					<p class="m_genre mb-1 mt-1">국가: ${moviedto.nationAlt}</p>
 				</div>
 			</div>
 
@@ -472,7 +482,7 @@ body {
 				<div class="row col">
 					<div class="col"></div>
 					<div class="col-lg-5 col-md-10 text-center like_round">
-						<span> <img src="images/heart.png"> 458
+						<span> <img src="images/heart.png"> ${m_like_count}
 						</span>
 					</div>
 				</div>
@@ -494,7 +504,9 @@ body {
 						<c:if test="${not empty reviewList}" var="review">
 							<div class="col-5 pe-5 text-end">
 								<%--<a href="#">&#9786공감순</a> --%>
-								<a href="#" class="highGrade">&#9734높은평점순</a> <a href="#" class="lowGrade">&#9734낮은평점순</a> <a href="#" class="newGrade">&#9737최신순</a>
+								<a href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=high" class="highGrade">&#9734높은평점순</a> <a
+									href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=low" class="lowGrade">&#9734낮은평점순</a> <a
+									href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
 
 							</div>
 						</c:if>
@@ -507,6 +519,7 @@ body {
 									<textarea id="r_content" class="form-control" name="r_content" placeholder="댓글을 입력해주세요."></textarea>
 								</div>
 								<div class="col-2">
+									<input type="hidden" name="movieCd" value="${moviedto.movieCd}">
 									<button type="button" class="btn btnWrite" id="btnWrite">리뷰 등록</button>
 								</div>
 							</div>
@@ -540,11 +553,8 @@ body {
 				<div class="col-9 reply_box">
 					<!-- 댓글 출력 -->
 					<div class="row">
-						<div class="col-2 text">
-							<!-- 프로필 -->
-							<div class="Profile text-center mt-5">프로필</div>
-						</div>
-						<div class="col-10 text-center">
+						
+						<div class="col text-center pt-3">
 							<p>등록된 댓글이 없습니다.</p>
 						</div>
 					</div>
@@ -759,7 +769,7 @@ body {
 							<!-- 날짜 -->
 							<div class="row mt-1 likeBox">
 								<div class="col-lg-7 col-md-5 ms-2">
-										<span id="r_date">${review.r_date}</span>
+									<span id="r_date">${review.r_date}</span>
 								</div>
 
 								<div class="row col-lg-2 col-md-3 m-1 like_round">
@@ -798,6 +808,14 @@ body {
 			</from>
 		</c:forEach>
 		<script>
+			const searchForm = $(".searchForm");
+			searchForm.on("submit", function (event) {
+				if ($(this).children(".searchInput").val() === "") {
+					event.preventDefault();
+					alert("검색어를 입력하세요");
+				}
+			});
+
 			$("#Sign_in").on("click", function() { // 로그인하기 클릭시 로그인페이지로 이동
 				location.href = "/Member/login.jsp";
 			});
@@ -1056,31 +1074,31 @@ body {
 				<div class="col-2">
 					<h5>장르</h5>
 					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">코믹</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">액션</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">멜로</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">SF</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">호러</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디" class="nav-link p-0">코미디</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션" class="nav-link p-0">액션</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로" class="nav-link p-0">멜로</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF" class="nav-link p-0">SF</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러" class="nav-link p-0">호러</a></li>
 					</ul>
 				</div>
 
 				<div class="col-2">
 					<h5>계정</h5>
 					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">로그인</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">회원가입</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">마이페이지</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">아이디 찾기</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">비밀번호 찾기</a></li>
+						<li class="nav-item mb-2"><a href="/Member/login.jsp" class="nav-link p-0">로그인</a></li>
+						<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+						<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
+						<li class="nav-item mb-2"><a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a></li>
+						<li class="nav-item mb-2"><a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a></li>
 					</ul>
 				</div>
 
 				<div class="col-2">
 					<h5>기타</h5>
 					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">리뷰</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">자유게시판</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">찜 목록</a></li>
+						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
+						<li class="nav-item mb-2"><a href="/post/post.jsp" class="nav-link p-0">자유게시판</a></li>
+						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 					</ul>
 				</div>
 
@@ -1129,17 +1147,18 @@ body {
 
 	</footer>
 	<script>
-		$(".lowGrade").on("click", function() { // 낮은 평점
-			location.href = "/lowGrade.re";
-		});
+		/*
+			$(".lowGrade").on("click", function() { // 낮은 평점
+				location.href = "/lowGrade.re";
+			});
 
-		$(".highGrade").on("click", function() { // 높은 평점
-			location.href = "/highGrade.re";
-		});
-		$(".newGrade").on("click", function() { // 높은 평점
-			location.href = "/detailView.re";
-		});
-
+			$(".highGrade").on("click", function() { // 높은 평점
+				location.href = "/highGrade.re";
+			});
+			$(".newGrade").on("click", function() { // 높은 평점
+				location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
+			});
+		 */
 		$("#btnWrite").on(
 				"click",
 				function() {
