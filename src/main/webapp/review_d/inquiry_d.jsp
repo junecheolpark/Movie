@@ -443,11 +443,12 @@ body {
 					<img src="images/movie.jpg" width="100%" height="100%">
 				</div>
 				<div class="col ">
-					<p class="m_genre mb-1 mt-1">장르: 액션</p>
+					<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
 					<p class="m_name my-1">
-						범죄도시<br>(the roundup)
+						${moviedto.movieNm}<br>(${moviedto.movieNmEn})
 					</p>
-					<p class="m_genre mb-1 mt-1">개봉: 2022 감독: 이상용</p>
+					<p class="m_genre mb-1 mt-1">개봉: ${moviedto.prdtYear} 감독: ${moviedto.directors}</p>
+					<p class="m_genre mb-1 mt-1">국가: ${moviedto.nationAlt}</p>
 				</div>
 			</div>
 
@@ -494,7 +495,9 @@ body {
 						<c:if test="${not empty reviewList}" var="review">
 							<div class="col-5 pe-5 text-end">
 								<%--<a href="#">&#9786공감순</a> --%>
-								<a href="#" class="highGrade">&#9734높은평점순</a> <a href="#" class="lowGrade">&#9734낮은평점순</a> <a href="#" class="newGrade">&#9737최신순</a>
+								<a href="/highGrade.re?movieCd=${moviedto.movieCd}" class="highGrade">&#9734높은평점순</a> 
+								<a href="/lowGrade.re?movieCd=${moviedto.movieCd}" class="lowGrade">&#9734낮은평점순</a> 
+								<a href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
 
 							</div>
 						</c:if>
@@ -1129,6 +1132,7 @@ body {
 
 	</footer>
 	<script>
+	/*
 		$(".lowGrade").on("click", function() { // 낮은 평점
 			location.href = "/lowGrade.re";
 		});
@@ -1137,9 +1141,9 @@ body {
 			location.href = "/highGrade.re";
 		});
 		$(".newGrade").on("click", function() { // 높은 평점
-			location.href = "/detailView.re";
+			location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
 		});
-
+*/
 		$("#btnWrite").on(
 				"click",
 				function() {

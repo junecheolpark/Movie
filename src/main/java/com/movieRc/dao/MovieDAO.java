@@ -526,5 +526,29 @@ public class MovieDAO {
 		}
 		return rs;
 	}
+	
+	// movieCd로 조회
+	public MovieDTO selectBySeq(String movieCd) throws Exception{
+		String sql = "SELECT * FROM tbl_movie WHERE movieCd = ?";
+
+		try(Connection con = getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+
+			pstmt.setString(1, movieCd);
+			ResultSet rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				String movieNm = rs.getString("movieNm");
+				String movieNmEn = rs.getString("movieNmEn");
+				String prdtYear = rs.getString("prdtYear");
+				String nationAlt = rs.getString("nationAlt");
+				String genreAlt = rs.getString("genreAlt");
+				String directors = rs.getString("directors");
+				MovieDTO dto = new MovieDTO(movieCd, movieNm, movieNmEn, prdtYear, nationAlt, genreAlt, directors);
+				return dto;
+			}
+			return null;
+		}
+	}
 
 }

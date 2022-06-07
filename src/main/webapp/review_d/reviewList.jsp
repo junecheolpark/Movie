@@ -619,7 +619,8 @@
                                     <div class="product">
                                         <div class="productDiv1">
                                             <div class="productTitle"><a
-                                                    href="/detailView.re?movieCd=${movieDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a></div>
+                                                    href="/detailView.re?movieCd=${reviewDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a></div>
+
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
                                             <div class="productAvgPoint">
                                                 <div class="avgPointStar"></div>
