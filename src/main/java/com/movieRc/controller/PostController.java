@@ -1,6 +1,5 @@
 package com.movieRc.controller;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,16 +24,19 @@ import com.movieRc.dto.PostDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-
 @WebServlet("*.po")
 
 public class PostController extends HttpServlet {
-protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	doAction(request,response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doAction(request, response);
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doAction(request,response);
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doAction(request, response);
 	}
+
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//로그인세션 (참고용)
@@ -143,12 +145,18 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				}
 			}else if(uri.equals("/modifyProc.po")) {
 				int seq_post= Integer.parseInt(request.getParameter("seq_post"));
-				System.out.println(seq_post);
+				String p_title=request.getParameter("p_title");
+				String p_content=request.getParameter("p_content");
+				/*
+				 * System.out.println(seq_post + " : title " + p_title+ " : content"+
+				 * p_content);
+				 */
 				PostDAO dao =new PostDAO();
 				try {
-					int rs =dao.postModify(seq_post,"content");
+					int rs =dao.postModify(seq_post,p_title,p_content);
+					response.sendRedirect("detailPost.po?seq_post="+seq_post);
 				}catch(Exception e){
-					
+					e.printStackTrace();
 				}
 				
 				
@@ -265,27 +273,81 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 				
 				
 			}else if(uri.equals("/pLike.po")) {
+				
 				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
 				int seq_post= Integer.parseInt(request.getParameter("seq_post"));
 				String user_id=dto1.getUser_id();
 				String user_category=dto1.getUser_category();
-				
-				
-				
+				System.out.println("plike.po");
 				PostDAO dao =new PostDAO();
-				
-				try {
-					int rs =dao.postLike(user_id, seq_post, user_category);
-					if(rs>0) {
-						response.getWriter().append("true");
-					}else {
-						response.getWriter().append("false");
+				int rs =10;
+				try {//좋아요1,싫어요2,선택안됨0
+					if(dao.curPLikeValue(user_id, seq_post) == -1) {//값 없음
+						dao.insertPostLike(user_id, seq_post, user_category);
+						
+						rs=-1;
+						System.out.println("좋아요");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 0) {//0상태
+						rs =dao.updatePostLike(user_id, seq_post, user_category);
+						rs=0;
+						System.out.println("좋아요");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//좋아요 한 상태
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						rs=1;
+						System.out.println("좋아요 취소");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//싫어요 한 상태
+						rs=2;
+						rs =dao.updatePostLike(user_id, seq_post, user_category);
+						System.out.println("좋아요");
 					}
+					String a= Integer.toString(rs);
+					System.out.println("rs :" +rs);
+					System.out.println("rs :" +a);
+						response.getWriter().append(a);
+					
 				}catch(Exception e){
 					e.printStackTrace();
 				}
 				
-			}else if(uri.equals("/deleteProc.po")) {
+			}else if(uri.equals("/phate.po")) {
+				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
+				int seq_post= Integer.parseInt(request.getParameter("seq_post"));
+				String user_id=dto1.getUser_id();
+				String user_category=dto1.getUser_category();
+				System.out.println("hate.po");
+				PostDAO dao =new PostDAO();
+				int rs =10;
+				try {//좋아요1,싫어요2,선택안됨0
+					if(dao.curPLikeValue(user_id, seq_post) == -1) {//값 없음
+					
+						dao.insertPostNotLike(user_id, seq_post, user_category);
+						rs=-1;
+						System.out.println("좋아요");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 0) {//0상태
+						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
+						rs=0;
+						System.out.println("좋아요");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//싫어요 한 상태
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						rs=1;
+						System.out.println("좋아요 취소");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//좋아요 한 상태
+						rs=2;
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						System.out.println("좋아요");
+					}
+					System.out.println("rs :" +rs);
+					String a= Integer.toString(rs);
+					
+					System.out.println("a :" +a);
+					response.getWriter().append(a);
+				
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+			}
+			else if(uri.equals("/deleteProc.po")) {
 				int seq_post = Integer.parseInt(request.getParameter("seq_post"));
 				System.out.println("seq_post :" + seq_post);
 
@@ -303,8 +365,4 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 			}
 			
 		}
-	}
-
-
-	
-
+}

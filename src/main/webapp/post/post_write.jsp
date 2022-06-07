@@ -65,7 +65,7 @@
 					<div id="summernote" name="summernote"></div>
 				</div>
 			</div>
-			<input style="" type="text" id="content" name="content">
+			<input style="display:none;" type="text" id="content" name="content">
 		</form>
 	</div>
 
