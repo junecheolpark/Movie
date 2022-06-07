@@ -9,11 +9,10 @@ private String user_id;
 public Like_r_countDTO() {}
 
 
-public Like_r_countDTO(int l_count, int seq_review, String user_id) {
+public Like_r_countDTO(int l_count, int seq_review) {
 	super();
 	this.l_count = l_count;
 	this.seq_review = seq_review;
-	this.user_id = user_id;
 }
 
 
@@ -38,20 +37,9 @@ public void setSeq_review(int seq_review) {
 
 
 
-
-public String getUser_id() {
-	return user_id;
-}
-
-
-public void setUser_id(String user_id) {
-	this.user_id = user_id;
-}
-
-
 @Override
 public String toString() {
-	return l_count + " : " + seq_review + " : " + user_id;
+	return l_count + " : " + seq_review;
 }
 
 

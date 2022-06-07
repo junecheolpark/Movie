@@ -31,9 +31,30 @@ public class Like_rDAO {
 	public Connection getConnection() throws Exception {
 		return basicDataSource.getConnection();
 	}
+	
+	//전체조회
+	public ArrayList<Like_rDTO> selectAll() throws Exception {
+		String sql = "select*from tbl_like_r order by 4";
+		try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<Like_rDTO> all_list = new ArrayList<>();
+			while (rs.next()) {
+				int seq_like = rs.getInt("seq_like");
+				int r_like_check= rs.getInt("r_like_check");
+				String user_id = rs.getString("user_id");
+				int seq_review = rs.getInt("seq_review");
+				String user_category = rs.getString("user_category");
+				all_list.add(new Like_rDTO(seq_like, r_like_check, user_id, seq_review, user_category));
+			}
+			return all_list;
+		}
+	}
+	
+	
 	//좋아요 갯수
 	public ArrayList<Like_r_countDTO> like_count() throws Exception{
-		String sql = "select *from tbl_like_r a LEFT OUTER JOIN (select count(*)as l_count ,seq_review from tbl_like_r where r_like_check = 1 group by seq_review) b on(a.seq_review = b.seq_review) order by 4";
+		String sql = "select count(CASE WHEN r_like_check=1 THEN 0 END)as l_count ,seq_review from tbl_like_r group by seq_review order by 2";
 		try(Connection con =getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -43,10 +64,9 @@ public class Like_rDAO {
 			ArrayList<Like_r_countDTO> like_list = new ArrayList<>(); 
 			
 			while(rs.next()) {
-				int l_count = rs.getInt(6);
-				int seq_review = rs.getInt(4);
-				String user_id = rs.getString(3);
-				like_list.add(new Like_r_countDTO(l_count, seq_review, user_id));
+				int l_count = rs.getInt(1);
+				int seq_review = rs.getInt(2);
+				like_list.add(new Like_r_countDTO(l_count, seq_review));
 			} 
 			return like_list;
 		}
@@ -55,7 +75,7 @@ public class Like_rDAO {
 
 	//싫어요 갯수
 			public ArrayList<Like_r_countDTO> hate_count() throws Exception{
-				String sql = "select *from tbl_like_r a LEFT OUTER JOIN (select count(*)as l_count ,seq_review from tbl_like_r where r_like_check = 2 group by seq_review) b on(a.seq_review = b.seq_review) order by 4";
+				String sql = "select count(CASE WHEN r_like_check=2 THEN 0 END)as l_count ,seq_review from tbl_like_r group by seq_review order by 2";
 				try(Connection con =getConnection();
 						PreparedStatement pstmt = con.prepareStatement(sql)){
 					
@@ -65,8 +85,7 @@ public class Like_rDAO {
 					while(rs.next()) {
 						int l_count = rs.getInt("l_count");
 						int seq_review = rs.getInt("seq_review");
-						String user_id = rs.getString("user_id");
-						hate_list.add(new Like_r_countDTO(l_count, seq_review, user_id));
+						hate_list.add(new Like_r_countDTO(l_count, seq_review));
 					} 
 					return hate_list;
 				}
@@ -122,7 +141,9 @@ public class Like_rDAO {
 			return rs;
 		}
 	}
-
+    // ----------------------------------------여기까지 준철dao----------------------------------------
+	
+	
     public int check(String id, String user_category, int seq_review) throws Exception{
         String sql = "select count(*) from tbl_like_r where user_id = ? and user_category = ? and seq_review = ?";
         try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
@@ -185,6 +206,9 @@ public class Like_rDAO {
         }
     }
 
+
+    
+    
     public int getStatus(String id, String user_category, int seq_review) throws Exception {
         String sql = "select r_like_check from tbl_like_r where user_id = ? and user_category = ? and seq_review = ?";
         try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

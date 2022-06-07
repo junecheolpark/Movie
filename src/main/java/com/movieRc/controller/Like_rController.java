@@ -1,47 +1,163 @@
 package com.movieRc.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
 import com.movieRc.dao.Like_rDAO;
 import com.movieRc.dao.ReviewDAO;
 import com.movieRc.dto.Like_rDTO;
+import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.ReviewDTO;
 
-@WebServlet("*.like")
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+@WebServlet(name = "Like_rController", value = "*.likeR")
 public class Like_rController extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doAction(request, response);
-	}
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doAction(request, response);
+    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doAction(request, response);
-	}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doAction(request, response);
 
-	protected void doAction(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String uri = request.getRequestURI();
-		System.out.println("요청 uri : " + uri);
-		request.setCharacterEncoding("utf-8");
+    }
 
-		if (uri.equals("/l_modify.like")) {
+    protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String uri = request.getRequestURI();
+        Like_rDAO like_rDAO = new Like_rDAO();
+        System.out.println("요청 uri : " + uri);
+
+        if (uri.equals("/like.reviewList.likeR")) {
+            HttpSession httpSession = request.getSession();
+            MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("loginSession");
+            String user_id = memberDTO.getUser_id();
+            String user_category = memberDTO.getUser_category();
+
+            int seq_review = Integer.parseInt(request.getParameter("seq_review"));
+            try {
+                int check = like_rDAO.check(user_id, user_category, seq_review);
+                if (check == 0) like_rDAO.insertLike(user_id, user_category, seq_review);
+                else like_rDAO.changeToLike(user_id, user_category, seq_review);
+
+                int likeCount = like_rDAO.countLike(seq_review);
+                int hateCount = like_rDAO.countHate(seq_review);
+                HashMap<String, Integer> likeHashMap = new HashMap<>();
+                likeHashMap.put("like", likeCount);
+                likeHashMap.put("hate", hateCount);
+
+                Gson gson = new Gson();
+                String data = gson.toJson(likeHashMap);
+                System.out.println(data);
+                response.getWriter().append(data);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (uri.equals("/likeCancle.reviewList.likeR")) {
+            HttpSession httpSession = request.getSession();
+            MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("loginSession");
+            String user_id = memberDTO.getUser_id();
+            String user_category = memberDTO.getUser_category();
+
+            int seq_review = Integer.parseInt(request.getParameter("seq_review"));
+            try {
+                int status = like_rDAO.getStatus(user_id, user_category, seq_review);
+                int rs = 0;
+                if (status == 1) {
+                    like_rDAO.delete(user_id, user_category, seq_review);
+                }
+
+                int likeCount = like_rDAO.countLike(seq_review);
+                int hateCount = like_rDAO.countHate(seq_review);
+                HashMap<String, Integer> likeHashMap = new HashMap<>();
+                likeHashMap.put("like", likeCount);
+                likeHashMap.put("hate", hateCount);
+
+                Gson gson = new Gson();
+                String data = gson.toJson(likeHashMap);
+                System.out.println(data);
+                response.getWriter().append(data);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else if (uri.equals("/hate.reviewList.likeR")) {
+            HttpSession httpSession = request.getSession();
+            MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("loginSession");
+            String user_id = memberDTO.getUser_id();
+            String user_category = memberDTO.getUser_category();
+
+            int seq_review = Integer.parseInt(request.getParameter("seq_review"));
+            try {
+                int check = like_rDAO.check(user_id, user_category, seq_review);
+                if (check == 0) like_rDAO.insertHate(user_id, user_category, seq_review);
+                else like_rDAO.changeToHate(user_id, user_category, seq_review);
+
+                int likeCount = like_rDAO.countLike(seq_review);
+                int hateCount = like_rDAO.countHate(seq_review);
+                HashMap<String, Integer> likeHashMap = new HashMap<>();
+                likeHashMap.put("like", likeCount);
+                likeHashMap.put("hate", hateCount);
+
+                Gson gson = new Gson();
+                String data = gson.toJson(likeHashMap);
+                System.out.println(data);
+                response.getWriter().append(data);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (uri.equals("/hateCancle.reviewList.likeR")) {
+
+            HttpSession httpSession = request.getSession();
+
+            MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("loginSession");
+            String user_id = memberDTO.getUser_id();
+            String user_category = memberDTO.getUser_category();
+
+            int seq_review = Integer.parseInt(request.getParameter("seq_review"));
+            try {
+                int status = like_rDAO.getStatus(user_id, user_category, seq_review);
+                int rs = 0;
+                if (status == 2) {
+                    like_rDAO.delete(user_id, user_category, seq_review);
+                }
+
+                int likeCount = like_rDAO.countLike(seq_review);
+                int hateCount = like_rDAO.countHate(seq_review);
+                HashMap<String, Integer> likeHashMap = new HashMap<>();
+                likeHashMap.put("like", likeCount);
+                likeHashMap.put("hate", hateCount);
+
+                Gson gson = new Gson();
+                String data = gson.toJson(likeHashMap);
+                System.out.println(data);
+                response.getWriter().append(data);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if (uri.equals("/l_modify.likeR")) {
+			HttpSession session = request.getSession();//임시
+			MemberDTO dto = (MemberDTO)session.getAttribute("loginSession");
+			
 			int seq_review = Integer.parseInt(request.getParameter("seq_review"));
 			System.out.println("seq_review: " + seq_review);
 			int r_like_check = Integer.parseInt(request.getParameter("r_like_check"));
 			System.out.println("r_like_check: " + r_like_check);
-
-			String user_id = "asd123"; // 로그인 세션으로 대체
+			String user_category = dto.getUser_category(); // 이것도 로그인 세션으로
+			String user_id = dto.getUser_id(); // 로그인 세션으로 대체
+			
 			String movieCd = "movieCd"; // 값 불러온다음 대체
-			String user_category = "일반"; // 이것도 로그인 세션으로
+			
 
 			Like_rDAO ldao = new Like_rDAO();
 			ReviewDAO rdao = new ReviewDAO();
@@ -84,6 +200,6 @@ public class Like_rController extends HttpServlet {
 			}
 
 		}
+    }
 
-	}
 }

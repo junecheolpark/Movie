@@ -113,8 +113,8 @@ public class MemberController extends HttpServlet {
 			MemberDAO dao = new MemberDAO();
 
 			try {
-				user_pw = EncryptionUtils.getSHA512(user_pw);
-				System.out.println("암호화된 pw : " + user_pw);
+//				user_pw = EncryptionUtils.getSHA512(user_pw);
+//				System.out.println("암호화된 pw : " + user_pw);
 
 				MemberDTO dto = dao.checkLogin(user_id, user_pw);
 				if (dto != null) {
@@ -126,7 +126,7 @@ public class MemberController extends HttpServlet {
 					System.out.println("로그인 실패");
 					request.setAttribute("rs", false);
 				}
-				request.getRequestDispatcher("/").forward(request, response);
+				request.getRequestDispatcher("/detailView.re").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
