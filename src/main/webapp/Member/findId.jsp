@@ -196,9 +196,11 @@
                     <p class="text-light" id="myPage">마이페이지</p>
                 </a>
 
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search"
-                               placeholder="Search" aria-label="Search">
+                    <form class="searchForm d-flex">
+                        <input class="searchInput form-control me-2" type="search"
+                               placeholder="Search" aria-label="Search" name ='val'>
+                        <input type="hidden" name = 'curPage' value="1">
+                        <input type="hidden" name = 's_type' value="movieNm">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
 
@@ -249,9 +251,11 @@
                         </a>
                         </div>
                         <div class="col-5">
-                            <form class="d-flex">
-                                <input class="form-control me-2" type="search"
-                                       placeholder="Search" aria-label="Search">
+                            <form class="searchForm d-flex">
+                                <input class="searchInput form-control me-2" type="search"
+                                       placeholder="Search" aria-label="Search" name = 'val'>
+                                <input type="hidden" name = 'curPage' value="1">
+                                <input type="hidden" name = 's_type' value="movieNm">
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
@@ -400,6 +404,15 @@
 </footer>
 
 <script>
+
+    const searchForm = $(".searchForm");
+    searchForm.on("submit", event => {
+        if(searchForm.find(".searchInput").val().trim() === ""){
+            event.preventDefault();
+            alert("검색어를 입력하세요");
+        }
+    });
+
     $("#findIdBtn").on("click", function () {
         if ($("#user_name").val() === "") {
             alert("이름을 입력해 주세요.");

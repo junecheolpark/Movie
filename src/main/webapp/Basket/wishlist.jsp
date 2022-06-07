@@ -294,9 +294,11 @@ section#container::after {
 							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
 						</ul>
 
-						<form class="d-flex">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
+						<form class="searchForm d-flex">
+							<input class="searchInput form-control me-2" type="search" placeholder="Search" aria-label="Search" name ='val'>
+							<input type="hidden" name = 'curPage' value="1">
+							<input type="hidden" name = 's_type' value="movieNm">
+							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
 					</div>
 				</div>
@@ -342,8 +344,10 @@ section#container::after {
 								</a>
 							</div>
 							<div class="col-5">
-								<form class="d-flex">
-									<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+								<form class="searchForm d-flex">
+									<input class="searchInput form-control me-2" type="search" placeholder="Search" aria-label="Search" name ='val'>
+									<input type="hidden" name = 'curPage' value="1">
+									<input type="hidden" name = 's_type' value="movieNm">
 									<button class="btn btn-outline-success" type="submit">Search</button>
 								</form>
 							</div>
@@ -616,6 +620,13 @@ section#container::after {
 	</footer>
 
 	<script>
+		const searchForm = $(".searchForm");
+		searchForm.on("submit", event => {
+			if(searchForm.find(".searchInput").val().trim() === ""){
+				event.preventDefault();
+				alert("검색어를 입력하세요");
+			}
+		});
 	
 		function sortWish(option){
 			let url;

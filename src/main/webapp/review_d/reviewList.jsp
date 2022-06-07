@@ -496,7 +496,7 @@
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
-                    <form class="searchForm d-flex" method="get" action="/search.movie" onsubmit="return search();">
+                    <form class="searchForm d-flex" method="get" action="/search.movie">
                         <input
                                 class="searchInput form-control me-2"
                                 type="search"
@@ -564,7 +564,7 @@
                             </a>
                         </div>
                         <div class="col-5">
-                            <form class="searchForm d-flex" method="get" action="/search.movie" onsubmit="return search();">
+                            <form class="searchForm d-flex" method="get" action="/search.movie">
                                 <input
                                         class="searchInput form-control me-2"
                                         type="search"
@@ -619,13 +619,7 @@
                                     <div class="product">
                                         <div class="productDiv1">
                                             <div class="productTitle"><a
-<<<<<<< HEAD
                                                     href="/detailView.re?movieCd=${reviewDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a></div>
-
-=======
-                                                    href="/detailView.re?movieCd=${movieDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a>
-                                            </div>
->>>>>>> 7584681 (0607)
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
                                             <div class="productAvgPoint">
                                                 <div class="avgPointStar"></div>
@@ -847,7 +841,6 @@
     </div>
 </footer>
 <script>
-    console.log("${loginSession.user_id}");
 
     $(".selectByCategory").on("click", function () {
         let val = $(this).val();
@@ -858,14 +851,13 @@
         }
     });
 
-    function search() {
-        let val = $(this).children(".searchInput").val();
-
-        if (val === "") {
-            alert("검색어를 입력하세요.");
-            return false
+    const searchForm = $(".searchForm");
+    searchForm.on("submit", event => {
+        if(searchForm.find(".searchInput").val().trim() === ""){
+            event.preventDefault();
+            alert("검색어를 입력하세요");
         }
-    }
+    });
 
     let prevBtn = ${hashMap.prevBtn};
     if (!prevBtn) {

@@ -241,11 +241,17 @@
                             <p class="text-light" id="myPage">마이페이지</p>
                         </a>
 
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        <form class="searchForm d-flex" method="get" action="/search.movie">
+                            <input
+                                    class="searchInput form-control me-2"
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"
+                                    name="val">
+                            <input type="hidden" name = 'curPage' value="1">
+                            <input type="hidden" name = 's_type' value="movieNm">
+                            <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                         </form>
-
                     </div>
                 </div>
             </nav>
@@ -298,11 +304,17 @@
                                 </a>
                             </div>
                             <div class="col-5">
-                                <form class="d-flex">
-                                    <input class="form-control me-2" type="search" placeholder="Search"
-                                        aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
-                                </form>
+                                <<form class="searchForm d-flex" method="get" action="/search.movie">
+                                <input
+                                        class="searchInput form-control me-2"
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search"
+                                        name="val">
+                                <input type="hidden" name = 'curPage' value="1">
+                                <input type="hidden" name = 's_type' value="movieNm">
+                                <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -491,7 +503,15 @@
         </div>
 
     </footer>
-
+    <script>
+        const searchForm = $(".searchForm");
+        searchForm.on("submit", event => {
+            if(searchForm.find(".searchInput").val().trim() === ""){
+                event.preventDefault();
+                alert("검색어를 입력하세요");
+            }
+        });
+    </script>
 </body>
 
 </html>

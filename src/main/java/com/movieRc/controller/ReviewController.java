@@ -359,6 +359,7 @@ public class ReviewController extends HttpServlet {
                         arrayList = reviewDAO.selectAllgenreEtc(start, end);
 
                         for (int i = 0; i < arrayList.size(); i++) {
+
                             hashMap1 = new HashMap<>();
                             movieCd = arrayList.get(i).getMovieCd();
                             movieDTO = movieDAO.getMovieDTO_byMovieCd(movieCd);
