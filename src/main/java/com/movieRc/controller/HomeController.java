@@ -4,15 +4,19 @@ import com.movieRc.dao.MemberDAO;
 import com.movieRc.dto.MemberDTO;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet("/home")
+import com.movieRc.dao.*;
+
+
+@WebServlet("*.do")
 public class HomeController extends HttpServlet {
+
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect("/index.jsp");

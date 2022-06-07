@@ -3,6 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+
+	<button id="btnPost" type="button">게시판</button>
+	<script>
+		$("#btnPost").on("click",function(){
+			location.href="/post.po?curPage=1";
+		})
+	</script>
+
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <script
@@ -13,6 +26,7 @@
 <body>
 <button id="test">test</button>
 <button id="test2">test2</button>
+
 </body>
 <script>
     $("#test").on("click", function (){
