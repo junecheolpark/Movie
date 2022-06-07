@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<title>비밀번호 찾기</title>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<title>회원가입</title>
 <style>
 body {
 	background-color: black;
@@ -101,7 +105,15 @@ a {
 }
 
 /* body*/
+.body-container {
+	padding: 10px;
+}
+
 .card-header {
+	background-color: white;
+}
+
+.card-footer {
 	background-color: white;
 }
 
@@ -143,6 +155,7 @@ a {
 }
 </style>
 </head>
+
 <body>
 	<!-- Header -->
 	<header class="mb-3 border-bottom">
@@ -247,104 +260,157 @@ a {
 
 		</div>
 	</header>
+
 	<!-- Contents -->
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-5">
-				<c:set var="doneLoop" value="false" />
-				<c:forEach items="${list}" var="dto" varStatus="status">
-					<c:if test="${not doneLoop}">
-						<c:if test="${dto.user_name eq param.user_name && dto.user_k ne null}">
-							<div class="card card-custom">
-								<div class="card-header">
-									<h4>비밀번호 찾기</h4>
-								</div>
-								<div class="card-body">
-									<div class="form-group p-2 d-flex justify-content-center">
-										<p class="text-center">카카오 회원가입 회원입니다. 카카오로 로그인 해주세요.</p>
-									</div>
-									<div class="row p-3 justify-content-center">
-										<div
-											class="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
-											<button type="button" class="btn btn-dark w-100"
-												id="againBtn">뒤로가기</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<script>
-								$("#againBtn").on("click", function() {
-									location.href = "/Member/login.jsp";
-								})
-							</script>
-							<c:set var="doneLoop" value="true" />
-						</c:if>
-					</c:if>
-					<c:if test="${not doneLoop}">
-						<c:if test="${dto.user_name eq  param.user_name && rs eq true}">
-							<div class="card card-custom">
-								<div class="card-header">
-									<h4>비밀번호 찾기</h4>
-								</div>
-								<div class="card-body">
-									<div class="form-group p-2 d-flex justify-content-center">
-											회원님의 임시 비밀번호는 ${ranPw} 입니다.<br>마이페이지에서 비밀번호를 변경해 주세요.
-										</p>
-									</div>
-									<div class="row p-3 justify-content-center">
-										<div
-											class="col-5 d-flex justify-content-center">
-											<button type="button" class="btn btn-dark w-100"
-												id="loginBtn">로그인</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<script>
-								$("#loginBtn").on("click", function() {
-									location.href = "/Member/login.jsp";
-								})
-							</script>
-							<c:set var="doneLoop" value="true" />
-						</c:if>
-					</c:if>
-				</c:forEach>
-				<c:if test="${rs eq false}">
+			<div class="col-lg-6">
+				<form id="kakaoSignupForm" action="/kakaoSignupProc.ka"
+					method="post">
 					<div class="card card-custom">
 						<div class="card-header">
-							<h4>비밀번호 찾기</h4>
+							<h4>회원가입</h4>
+							<div class="form-text">카카오 회원가입을 위한 폼을 작성해 주세요.</div>
 						</div>
 						<div class="card-body">
-							<div class="form-group p-2 d-flex justify-content-center">
-								<p class="text-center">등록된 정보가 없습니다.</p>
+							<div class="row p-2 d-none">
+								<div class="col-12">
+									<p>이름*</p>
+								</div>
+								<div class="col-12">
+									<input type="text" class="form-control" id="user_name"
+										name="user_name" value="${param.user_name}">
+								</div>
+							</div>
+							<div class="row p-2 d-none">
+								<div class="col-12">
+									<p>토큰*</p>
+								</div>
+								<div class="col-12">
+									<input type="text" class="form-control" id="user_k"
+										name="user_k" value="${param.user_k}">
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col-12">
+									<p>아이디*</p>
+								</div>
+								<c:if test="${param.user_id eq 'undefined'}"> <%-- 이메일 동의를 안했다면 입력하기 --%>
+									<div class="col-12 col-md-8 col-lg-8">
+										<input type="text" class="form-control" id="user_id"
+											name="user_id" readonly>
+									</div>
+									<div class="col-12 col-md-4 col-lg-4">
+										<button type="button" class="btn btn-secondary w-100"
+											id="checkId">아이디 확인</button> 
+									</div>
+									<div class="form-text">카카오 계정에 등록된 이메일을 입력해 주세요.</div>
+								</c:if>
+								<c:if test="${param.user_id ne 'undefined'}"> <%-- 이메일 등록을 했다면 값 불러주기 --%>
+									<div class="col-12">
+										<input type="text" class="form-control" id="user_id"
+											name="user_id" value="${param.user_id}" readonly>
+									</div>									
+								</c:if>
+							</div>
+							<div class="row p-2 d-none">
+								<div class="col-12">
+									<p>비밀번호*</p>
+								</div>
+								<div class="col-12">
+									<input type="text" class="form-control" id="user_pw"
+										name="user_pw" value="${ranPw}">
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col-12">
+									<p>닉네임*</p>
+								</div>
+								<div class="col-8">
+									<input type="text" class="form-control" id="user_nickname"
+										name="user_nickname" readonly>
+								</div>
+								<div class="col-4">
+									<button type="button" class="btn btn-secondary w-100"
+										id="checkNickname">닉네임 확인</button>
+								</div>
+								<div class="form-text">나를 표현할 닉네임을 4~10자 이내로 입력해 주세요.</div>
+							</div>
+							<div class="row p-2">
+								<div class="col-12">
+									<p>생년월일*</p>
+								</div>
+								<div class="col-12">
+									<input type="text" class="form-control" id="user_birth"
+										name="user_birth">
+								</div>
+								<div class="form-text">
+									8자리 숫자로 입력해 주세요. <br>예) 2000년 01월 01일 -> 20000101
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col-12">
+									<label for="phone" class="form-label">휴대폰 번호</label>
+								</div>
+								<div class="col-4 mb-2">
+									<select class="form-select" id="phone1">
+										<option value="010" selected>010</option>
+										<option value="011">011</option>
+										<option value="016">016</option>
+										<option value="017">017</option>
+										<option value="018">018</option>
+										<option value="019">019</option>
+									</select>
+								</div>
+								<div class="col-4 mb-2">
+									<input type="text" class="form-control" id="phone2">
+								</div>
+								<div class="col-4 mb-2">
+									<input type="text" class="form-control" id="phone3">
+								</div>
+								<div class="col d-none">
+									<input type="text" id="user_phone" name="user_phone">
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col">
+									<input type="text" class="form-control" id="postcode"
+										name="postcode" placeholder="우편번호">
+								</div>
+								<div class="col">
+									<button type="button" class="btn btn-primary w-100"
+										id="btnPostCode">우편번호 찾기</button>
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col">
+									<input type="text" class="form-control" id="roadAddr"
+										name="roadAddr" placeholder="도로명주소">
+								</div>
+							</div>
+							<div class="row p-2">
+								<div class="col mb-2">
+									<input type="text" class="form-control" id="detailAddr"
+										name="detailAddr" placeholder="상세주소">
+								</div>
+								<div class="col mb-2">
+									<input type="text" class="form-control" id="extraAddr"
+										name="extraAddr" placeholder="읍/면/동">
+								</div>
 							</div>
 							<div class="row p-3 justify-content-center">
-								<div
-									class="col-5 d-flex justify-content-center">
-									<button type="button" class="btn btn-dark w-100" id="againBtn">다시
-										찾기</button>
-								</div>
-								<div
-									class="col-5 d-flex justify-content-center">
-									<button type="button" class="btn btn-dark w-100" id="signupBtn">회원가입</button>
+								<div class="col-6 d-flex justify-content-end">
+									<button type="button" class="btn btn-dark rounded w-100"
+										id="signupBtn">회원가입</button>
 								</div>
 							</div>
 						</div>
 					</div>
-					<script>
-						$("#againBtn").on("click", function() {
-							location.href = "/Member/findPw.jsp";
-						})
-
-						$("#signupBtn").on("click", function() {
-							location.href = "/Member/signup.jsp";
-						})
-					</script>
-				</c:if>
+				</form>
 			</div>
 		</div>
 	</div>
-
+	
 	<!-- Footer -->
 	<footer class="py-5 text-light">
 		<div class="container">
@@ -442,5 +508,101 @@ a {
 			</div>
 		</div>
 	</footer>
+
+	<script>
+		// 카카오 회원가입	
+		$("#signupBtn").on("click", function() {
+			let regexBirth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/; // 셍년월일 정규식
+			let regexPhone = /[0-9]{11}/; 
+			let user_phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
+			$("#user_phone").val(user_phone); // 전화번호 정규식
+
+			if ($("#user_name").val() === "") {
+				alert("이름을 입력해 주세요.");
+				$('#user_name').focus();
+				return;
+			} else if ($("#user_id").val() === "") {
+				alert("아이디를 입력해 주세요.");
+				$('#user_id').focus();
+				return;
+			}  else if ($("#user_nickname").val() === "") {
+				alert("닉네임을 입력해 주세요.");
+				$('#user_nickname').focus();
+				return;
+			} else if (!regexBirth.test($("#user_birth").val())) {
+				alert("형식에 맞지않는 생년월일입니다.");
+				$('#user_birth').focus();
+				return;
+			} else if (!regexPhone.test($("#user_phone").val())) {
+				alert("형식에 맞지않는 전화번호입니다.");
+				$('#user_phone').focus();
+				return;
+			} else if ($("#postcode").val() === ""
+					|| $("#roadAddr").val() === "") {
+				alert("주소를 입력해 주세요.");
+				$('#postcode').focus();
+				return;
+			}
+
+			document.getElementById("kakaoSignupForm").submit();
+		})
+
+		// 아이디 팝업
+		$("#checkId").on("click", function() {
+			let url = "/checkId.mem";
+			let name = "아이디 중복검사";
+			let option = "width=500, height=300, left=700, top=300";
+			window.open(url, name, option);
+		})
+
+		// 닉네임 팝업
+		$("#checkNickname").on("click", function() {
+			let url = "/checkNickname.mem";
+			let name = "닉네임 중복검사";
+			let option = "width=500, height=300, left=700, top=300";
+			window.open(url, name, option);
+		})
+
+		// 다음 우편번호 api
+		$("#btnPostCode").on("click",function() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var extraRoadAddr = ''; // 참고 항목 변수
+
+					if (data.bname !== ''
+							&& /[동|로|가]$/g
+									.test(data.bname)) {
+						extraRoadAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다
+					if (data.buildingName !== ''
+							&& data.apartment === 'Y') {
+						extraRoadAddr += (extraRoadAddr !== '' ? ', '
+								+ data.buildingName
+								: data.buildingName);
+					}
+					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+					if (extraRoadAddr !== '') {
+						extraRoadAddr = ' ('
+								+ extraRoadAddr + ')';
+					}
+
+					// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					$("#postcode").val(data.zonecode);
+					$("#roadAddr").val(roadAddr);
+
+					// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+					if (roadAddr !== '') {
+						$("#extraAddr").val(
+								extraRoadAddr);
+					} else {
+						$("#extraAddr").val("");
+					}
+				}
+			}).open();
+		})
+	</script>
 </body>
+
 </html>

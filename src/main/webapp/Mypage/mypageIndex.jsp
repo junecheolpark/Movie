@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <title>MypageIndex</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <title>Mypage</title>
 
     <style>
         body {
@@ -145,11 +149,11 @@
                 display: none;
             }
         }
-        /* 내가 추가한 스타일 */
+        /* Contents */
         .contents{
             background-color: rgb(237, 241, 244);
         }
-        .box1{
+        .contentsBox{
             width: 1500px;
             height: 195px;
             background-color: white;
@@ -160,7 +164,7 @@
             transform: translateX(-50%);
             text-align: center;
         }
-        .box2{
+        .contentsImgBox{
             width: 80px;
             height: 80px;
             background-color: rgb(237, 241, 244);
@@ -176,11 +180,11 @@
             height: 100%;
             object-fit: cover;
         }
-        .box1 > .btn{
+        .contentsBox > .btn{
             float: right;
             margin: 5px;
         }
-        .box3{
+        .contentsBox2{
             width: 1500px;
             height: 1150px;
             background-color: white;
@@ -190,10 +194,10 @@
             left: 50%;
             transform: translateX(-50%);
         }
-        .box4{
+        .contentsmyWrite{
             margin: 20px;
         }
-        .box5{
+        .contentsmyWriteBox{
             width: 100%;
             height: 1070px;
             border: 1px solid black;
@@ -284,7 +288,7 @@
                     <!-- logo -->
                     <div class="col-2">
                         <a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-                            <img id="navLogo" src="/movie/images/logo3.png">
+                            <img id="navLogo" src="/images/logo3.png">
                         </a>
                     </div>
 
@@ -303,11 +307,11 @@
 
                             <div class="col-2">
                                 <a href="" class="align-items-center ">
-                                    <img class="img-fluid" id="cartIcon" src="\Movie\images\찜.png">
+                                    <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                     <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                                 </a>
                                 <a href="" class="align-items-center">
-                                    <img class="img-fluid" id="myPageIcon" src="\Movie\images\마이페이지.png">
+                                    <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                     <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                                 </a>
                             </div>
@@ -330,28 +334,43 @@
 
     <!-- Contents -->
     <div class="contents">
-        <div class="contents row text-black">
-            <div class="box1">
-                <div class="box2">
-                    <img class="profileImg" src="/Movie/images/profileImg.png">
-                </div>
-                <br><p>신난 라이언</p>
-                <button type="button" class="btn btn-outline-danger" id="mb_delet">회원 탈퇴</button>
-                <button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
-                <button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
-            </div>
-            <div class="box3">
-                <div class="box4">
-                    <a href="/" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
-                    <a href="/" class="myWrite" id="i_c_inquiry"><strong>작성댓글</strong></a>
-                    <a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
-                </div>
-                <div class="box5">
-
-                </div>
-            </div>
-        </div>
+    	<form id="indexForm" action="/modify.mem" method="post">
+	    	<div class="contents row text-black">
+	            <div class="contentsBox">
+	                <div class="contentsImgBox">
+	                    <img class="profileImg" src="/files/${file_dto.sys_name}">
+	                </div>
+	                <br><p>${loginSession.nickname}</p>
+	                <button type="button" class="btn btn-outline-danger" id="mb_delete">회원 탈퇴</button>
+	                <button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
+	                <button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
+	            </div>
+	            <div class="contentsBox2">
+	                <div class="contentsmyWrite">
+	                    <a href="/" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
+	                    <a href="/" class="myWrite" id="i_c_inquiry"><strong>작성댓글</strong></a>
+	                    <a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
+	                </div>
+	                <div class="contentsmyWriteBox">
+	
+	                </div>
+	            </div>
+	        </div>
+    	</form>
     </div>
+    <script>
+	    $("#mb_delete").on("click", function(){ // 회원탈퇴 요청
+			location.href = "/deleteProc.mem";
+		});
+	    
+    	$("#i_logout").on("click", function(){ // 로그아웃 요청
+    		location.href = "/logoutProc.mem";
+    	})
+    	
+    	$("#i_modify").on("click", function(){ // 내 정보 수정 페이지 요청
+    		location.href = "/modify.mem";
+		});
+    </script>
 
 
     <!-- Footer -->

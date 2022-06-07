@@ -1,14 +1,12 @@
 package com.movieRc.util;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import java.sql.Connection;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import java.io.PipedReader;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.HashMap;
+
+import org.apache.commons.dbcp2.BasicDataSource;
 
 public class Pagination {
     private int totalCnt;
@@ -23,22 +21,22 @@ public class Pagination {
     private boolean prevBtn;
     private boolean nextBtn;
 
-
-    private BasicDataSource basicDataSource;
-
-    public Pagination() {
-        try {
-            Context context = new InitialContext();
-            Context envContext = (Context) context.lookup("java:comp/env");
-            basicDataSource = (BasicDataSource) envContext.lookup("jdbc/bds");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Connection getConnection() throws Exception {
-        return basicDataSource.getConnection();
-    }
+//
+//    private BasicDataSource basicDataSource;
+//
+//    public Pagination() {
+//        try {
+//            Context context = new InitialContext();
+//            Context envContext = (Context) context.lookup("java:comp/env");
+//            basicDataSource = (BasicDataSource) envContext.lookup("jdbc/bds");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public Connection getConnection() throws Exception {
+//        return basicDataSource.getConnection();
+//    }
 
     // 게시판쪽애서도 활용할 수 있을 거 같아서 별도의 클래스로 만들었어요
     public HashMap<String, Object> getPageNavi(int totalCnt,  int recordPerPage, int naviCntPerPage, int curPage) throws Exception {

@@ -102,6 +102,20 @@ a {
 	background-color: white;
 }
 
+#user_name {
+	border-radius: 10px;
+}
+
+#user_id {
+	border-radius: 10px;
+}
+
+#findPwBtn{
+	background-color: blueviolet;
+	color: white;
+	border-radius: 8px;
+}
+
 /* Footer */
 .nav-link {
 	color: gray;
@@ -205,7 +219,7 @@ a {
 					<div class="col-2">
 						<a href="/"
 							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-							<img id="navLogo" src="images/logo3.png">
+							<img id="navLogo" src="/resources/images/logo3.png">
 						</a>
 					</div>
 
@@ -222,10 +236,11 @@ a {
 
 							<div class="col-2">
 								<a href="" class="align-items-center "> <img
-									class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
+									class="img-fluid" id="cartIcon"
+									src="/resources/images/basket.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
 								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
-									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
+									class="img-fluid" id="myPageIcon"
+									src="/resources/images/myPage.png"> <!-- <p class="text-light" id="myPage">마이페이지</p> -->
 								</a>
 							</div>
 							<div class="col-5">
@@ -249,7 +264,36 @@ a {
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-5">
-				
+				<form id="findPwForm" action="/findPw.mem" method="post">
+					<div class="card card-custom">
+						<div class="card-header">
+							<h4>비밀번호 찾기</h4>
+						</div>
+						<div class="card-body">
+							<div class="form-group p-2">
+								<p>이름*</p>
+								<div>
+									<input type="text" class="form-control" id="user_name"
+										name="user_name" placeholder="이름">
+								</div>
+							</div>
+							<div class="form-group p-2">
+								<p>아이디*</p>
+								<div>
+									<input type="text" class="form-control" id="user_id"
+										name="user_id" placeholder="아이디">
+								</div>
+							</div>
+							<div class="row p-3 justify-content-center">
+								<div
+									class="col-5 d-flex justify-content-center">
+									<button type="button" class="btn w-100"
+										id="findPwBtn">비밀번호 찾기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -310,25 +354,25 @@ a {
 						<div class="snsIcon1">
 							<a href="https://www.kakaocorp.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="kakaoIcon" src="images/kakaotalk.png">
+								id="kakaoIcon" src="/resources/images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
 							<a href="https://twitter.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="twitterIcon" src="images/twitter.png">
+								id="twitterIcon" src="/resources/images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
 							<a href="https://www.instagram.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="instagramIcon" src="images/instagram.png">
+								id="instagramIcon" src="/resources/images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
 							<a href="https://www.facebook.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="facebookIcon" src="images/facebook.png">
+								id="facebookIcon" src="/resources/images/facebook.png">
 							</a>
 						</div>
 					</div>
@@ -350,8 +394,28 @@ a {
                             </ul> -->
 			</div>
 		</div>
-
 	</footer>
+	
+	<script>
+	let regexId = /^[a-zA-Z][\w]+@[a-zA-Z]+\.(com|net|co\.kr|or\.kr)$/;
+	
+		$("#findPwBtn").on("click", function() {
+			if ($("#user_name").val() === "") {
+				alert("이름을 입력해 주세요.");
+				$('#user_name').focus();
+				return;
+			} else if ($("#user_id").val() === "") {
+				alert("아이디를 입력해 주세요.");
+				$('#user_id').focus();
+				return;
+			} else if (!regexId.test($("#user_id").val())){
+				alert("아이디를 정확히 입력해 주세요.")
+				$('#user_id').focus();
+				return;
+			}
+			$("#findPwForm").submit();
+		})
+	</script>
 </body>
 
 </html>

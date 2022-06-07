@@ -482,21 +482,21 @@
 
                     <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
+                            <a class="nav-link" href="/Member/login.jsp">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">회원가입</a>
+                            <a class="nav-link" href="/signup.mem">회원가입</a>
                         </li>
                     </ul>
 
-                    <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                    <a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="cart">찜한 영화</p>
                     </a>
-                    <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                    <a href="/myPage.mem" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
-                    <form class="searchForm d-flex" action="" method="get">
+                    <form class="searchForm d-flex"  method="get" action="/search.movie">
                         <input
                                 class="form-control me-2"
                                 type="search"
@@ -542,26 +542,26 @@
                         <div class="col-5">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">로그인</a>
+                                    <a class="nav-link" href="/Member/login.jsp">로그인</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">회원가입</a>
+                                    <a class="nav-link" href="/signup.mem">회원가입</a>
                                 </li>
                             </ul>
                         </div>
 
                         <div class="col-2">
-                            <a href="" class="align-items-center ">
+                            <a href="/wishlist.wish" class="align-items-center ">
                                 <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                             </a>
-                            <a href="" class="align-items-center">
+                            <a href="/myPage.mem" class="align-items-center">
                                 <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                             </a>
                         </div>
                         <div class="col-5">
-                            <form class="d-flex">
+                            <form class="searchForm d-flex"  method="get" action="/search.movie">
                                 <input
                                         class="form-control me-2"
                                         type="search"
@@ -607,16 +607,16 @@
                             <c:forEach items="${movies}" var="movie">
                                 <c:if test="${reviewDTO.movieCd eq movie.key}">
                                     <div class="movieImgDiv">
-                                        <a href="##"><img src="/images/NoImg.webp"></a>
+                                        <a href="/detailView.re?movieCd=${movieDTO.movieCd}"><img src="/images/NoImg.webp"></a>
                                     </div>
                                     <div class="product">
                                         <div class="productDiv1">
                                             <div class="productTitle"><a
-                                                    href="##">${movie.value['movieDTO'].movieNm}</a></div>
+                                                    href="/detailView.re?movieCd=${movieDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a></div>
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
                                             <div class="productAvgPoint">
                                                 <div class="avgPointStar"></div>
-                                                <div class="avgPointNum" data-value='${movie.value['avg']}'>
+                                                <div class="avgPointNum" data-value='${movie.value}'>
                                                     <fmt:formatNumber value="${movie.value['avg']}"
                                                                       type="pattern"
                                                                       pattern="0.00"/> (${movie.value['count']})
@@ -657,7 +657,7 @@
                                 <div class="reviewLike">
                                     <c:forEach items="${likes}" var="like">
                                         <c:if test="${reviewDTO.seq_review eq like.key}">
-                                            <input type="hidden" value ='${like.value['status']}' class="likeStatus">
+                                            <input type="hidden" value ="${like.value['status']}" class="likeStatus">
                                             <span class="likeSpan">${like.value['like']}</span>
                                             <button type='button' class='likeBtn' value="${reviewDTO.seq_review}">좋아요
                                             </button>
@@ -744,19 +744,19 @@
                 <h5>계정</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">로그인</a>
+                        <a href="/Member/login.jsp" class="nav-link p-0">로그인</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">회원가입</a>
+                        <a href=/signup.mem" class="nav-link p-0">회원가입</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">마이페이지</a>
+                        <a href="/myPage.mem" class="nav-link p-0">마이페이지</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">아이디 찾기</a>
+                        <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">비밀번호 찾기</a>
+                        <a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a>
                     </li>
                 </ul>
             </div>
@@ -771,7 +771,7 @@
                         <a href="#" class="nav-link p-0">자유게시판</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">찜 목록</a>
+                        <a href="/wishlist.wish" class="nav-link p-0">찜 목록</a>
                     </li>
                 </ul>
             </div>
@@ -845,6 +845,17 @@
         }
     });
 
+    $(".searchBtn").on("click", function () {
+        let val = $(this).siblings($(".searchInput")).val();
+        if (val !== "") {
+            let searchForm = $(this).parent(".searchForm");
+            searchForm.submit();
+        }
+        if (val === "") {
+            alert("검색어를 입력하세요.");
+        }
+    });
+
     let prevBtn = ${hashMap.prevBtn};
     if (!prevBtn) {
         $(".prevBtn").addClass("disabled");
@@ -905,11 +916,7 @@
                 $(this).css("color", "black");
                 $(this).siblings(".likeStatus").val("0");
                 let form = $("<form>")
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
                 seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
-                form.append(user_id);
-                form.append(user_category);
                 form.append(seq_review);
                 $("body").append(form);
                 let data = form.serialize();
@@ -936,12 +943,7 @@
                 $(this).siblings(".hateBtn").css('color', 'black');
 
                 let form = $("<form>")
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
                 seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
-                form.append(user_id);
-                form.append(user_category);
                 form.append(seq_review);
                 $("body").append(form);
                 let data = form.serialize();
@@ -981,11 +983,7 @@
                 $(this).css("color", "black");
                 $(this).siblings(".likeStatus").val("0");
                 let form = $("<form>")
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
                 seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
-                form.append(user_id);
-                form.append(user_category);
                 form.append(seq_review);
                 $("body").append(form);
                 let data = form.serialize();
@@ -1012,12 +1010,7 @@
                 $(this).siblings(".likeBtn").css('color', 'black');
 
                 let form = $("<form>")
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_id = $("<input>", {type: 'hidden', value: user_id, name: 'id'});
-                user_category = $("<input>", {type: 'hidden', value: user_category, name: 'category'});
                 seq_review = $("<input>", {type: 'hidden', value: seq_review, name: "seq_review"});
-                form.append(user_id);
-                form.append(user_category);
                 form.append(seq_review);
                 $("body").append(form);
                 let data = form.serialize();

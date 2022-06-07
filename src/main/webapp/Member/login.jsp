@@ -105,9 +105,17 @@ a {
 	background-color: white;
 }
 
+#user_id {
+	border-radius: 10px;
+}
+
+#user_pw {
+	border-radius: 10px;
+}
+
 #kakaoLogin {
-	background-color: #F9e000;
-	border-color: #F9e000;
+	height: 100%;
+	width: 100%;
 }
 
 /* Footer */
@@ -213,7 +221,7 @@ a {
 					<div class="col-2">
 						<a href="/"
 							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-							<img id="navLogo" src="images/logo3.png">
+							<img id="navLogo" src="/resources/images/logo3.png">
 						</a>
 					</div>
 
@@ -230,10 +238,11 @@ a {
 
 							<div class="col-2">
 								<a href="" class="align-items-center "> <img
-									class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
+									class="img-fluid" id="cartIcon"
+									src="/resources/images/basket.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
 								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
-									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
+									class="img-fluid" id="myPageIcon"
+									src="/resources/images/myPage.png"> <!-- <p class="text-light" id="myPage">마이페이지</p> -->
 								</a>
 							</div>
 							<div class="col-5">
@@ -256,7 +265,7 @@ a {
 	<!-- Contents -->
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-5">
+			<div class="col-lg-5 col-md-10">
 				<form id="loginForm" action="/loginProc.mem" method="post">
 					<div class="card card-custom">
 						<div class="card-header">
@@ -278,13 +287,11 @@ a {
 								</div>
 							</div>
 							<div class="row p-3 justify-content-center">
-								<div class="col-12 col-md-5 col-lg-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-dark rounded w-100"
-										id="loginBtn">로그인</button>
+								<div class="col-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-dark w-100" id="loginBtn">로그인</button>
 								</div>
-								<div class="col-12 col-md-5 col-lg-5 flex justify-content-start">
-									<button type="button" class="btn btn-warning rounded w-100"
-										id="kakaoLogin">카카오톡 로그인</button>
+								<div class="col-5 flex justify-content-start">
+									<img id="kakaoLogin" src="/resources/images/kakao_login.png">
 								</div>
 							</div>
 							<div class="row p-3">
@@ -368,25 +375,25 @@ a {
 						<div class="snsIcon1">
 							<a href="https://www.kakaocorp.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="kakaoIcon" src="images/kakaotalk.png">
+								id="kakaoIcon" src="/resources/images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
 							<a href="https://twitter.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="twitterIcon" src="images/twitter.png">
+								id="twitterIcon" src="/resources/images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
 							<a href="https://www.instagram.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="instagramIcon" src="images/instagram.png">
+								id="instagramIcon" src="/resources/images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
 							<a href="https://www.facebook.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="facebookIcon" src="images/facebook.png">
+								id="facebookIcon" src="/resources/images/facebook.png">
 							</a>
 						</div>
 					</div>
@@ -410,14 +417,121 @@ a {
 		</div>
 	</footer>
 	<script>
-		// 로그인 버튼
+		// 일반 로그인
+		let regexId = /^[a-zA-Z][\w]+@[a-zA-Z]+\.(com|net|co\.kr|or\.kr)$/;
+		let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,12}/;
+		
 		$("#loginBtn").on("click", function(){
-			if($("#user_id").val() === "" || $("#user_pw").val() === "") {
-				alert("아이디 혹은 비밀번호를 정확히 입력해 주세요.");
+			if($("#user_id").val() === "") {
+				alert("아이디를 입력해 주세요.");
+				$('#user_id').focus();
+				return;
+			} else if (!regexId.test($("#user_id").val())){
+				alert("아이디를 정확히 입력해 주세요.")
+				$('#user_id').focus();
+				return;
+			} else if($("#user_pw").val() === ""){
+				alert("비밀번호를 입력해 주세요.");
+				$('#user_pw').focus();
+				return;
+			} else if (!regexPw.test($("#user_pw").val())){
+				alert("비밀번호를 정확히 입력해 주세요.")
+				$('#user_id').focus();
 				return;
 			}
 			$("#loginForm").submit();
 		})
+		
+		// 카카오 로그인
+		$("#kakaoLogin").on("click", function(){
+			kakaoLogin();
+		})
+		
+		// 카카오 로그인
+		Kakao.init('23a01cb0d87a6404d4df1ec97cf82ec7');		
+		function kakaoLogin() {
+			
+		    Kakao.Auth.login({
+		        success: function(response) {
+		            Kakao.API.request({ // 사용자 정보 가져오기 
+		                url: '/v2/user/me',
+		                success: function(response) {
+		                	$.ajax({
+		                    	url : '/kakaoTokenCheck.ka', // ID중복체크를 통해 회원가입 유무를 결정한다.
+		    					type : "post",    					
+		    					data : {"user_k": response.id},
+		    					dataType: "json",
+		    					success : function(data){   
+									  for(let dto of data) {
+										console.log(dto.user_k);
+										console.log(response.id);
+										if(response.id == dto.user_k && dto.user_k != null  && response.properties.nickname == dto.user_name){
+			    							// 존재하는 경우 로그인 처리
+			    							createHiddenLoginForm(response.id, response.properties.nickname);	
+			    							break;
+			    						} else if (response.id == dto.user_k && dto.user_k != null && response.properties.nickname != dto.user_name){
+			    							// 정보 미일치시
+			    							alert("잘못된 정보입니다. 일반 로그인 또는 회원가입을 진행해 주세요.");
+			    							location.href = "/Member/login.jsp";
+			    							break;
+			    						}  else{
+			    							// 회원가입
+			    							createHiddenSignupForm(response.id, response.properties.nickname,response.kakao_account.email);				
+			    						}	 
+									}		 		
+		    					},
+		    					error: function(request, status, error){
+		    							console.log(error);		    		                
+		    		                }
+		    				});
+		                }
+		            });
+		        },
+		        fail: function(error) {
+		            alert(error);
+		        }
+		    });
+		}
+		
+		// 로그인
+		function createHiddenLoginForm(user_k, user_name){		
+			var frm = document.createElement('form');
+			frm.setAttribute('method', 'post');
+			frm.setAttribute('action', '/kakaoLogin.ka');
+			var token = document.createElement('input');
+			token.setAttribute('type','hidden');
+			token.setAttribute('name','user_k');
+			token.setAttribute('value',user_k);
+ 			var name = document.createElement('input');
+ 			name.setAttribute('type','hidden');
+ 			name.setAttribute('name','user_name');
+ 			name.setAttribute('value', user_name);
+			frm.append(token, name);
+			document.body.append(frm);
+			frm.submit();	
+		}
+		
+		// 회원가입
+		function createHiddenSignupForm(user_k, user_name, user_id){		
+			var frm = document.createElement('form');
+			frm.setAttribute('method', 'post');
+			frm.setAttribute('action', '/kakaoSignup.ka');
+			var token = document.createElement('input');
+			token.setAttribute('type','hidden');
+			token.setAttribute('name','user_k');
+			token.setAttribute('value',user_k);
+ 			var name = document.createElement('input');
+ 			name.setAttribute('type','hidden');
+ 			name.setAttribute('name','user_name');
+ 			name.setAttribute('value', user_name);
+ 			var id = document.createElement('input');
+ 			id.setAttribute('type','hidden');
+ 			id.setAttribute('name','user_id');
+ 			id.setAttribute('value', user_id);
+			frm.append(token, name, id);
+			document.body.append(frm);
+			frm.submit();	
+		}
 	</script>
 </body>
 

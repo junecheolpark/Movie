@@ -472,17 +472,17 @@
 
                     <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
+                            <a class="nav-link" href="/Member/login.jsp">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">회원가입</a>
+                            <a class="nav-link" href="/signup.mem">회원가입</a>
                         </li>
                     </ul>
 
-                    <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                    <a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="cart">찜한 영화</p>
                     </a>
-                    <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                    <a href="/myPage.mem" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
@@ -534,20 +534,20 @@
                         <div class="col-5">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">로그인</a>
+                                    <a class="nav-link" href="/Member/login.jsp">로그인</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">회원가입</a>
+                                    <a class="nav-link" href="/signup.mem">회원가입</a>
                                 </li>
                             </ul>
                         </div>
 
                         <div class="col-2">
-                            <a href="#" class="align-items-center ">
+                            <a href="/wishlist.wish" class="align-items-center ">
                                 <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                             </a>
-                            <a href="#" class="align-items-center">
+                            <a href="/myPage.mem" class="align-items-center">
                                 <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                             </a>
@@ -614,7 +614,7 @@
                         </div>
                         <div class="movieNameDiv">
                             <span class="movieName">
-                                 <a href="">${movieDTO.movieNm}</a>
+                                 <a href="/detailView.re?movieCd=${movieDTO.movieCd}">${movieDTO.movieNm}</a>
                             </span>
                             <c:if test="${not empty movieDTO.directors}">
                                 <span class="directors">${movieDTO.directors}</span>
@@ -632,7 +632,7 @@
                             </span>
                             <c:forEach items="${points}" var="i">
                                 <c:if test="${i.key eq movieDTO.movieCd}">
-                                        <span class="movieAvgPoint" data-value='${i.value['avg']}'>
+                                        <span class="movieAvgPoint" data-value="${i.value['avg']}">
                                             <fmt:formatNumber value="${i.value['avg']}" type="pattern" pattern="0.00"/> (${i.value['count']})
                                         </span>
                                 </c:if>
@@ -738,19 +738,19 @@
                 <h5>계정</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">로그인</a>
+                        <a href="/Member/login.jsp" class="nav-link p-0">로그인</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">회원가입</a>
+                        <a href="/signup.mem" class="nav-link p-0">회원가입</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">마이페이지</a>
+                        <a href="/myPage.mem" class="nav-link p-0">마이페이지</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">아이디 찾기</a>
+                        <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">비밀번호 찾기</a>
+                        <a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a>
                     </li>
                 </ul>
             </div>
@@ -765,7 +765,7 @@
                         <a href="#" class="nav-link p-0">자유게시판</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0">찜 목록</a>
+                        <a href="/wishlist.wish" class="nav-link p-0">찜 목록</a>
                     </li>
                 </ul>
             </div>

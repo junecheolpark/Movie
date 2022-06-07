@@ -1,18 +1,21 @@
 package com.movieRc.controller;
 
-import com.movieRc.dao.MovieDAO;
-import com.movieRc.dao.ReviewDAO;
-import com.movieRc.dto.MovieDTO;
-import com.movieRc.util.Pagination;
-
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.movieRc.dao.MovieDAO;
+import com.movieRc.dao.ReviewDAO;
+import com.movieRc.dto.MovieDTO;
+import com.movieRc.util.Pagination;
 
 
 @WebServlet("*.movie")
@@ -362,6 +365,37 @@ public class MovieController extends HttpServlet {
 //            } catch (Exception e){
 //                e.printStackTrace();
 //            }
+        }else if(uri.equals("/lib.movie")) {
+        	MovieDAO dao = new MovieDAO();
+        	
+          String[] movieList = request.getParameterValues("lib");
+          List<MovieDTO> dtos = new ArrayList<MovieDTO>();
+          for(int i=0; i<movieList.length; i++) {
+        	  String[] tmp = movieList[i].split("/");
+        	  
+        	  
+        	  MovieDTO dto = new MovieDTO(tmp[0],tmp[1],tmp[2],tmp[3],tmp[4],tmp[5],tmp[6]);
+        	  dtos.add(dto);
+          }
+          
+      
+        	 int rs = dao.insert(dtos);
+        	 
+        	 if(rs == dtos.size()) {
+        		 jsResponse("db 저장 성공","lib.do?mommand=list",response);
+        	 }else {
+        		 jsResponse("db 저장 실패","lib.do?mommand=list",response);
+        	 }
+           
         }
     }
+    private void jsResponse(String msg, String url, HttpServletResponse response)throws IOException{
+    	String alert = "<Script type='text/javascript'>"
+    			+"alert('"+msg+"');"
+    			+"location.href='"+url+"';"
+    			+"</script>";
+    	PrintWriter out = response.getWriter();
+    	out.print(alert);
+    }
 }
+
