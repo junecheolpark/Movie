@@ -278,7 +278,9 @@
     </div>
 </header>
 <%--content--%>
-<div class="content"></div>
+<div class="content">
+
+</div>
 
 <%--footer--%>
 <footer class="py-5 text-light">
