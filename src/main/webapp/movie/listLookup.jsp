@@ -29,7 +29,7 @@
 
         header {
             width: 100%;
-            height: 3.075%;
+            height: 3.6%;
             background-color: black !important;
         }
 

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import com.google.gson.Gson;
 import com.movieRc.dao.PostCommentDAO;
 import com.movieRc.dao.PostDAO;
@@ -118,7 +117,6 @@ public class PostController extends HttpServlet {
 				PostDAO dao= new PostDAO();
 				
 				try {
-				
 				dao.updateView_count(seq_post);
 				PostDTO dto1 =dao.getPost(seq_post);
 				request.setAttribute("dto", dto1);
@@ -127,17 +125,24 @@ public class PostController extends HttpServlet {
 				
 				
 				//좋아요 싫어요개수 얻기
+<<<<<<< HEAD
 
+=======
+>>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
 				int countLike =dao.pLikeCount(seq_post, 1);
 				int countHate =dao.pLikeCount(seq_post, 2);
 				request.setAttribute("countLike", countLike);
 				request.setAttribute("countHate", countHate);
+<<<<<<< HEAD
 
 //				int countLike =dao.pLikeCount(seq_post, 1);
 //				int countHate =dao.pLikeCount(seq_post, 2);
 //				request.setAttribute("countLike", countLike);
 //				request.setAttribute("countHate", countHate);
 
+=======
+          
+>>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
 				request.setAttribute("post_commentList", list);
 				
 				request.getRequestDispatcher("/post/post_detailview.jsp").forward(request, response);
@@ -296,32 +301,35 @@ public class PostController extends HttpServlet {
 				System.out.println("plike.po");
 				PostDAO dao =new PostDAO();
 				int rs =10;
-				
-				try {
-					int curPLikeValue =dao.curPLikeValue(user_id, seq_post);//좋아요1,싫어요2,선택안됨0
-					System.out.println("curPLikeValue의 값은: "+curPLikeValue);
-					if(curPLikeValue == -1) {//값 없음
+				try {//좋아요1,싫어요2,선택안됨0
+					if(dao.curPLikeValue(user_id, seq_post) == -1) {//값 없음
 						dao.insertPostLike(user_id, seq_post, user_category);
+						
 						rs=-1;
 						System.out.println("좋아요");
-					}else if(curPLikeValue == 0) {//0상태
+					}else if(dao.curPLikeValue(user_id, seq_post) == 0) {//0상태
 						rs =dao.updatePostLike(user_id, seq_post, user_category);
 						rs=0;
 						System.out.println("좋아요");
-					}else if(curPLikeValue == 1) {//좋아요 한 상태
+					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//좋아요 한 상태
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
 						rs=1;
 						System.out.println("좋아요 취소");
+<<<<<<< HEAD
 					}else if(curPLikeValue == 2) {//싫어요 한 상태
 						
 						rs =dao.updatePostLike(user_id, seq_post, user_category);
 						rs=2;
 						System.out.println("싫어요 취소");
+=======
+					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//싫어요 한 상태
+						rs=2;
+						rs =dao.updatePostLike(user_id, seq_post, user_category);
+>>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
 						System.out.println("좋아요");
-					}else {
-						System.out.println("잘못실행됨");
 					}
-					String a= Integer.toString(rs);;
+					String a= Integer.toString(rs);
+				;
 					System.out.println("rs :" +a);
 					int likeCount=dao.pLikeCount(seq_post, 1);
 					int hateCount=dao.pLikeCount(seq_post, 2);
@@ -346,16 +354,17 @@ public class PostController extends HttpServlet {
 				PostDAO dao =new PostDAO();
 				int rs =10;
 				try {//좋아요1,싫어요2,선택안됨0
-					int curPLikeValue =dao.curPLikeValue(user_id, seq_post);//좋아요1,싫어요2,선택안됨0
-					System.out.println("curPLikeValue의 값은: "+curPLikeValue);
-					if(curPLikeValue == -1) {//값 없음
+					if(dao.curPLikeValue(user_id, seq_post) == -1) {//값 없음
+					
 						dao.insertPostNotLike(user_id, seq_post, user_category);
 						rs=-1;
-						System.out.println("싫어요 삽입");
-					}else if(curPLikeValue == 0) {//0상태
+						System.out.println("좋아요");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 0) {//0상태
 						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
 						rs=0;
+
 						System.out.println("싫어요");
+<<<<<<< HEAD
 
 					}else if(curPLikeValue == 1) {//좋아요 한 상태
 						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
@@ -377,6 +386,16 @@ public class PostController extends HttpServlet {
 						System.out.println("좋아요 취소");
 						System.out.println("싫어요");
 
+=======
+					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//싫어요 한 상태
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						rs=1;
+						System.out.println("좋아요 취소");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//좋아요 한 상태
+						rs=2;
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+					
+>>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
 					}
 				
 					String a= Integer.toString(rs);

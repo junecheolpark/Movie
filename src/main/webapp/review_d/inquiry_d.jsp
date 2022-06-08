@@ -21,308 +21,369 @@
 	<title>Document</title>
 
 	<style>
-		header, footer {
-			background-color: black;
-		}
+header, footer {
+	background-color: black;
+}
 
-		a {
-			text-decoration: none;
-		}
+a {
+	text-decoration: none;
+}
 
-		.contents {
-			height: 500px;
-		}
+.contents {
+	height: 500px;
+}
 
-		#navLogo {
-			width: 150px;
-			height: 100px;
-		}
+/* header */
+#navLogo {
+	width: 150px;
+	height: 100px;
+}
 
-		#logoImg{
-			width: 100%;
-			height: 100%;
-		}
+#logoImg{
+	width: 100%;
+	height: 100%;
+}
 
-		/* Icon */
-		#cartIcon {
-			width: 30px;
-			height: 30px;
-		}
+/* Icon */
+#cartIcon {
+	width: 30px;
+	height: 30px;
+}
 
-		#myPageIcon {
-			width: 30px;
-			height: 30px;
-		}
+#myPageIcon {
+	width: 30px;
+	height: 30px;
+}
 
-		#kakaoIcon {
-			width: 30px;
-			height: 30px;
-		}
+#kakaoIcon {
+	width: 30px;
+	height: 30px;
+}
 
-		#twitterIcon {
-			width: 30px;
-			height: 30px;
-		}
+#twitterIcon {
+	width: 30px;
+	height: 30px;
+}
 
-		#instagramIcon {
-			width: 30px;
-			height: 30px;
-		}
+#instagramIcon {
+	width: 30px;
+	height: 30px;
+}
 
-		#facebookIcon {
-			width: 30px;
-			height: 30px;
-		}
+#facebookIcon {
+	width: 30px;
+	height: 30px;
+}
 
-		.snsIcon1 {
-			float: left;
-			margin-top: 10px;
-			margin-right: 5px;
-		}
+.snsIcon1 {
+	float: left;
+	margin-top: 10px;
+	margin-right: 5px;
+}
 
-		.snsIcon2 {
-			float: left;
-			margin-top: 10px;
-			margin-right: 5px;
-		}
+.snsIcon2 {
+	float: left;
+	margin-top: 10px;
+	margin-right: 5px;
+}
 
-		.snsIcon3 {
-			float: left;
-			margin-top: 10px;
-			margin-right: 5px;
-		}
+.snsIcon3 {
+	float: left;
+	margin-top: 10px;
+	margin-right: 5px;
+}
 
-		.snsIcon4 {
-			float: left;
-			margin-top: 10px;
-		}
-		/* Icon end */
+.snsIcon4 {
+	float: left;
+	margin-top: 10px;
+}
+/* Icon end */
 
-		/* Footer */
-		.nav-link {
-			color: gray;
-			text-decoration: none;
-		}
+/* Footer */
+.nav-link {
+	color: gray;
+	text-decoration: none;
+}
 
-		.nav-link:hover {
-			color: white;
-		}
+.nav-link:hover {
+	color: white;
+}
 
-		/* header 반응형 */
-		@media ( max-width : 767px) {
-			#navLogo {
-				display: none;
-			}
-			#myPageIcon {
-				display: none;
-			}
-			#cartIcon {
-				display: none;
-			}
-			#menu {
-				display: none;
-			}
-		}
+/* header 반응형 */
+@media ( max-width : 767px) {
+	#navLogo {
+		display: none;
+	}
+	#myPageIcon {
+		display: none;
+	}
+	#cartIcon {
+		display: none;
+	}
+	#menu {
+		display: none;
+	}
+}
 
-		@media (min-width : 768px) {
-			#navibar {
-				display: none;
-			}
-		}
+@media (min-width : 768px) {
+	#navibar {
+		display: none;
+	}
+}
+/* header 반응형 끝 */
 
-		textarea {
-			resize: none;
-		}
 
-		a {
-			text-decoration: none;
-			font-weight: bold;
-			color: black;
-		}
+/* -----------------------------------------------------------*/
+textarea {
+	resize: none;
+}
 
-		body {
-			background-color: rgb(213, 226, 228);
-		}
+a {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
 
-		/* -----------------------------------------------------------*/
-		/* 왼쪽 영화 이미지 */
-		.movie_box {
-			background-color: white;
-			/* height:calc(100vh - 400px); */
-			height: 70%;
-			border-radius: 10px;
-		}
+body {
+	background-color: rgb(213, 226, 228);
+}
 
-		.m_genre {
-			font-size: 12px;
-		}
+/* 왼쪽 영화 이미지 */
+.movie_box {
+	background-color: white;
+	/* height:calc(100vh - 400px); */
+	height: 70%;
+	border-radius: 10px;
+}
 
-		.movie_img {
-			height: 75%;
-			background-color: #ccc;
-			border-radius: 10px;
-		}
+.m_genre {
+	font-size: 12px;
+}
 
-		/* -----------------------------------------------------------*/
-		/* 영화 코멘트 */
-		.movie_coment {
-			background-color: white;
-			border-radius: 10px;
-		}
+.movie_img {
+	height: 75%;
+	background-color: #ccc;
+	border-radius: 10px;
+}
 
-		.content-movie {
-			height: 200px;
-			border: none;
-		}
+/* -----------------------------------------------------------*/
+/* 영화 코멘트 */
+.movie_coment {
+	background-color: white;
+	border-radius: 10px;
+}
 
-		/* -----------------------------------------------------------*/
-		/* 평점, 리뷰등록 */
-		#divWrite {
-			display: none;
-		}
+.content-movie {
+	height: 200px;
+	border: none;
+}
 
-		.form-control[readonly] {
-			background-color: transparent;
-		}
+/* -----------------------------------------------------------*/
+/* 평점, 리뷰등록 */
+#divWrite {
+	display: none;
+}
 
-		#t_r_grade {
-			display: none;
-		}
+.form-control[readonly] {
+	background-color: transparent;
+}
 
-		.r_grade_box {
-			font-size: 12px;
-		}
+#t_r_grade {
+	display: none;
+}
 
-		.btnWrite {
-			background-color: rgb(197, 192, 192);
-		}
+.r_grade_box {
+	font-size: 12px;
+}
 
-		/* 별점 Write */
-		.star-rating {
-			/* border: solid 1px #ccc; */
-			display: inline-flex;
-			flex-direction: row-reverse;
-			font-size: 1.2em;
-			justify-content: space-around;
-			padding: 0 .2em;
-			text-align: center;
-			width: 5em;
-		}
+.btnWrite {
+	background-color: rgb(197, 192, 192);
+}
 
-		.star-rating input {
-			display: none;
-		}
+/* 별점 Write */
+.star-rating {
+	/* border: solid 1px #ccc; */
+	display: inline-flex;
+	flex-direction: row-reverse;
+	font-size: 1.2em;
+	justify-content: space-around;
+	padding: 0 .2em;
+	text-align: center;
+	width: 5em;
+}
 
-		.star-rating label {
-			color: #ccc;
-			cursor: pointer;
-		}
+.star-rating input {
+	display: none;
+}
 
-		.star-rating :checked ~label {
-			color: rgb(0, 0, 0);
-		}
+.star-rating label {
+	color: #ccc;
+	cursor: pointer;
+}
 
-		.star-rating label:hover, .star-rating label:hover ~label {
-			color: #fc0;
-		}
+.star-rating :checked ~label {
+	color: rgb(0, 0, 0);
+}
 
-		/* -----------------------------------------------------------*/
-		/* 리플 박스 */
-		#r_date {
-			color: rgb(173, 164, 164);
-			font-size: small;
-		}
+.star-rating label:hover, .star-rating label:hover ~label {
+	color: #fc0;
+}
 
-		#btnLikeUp2 {
-			z-index: 1;
-		}
+/* -----------------------------------------------------------*/
+/* 리플 박스 */
+#r_date {
+	color: rgb(173, 164, 164);
+	font-size: small;
+}
 
-		#btnHateUp2 {
-			z-index: 1;
-		}
+#btnLikeUp2 {
+	z-index: 1;
+}
 
-		.reply_box {
-			background-color: white;
-			border-radius: 10px;
-		}
+#btnHateUp2 {
+	z-index: 1;
+}
 
-		.btnModify {
-			border: none;
-		}
+.reply_box {
+	background-color: white;
+	border-radius: 10px;
+}
 
-		.Profile {
-			margin: auto;
-			background-color: rgb(165, 162, 162);
-			width: 70px;
-			height: 70px;
-			border-radius: 35px;
-		}
+.btnModify {
+	border: none;
+}
 
-		.content-reply {
-			border: none;
-		}
+.Profile {
+	margin: auto;
+	background-color: rgb(165, 162, 162);
+	width: 70px;
+	height: 70px;
+	border-radius: 35px;
+}
 
-		/* 좋아요 라운드 */
-		.like_round {
-			background-color: rgb(197, 192, 192);
-			height: 30px;
-			border-radius: 15px;
-		}
+.content-reply {
+	border: none;
+}
 
-		/* 별점 reply */
-		#r_grade_star2 {
-			display: none;
-		}
+/* 좋아요 라운드 */
+.like_round {
+	background-color: rgb(197, 192, 192);
+	height: 30px;
+	border-radius: 15px;
+}
 
-		.reply-star-rating1 {
-			/* border: solid 1px #ccc; */
-			display: inline-flex;
-			flex-direction: row-reverse;
-			font-size: 1.1em;
-			justify-content: space-around;
-			padding: 0 em;
-			text-align: center;
-			width: em;
-		}
+/* 별점 reply */
+#r_grade_star2 {
+	display: none;
+}
 
-		.reply-star-rating {
-			/* border: solid 1px #ccc; */
-			display: inline-flex;
-			flex-direction: row-reverse;
-			font-size: 1.1em;
-			justify-content: space-around;
-			padding: 0 em;
-			text-align: center;
-			width: em;
-		}
+.reply-star-rating1 {
+	/* border: solid 1px #ccc; */
+	display: inline-flex;
+	flex-direction: row-reverse;
+	font-size: 1.1em;
+	justify-content: space-around;
+	padding: 0 em;
+	text-align: center;
+	width: em;
+}
 
-		.reply-star-rating1 #r_star {
-			color: #ccc;
-		}
+.reply-star-rating {
+	/* border: solid 1px #ccc; */
+	display: inline-flex;
+	flex-direction: row-reverse;
+	font-size: 1.1em;
+	justify-content: space-around;
+	padding: 0 em;
+	text-align: center;
+	width: em;
+}
 
-		.reply-star-rating input {
-			display: none;
-		}
+.reply-star-rating1 #r_star {
+	color: #ccc;
+}
 
-		.reply-star-rating label {
-			color: #ccc;
-			cursor: pointer;
-		}
+.reply-star-rating input {
+	display: none;
+}
 
-		.reply-star-rating :checked ~label {
-			color: rgb(0, 0, 0);
-		}
+.reply-star-rating label {
+	color: #ccc;
+	cursor: pointer;
+}
 
-		.reply-star-rating label:hover, .reply-star-rating label:hover ~label {
-			color: #fc0;
-		}
+.reply-star-rating :checked ~label {
+	color: rgb(0, 0, 0);
+}
 
-		/* -----------------------------------------------------------*/
+.reply-star-rating label:hover, .reply-star-rating label:hover ~label {
+	color: #fc0;
+}
 
-	</style>
+/* -----------------------------------------------------------*/
+
+/* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
+        https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
+/* 반응형 시작 */
+@media screen and (max-width: 1200px) {
+	aside#aside{
+		width: 25%;
+	}
+	div.body-wishList{
+		width: 75%;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	aside#aside{
+		display: none;
+	}
+	div.body-wishList{
+		width: 100%;
+	}
+	
+	aside#asideSM{
+		display: block;
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	aside#asideSM{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	aside#asideSM div#profileBox {
+		display: none;
+		width: 50%
+	}
+	aside#asideSM div#profileBtnBox {
+		display: none;
+	}
+	/* aside#asideSM div#profileBtnBoxSM {
+		display: block;
+	} */
+	
+	div.body-wishList {
+		width: 100%;
+		float: none;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	aside#asideSM div#profileBtnBoxSM {
+		display: none;
+	}
+} 
+/* 반응형 끝 */
+</style>
+
 </head>
 
 <body>
+
 
 <!-- Header -->
 <header class="mb-3 border-bottom">
@@ -336,109 +397,122 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<!-- 메뉴 -->
-				<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-					<ul class="navbar-nav mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
-						<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
-						<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-						<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
-					</ul>
+					<!-- 메뉴 -->
+					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+						<ul class="navbar-nav mb-2 mb-lg-0">
+							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
+							<c:choose>
+						      <c:when test="${not empty loginSession}">
+						        <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+								<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+						      </c:when>
+						      <c:otherwise>
+						     	 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+							   	<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+						      </c:otherwise>
+						    </c:choose>
+							
+							
+						</ul>
 
-					<form class="searchForm d-flex" action="/search.movie">
-						<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
-						<input type="hidden" name = 'curPage' value="1">
-						<input type="hidden" name = 's_type' value="movieNm">
-						<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
-					</form>
-				</div>
-			</div>
-		</nav>
-
-		<!-- 펼쳐졌을 때 nav -->
-		<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
-			<div class="row w-100 align-items-center">
-				<div class="col-5 d-flex justify-content-center">
-					<ul class="navbar-nav mb-2 mb-lg-0">
-						<li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
-						<li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-						<li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
-					</ul>
-				</div>
-
-				<!-- logo -->
-				<div class="col-2">
-					<a href="/home" id="navLogo" class="mb-2 mb-lg-0">
-						<img id="logoImg" src="/images/logo3.png">
-					</a>
-				</div>
-
-				<div class="col-5">
-					<div class="row align-items-center justify-content-center">
-						<div class="col-auto">
-							<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-								<li class="nav-item">
-									<a class="nav-link" href="/Member/login.jsp">로그인</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="/Member/signup.jsp">회원가입</a>
-								</li>
-
-							</ul>
-						</div>
-
-						<div class="col-auto">
-							<a href="/wishlist.wish" class="">
-								<img class="img-fluid" id="cartIcon" src="/images/찜.png">
-							</a>
-							<a href="/Mypage/mypageIndex.jsp" class="">
-								<img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
-							</a>
-						</div>
-
-						<div class="col-1">
-							<button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
-								<img src="/images/searchIcon.png">
-							</button>
-						</div>
-
-						<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title m-auto">영화 찾기</h5>
-										<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										<form id="searchForm" class="searchForm" action="/search.movie">
-											<div class="row justify-content-center">
-												<div class="col-11">
-													<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
-													<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
-													<input type="hidden" name = 'curPage' value="1">
-													<input type="hidden" name = 's_type' value="movieNm">
-												</div>
-											</div>
-											<div class="row justify-content-end">
-												<div class="col-3">
-													<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-
+						<form class="searchForm d-flex" method="get" action="/search.movie">
+							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
+							<input type="hidden" name = 'curPage' value="1">
+							<input type="hidden" name = 's_type' value="movieNm">
+							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+						</form>
 					</div>
 				</div>
-			</div>
-		</nav>
-	</div>
-</header>
+			</nav>
+			
+			<!-- 펼쳐졌을 때 nav -->
+			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
+				<div class="row w-100 align-items-center">
+					<div class="col-5 d-flex justify-content-center">
+						<ul class="navbar-nav mb-2 mb-lg-0">
+							<li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/post/post.jsp">자유게시판</a></li>
+						</ul>
+					</div>
+
+					<!-- logo -->
+					<div class="col-2">
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0">
+							<img id="logoImg" src="/images/logo3.png">
+						</a>
+					</div>
+
+					<div class="col-5">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-auto">
+								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
+									<c:if test="${empty loginSession}">
+										<li class="nav-item">
+											<a class="nav-link" href="/Member/login.jsp">로그인</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="/Member/signup.jsp">회원가입</a>
+										</li>
+									</c:if>
+								</ul>
+							</div>
+
+							<div class="col-auto"> 
+								<c:if test="${not empty loginSession}">
+									<a href="/wishlist.wish" class="">
+										<img class="img-fluid" id="cartIcon" src="/images\찜.png">
+									</a>
+									<a href="" class="">
+										<img class="img-fluid" id="myPageIcon" src="/images\마이페이지.png">
+									</a>
+								</c:if>
+							</div>
+
+							<div class="col-1">
+								<button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+									<img src="/images/searchIcon.png">
+								</button>
+							</div>
+							<form class="searchForm d-flex" method="get" action="/search.movie">
+								<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title m-auto">영화 찾기</h5>
+												<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form id="searchForm" class="searchForm">
+													<div class="row justify-content-center">
+														<div class="col-11">
+															<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
+															<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+															<input type="hidden" name = 'curPage' value="1">
+															<input type="hidden" name = 's_type' value="movieNm"> 
+														</div>
+													</div>
+													<div class="row justify-content-end">
+														<div class="col-3">
+															<button class="searchBtn btn btn-outline-success" type="submit">Search</button>			
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+
 
 
 <!-- Contents -->
@@ -484,9 +558,7 @@
 						찜
 					</button>
 				</div>
-				<div class="col-1">
-
-				</div>
+				
 				<div class="col-lg-5 col-7 text-center like_round">
                         <span><img src="images/heart.png"> ${m_like_count}
                         </span>
@@ -587,7 +659,7 @@
 							<div class="col-10">
 								<div class="row mb-1">
 									<!-- 닉네임 -->
-									<div class="col-6 ms-2 mt-1">${review.user_nickname}</div>
+									<div class="col-6 ms-2 mt-1 fw-bolder">${review.user_nickname}</div>
 									<div class="col-4 text-end r_grade">
 										<input type=text id="t_r_grade" value="${review.r_grade}">
 										<!-- 별점 표시 if문 -->

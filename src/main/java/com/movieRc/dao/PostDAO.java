@@ -240,6 +240,7 @@ public class PostDAO {
 		}
 	}
 
+
 	// 선택안함 =0,좋아요=1,싫어요=2
 	//좋아요 싫어요 구간
 
@@ -263,17 +264,16 @@ public class PostDAO {
 	public int insertPostLike (String user_id, int seq_post, String user_category) throws Exception {
 		String sql = "insert into tbl_like_p values(seq_like.nextval,1,?,?,?)";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
-			
-				pstmt.setString(1, user_id);
-				pstmt.setInt(2, seq_post);
-				pstmt.setString(3, user_category);
-				int rs = pstmt.executeUpdate();
 
-				return rs;
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, seq_post);
+			pstmt.setString(3, user_category);
+			int rs = pstmt.executeUpdate();
+
+			return rs;
 
 
 		}
-
 	}
 
 	
