@@ -16,7 +16,7 @@ import com.movieRc.dto.MovieDTO;
 import com.movieRc.util.Pagination;
 
 
-@WebServlet("/home")
+@WebServlet("*.home")
 
 
 public class HomeController extends HttpServlet {

@@ -564,7 +564,7 @@ body {
                     <div class="col-lg-5 col-7 text-center like_round">
                         <span>
                             <img src="images/heart.png">
-                            458</span>
+                            수정</span>
                     </div>
                 </div>
 
