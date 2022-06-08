@@ -196,9 +196,17 @@
                     <p class="text-light" id="myPage">마이페이지</p>
                 </a>
 
+<<<<<<< HEAD
                     <form class="d-flex">
                         <input class="form-control me-2" type="search"
                                placeholder="Search" aria-label="Search">
+=======
+                    <form class="searchForm d-flex">
+                        <input class="searchInput form-control me-2" type="search"
+                               placeholder="Search" aria-label="Search" name ='val'>
+                        <input type="hidden" name = 'curPage' value="1">
+                        <input type="hidden" name = 's_type' value="movieNm">
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
 
@@ -249,9 +257,17 @@
                         </a>
                         </div>
                         <div class="col-5">
+<<<<<<< HEAD
                             <form class="d-flex">
                                 <input class="form-control me-2" type="search"
                                        placeholder="Search" aria-label="Search">
+=======
+                            <form class="searchForm d-flex">
+                                <input class="searchInput form-control me-2" type="search"
+                                       placeholder="Search" aria-label="Search" name = 'val'>
+                                <input type="hidden" name = 'curPage' value="1">
+                                <input type="hidden" name = 's_type' value="movieNm">
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
@@ -400,6 +416,18 @@
 </footer>
 
 <script>
+<<<<<<< HEAD
+=======
+
+    const searchForm = $(".searchForm");
+    searchForm.on("submit", function (event) {
+        if ($(this).children(".searchInput").val() === "") {
+            event.preventDefault();
+            alert("검색어를 입력하세요");
+        }
+    });
+
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
     $("#findIdBtn").on("click", function () {
         if ($("#user_name").val() === "") {
             alert("이름을 입력해 주세요.");

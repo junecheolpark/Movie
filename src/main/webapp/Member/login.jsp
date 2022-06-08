@@ -159,69 +159,62 @@ a {
 
 <body>
 	<!-- Header -->
-	<header class="mb-3 border-bottom">
+<header class="mb-3 border-bottom">
 		<div class="container">
-			<nav id="navibar" class="navbar navbar-expand-lg navbar-dark"
-				aria-label="Main navigation">
+			<nav id="navibar" class="navbar navbar-expand-lg navbar-dark" aria-label="Main navigation">
 				<div class="container-fluid">
 					<!-- toggle button -->
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-						aria-controls="navbarNavDropdown" aria-expanded="false"
-						aria-label="Toggle navigation">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+						aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
 					<!-- 메뉴 -->
-					<div class="collapse navbar-collapse justify-content-end"
-						id="navbarNavDropdown">
+					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
 						</ul>
 
 						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
 						</ul>
 
 
-						<a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+						<a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
 							<p class="text-light" id="cart">찜한 영화</p>
-						</a> <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+						</a> <a href="/Mypage/mypageIndex.jsp" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
 							<p class="text-light" id="myPage">마이페이지</p>
 						</a>
 
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
+						<form class="searchForm d-flex" method="get" action="/search.movie">
+							<input class="searchInput form-control me-2" type="search" name='val' placeholder="Search" aria-label="Search"> 
+							<input type="hidden" name='curPage' value="1"> 
+							<input type="hidden" name='s_type' value="movieNm">
+							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
 
 					</div>
 				</div>
 			</nav>
 
-			<nav id="menu" class="navbar navbar-expand-lg w-100 navbar-dark"
-				aria-label="Main navigation">
+			<nav id="menu" class="navbar navbar-expand-lg w-100 navbar-dark" aria-label="Main navigation">
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
+							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
 						</ul>
 
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/"
-							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-							<img id="navLogo" src="/resources/images/logo3.png">
+						<a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0"> <img id="navLogo"
+							src="images/logo3.png">
 						</a>
 					</div>
 
@@ -229,31 +222,37 @@ a {
 						<div class="row">
 							<div class="col-5">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<li class="nav-item"><a class="nav-link" href="#">로그인</a>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="#">회원가입</a>
-									</li>
+									<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="/signup.mem">회원가입</a></li>
 								</ul>
 							</div>
 
 							<div class="col-2">
-								<a href="" class="align-items-center "> <img
-									class="img-fluid" id="cartIcon"
-									src="/resources/images/basket.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
-								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon"
-									src="/resources/images/myPage.png"> <!-- <p class="text-light" id="myPage">마이페이지</p> -->
+								<a href="" class="align-items-center "> <img class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
+								</a> <a href="" class="align-items-center"> <img class="img-fluid" id="myPageIcon" src="images\마이페이지.png"> <!-- <p class="text-light" id="myPage">마이페이지</p> -->
 								</a>
 							</div>
 							<div class="col-5">
-								<form class="d-flex">
-									<input class="form-control me-2" type="search"
-										placeholder="Search" aria-label="Search">
-									<button class="btn btn-outline-success" type="submit">Search</button>
+								<form class="searchForm d-flex" method="get" action="/search.movie">
+									<input
+											class="searchInput form-control me-2"
+											type="search"
+											placeholder="Search"
+											aria-label="Search"
+											name="val">
+									<input type="hidden" name = 'curPage' value="1">
+									<input type="hidden" name = 's_type' value="movieNm">
+									<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 								</form>
 							</div>
+
 						</div>
+
+
+
+
 					</div>
+
 				</div>
 			</nav>
 		</div>
@@ -276,7 +275,7 @@ a {
 								<p>ID*</p>
 								<div>
 									<input type="text" class="form-control" id="user_id"
-										name="user_id" placeholder="ID">
+										name="user_id" placeholder="ID" >
 								</div>
 								<div class="form-text">
 									*이메일 형식으로 입력해 주세요.
@@ -286,7 +285,7 @@ a {
 								<p>PW*</p>
 								<div>
 									<input type="password" class="form-control " id="user_pw"
-										name="user_pw" placeholder="PW">
+										name="user_pw" placeholder="PW" >
 								</div>
 							</div>
 							<div class="row p-3 justify-content-center">
@@ -420,6 +419,15 @@ a {
 		</div>
 	</footer>
 	<script>
+
+		const searchForm = $(".searchForm");
+		searchForm.on("submit", function (event) {
+			if ($(this).children(".searchInput").val() === "") {
+				event.preventDefault();
+				alert("검색어를 입력하세요");
+			}
+		});
+
 		// 일반 로그인
 		let regexId = /^[a-zA-Z][\w]+@[a-zA-Z]+\.(com|net|co\.kr|or\.kr)$/;
 		let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,12}/;
@@ -429,19 +437,22 @@ a {
 				alert("아이디를 입력해 주세요.");
 				$('#user_id').focus();
 				return;
-			} else if (!regexId.test($("#user_id").val())){
+			} 
+			/**/else if (!regexId.test($("#user_id").val())){
 				alert("아이디를 정확히 입력해 주세요.")
 				$('#user_id').focus();
 				return;
-			} else if($("#user_pw").val() === ""){
+			} /**/
+			else if($("#user_pw").val() === ""){
 				alert("비밀번호를 입력해 주세요.");
 				$('#user_pw').focus();
 				return;
-			} else if (!regexPw.test($("#user_pw").val())){
+			} 
+			/**/else if (!regexPw.test($("#user_pw").val())){
 				alert("비밀번호를 정확히 입력해 주세요.")
 				$('#user_id').focus();
 				return;
-			}
+			}/**/
 			$("#loginForm").submit();
 		})
 		

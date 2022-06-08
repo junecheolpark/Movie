@@ -51,15 +51,15 @@ a {
 	height: 30px;
 }
 
-#calendarIcon {
-	width: 30px;
-	height: 30px;
+/* #calendarIcon {
+	width: 25px;
+	height: 25px;
 }
 
 #humanIcon {
-	width: 30px;
-	height: 30px;
-}
+	width: 25px;
+	height: 25px;
+} */
 
 #kakaoIcon {
 	width: 30px;
@@ -288,6 +288,7 @@ section#container::after {
 							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+<<<<<<< HEAD
 							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">찜한 영화</a></li>
@@ -297,6 +298,19 @@ section#container::after {
 						<form class="d-flex">
 							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 							<button class="btn btn-outline-success" type="submit">Search</button>
+=======
+							<li class="nav-item"><a class="nav-link" href="Member/login.jsp">로그인</a></li>
+							<li class="nav-item"><a class="nav-link" href="Member/signup.jsp">회원가입</a></li>
+							<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+						</ul>
+
+						<form class="searchForm d-flex">
+							<input class="searchInput form-control me-2" type="search" placeholder="Search" aria-label="Search" name ='val'>
+							<input type="hidden" name = 'curPage' value="1">
+							<input type="hidden" name = 's_type' value="movieNm">
+							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 						</form>
 					</div>
 				</div>
@@ -306,11 +320,16 @@ section#container::after {
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
+<<<<<<< HEAD
 							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+=======
+							<li class="nav-item"><a class="nav-link px-4" href="#">영화</a></li>
+							<li class="nav-item"><a class="nav-link px-4" href="#">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link px-4" href="#">자유게시판</a></li>
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 						</ul>
-
 					</div>
 
 					<!-- logo -->
@@ -322,29 +341,55 @@ section#container::after {
 
 					<div class="col-5">
 						<div class="row">
-							<div class="col-5">
+							<div class="col-4">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 									<li class="nav-item">
+<<<<<<< HEAD
 										<a class="nav-link" href="#">로그인</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="#">회원가입</a>
+=======
+										<a class="nav-link" href="Member/login.jsp">로그인</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="Member/signup.jsp">회원가입</a>
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 									</li>
 								</ul>
 							</div>
 
+<<<<<<< HEAD
 							<div class="col-2">
 								<a href="" class="align-items-center ">
+=======
+							<div class="col-3">
+								<a href="/wishlist.wish" class="align-items-center ">
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 									<img class="img-fluid" id="cartIcon" src="images\찜.png">
 								</a>
 								<a href="" class="align-items-center">
 									<img class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
 								</a>
 							</div>
+<<<<<<< HEAD
 							<div class="col-5">
 								<form class="d-flex">
 									<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 									<button class="btn btn-outline-success" type="submit">Search</button>
+=======
+
+							<div class="col-4">
+								<form class="searchForm d-flex">
+<!-- 							
+                  <input class="searchInput form-control me-2" type="search" placeholder="Search" aria-label="Search" name ='val'>
+                  <input type="hidden" name = 'curPage' value="1">
+									<input type="hidden" name = 's_type' value="movieNm"> 
+-->
+									<button class="btn" type="submit">
+										<img src="images/searchIcon.png">
+									</button>
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 								</form>
 							</div>
 						</div>
@@ -472,11 +517,25 @@ section#container::after {
 			                                    		<p class="mb-0 text-secondary">${wishList.prdtYear}년 개봉</p>
 						                			</div>
 						                			<div class="imgBtn">
+<<<<<<< HEAD
 						                				<button type="button" class="btn btn-warning mb-2">리뷰보기</button>
+=======
+						                				<button type="button" class="reviewBtn btn btn-warning mb-2" value="${wishList.movieCd}">리뷰보기</button>
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 			                                			<button type="button" class="deleteWish btn btn-secondary mb-2" value="${wishList.seq_basket}">삭제하기</button>
 						                			</div>
 			                            		</div>
 			                        		</c:forEach>
+<<<<<<< HEAD
+=======
+			                        		
+			                        		
+											<script>
+												$(".reviewBtn").on("click", function(){
+													location.href = "/detailView.re?movieCd="+$(this).val();
+												})
+											</script>
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 			                    		</div>
 									</c:otherwise>						
 								</c:choose>
@@ -616,7 +675,13 @@ section#container::after {
 	</footer>
 
 	<script>
-	
+		const searchForm = $(".searchForm");
+		searchForm.on("submit", function (event) {
+			if ($(this).children(".searchInput").val() === "") {
+				event.preventDefault();
+				alert("검색어를 입력하세요");
+			}
+		});
 		function sortWish(option){
 			let url;
 			if(option == 1){ //등록순
@@ -737,6 +802,7 @@ section#container::after {
 				$(".body-wishList").append(rs);
 			}
 		}
+		
 	</script>
 </body>
 </html>

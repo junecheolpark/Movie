@@ -241,11 +241,17 @@
                             <p class="text-light" id="myPage">마이페이지</p>
                         </a>
 
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        <form class="searchForm d-flex" method="get" action="/search.movie">
+                            <input
+                                    class="searchInput form-control me-2"
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"
+                                    name="val">
+                            <input type="hidden" name = 'curPage' value="1">
+                            <input type="hidden" name = 's_type' value="movieNm">
+                            <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                         </form>
-
                     </div>
                 </div>
             </nav>
@@ -270,7 +276,7 @@
                     <!-- logo -->
                     <div class="col-2">
                         <a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-                            <img id="navLogo" src="/movie/images/logo3.png">
+                            <img id="navLogo" src="/images/logo3.png">
                         </a>
                     </div>
 
@@ -289,20 +295,26 @@
 
                             <div class="col-2">
                                 <a href="" class="align-items-center ">
-                                    <img class="img-fluid" id="cartIcon" src="\Movie\images\찜.png">
+                                    <img class="img-fluid" id="cartIcon" src="\images\찜.png">
                                     <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                                 </a>
                                 <a href="" class="align-items-center">
-                                    <img class="img-fluid" id="myPageIcon" src="\Movie\images\마이페이지.png">
+                                    <img class="img-fluid" id="myPageIcon" src="\images\마이페이지.png">
                                     <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                                 </a>
                             </div>
                             <div class="col-5">
-                                <form class="d-flex">
-                                    <input class="form-control me-2" type="search" placeholder="Search"
-                                        aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
-                                </form>
+                                <<form class="searchForm d-flex" method="get" action="/search.movie">
+                                <input
+                                        class="searchInput form-control me-2"
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search"
+                                        name="val">
+                                <input type="hidden" name = 'curPage' value="1">
+                                <input type="hidden" name = 's_type' value="movieNm">
+                                <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -491,7 +503,15 @@
         </div>
 
     </footer>
-
+    <script>
+        const searchForm = $(".searchForm");
+        searchForm.on("submit", function (event) {
+            if ($(this).children(".searchInput").val() === "") {
+                event.preventDefault();
+                alert("검색어를 입력하세요");
+            }
+        });
+    </script>
 </body>
 
 </html>

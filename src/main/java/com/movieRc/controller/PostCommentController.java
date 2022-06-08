@@ -27,12 +27,20 @@ public class PostCommentController extends HttpServlet {
 		}
 		protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			//로그인세션 (참고용)
+<<<<<<< HEAD
 			/*
 			 * HttpSession session=request.getSession(); MemberDTO dto = new
 			 * MemberDTO("abc123", "kakao", "k","abc123","뚱이", "김뚱이", 198084,
 			 * "010-151","서울시우체국","국도123","우리집앞", "내친구집","3학년");
 			 * session.setAttribute("loginSession", dto);
 			 */
+=======
+			HttpSession session=request.getSession();
+			MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
+					"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
+					"내친구집","3학년");
+			session.setAttribute("loginSession", dto);
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 			
 			
 			String uri =request.getRequestURI();
@@ -40,10 +48,16 @@ public class PostCommentController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			if(uri.equals("/insert.co")) {//post_comment 삽입 
 				int seq_post=Integer.parseInt(request.getParameter("seq_post"));
+<<<<<<< HEAD
 				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
 				String user_nickname=dto1.getUser_nickname();
 				String user_id= dto1.getUser_id();
 				String comment_content =request.getParameter("comment_content");
+=======
+				String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
+				String comment_content =request.getParameter("comment_content");
+				String user_id=((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 				
 				PostCommentDAO dao =new PostCommentDAO();
 				try {

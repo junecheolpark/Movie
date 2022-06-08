@@ -1,8 +1,5 @@
 package com.movieRc.controller;
 
-import com.movieRc.dao.MemberDAO;
-import com.movieRc.dto.MemberDTO;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;

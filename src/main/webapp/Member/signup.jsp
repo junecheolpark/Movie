@@ -196,10 +196,16 @@ a {
 							<p class="text-light" id="myPage">마이페이지</p>
 						</a>
 
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
+						<form class="searchForm d-flex" method="get" action="/search.movie">
+							<input
+									class="searchInput form-control me-2"
+									type="search"
+									placeholder="Search"
+									aria-label="Search"
+									name="val">
+							<input type="hidden" name = 'curPage' value="1">
+							<input type="hidden" name = 's_type' value="movieNm">
+							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
 
 					</div>
@@ -248,11 +254,17 @@ a {
 								</a>
 							</div>
 							<div class="col-5">
-								<form class="d-flex">
-									<input class="form-control me-2" type="search"
-										placeholder="Search" aria-label="Search">
-									<button class="btn btn-outline-success" type="submit">Search</button>
-								</form>
+								<<form class="searchForm d-flex" method="get" action="/search.movie">
+								<input
+										class="searchInput form-control me-2"
+										type="search"
+										placeholder="Search"
+										aria-label="Search"
+										name="val">
+								<input type="hidden" name = 'curPage' value="1">
+								<input type="hidden" name = 's_type' value="movieNm">
+								<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+							</form>
 							</div>
 						</div>
 					</div>
@@ -518,6 +530,14 @@ a {
 	</footer>
 
 	<script>
+		const searchForm = $(".searchForm");
+		searchForm.on("submit", function (event) {
+			if ($(this).children(".searchInput").val() === "") {
+				event.preventDefault();
+				alert("검색어를 입력하세요");
+			}
+		});
+
 		// 일반 가입
 		$("#signupBtn").on("click", function() {
 			let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,12}/; // 비밀번호 정규식
