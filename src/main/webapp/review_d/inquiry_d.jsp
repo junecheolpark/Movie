@@ -513,9 +513,15 @@ body {
 						<c:if test="${not empty reviewList}" var="review">
 							<div class="col-5 pe-5 text-end">
 								<%--<a href="#">&#9786공감순</a> --%>
+<<<<<<< HEAD
+								<a href="/highGrade.re?movieCd=${moviedto.movieCd}" class="highGrade">&#9734높은평점순</a> 
+								<a href="/lowGrade.re?movieCd=${moviedto.movieCd}" class="lowGrade">&#9734낮은평점순</a> 
+								<a href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
+=======
 								<a href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=high" class="highGrade">&#9734높은평점순</a> <a
 									href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=low" class="lowGrade">&#9734낮은평점순</a> <a
 									href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 
 							</div>
 						</c:if>
@@ -1156,6 +1162,20 @@ body {
 
 	</footer>
 	<script>
+<<<<<<< HEAD
+	/*
+		$(".lowGrade").on("click", function() { // 낮은 평점
+			location.href = "/lowGrade.re";
+		});
+
+		$(".highGrade").on("click", function() { // 높은 평점
+			location.href = "/highGrade.re";
+		});
+		$(".newGrade").on("click", function() { // 높은 평점
+			location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
+		});
+*/
+=======
 		/*
 			$(".lowGrade").on("click", function() { // 낮은 평점
 				location.href = "/lowGrade.re";
@@ -1168,6 +1188,7 @@ body {
 				location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
 			});
 		 */
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 		$("#btnWrite").on(
 				"click",
 				function() {

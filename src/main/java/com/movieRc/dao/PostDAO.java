@@ -151,6 +151,13 @@ public class PostDAO {
 	}
 
 	// 포스트 수정함수
+	public int postModify(int seq_post, String p_content) throws Exception {
+		String sql = "update tbl_post set p_content=? where seq_post = ?";
+
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+			pstmt.setString(1, p_content);
+			pstmt.setInt(2, seq_post);
 	public int postModify(int seq_post,String p_title, String p_content) throws Exception {
 		String sql = "update tbl_post set p_title=?,p_content=? where seq_post = ?";
 
@@ -240,8 +247,10 @@ public class PostDAO {
 		}
 	}
 
+	// 선택안함 =0,좋아요=1,싫어요=2
+	public int postLike(String user_id, int seq_post, String user_category) throws Exception {
+		String sql = "select count(*) from tbl_like_p where user_id=? AND seq_post=? ";
 	//좋아요 싫어요 구간
-	
 	
 	public int curPLikeValue(String user_id, int seq_post) throws Exception{
 		String sql = "select p_like_check from tbl_like_p where user_id=? AND seq_post=? ";
@@ -249,6 +258,25 @@ public class PostDAO {
 			pstmt.setString(1, user_id);
 			pstmt.setInt(2, seq_post);
 			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+
+			if (count == 1) {
+				sql = "update tbl_like_p set p_like_check=1 where user_id=? AND seq_post=?";
+				pstmt.setString(1, user_id);
+				pstmt.setInt(2, seq_post);
+				int rs1 = pstmt.executeUpdate();
+				return rs1;
+
+			} else {
+				sql = "insert into tbl_like_p values(seq_like.nextval,1,?,?,?)";
+
+				pstmt.setString(1, user_id);
+				pstmt.setInt(2, seq_post);
+				pstmt.setString(3, user_category);
+				int rs2 = pstmt.executeUpdate();
+
+				return rs2;
 			
 			int rsValue=-1;
 			if(rs.next()) {
@@ -273,6 +301,8 @@ public class PostDAO {
 
 			}
 		}
+
+	}
 
 	
 	// 선택안함 =0,좋아요=1,싫어요=2

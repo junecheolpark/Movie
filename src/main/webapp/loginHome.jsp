@@ -275,6 +275,16 @@ a {
 									id="logoutBtn">로그아웃</button>
 							</div>
 						</div>
+						<div class="row p-3 justify-content-center">
+							<div class="col-12c ol-md-5 col-lg-5 flex justify-content-start">
+								<button type="button" class="btn btn-dark rounded w-100"
+									id="mypageBtn">마이페이지</button>
+							</div>
+							<div class="col-12 col-md-5 col-lg-5 d-flex justify-content-end">
+								<button type="button" class="btn btn-dark rounded w-100"
+									id="postBtn">게시판</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -377,23 +387,32 @@ a {
 				</div>
 			</footer>
 			<script>
-			// 카카오 로그아웃 
-			Kakao.init('23a01cb0d87a6404d4df1ec97cf82ec7');		
-			function kakaoLogout() {
-			    if (!Kakao.Auth.getAccessToken()) { // 토큰이 없다면
-			    	 console.log("일반 로그인");
-			    	 return;   
-			    }
-			    Kakao.Auth.logout(function() {
-			      location.href = "/kakaoLogout.ka"; // 로그아웃 처리
-				})
-			}
-			
-			// 일반 로그아웃
-			$("#logoutBtn").on("click", function(){
-				location.href = "/logout.mem"; // 로그아웃 처리
-			})
+				// 카카오 로그아웃 
+				Kakao.init('23a01cb0d87a6404d4df1ec97cf82ec7');
+				function kakaoLogout() {
+					if (!Kakao.Auth.getAccessToken()) { // 토큰이 없다면
+						console.log("일반 로그인");
+						return;
+					}
+					Kakao.Auth.logout(function() {
+						location.href = "/kakaoLogout.ka"; // 로그아웃 처리
+					})
+				}
 
+				// 일반 로그아웃
+				$("#logoutBtn").on("click", function() {
+					location.href = "/logout.mem"; // 로그아웃 처리
+				})
+				
+				// 마이페이지
+				$("#mypageBtn").on("click", function() {
+					location.href = "/myPage.mem"; 
+				})
+				
+				// 게시판
+				$("#postBtn").on("click", function() {
+					location.href = "/post/post.jsp"; 
+				})
 			</script>
 		</c:when>
 		<c:otherwise>

@@ -486,7 +486,7 @@
                         <p class="text-light" id="myPage">마이페이지</p>
                     </a>
 
-                    <form class="searchForm d-flex" method="get" action="/search.movie">
+                    <form class="searchForm d-flex" method="get" action="/search.movie" onsubmit="return search();">
                         <input
                                 class="searchInput form-control me-2"
                                 type="search"
@@ -553,7 +553,7 @@
                             </a>
                         </div>
                         <div class="col-5">
-                            <form class="searchForm d-flex" method="get" action="/search.movie">
+                            <form class="searchForm d-flex" method="get" action="/search.movie" onsubmit="return search();">
                                 <input
                                         class="searchInput form-control me-2"
                                         type="search"
@@ -702,8 +702,13 @@
         </ul>
     </nav>
     <div class="searchDiv">
-        <form method="get" class="searchForm" action="/search.movie">
+        <form method="get" class="searchForm" action="/search.movie" onsubmit="return search();">
             <input type="text" id="searchInput" class="searchInput" name="val" placeholder="검색">
+<<<<<<< HEAD
+            <input type="hidden" name = 'curPage' value="1">
+            <input type="hidden" name = 's_type' value="movieNm">
+=======
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
             <button type="submit" id="searchBtn" class="searchBtn">검색</button>
         </form>
     </div>
@@ -826,6 +831,15 @@
     </div>
 </footer>
 <script>
+<<<<<<< HEAD
+    function search() {
+        let val = $(this).children(".searchInput")[0].val();
+        if (val === "") {
+            alert("검색어를 입력하세요.");
+            return false
+        }
+    }
+=======
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {
         if ($(this).children(".searchInput").val() === "") {
@@ -833,6 +847,7 @@
             alert("검색어를 입력하세요");
         }
     });
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 
     let prevBtn = ${hashMap.prevBtn};
     if (!prevBtn) {
