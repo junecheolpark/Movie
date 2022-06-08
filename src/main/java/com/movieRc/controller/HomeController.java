@@ -18,6 +18,7 @@ import com.movieRc.util.Pagination;
 
 @WebServlet("*.home")
 
+
 public class HomeController extends HttpServlet {
 
 

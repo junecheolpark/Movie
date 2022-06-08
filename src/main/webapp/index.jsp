@@ -36,7 +36,7 @@ a {
 	height: 100px;
 }
 
-#logoImg {
+#logoImg{
 	width: 100%;
 	height: 100%;
 }
@@ -97,12 +97,12 @@ a {
 /* Icon end */
 
 /* Footer */
-.nav-item>a {
+.nav-link {
 	color: gray;
 	text-decoration: none;
 }
 
-.nav-item>a:hover {
+.nav-link:hover {
 	color: white;
 }
 
@@ -122,12 +122,13 @@ a {
 	}
 }
 
-@media ( min-width : 768px) {
+@media (min-width : 768px) {
 	#navibar {
 		display: none;
 	}
 }
 /* header 반응형 끝 */
+
 
 /* -----------------------------------------------------------*/
 textarea {
@@ -143,136 +144,42 @@ a {
 body {
 	background-color: white
 }
-
-.content {
-	height: 1000px;
+.content{
+    height: 1000px;
 }
 
 
-       .movieLi {
-            height: 19.8%;
-            width: 100%;
-        }
 
-        .movie {
-            height: 50%;
-            width: 33%;
-        }
-
-        .movie div {
-            padding-left: 70px;
-            padding-right: 70px;
-        }
-
-        .avgPointImg {
-            padding: 1px;
-        }
-
-        .movie .movieImgDiv {
-            height: 72%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .movieNameDiv {
-            height: 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px;
-            gap: 10px;
-        }
-
-        .movieNameDiv a {
-            flex-basis: 200px;
-            color: black;
-            text-decoration: none;
-        }
-
-        .movieName {
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .directors {
-            display: block;
-            flex-basis: 100px;
-            color: silver;
-            font-size: 0.8em;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .movie .movieImgDiv img {
-            height: 100%;
-            border-radius: 10px;
-        }
-
-        .movieCategory {
-            width: 300px;
-            color: silver;
-            font-size: 0.8em;
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            text-align: left;
-        }
-
-
-        .avgPointDiv {
-            display: flex;
-            color: silver;
-            font-size: 0.7em;
-        }
-
-        .movieAvgPoint {
-            height: 8%;
-            text-align: right;
-            flex-basis: 70px;
-        }
-
-        .searchDiv {
-            height: 1%;
-            display: flex;
-            justify-content: center;
-            margin: 20px;
-            margin-top: 30px;
-        }
 /* -----------------------------------------------------------*/
 
 /* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
         https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
 /* 반응형 시작 */
 @media screen and (max-width: 1200px) {
-	aside#aside {
+	aside#aside{
 		width: 25%;
 	}
-	div.body-wishList {
+	div.body-wishList{
 		width: 75%;
 	}
 }
 
 @media screen and (max-width: 1024px) {
-	aside#aside {
+	aside#aside{
 		display: none;
 	}
-	div.body-wishList {
+	div.body-wishList{
 		width: 100%;
 	}
-	aside#asideSM {
+	
+	aside#asideSM{
 		display: block;
 		width: 100%;
 	}
 }
 
 @media screen and (min-width: 1024px) {
-	aside#asideSM {
+	aside#asideSM{
 		display: none;
 	}
 }
@@ -288,6 +195,7 @@ body {
 	/* aside#asideSM div#profileBtnBoxSM {
 		display: block;
 	} */
+	
 	div.body-wishList {
 		width: 100%;
 		float: none;
@@ -298,9 +206,10 @@ body {
 	aside#asideSM div#profileBtnBoxSM {
 		display: none;
 	}
-}
+} 
 /* 반응형 끝 */
 </style>
+
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
@@ -562,14 +471,6 @@ body {
 			}
 		});
 
-		
-
-		
-
-		
-
-	
-
 		$.each($(".movie .movieAvgPoint"), function() {
 			let points = $(this).attr('data-value');
 			points = Math.round(points);
@@ -583,6 +484,5 @@ body {
 			}
 		})
 	</script>
-
 </body>
 </html>
