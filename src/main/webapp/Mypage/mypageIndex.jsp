@@ -203,8 +203,6 @@ a {
 </head>
 
 <body>
-
-	<!-- Header -->
 <header class="mb-3 border-bottom">
 	<div class="container">
 		<!-- 접혔을 때 nav -->
@@ -228,34 +226,12 @@ a {
 						<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
 					</ul>
 
-<<<<<<< HEAD
-						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
-						</ul>
-
-
-						<a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="cart">찜한 영화</p>
-						</a> <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="myPage">마이페이지</p>
-						</a>
-
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
-
-					</div>
-=======
-					<form class="searchForm d-flex">
+					<form class="searchForm d-flex" action="/search.movie">
 						<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
 						<input type="hidden" name = 'curPage' value="1">
 						<input type="hidden" name = 's_type' value="movieNm">
 						<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 					</form>
->>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 				</div>
 			</div>
 		</nav>
@@ -292,22 +268,6 @@ a {
 							</ul>
 						</div>
 
-<<<<<<< HEAD
-							<div class="col-2">
-								<a href="" class="align-items-center "> <img
-									class="img-fluid" id="cartIcon" src="/images/찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
-								</a> <a href="" class="align-items-center"> <img
-									class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
-									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
-								</a>
-							</div>
-							<div class="col-5">
-								<form class="d-flex">
-									<input class="form-control me-2" type="search"
-										placeholder="Search" aria-label="Search">
-									<button class="btn btn-outline-success" type="submit">Search</button>
-								</form>
-=======
 						<div class="col-auto">
 							<a href="/wishlist.wish" class="">
 								<img class="img-fluid" id="cartIcon" src="/images/찜.png">
@@ -331,7 +291,7 @@ a {
 										<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form id="searchForm" class="searchForm">
+										<form id="searchForm" class="searchForm" action="/search.movie">
 											<div class="row justify-content-center">
 												<div class="col-11">
 													<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
@@ -348,7 +308,6 @@ a {
 										</form>
 									</div>
 								</div>
->>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 							</div>
 						</div>
 
@@ -356,15 +315,8 @@ a {
 				</div>
 			</div>
 		</nav>
-<<<<<<< HEAD
-
-		</div>
-	</header>
-
-=======
 	</div>
 </header>
->>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 	<!-- Contents -->
 	<c:if test="${loginSession.user_nickname eq null}">
 		<div class="container">

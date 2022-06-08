@@ -214,30 +214,11 @@ a {
 							<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
 						</ul>
 
-<<<<<<< HEAD
-						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
-						</ul>
-
-
-						<a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="cart">찜한 영화</p>
-						</a> <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="myPage">마이페이지</p>
-						</a>
-
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-=======
 						<form class="searchForm d-flex" action="/search.movie">
 							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
 							<input type="hidden" name = 'curPage' value="1">
 							<input type="hidden" name = 's_type' value="movieNm">
 							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
->>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 						</form>
 					</div>
 				</div>
