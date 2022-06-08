@@ -345,8 +345,13 @@ public class ReviewController extends HttpServlet {
             int curPage = Integer.parseInt(request.getParameter("curPage"));
             HttpSession httpSession = request.getSession();
             MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("loginSession");
-            String id = memberDTO.getUser_id();
-            String user_category = memberDTO.getUser_category();
+            String id = null;
+            String user_category = null;
+
+            if (memberDTO != null) {
+                id = memberDTO.getUser_id();
+                user_category = memberDTO.getUser_category();
+            }
             String s_type = request.getParameter("s_type");
             String val = request.getParameter("val");
 

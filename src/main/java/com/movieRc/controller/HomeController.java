@@ -53,13 +53,11 @@ public class HomeController extends HttpServlet {
         Pagination pagination = new Pagination();
         System.out.println("요청 uri : " + uri);
     	
-        if (uri.equals("/lookMovie.home")) {
-            int curPage = 1;
+        if (uri.equals("/toHome.home")) {
+
             try {
-                int totalCount = movieDAO.CountAll();
-                HashMap<String, Object> hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
-                int start = (int) hashMap.get("postStart");
-                int end = (int) hashMap.get("postEnd");
+                int start = 1;
+                int end = 10;
                 ArrayList<MovieDTO> arrayList = movieDAO.selectAll(start, end);
                 double avg = 0;
                 int count = 0;
@@ -74,11 +72,11 @@ public class HomeController extends HttpServlet {
                     points.put("count", count);
                     hashMap1.put(arrayList.get(i).getMovieCd(), points);
                 }
-                request.setAttribute("totalCount", totalCount);
-                request.setAttribute("hashMap", hashMap);
+
                 request.setAttribute("arrayList", arrayList);
                 request.setAttribute("points", hashMap1);
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.getRequestDispatcher("/redirect.jsp").forward(request, response);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
