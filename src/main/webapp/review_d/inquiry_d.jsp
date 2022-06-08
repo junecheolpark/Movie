@@ -452,12 +452,12 @@ body {
 					<img src="images/NoImg.webp" width="100%" height="100%">
 				</div>
 				<div class="col ">
-					<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
-					<p class="m_name my-1">
+					<p class="mb-1 mt-1 m_genre">장르: ${moviedto.genreAlt}</p>
+					<p class="my-1 fw-bold m_name">
 						${moviedto.movieNm}<br>(${moviedto.movieNmEn})
 					</p>
-					<p class="m_genre mb-1 mt-1">개봉: ${moviedto.prdtYear} 감독: ${moviedto.directors}</p>
-					<p class="m_genre mb-1 mt-1">국가: ${moviedto.nationAlt}</p>
+					<p class="mb-1 mt-1 m_genre">개봉: ${moviedto.prdtYear} 감독: ${moviedto.directors}</p>
+					<p class="mb-1 mt-1 m_genre">국가: ${moviedto.nationAlt}</p>
 				</div>
 			</div>
 
@@ -589,7 +589,7 @@ body {
 							<div class="col-10">
 								<div class="row mb-1">
 									<!-- 닉네임 -->
-									<div class="col-6 ms-2 mt-1">${review.user_nickname}</div>
+									<div class="col-6 ms-2 mt-1 fw-bolder">${review.user_nickname}</div>
 									<div class="col-4 text-end r_grade">
 										<input type=text id="t_r_grade" value="${review.r_grade}">
 										<!-- 별점 표시 if문 -->
