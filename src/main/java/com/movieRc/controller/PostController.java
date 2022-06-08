@@ -121,6 +121,14 @@ public class PostController extends HttpServlet {
 				request.setAttribute("dto", dto1);
 				PostCommentDAO PostCommentDAO = new PostCommentDAO();
 				ArrayList<PostCommentDTO> list = PostCommentDAO.selectAll(seq_post);
+				
+				
+				//좋아요 싫어요개수 얻기
+//				int countLike =dao.pLikeCount(seq_post, 1);
+//				int countHate =dao.pLikeCount(seq_post, 2);
+//				request.setAttribute("countLike", countLike);
+//				request.setAttribute("countHate", countHate);
+
 				request.setAttribute("post_commentList", list);
 				
 				request.getRequestDispatcher("/post/post_detailview.jsp").forward(request, response);
