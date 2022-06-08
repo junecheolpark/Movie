@@ -293,7 +293,7 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
                         <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
@@ -318,7 +318,7 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/post.po?curPage=1">자유게시판</a></li>
                     </ul>
                 </div>
 
