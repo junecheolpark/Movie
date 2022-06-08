@@ -39,36 +39,24 @@ a {
 	height: 1400px;
 }
 
+
 #navLogo {
-	width: 90%;
-	height: 90%;
+	width: 150px;
+	height: 100px;
 }
 
+#logoImg{
+	width: 100%;
+	height: 100%;
+}
+
+/* Icon */
 #cartIcon {
 	width: 30px;
 	height: 30px;
 }
 
 #myPageIcon {
-	width: 30px;
-	height: 30px;
-}
-
-#cart {
-	display: none;
-}
-
-#myPage {
-	display: none;
-}
-
-/* Icon */
-#calendarIcon {
-	width: 30px;
-	height: 30px;
-}
-
-#humanIcon {
 	width: 30px;
 	height: 30px;
 }
@@ -115,24 +103,7 @@ a {
 	float: left;
 	margin-top: 10px;
 }
-
-/* body*/
-.card-header {
-	background-color: white;
-}
-
-#user_id {
-	border-radius: 10px;
-}
-
-#user_pw {
-	border-radius: 10px;
-}
-
-#kakaoLogin {
-	height: 100%;
-	width: 100%;
-}
+/* Icon end */
 
 /* Footer */
 .nav-link {
@@ -144,7 +115,8 @@ a {
 	color: white;
 }
 
-@media ( max-width : 1000px) {
+/* header 반응형 */
+@media ( max-width : 767px) {
 	#navLogo {
 		display: none;
 	}
@@ -154,28 +126,21 @@ a {
 	#cartIcon {
 		display: none;
 	}
-	#cart {
-		display: block;
-	}
-	#myPage {
-		display: block;
-	}
 	#menu {
 		display: none;
 	}
 }
 
-@media ( min-width : 1000px) {
+@media (min-width : 768px) {
 	#navibar {
 		display: none;
 	}
 }
-/* Contents */
-.contents {
+
+.contents{
 	background-color: rgb(237, 241, 244);
 }
-
-.contentsBox {
+.contentsBox{
 	width: 1500px;
 	height: 195px;
 	background-color: white;
@@ -186,8 +151,7 @@ a {
 	transform: translateX(-50%);
 	text-align: center;
 }
-
-.contentsImgBox {
+.contentsImgBox{
 	width: 80px;
 	height: 80px;
 	background-color: rgb(237, 241, 244);
@@ -198,19 +162,16 @@ a {
 	left: 50%;
 	transform: translateX(-50%);
 }
-
-.profileImg {
+.profileImg{
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
-
-.contentsBox>.btn {
+.contentsBox > .btn{
 	float: right;
 	margin: 5px;
 }
-
-.contentsBox2 {
+.contentsBox2{
 	width: 1500px;
 	height: 1150px;
 	background-color: white;
@@ -220,56 +181,54 @@ a {
 	left: 50%;
 	transform: translateX(-50%);
 }
-
-.contentsmyWrite {
+.contentsmyWrite{
 	margin: 20px;
 }
-
-.contentsmyWriteBox {
+.contentsmyWriteBox{
 	width: 100%;
 	height: 1070px;
 	border: 1px solid black;
 }
-
-.myWrite {
+.myWrite{
 	color: black;
 	text-decoration: none;
 	margin-right: 15px;
 }
-
-.myWrite:hover {
+.myWrite:hover{
 	text-decoration: underline;
 	color: black;
 }
-</style>
+    </style>
+
 </head>
 
 <body>
 
 	<!-- Header -->
-	<header class="mb-3 border-bottom">
-		<div class="container">
-			<nav id="navibar" class="navbar navbar-expand-lg navbar-dark"
-				aria-label="Main navigation">
-				<div class="container-fluid">
-					<!-- toggle button -->
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-						aria-controls="navbarNavDropdown" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+<header class="mb-3 border-bottom">
+	<div class="container">
+		<!-- 접혔을 때 nav -->
+		<nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
+			<div class="container-fluid">
+				<!-- toggle button -->
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+						aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-					<!-- 메뉴 -->
-					<div class="collapse navbar-collapse justify-content-end"
-						id="navbarNavDropdown">
-						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
-						</ul>
+				<!-- 메뉴 -->
+				<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+					<ul class="navbar-nav mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+						<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+					</ul>
 
+<<<<<<< HEAD
 						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
@@ -289,41 +248,51 @@ a {
 						</form>
 
 					</div>
+=======
+					<form class="searchForm d-flex">
+						<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
+						<input type="hidden" name = 'curPage' value="1">
+						<input type="hidden" name = 's_type' value="movieNm">
+						<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+					</form>
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 				</div>
-			</nav>
+			</div>
+		</nav>
 
-			<nav id="menu" class="navbar navbar-expand-lg w-100 navbar-dark"
-				aria-label="Main navigation">
-				<div class="row w-100 align-items-center">
-					<div class="col-5 d-flex justify-content-center">
-						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
-						</ul>
+		<!-- 펼쳐졌을 때 nav -->
+		<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
+			<div class="row w-100 align-items-center">
+				<div class="col-5 d-flex justify-content-center">
+					<ul class="navbar-nav mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
+						<li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
+						<li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
+					</ul>
+				</div>
 
-					</div>
+				<!-- logo -->
+				<div class="col-2">
+					<a href="/home" id="navLogo" class="mb-2 mb-lg-0">
+						<img id="logoImg" src="/images/logo3.png">
+					</a>
+				</div>
 
-					<!-- logo -->
-					<div class="col-2">
-						<a href="/"
-							class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-							<img id="navLogo" src="/images/logo3.png">
-						</a>
-					</div>
+				<div class="col-5">
+					<div class="row align-items-center justify-content-center">
+						<div class="col-auto">
+							<ul class="navbar-nav mb-2 mb-lg-0 me-2">
+								<li class="nav-item">
+									<a class="nav-link" href="/Member/login.jsp">로그인</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/Member/signup.jsp">회원가입</a>
+								</li>
 
-					<div class="col-5">
-						<div class="row">
-							<div class="col-5">
-								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<li class="nav-item"><a class="nav-link" href="#">로그인</a>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="#">회원가입</a>
-									</li>
-								</ul>
-							</div>
+							</ul>
+						</div>
 
+<<<<<<< HEAD
 							<div class="col-2">
 								<a href="" class="align-items-center "> <img
 									class="img-fluid" id="cartIcon" src="/images/찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
@@ -338,17 +307,64 @@ a {
 										placeholder="Search" aria-label="Search">
 									<button class="btn btn-outline-success" type="submit">Search</button>
 								</form>
+=======
+						<div class="col-auto">
+							<a href="/wishlist.wish" class="">
+								<img class="img-fluid" id="cartIcon" src="/images/찜.png">
+							</a>
+							<a href="/Mypage/mypageIndex.jsp" class="">
+								<img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+							</a>
+						</div>
+
+						<div class="col-1">
+							<button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+								<img src="/images/searchIcon.png">
+							</button>
+						</div>
+
+						<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title m-auto">영화 찾기</h5>
+										<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form id="searchForm" class="searchForm">
+											<div class="row justify-content-center">
+												<div class="col-11">
+													<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
+													<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+													<input type="hidden" name = 'curPage' value="1">
+													<input type="hidden" name = 's_type' value="movieNm">
+												</div>
+											</div>
+											<div class="row justify-content-end">
+												<div class="col-3">
+													<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 							</div>
 						</div>
+
 					</div>
 				</div>
-			</nav>
-		</div>
+			</div>
 		</nav>
+<<<<<<< HEAD
 
 		</div>
 	</header>
 
+=======
+	</div>
+</header>
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 	<!-- Contents -->
 	<c:if test="${loginSession.user_nickname eq null}">
 		<div class="container">
@@ -392,7 +408,7 @@ a {
 		// 일반 로그인
 		let regexId = /^[a-zA-Z][\w]+@[a-zA-Z]+\.(com|net|co\.kr|or\.kr)$/;
 		let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,12}/;
-		
+
 		$("#loginBtn").on("click", function(){
 			if($("#user_id").val() === "") {
 				alert("아이디를 입력해 주세요.");
@@ -413,33 +429,33 @@ a {
 			}
 			$("#loginForm").submit();
 		})
-		
+
 		// 카카오 로그인
 		$("#kakaoLogin").on("click", function(){
 			kakaoLogin();
 		})
-		
+
 		// 카카오 로그인
-		Kakao.init('23a01cb0d87a6404d4df1ec97cf82ec7');		
+		Kakao.init('23a01cb0d87a6404d4df1ec97cf82ec7');
 		function kakaoLogin() {
-			
+
 		    Kakao.Auth.login({
 		        success: function(response) {
-		            Kakao.API.request({ // 사용자 정보 가져오기 
+		            Kakao.API.request({ // 사용자 정보 가져오기
 		                url: '/v2/user/me',
 		                success: function(response) {
 		                	$.ajax({
 		                    	url : '/kakaoTokenCheck.ka', // ID중복체크를 통해 회원가입 유무를 결정한다.
-		    					type : "post",    					
+		    					type : "post",
 		    					data : {"user_k": response.id},
 		    					dataType: "json",
-		    					success : function(data){   
+		    					success : function(data){
 									  for(let dto of data) {
 										console.log(dto.user_k);
 										console.log(response.id);
 										if(response.id == dto.user_k && dto.user_k != null  && response.properties.nickname == dto.user_name){
 			    							// 존재하는 경우 로그인 처리
-			    							createHiddenLoginForm(response.id, response.properties.nickname);	
+			    							createHiddenLoginForm(response.id, response.properties.nickname);
 			    							break;
 			    						} else if (response.id == dto.user_k && dto.user_k != null && response.properties.nickname != dto.user_name){
 			    							// 정보 미일치시
@@ -448,12 +464,12 @@ a {
 			    							break;
 			    						}  else{
 			    							// 회원가입
-			    							createHiddenSignupForm(response.id, response.properties.nickname,response.kakao_account.email);				
-			    						}	 
-									}		 		
+			    							createHiddenSignupForm(response.id, response.properties.nickname,response.kakao_account.email);
+			    						}
+									}
 		    					},
 		    					error: function(request, status, error){
-		    							console.log(error);		    		                
+		    							console.log(error);
 		    		                }
 		    				});
 		                }
@@ -464,9 +480,9 @@ a {
 		        }
 		    });
 		}
-		
+
 		// 로그인
-		function createHiddenLoginForm(user_k, user_name){		
+		function createHiddenLoginForm(user_k, user_name){
 			var frm = document.createElement('form');
 			frm.setAttribute('method', 'post');
 			frm.setAttribute('action', '/kakaoLogin.ka');
@@ -480,11 +496,11 @@ a {
  			name.setAttribute('value', user_name);
 			frm.append(token, name);
 			document.body.append(frm);
-			frm.submit();	
+			frm.submit();
 		}
-		
+
 		// 회원가입
-		function createHiddenSignupForm(user_k, user_name, user_id){		
+		function createHiddenSignupForm(user_k, user_name, user_id){
 			var frm = document.createElement('form');
 			frm.setAttribute('method', 'post');
 			frm.setAttribute('action', '/kakaoSignup.ka');
@@ -502,10 +518,11 @@ a {
  			id.setAttribute('value', user_id);
 			frm.append(token, name, id);
 			document.body.append(frm);
-			frm.submit();	
+			frm.submit();
 		}
 	</script>
 	</c:if>
+	<!-- Contents -->
 	<c:if test="${loginSession.user_nickname ne null}">
 		<div class="contents">
 			<form id="indexForm" action="/modify.mem" method="post">
@@ -514,14 +531,10 @@ a {
 						<div class="contentsImgBox">
 							<img class="profileImg" src="/files/${file_dto.sys_name}">
 						</div>
-						<br>
-						<p>${loginSession.user_nickname}</p>
-						<button type="button" class="btn btn-outline-danger"
-							id="mb_delete">회원 탈퇴</button>
-						<button type="button" class="btn btn-outline-warning"
-							id="i_logout">로그아웃</button>
-						<button type="button" class="btn btn-outline-primary"
-							id="i_modify">내 정보 수정</button>
+						<br><p>${loginSession.user_nickname}</p>
+						<button type="button" class="btn btn-outline-danger" id="mb_delete">회원 탈퇴</button>
+						<button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
+						<button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
 					</div>
 					<div class="contentsBox2">
 						<div class="contentsmyWrite">
@@ -529,21 +542,23 @@ a {
 							<a href="/" class="myWrite" id="i_c_inquiry"><strong>작성댓글</strong></a>
 							<a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
 						</div>
-						<div class="contentsmyWriteBox"></div>
+						<div class="contentsmyWriteBox">
+
+						</div>
 					</div>
 				</div>
 			</form>
 		</div>
 		<script>
-			$("#mb_delete").on("click", function() { // 회원탈퇴 요청
+			$("#mb_delete").on("click", function(){ // 회원탈퇴 요청
 				location.href = "/deleteProc.mem";
 			});
 
-			$("#i_logout").on("click", function() { // 로그아웃 요청
+			$("#i_logout").on("click", function(){ // 로그아웃 요청
 				location.href = "/logout.mem";
 			})
 
-			$("#i_modify").on("click", function() { // 내 정보 수정 페이지 요청
+			$("#i_modify").on("click", function(){ // 내 정보 수정 페이지 요청
 				location.href = "/modify.mem";
 			});
 		</script>
@@ -646,9 +661,22 @@ a {
                         </ul> -->
 			</div>
 		</div>
+<<<<<<< HEAD
 
 	</footer>
 
+=======
+    </footer>
+    <script>
+        const searchForm = $(".searchForm");
+        searchForm.on("submit", function (event) {
+            if ($(this).find(".searchInput").val() === "") {
+                event.preventDefault();
+                alert("검색어를 입력하세요");
+            }
+        });
+    </script>
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 </body>
 
 </html>
