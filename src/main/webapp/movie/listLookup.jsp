@@ -30,14 +30,16 @@
         header {
             width: 100%;
             height: 3.075%;
-            background-color: black;
+            background-color: black !important;
         }
 
         footer {
             width: 100%;
             height: 9%;
-            background-color: black;
+            background-color: black !important;
         }
+
+
 
         #container {
             height: 84%;
@@ -219,7 +221,7 @@
             margin-top: 30px;
         }
 
-        #searchBtn {
+        #searchBtn2 {
             background-color: #037b94;
             color: white;
             border: none;
@@ -293,36 +295,28 @@
         .contents {
             height: 500px;
         } */
-        #navLogo {
-            width: 90%;
-            height: 90%;
+
+        #navibar {
+            background-color: black;
         }
 
+        #navLogo {
+            width: 150px;
+            height: 100px;
+        }
+
+        #logoImg{
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Icon */
         #cartIcon {
             width: 30px;
             height: 30px;
         }
 
         #myPageIcon {
-            width: 30px;
-            height: 30px;
-        }
-
-        #cart {
-            display: none;
-        }
-
-        #myPage {
-            display: none;
-        }
-
-        /* Icon */
-        #calendarIcon {
-            width: 30px;
-            height: 30px;
-        }
-
-        #humanIcon {
             width: 30px;
             height: 30px;
         }
@@ -369,10 +363,11 @@
             float: left;
             margin-top: 10px;
         }
+        /* Icon end */
 
         /* Footer */
         .nav-link {
-            color: gray !important;
+            color: gray;
             text-decoration: none;
         }
 
@@ -380,37 +375,23 @@
             color: white;
         }
 
-        @media (max-width: 1000px) {
+        /* header 반응형 */
+        @media ( max-width : 767px) {
             #navLogo {
                 display: none;
             }
-
             #myPageIcon {
                 display: none;
             }
-
             #cartIcon {
                 display: none;
             }
-
-            #cart {
-                display: block;
-            }
-
-            #myPage {
-                display: block;
-            }
-
             #menu {
                 display: none;
             }
         }
 
-        #navibar {
-            background-color: black;
-        }
-
-        @media (min-width: 1000px) {
+        @media (min-width : 768px) {
             #navibar {
                 display: none;
             }
@@ -437,142 +418,119 @@
 <body>
 <header class="mb-3 border-bottom">
     <div class="container">
-        <nav
-                id="navibar"
-                class="navbar navbar-expand-lg navbar-dark"
-                aria-label="Main navigation">
+        <!-- 접혔을 때 nav -->
+        <nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
             <div class="container-fluid">
                 <!-- toggle button -->
-                <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- 메뉴 -->
-                <div
-                        class="collapse navbar-collapse justify-content-end"
-                        id="navbarNavDropdown">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/listLookup.movie?curPage=1">영화</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">자유게시판</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
                     </ul>
 
-                    <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Member/login.jsp">로그인</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/signup.mem">회원가입</a>
-                        </li>
-                    </ul>
-
-                    <a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-                        <p class="text-light" id="cart">찜한 영화</p>
-                    </a>
-                    <a href="/myPage.mem" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-                        <p class="text-light" id="myPage">마이페이지</p>
-                    </a>
-
-                    <form class="searchForm d-flex" method="get" action="/search.movie">
-                        <input
-                                class="searchInput form-control me-2"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search" name="val">
-                        <input type="hidden" name='s_type' value="movieNm">
-                        <input type="hidden" name='curPage' value="1">
-                        <button class="searchBtn btn btn-outline-success" type="button">Search</button>
+                    <form class="searchForm d-flex" action="/search.movie">
+                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
+                        <input type="hidden" name = 'curPage' value="1">
+                        <input type="hidden" name = 's_type' value="movieNm">
+                        <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </div>
         </nav>
 
-        <nav
-                id="menu"
-                class="navbar navbar-expand-lg w-100 navbar-dark"
-                aria-label="Main navigation">
+        <!-- 펼쳐졌을 때 nav -->
+        <nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
             <div class="row w-100 align-items-center">
                 <div class="col-5 d-flex justify-content-center">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/listLookup.movie?curPage=1">영화</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">자유게시판</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
                     </ul>
-
                 </div>
 
                 <!-- logo -->
                 <div class="col-2">
-                    <a
-                            href="/home"
-                            class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-                        <img id="navLogo" src="/images/logo3.png">
+                    <a href="/home" id="navLogo" class="mb-2 mb-lg-0">
+                        <img id="logoImg" src="/images/logo3.png">
                     </a>
                 </div>
 
                 <div class="col-5">
-                    <div class="row">
-                        <div class="col-5">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-auto">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/Member/login.jsp">로그인</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/signup.mem">회원가입</a>
+                                    <a class="nav-link" href="/Member/signup.jsp">회원가입</a>
                                 </li>
+
                             </ul>
                         </div>
 
-                        <div class="col-2">
-                            <a href="/wishlist.wish" class="align-items-center ">
+                        <div class="col-auto">
+                            <a href="/wishlist.wish" class="">
                                 <img class="img-fluid" id="cartIcon" src="/images/찜.png">
-                                <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                             </a>
-                            <a href="/myPage.mem" class="align-items-center">
+                            <a href="/Mypage/mypageIndex.jsp" class="">
                                 <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
-                                <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                             </a>
                         </div>
-                        <div class="col-5">
-                            <form class="searchForm d-flex" method="get" action="/search.movie">
-                                <input
-                                        class="searchInput form-control me-2"
-                                        type="search"
-                                        placeholder="Search"
-                                        aria-label="Search"
-                                        name="val">
-                                <input type="hidden" name='s_type' value="movieNm">
-                                <input type="hidden" name='curPage' value="1">
-                                <button class="searchBtn btn btn-outline-success" type="button">Search</button>
-                            </form>
+
+                        <div class="col-1">
+                            <button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                <img src="/images/searchIcon.png">
+                            </button>
                         </div>
+
+                        <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title m-auto">영화 찾기</h5>
+                                        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="searchForm" class="searchForm" action="/search.movie">
+                                            <div class="row justify-content-center">
+                                                <div class="col-11">
+                                                    <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
+                                                    <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+                                                    <input type="hidden" name = 'curPage' value="1">
+                                                    <input type="hidden" name = 's_type' value="movieNm">
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-end">
+                                                <div class="col-3">
+                                                    <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-
                 </div>
-
             </div>
         </nav>
     </div>
 </header>
+
 <div id="container">
     <div id="titleContainer">
         <div id="titleDiv">
@@ -704,9 +662,9 @@
     <div class="searchDiv">
         <form method="get" class="searchForm" action="/search.movie">
             <input type="text" id="searchInput" class="searchInput" name="val" placeholder="검색">
-            <input type="hidden" name='s_type' value="movieNm">
-            <input type="hidden" name='curPage' value="1">
-            <button type="button" id="searchBtn" class="searchBtn">검색</button>
+            <input type="hidden" name = 'curPage' value="1">
+            <input type="hidden" name = 's_type' value="movieNm">
+            <button type="submit" id="searchBtn2" class="searchBtn">검색</button>
         </form>
     </div>
 </div>
@@ -744,7 +702,7 @@
                         <a href="/signup.mem" class="nav-link p-0">회원가입</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="/myPage.mem" class="nav-link p-0">마이페이지</a>
+                        <a href="/myPage.mem " class="nav-link p-0">마이페이지</a>
                     </li>
                     <li class="nav-item mb-2">
                         <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
@@ -828,6 +786,14 @@
     </div>
 </footer>
 <script>
+    const searchForm = $(".searchForm");
+    searchForm.on("submit", function (event) {
+        if ($(this).find(".searchInput").val() === "") {
+            event.preventDefault();
+            alert("검색어를 입력하세요");
+        }
+    });
+
     let prevBtn = ${hashMap.prevBtn};
     if (!prevBtn) {
         $(".prevBtn").addClass("disabled");
@@ -847,16 +813,6 @@
         }
     });
 
-    $(".searchBtn").on("click", function () {
-        let val = $(this).siblings($(".searchInput")).val();
-        if (val !== "") {
-            let searchForm = $(this).parent(".searchForm");
-            searchForm.submit();
-        }
-        if (val === "") {
-            alert("검색어를 입력하세요.");
-        }
-    });
     $("#orderByRecentMovie").on("click", function () {
         location.href = "/orderBy.recent.movie?s_type=${s_type}&curPage=1&val=${val}";
     });
