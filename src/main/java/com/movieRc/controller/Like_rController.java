@@ -187,7 +187,6 @@ public class Like_rController extends HttpServlet {
 						}
 					}
 				}
-				response.sendRedirect("/detailView.re");
 
 			} catch (Exception e) {
 				e.printStackTrace();
