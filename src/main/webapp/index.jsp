@@ -148,6 +148,93 @@ body {
     height: 1000px;
 }
 
+.movieLi {
+            height: 19.8%;
+            width: 100%;
+        }
+
+        .movie {
+            height: 50%;
+            width: 33%;
+        }
+
+        .movie div {
+            padding-left: 70px;
+            padding-right: 70px;
+        }
+
+        .avgPointImg {
+            padding: 1px;
+        }
+
+        .movie .movieImgDiv {
+            height: 72%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .movieNameDiv {
+            height: 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            gap: 10px;
+        }
+
+        .movieNameDiv a {
+            flex-basis: 200px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .movieName {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .directors {
+            display: block;
+            flex-basis: 100px;
+            color: silver;
+            font-size: 0.8em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .movie .movieImgDiv img {
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .movieCategory {
+            width: 300px;
+            color: silver;
+            font-size: 0.8em;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: left;
+        }
+
+
+        .avgPointDiv {
+            display: flex;
+            color: silver;
+            font-size: 0.7em;
+        }
+
+        .movieAvgPoint {
+            height: 8%;
+            text-align: right;
+            flex-basis: 70px;
+        }
 
 
 /* -----------------------------------------------------------*/

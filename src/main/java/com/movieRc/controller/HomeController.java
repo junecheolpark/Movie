@@ -16,7 +16,7 @@ import com.movieRc.dto.MovieDTO;
 import com.movieRc.util.Pagination;
 
 
-@WebServlet("*.home")
+@WebServlet("/home")
 
 
 public class HomeController extends HttpServlet {
@@ -44,20 +44,20 @@ public class HomeController extends HttpServlet {
         Pagination pagination = new Pagination();
         System.out.println("요청 uri : " + uri);
     	
-        if (uri.equals("/lookMovie.home")) {
+        if (uri.equals("/lookMovie.home")) {// 평점 높은순으로 10개 뽑기
             int curPage = 1;
             try {
                 int totalCount = movieDAO.CountAll();
                 HashMap<String, Object> hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
-                int start = (int) hashMap.get("postStart");
-                int end = (int) hashMap.get("postEnd");
-                ArrayList<MovieDTO> arrayList = movieDAO.selectAll(start, end);
+                int start = 1;
+                int end = 10;
+                ArrayList<MovieDTO> arrayList = movieDAO.selectAll_OrderByAvgPoint(start, end);
                 double avg = 0;
                 int count = 0;
                 HashMap<String, HashMap> hashMap1 = new HashMap<>();
                 HashMap<String, Object> points;
 
-                for (int i = 0; i < arrayList.size(); i++) {
+                for (int i = 0; i < 10; i++) {
                     points = new HashMap<>();
                     avg = reviewDAO.getAvgPoint(arrayList.get(i).getMovieCd());
                     count = reviewDAO.countByMovieCd(arrayList.get(i).getMovieCd());
