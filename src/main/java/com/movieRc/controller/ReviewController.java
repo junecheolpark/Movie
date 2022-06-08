@@ -88,8 +88,6 @@ public class ReviewController extends HttpServlet {
 
             	String movieCd = request.getParameter("movieCd");
             	System.out.println(movieCd);
-<<<<<<< HEAD
-=======
             	String Sequence = request.getParameter("Sequence");
             	System.out.println(Sequence);
             	
@@ -97,7 +95,6 @@ public class ReviewController extends HttpServlet {
             	int m_like_count = like_rDAO.like_allCount(movieCd);
             	 request.setAttribute("m_like_count", m_like_count);
             	 System.out.println(m_like_count);
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
                 // 평점 몇명했는지
                 int cnt = reviewDAO.countByMovieCd(movieCd);
                 request.setAttribute("cnt", cnt);
@@ -177,7 +174,6 @@ public class ReviewController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-<<<<<<< HEAD
         } else if (uri.equals("/lowGrade.re")) { // 낮은 평점순
         	  HttpSession session = request.getSession();//임시
               MemberDTO dto = (MemberDTO) session.getAttribute("loginSession");
@@ -272,8 +268,7 @@ public class ReviewController extends HttpServlet {
                 e.printStackTrace();
             }
             request.getRequestDispatcher("/review_d/inquiry_d.jsp").forward(request, response);
-=======
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
+
         } else if (uri.equals("/toReviewList.re")) {
             int curPage = Integer.parseInt(request.getParameter("curPage"));
             HttpSession httpSession = request.getSession();

@@ -636,21 +636,17 @@ div {
 
 																		<div class="mb-3">
 																			<label for="message-title" class="col-form-label">Title:</label>
-																			<input type="text" class="form-control"
-<<<<<<< HEAD
-																				id="message-title" name="rp_title"/>
+																			<input type="text" class="form-control" id="message-title" name="rp_title"/>
 																		</div>
 																		<div class="mb-3">
 																			<label for="message-text" class="col-form-label">Message:</label>
 																			<textarea class="form-control" id="message-text" name="rp_content"> </textarea>
-=======
 																				id="message-title" name="rp_title" />
 																		</div>
 																		<div class="mb-3">
 																			<label for="message-text" class="col-form-label">Message:</label>
 																			<textarea class="form-control" id="message-text"
 																				name="rp_content"> </textarea>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 																		</div>
 																	</div>
 																	<div class="modal-footer">

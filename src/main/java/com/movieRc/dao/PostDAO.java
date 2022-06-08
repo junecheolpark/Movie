@@ -151,7 +151,6 @@ public class PostDAO {
 	}
 
 	// 포스트 수정함수
-<<<<<<< HEAD
 	public int postModify(int seq_post, String p_content) throws Exception {
 		String sql = "update tbl_post set p_content=? where seq_post = ?";
 
@@ -159,7 +158,6 @@ public class PostDAO {
 
 			pstmt.setString(1, p_content);
 			pstmt.setInt(2, seq_post);
-=======
 	public int postModify(int seq_post,String p_title, String p_content) throws Exception {
 		String sql = "update tbl_post set p_title=?,p_content=? where seq_post = ?";
 
@@ -168,7 +166,6 @@ public class PostDAO {
 			pstmt.setString(1, p_title);
 			pstmt.setString(2, p_content);
 			pstmt.setInt(3, seq_post);
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 
 			int rs = pstmt.executeUpdate();
 			return rs;
@@ -250,22 +247,17 @@ public class PostDAO {
 		}
 	}
 
-<<<<<<< HEAD
 	// 선택안함 =0,좋아요=1,싫어요=2
 	public int postLike(String user_id, int seq_post, String user_category) throws Exception {
 		String sql = "select count(*) from tbl_like_p where user_id=? AND seq_post=? ";
-=======
 	//좋아요 싫어요 구간
-	
 	
 	public int curPLikeValue(String user_id, int seq_post) throws Exception{
 		String sql = "select p_like_check from tbl_like_p where user_id=? AND seq_post=? ";
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, user_id);
 			pstmt.setInt(2, seq_post);
 			ResultSet rs = pstmt.executeQuery();
-<<<<<<< HEAD
 			rs.next();
 			int count = rs.getInt(1);
 
@@ -285,7 +277,6 @@ public class PostDAO {
 				int rs2 = pstmt.executeUpdate();
 
 				return rs2;
-=======
 			
 			int rsValue=-1;
 			if(rs.next()) {
@@ -307,15 +298,12 @@ public class PostDAO {
 				int rs = pstmt.executeUpdate();
 
 				return rs;
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 
 			}
 		}
 
-<<<<<<< HEAD
 	}
 
-=======
 	
 	// 선택안함 =0,좋아요=1,싫어요=2
 	//좋아요 업데이트
@@ -378,7 +366,6 @@ public class PostDAO {
 		}
 	}
 	
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 	// 시퀀스번호,유저닉네임,제목,내용,뷰카운트,유저아이디,유저카테고리
 	public int write(PostDTO dto) throws Exception {
 		String sql = "insert into tbl_post values(?,?,?,?,sysdate,?,?,?)";

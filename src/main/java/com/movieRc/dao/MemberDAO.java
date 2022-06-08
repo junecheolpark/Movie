@@ -151,11 +151,8 @@ public class MemberDAO {
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setUser_pw(rs.getString("user_pw"));
 				dto.setUser_nickname(rs.getString("user_nickname"));
-<<<<<<< HEAD
 				dto.setUser_phone(rs.getString("user_phone"));
-=======
 				dto.setUser_phone(rs.getString("phone"));
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 				dto.setPostcode(rs.getString("postcode"));
 				dto.setRoadAddr(rs.getString("roadAddr"));
 				dto.setDetailAddr(rs.getString("detailAddr"));
