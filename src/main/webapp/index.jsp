@@ -16,7 +16,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
     <style>
         body {
             height: 4000px;
@@ -39,8 +38,8 @@
             background-color: black;
         }
 
-        a {
-            text-decoration: none;
+        #navibar {
+            background-color: black;
         }
 
         .content {
@@ -50,36 +49,27 @@
             margin-right: 5%;
         }
 
-        #navLogo {
-            width: 90%;
-            height: 90%;
+        a {
+            text-decoration: none;
         }
 
+        #navLogo {
+            width: 150px;
+            height: 100px;
+        }
+
+        #logoImg{
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Icon */
         #cartIcon {
             width: 30px;
             height: 30px;
         }
 
         #myPageIcon {
-            width: 30px;
-            height: 30px;
-        }
-
-        #cart {
-            display: none;
-        }
-
-        #myPage {
-            display: none;
-        }
-
-        /* Icon */
-        #calendarIcon {
-            width: 30px;
-            height: 30px;
-        }
-
-        #humanIcon {
             width: 30px;
             height: 30px;
         }
@@ -126,10 +116,11 @@
             float: left;
             margin-top: 10px;
         }
+        /* Icon end */
 
         /* Footer */
         .nav-link {
-            color: gray !important;
+            color: gray;
             text-decoration: none;
         }
 
@@ -137,40 +128,30 @@
             color: white;
         }
 
-        @media (max-width: 1000px) {
+        /* header 반응형 */
+        @media ( max-width : 767px) {
             #navLogo {
                 display: none;
             }
-
             #myPageIcon {
                 display: none;
             }
-
             #cartIcon {
                 display: none;
             }
-
-            #cart {
-                display: block;
-            }
-
-            #myPage {
-                display: block;
-            }
-
             #menu {
                 display: none;
             }
         }
 
-        #navibar {
-            background-color: black;
-        }
-
-        @media (min-width: 1000px) {
+        @media (min-width : 768px) {
             #navibar {
                 display: none;
             }
+        }
+
+        .pagination {
+            margin: 20px;
         }
 
     </style>
@@ -183,6 +164,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <body>
+
 <header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
@@ -297,13 +279,9 @@
         </nav>
     </div>
 </header>
-
-<%--content--%>
 <div class="content">
 
 </div>
-
-<%--footer--%>
 <footer class="py-5 text-light">
     <div class="container">
         <div class="row">
@@ -399,7 +377,7 @@
 <script>
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {
-        if ($(this).children(".searchInput").val() === "") {
+        if ($(this).find(".searchInput").val() === "") {
             event.preventDefault();
             alert("검색어를 입력하세요");
         }

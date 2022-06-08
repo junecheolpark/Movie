@@ -174,6 +174,7 @@ a {
 </head>
 <body>
 	<!-- Header -->
+
 	<header class="mb-3 border-bottom">
 		<div class="container">
 			<!-- 접혔을 때 nav -->
@@ -188,13 +189,13 @@ a {
 					<!-- 메뉴 -->
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
 							<li class="nav-item"><a class="nav-link" href="Member/login.jsp">로그인</a></li>
 							<li class="nav-item"><a class="nav-link" href="Member/signup.jsp">회원가입</a></li>
 							<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
 						</ul>
 
 						<form class="searchForm d-flex">
@@ -212,15 +213,15 @@ a {
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link mx-2" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link mx-2" href="#">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
 						</ul>
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/" id="navLogo" class="mb-2 mb-lg-0">
+						<a href="/home" id="navLogo" class="mb-2 mb-lg-0">
 							<img id="logoImg" src="images/logo3.png">
 						</a>
 					</div>
@@ -243,7 +244,7 @@ a {
 								<a href="/wishlist.wish" class="">
 									<img class="img-fluid" id="cartIcon" src="images\찜.png">
 								</a>
-								<a href="" class="">
+								<a href="/Mypage/mypageIndex.jsp" class="">
 									<img class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
 								</a>
 							</div>
@@ -288,6 +289,7 @@ a {
 			</nav>
 		</div>
 	</header>
+
 
 	<!-- Contents -->
 	<div class="container">
@@ -438,7 +440,13 @@ a {
 	</footer>
 
 	<script>
-	
+		const searchForm = $(".searchForm");
+		searchForm.on("submit", function (event) {
+			if ($(this).find(".searchInput").val() === "") {
+				event.preventDefault();
+				alert("검색어를 입력하세요");
+			}
+		});
 	</script>
 </body>
 </html>
