@@ -563,7 +563,8 @@ a {
 								</p>
 								<div class="d-flex w-100 gap-2">
 									<label for="newsletter1" class="visually-hidden">Email
-										address</label> <input id="newsletter1" type="text"
+										address</label>
+									<input id="newsletter1" type="text"
 										class="form-control" placeholder="Email address">
 									<button class="btn btn-primary" type="button">영화 추천받기</button>
 								</div>

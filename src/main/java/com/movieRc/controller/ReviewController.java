@@ -53,11 +53,11 @@ public class ReviewController extends HttpServlet {
             String user_category = dto.getUser_category();
 
             try {
-                int rs = reviewDAO.write(new ReviewDTO(0, user_nickname, r_content, null, r_grade, movieCd, user_id, user_category));
+                int rs = reviewDAO.write(new ReviewDTO(0,movieCd,user_id,user_category,user_nickname,r_content,null,r_grade));
 
                 if (rs > 0) { // 댓글 등록이 제대로 이뤄졌다면
                     int seq_review = reviewDAO.writeSelect(user_id, r_content);
-                    int rs1 = like_rDAO.like_insert(new Like_rDTO(0, 0, user_id, seq_review, user_category));
+                    int rs1 = like_rDAO.like_insert(new Like_rDTO(0, 0, user_id, user_category,seq_review));
 
                     if (rs1 > 0) {
                         response.sendRedirect("/detailView.re?movieCd="+movieCd);
