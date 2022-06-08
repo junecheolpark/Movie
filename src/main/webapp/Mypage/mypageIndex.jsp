@@ -282,25 +282,11 @@ a {
 							<p class="text-light" id="myPage">마이페이지</p>
 						</a>
 
-<<<<<<< HEAD
 						<form class="d-flex">
 							<input class="form-control me-2" type="search"
 								placeholder="Search" aria-label="Search">
 							<button class="btn btn-outline-success" type="submit">Search</button>
 						</form>
-=======
-                        <form class="searchForm d-flex" method="get" action="/search.movie">
-                            <input
-                                    class="searchInput form-control me-2"
-                                    type="search"
-                                    placeholder="Search"
-                                    aria-label="Search"
-                                    name="val">
-                            <input type="hidden" name = 'curPage' value="1">
-                            <input type="hidden" name = 's_type' value="movieNm">
-                            <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
-                        </form>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 
 					</div>
 				</div>
@@ -338,7 +324,6 @@ a {
 								</ul>
 							</div>
 
-<<<<<<< HEAD
 							<div class="col-2">
 								<a href="" class="align-items-center "> <img
 									class="img-fluid" id="cartIcon" src="/images/찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
@@ -360,42 +345,10 @@ a {
 			</nav>
 		</div>
 		</nav>
-=======
-                            <div class="col-2">
-                                <a href="" class="align-items-center ">
-                                    <img class="img-fluid" id="cartIcon" src="/images/찜.png">
-                                    <!-- <p class="text-light" id="cart">찜한 영화</p> -->
-                                </a>
-                                <a href="" class="align-items-center">
-                                    <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
-                                    <!-- <p class="text-light" id="myPage">마이페이지</p> -->
-                                </a>
-                            </div>
-                            <div class="col-5">
-                                <form class="searchForm d-flex" method="get" action="/search.movie">
-                                    <input
-                                            class="searchInput form-control me-2"
-                                            type="search"
-                                            placeholder="Search"
-                                            aria-label="Search"
-                                            name="val">
-                                    <input type="hidden" name = 'curPage' value="1">
-                                    <input type="hidden" name = 's_type' value="movieNm">
-                                    <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        </nav>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 
 		</div>
 	</header>
 
-<<<<<<< HEAD
 	<!-- Contents -->
 	<c:if test="${loginSession.user_nickname eq null}">
 		<div class="container">
@@ -595,47 +548,6 @@ a {
 			});
 		</script>
 	</c:if>
-=======
-    <!-- Contents -->
-    <div class="contents">
-    	<form id="indexForm" action="/modify.mem" method="post">
-	    	<div class="contents row text-black">
-	            <div class="contentsBox">
-	                <div class="contentsImgBox">
-	                    <img class="profileImg" src="/files/${file_dto.sys_name}">
-	                </div>
-	                <br><p>${loginSession.user_nickname}</p>
-	                <button type="button" class="btn btn-outline-danger" id="mb_delete">회원 탈퇴</button>
-	                <button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
-	                <button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
-	            </div>
-	            <div class="contentsBox2">
-	                <div class="contentsmyWrite">
-	                    <a href="/" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
-	                    <a href="/" class="myWrite" id="i_c_inquiry"><strong>작성댓글</strong></a>
-	                    <a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
-	                </div>
-	                <div class="contentsmyWriteBox">
-
-	                </div>
-	            </div>
-	        </div>
-    	</form>
-    </div>
-    <script>
-	    $("#mb_delete").on("click", function(){ // 회원탈퇴 요청
-			location.href = "/deleteProc.mem";
-		});
-
-    	$("#i_logout").on("click", function(){ // 로그아웃 요청
-    		location.href = "/logout.mem";
-    	})
-
-    	$("#i_modify").on("click", function(){ // 내 정보 수정 페이지 요청
-    		location.href = "/modify.mem";
-		});
-    </script>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 
 
 	<!-- Footer -->
@@ -735,21 +647,8 @@ a {
 			</div>
 		</div>
 
-<<<<<<< HEAD
 	</footer>
 
-=======
-    </footer>
-    <script>
-        const searchForm = $(".searchForm");
-        searchForm.on("submit", function (event) {
-            if ($(this).children(".searchInput").val() === "") {
-                event.preventDefault();
-                alert("검색어를 입력하세요");
-            }
-        });
-    </script>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 </body>
 
 </html>

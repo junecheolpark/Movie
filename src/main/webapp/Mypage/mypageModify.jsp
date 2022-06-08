@@ -220,7 +220,6 @@ a {
 						aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-<<<<<<< HEAD
 
 					<!-- 메뉴 -->
 					<div class="collapse navbar-collapse justify-content-end"
@@ -232,19 +231,6 @@ a {
 							</li>
 						</ul>
 
-=======
-          
-					<!-- 메뉴 -->
-					<div class="collapse navbar-collapse justify-content-end"
-						id="navbarNavDropdown">
-						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a>
-							</li>
-						</ul>
-
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
@@ -323,7 +309,6 @@ a {
 
 		</div>
 	</header>
-<<<<<<< HEAD
 
 	<!-- Contents -->
 	<div class="contents">
@@ -462,147 +447,6 @@ a {
 											placeholder="읍/면/동" readonly>
 									</div>
 								</div>
-=======
-
-	<!-- Contents -->
-	<div class="contents">
-		<div class="contents row text-black">
-			<div class="contentsBox">
-				<div class="contentsModifyBox">
-					<div class="contentsImgBox">
-						<img class="profileImg" src="/files/${file_dto.sys_name}">
-					</div>
-					<br>
-					<p>${loginSession.user_nickname}</p>
-					<div class="contentsModify">
-						<div class="container w-50">
-							<form id="imgChangeForm" action="/upload1.file" method="post"
-								enctype="multipart/form-data">
-								<div class="row p-2">
-									<h2>내 정보 수정</h2>
-									<div class="col-12">
-										<label for="profileImg" class="form-label">프로필 사진</label><br>
-										<input type="file" name="photo">
-										<button type="button" id="changeProfile"
-											class="btn btn-outline-info">프로필 사진 변경</button>
-									</div>
-								</div>
-							</form>
-							<form id="modifyForm" action="/modifyProc.mem" method="post">
-								<div class="row p-2">
-									<div class="col-12">
-										<label for="nickname" class="form-label">닉네임</label>
-									</div>
-									<div class="col-8 mb-2">
-										<input type="text" class="form-control" id="nickname"
-											name="nickname" value="${dto.getUser_nickname()}" readonly>
-									</div>
-									<div class="col-4 mb-2">
-										<button type="button" id="checkNicknameBtn"
-											class="btn btn-outline-warning w-100">닉네임 확인</button>
-									</div>
-								</div>
-								<c:if test="${loginSession.user_category eq '일반 가입'}">
-									<%-- 일반 회원이라면 비밀번호 보이기 --%>
-									<div class="row p-2">
-										<div class="col-12">
-											<label for="password" class="form-label">비밀번호</label>
-										</div>
-										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pw" name="pw"
-												readonly>
-										</div>
-									</div>
-									<div class="row p-2">
-										<div class="col-12">
-											<label for="pwCheck" class="form-label">비밀번호 확인</label>
-										</div>
-										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pwCheck"
-												readonly>
-										</div>
-									</div>
-								</c:if>
-								<c:if test="${loginSession.user_category eq '카카오 가입'}">
-									<%-- 카카오 회원이라면 비밀번호 감추기 --%>
-									<div class="row p-2 d-none">
-										<div class="col-12 ">
-											<label for="password" class="form-label">비밀번호</label>
-										</div>
-										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pw" name="pw"
-												readonly value="${loginSession.user_pw}">
-										</div>
-									</div>
-									<div class="row p-2 d-none">
-										<div class="col-12 ">
-											<label for="pwCheck" class="form-label">비밀번호 확인</label>
-										</div>
-										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pwCheck"
-												readonly>
-										</div>
-									</div>
-								</c:if>
-								<div class="row p-2">
-									<div class="col-12">
-										<label for="phone" class="form-label">휴대폰 번호</label>
-									</div>
-									<div class="col-4 mb-2">
-										<select class="form-select" id="phone1" readonly>
-											<option value="010" selected>010</option>
-											<option value="011">011</option>
-											<option value="016">016</option>
-											<option value="017">017</option>
-											<option value="018">018</option>
-											<option value="019">019</option>
-										</select>
-									</div>
-									<div class="col-4 mb-2">
-										<input type="text" class="form-control" id="phone2" readonly>
-									</div>
-									<div class="col-4 mb-2">
-										<input type="text" class="form-control" id="phone3" readonly>
-									</div>
-									<div class="col d-none">
-										<input type="text" id="phone" name="phone">
-									</div>
-								</div>
-								<div class="row p-2">
-									<div class="col-12">
-										<label for="phone" class="form-label">주소</label>
-									</div>
-									<div class="col">
-										<input type="text" class="form-control" id="postcode"
-											name="postcode" value="${dto.getPostcode()}"
-											placeholder="우편번호" readonly>
-									</div>
-									<div class="col">
-										<button type="button" class="btn btn-outline-primary w-100"
-											id="btnPostcode">우편번호 찾기</button>
-									</div>
-								</div>
-								<div class="row p-2">
-									<div class="col">
-										<input type="text" class="form-control" id="roadAddr"
-											name="roadAddr" value="${dto.getRoadAddr()}"
-											placeholder="도로명주소" readonly>
-									</div>
-								</div>
-								<div class="row p-2">
-									<div class="col mb-2">
-										<input type="text" class="form-control" id="detailAddr"
-											name="detailAddr" value="${dto.getDetailAddr()}"
-											placeholder="상세주소" readonly>
-									</div>
-									<div class="col mb-2">
-										<input type="text" class="form-control" id="extraAddr"
-											name="extraAddr" value="${dto.getExtraAddr()}"
-											placeholder="읍/면/동" readonly>
-									</div>
-								</div>
-
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 								<div class="row justify-content-center btn-before">
 									<div class="col-4 d-flex justify-content-end">
 										<button type="button" class="btn btn-secondary" id="backBtn">뒤로가기</button>
@@ -622,15 +466,6 @@ a {
 							</form>
 						</div>
 						<script>
-
-                            const searchForm = $(".searchForm");
-                            searchForm.on("submit", function (event) {
-                                if ($(this).children(".searchInput").val() === "") {
-                                    event.preventDefault();
-                                    alert("검색어를 입력하세요");
-                                }
-                            });
-
 							// 프로필 변경 사진버튼을 눌렀을때
 							$("#changeProfile").on("click", function() {
 								$("#imgChangeForm").submit();
@@ -667,14 +502,10 @@ a {
 							});
 
 							// 수정완료버튼 눌렀을 때 
-<<<<<<< HEAD
 							$("#completeBtn")
 									.on(
 											"click",
 											function() {
-=======
-							$("#completeBtn").on("click", function() {
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 												// 닉네임, 전화번호, 주소 빈값/유효한 값인지 확인 
 												let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
 												let regexPhone = /[0-9]{11}/; // 휴대전화 정규식

@@ -416,8 +416,6 @@
 </footer>
 
 <script>
-<<<<<<< HEAD
-=======
 
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {
@@ -427,7 +425,6 @@
         }
     });
 
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
     $("#findIdBtn").on("click", function () {
         if ($("#user_name").val() === "") {
             alert("이름을 입력해 주세요.");
