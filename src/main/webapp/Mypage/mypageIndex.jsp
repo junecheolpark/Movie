@@ -615,22 +615,16 @@ a {
                         </ul> -->
 			</div>
 		</div>
-
-<<<<<<< HEAD
-	</footer>
-
-=======
     </footer>
     <script>
         const searchForm = $(".searchForm");
         searchForm.on("submit", function (event) {
-            if ($(this).children(".searchInput").val() === "") {
+            if ($(this).find(".searchInput").val() === "") {
                 event.preventDefault();
                 alert("검색어를 입력하세요");
             }
         });
     </script>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 </body>
 
 </html>

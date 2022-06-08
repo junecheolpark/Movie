@@ -466,7 +466,7 @@ a {
 
                             const searchForm = $(".searchForm");
                             searchForm.on("submit", function (event) {
-                                if ($(this).children(".searchInput").val() === "") {
+                                if ($(this).find(".searchInput").val() === "") {
                                     event.preventDefault();
                                     alert("검색어를 입력하세요");
                                 }

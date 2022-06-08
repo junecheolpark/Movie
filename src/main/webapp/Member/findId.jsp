@@ -136,7 +136,8 @@
     </style>
 </head>
 <body>
-<!-- Header --><header class="mb-3 border-bottom">
+<!-- Header -->
+<header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
         <nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">

@@ -409,7 +409,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-<body><header class="mb-3 border-bottom">
+<body>
+<header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
         <nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
@@ -432,7 +433,7 @@
                         <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
                     </ul>
 
-                    <form class="searchForm d-flex">
+                    <form class="searchForm d-flex" action="/search.movie">
                         <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
                         <input type="hidden" name = 'curPage' value="1">
                         <input type="hidden" name = 's_type' value="movieNm">
@@ -497,7 +498,7 @@
                                         <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="searchForm" class="searchForm">
+                                        <form id="searchForm" class="searchForm" action="/search.movie">
                                             <div class="row justify-content-center">
                                                 <div class="col-11">
                                                     <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>

@@ -330,67 +330,6 @@
                 </ul>
             </div>
 
-<<<<<<< HEAD
-	<!-- Contents -->
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-5 col-md-10">
-				<form id="loginForm" action="/loginProc.mem" method="post">
-					<div class="card card-custom">
-						<div class="card-header">
-							<h4>로그인</h4>
-						</div>
-						<div class="card-body">
-							<div class="form-group p-2">
-								<p>ID*</p>
-								<div>
-									<input type="text" class="form-control" id="user_id"
-										name="user_id" placeholder="ID" >
-								</div>
-								<div class="form-text">
-									*이메일 형식으로 입력해 주세요.
-								</div>
-							</div>
-							<div class="form-group p-2">
-								<p>PW*</p>
-								<div>
-									<input type="password" class="form-control " id="user_pw"
-										name="user_pw" placeholder="PW" >
-								</div>
-							</div>
-							<div class="row p-3 justify-content-center">
-								<div class="col-5 d-flex justify-content-end">
-									<button type="button" class="btn btn-dark w-100" id="loginBtn">로그인</button>
-								</div>
-								<div class="col-5 flex justify-content-start">
-									<img id="kakaoLogin" src="/resources/images/kakao_login.png">
-								</div>
-							</div>
-							<div class="row p-3">
-								<div class="col text-center">
-									<p class="m-0">
-										계정이 없으신가요? <a href="/Member/signup.jsp"
-											class="text-decoration-none"><strong>회원가입</strong></a>을해보세요
-									</p>
-									<br>
-									<p class="m-0">
-										아이디를 잊으셨나요? <a href="/Member/findId.jsp"
-											class="text-decoration-none"><strong>아이디찾기</strong></a>
-									</p>
-									<br>
-									<p class="m-0">
-										비밀번호를 잊으셨나요? <a href="/Member/findPw.jsp"
-											class="text-decoration-none"><strong>비밀번호찾기</strong></a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-=======
             <div class="col-2">
                 <h5>계정</h5>
                 <ul class="nav flex-column">
@@ -403,7 +342,6 @@
                         찾기</a></li>
                 </ul>
             </div>
->>>>>>> 55d31a120e5c6f89d5438cd65041763575f61d4c
 
             <div class="col-2">
                 <h5>기타</h5>
