@@ -24,9 +24,9 @@ public class MemberDAO {
 		}
 	}
 	
-	private Connection getConnection() {
+	private Connection getConnection() throws Exception{
 		// TODO Auto-generated method stub
-		return null;
+		return bds.getConnection();
 	}
 	
 	private void close(Connection con, PreparedStatement pstmt) {
@@ -303,4 +303,5 @@ public class MemberDAO {
 			}
 		}
 	}
+	
 }

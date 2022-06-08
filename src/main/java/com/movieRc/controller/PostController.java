@@ -433,6 +433,21 @@ public class PostController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			else if(uri.equals("/myPostPage.po")) {
+		         MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
+		         String user_nickname=dto1.getUser_nickname();
+		         
+		         
+		         PostDAO dao= new PostDAO();
+		         ArrayList<PostDTO> list =new ArrayList<>();
+		         try {
+		            list =dao.myPost(user_nickname);
+		            request.setAttribute("list", list);
+		            request.getRequestDispatcher("post/myPost.jsp").forward(request, response);
+		         }catch(Exception e) {
+		            e.printStackTrace();
+		         }
+		      }
 			
 		}
 }

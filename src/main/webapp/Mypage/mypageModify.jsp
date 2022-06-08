@@ -336,8 +336,8 @@ a {
 										<label for="nickname" class="form-label">닉네임</label>
 									</div>
 									<div class="col-8 mb-2">
-										<input type="text" class="form-control" id="nickname"
-											name="nickname" value="${dto.getUser_nickname()}" readonly>
+										<input type="text" class="form-control" id="user_nickname"
+											name="user_nickname" value="${dto.getUser_nickname()}" readonly>
 									</div>
 									<div class="col-4 mb-2">
 										<button type="button" id="checkNicknameBtn"
@@ -351,8 +351,7 @@ a {
 											<label for="password" class="form-label">비밀번호</label>
 										</div>
 										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pw" name="pw"
-												readonly>
+											<input type="password" class="form-control" id="user_pw" name="user_pw" readonly>
 										</div>
 									</div>
 									<div class="row p-2">
@@ -360,8 +359,7 @@ a {
 											<label for="pwCheck" class="form-label">비밀번호 확인</label>
 										</div>
 										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pwCheck"
-												readonly>
+											<input type="password" class="form-control" id="user_pwCheck" readonly>
 										</div>
 									</div>
 								</c:if>
@@ -372,7 +370,7 @@ a {
 											<label for="password" class="form-label">비밀번호</label>
 										</div>
 										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pw" name="pw"
+											<input type="password" class="form-control" id="user_pw" name="user_pw"
 												readonly value="${loginSession.user_pw}">
 										</div>
 									</div>
@@ -381,7 +379,7 @@ a {
 											<label for="pwCheck" class="form-label">비밀번호 확인</label>
 										</div>
 										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pwCheck"
+											<input type="password" class="form-control" id="user_pwCheck"
 												readonly>
 										</div>
 									</div>
@@ -407,12 +405,12 @@ a {
 										<input type="text" class="form-control" id="phone3" readonly>
 									</div>
 									<div class="col d-none">
-										<input type="text" id="phone" name="phone">
+										<input type="text" id="user_phone" name="user_phone">
 									</div>
 								</div>
 								<div class="row p-2">
 									<div class="col-12">
-										<label for="phone" class="form-label">주소</label>
+										<label for="postcode" class="form-label">주소</label>
 									</div>
 									<div class="col">
 										<input type="text" class="form-control" id="postcode"
@@ -508,42 +506,42 @@ a {
 							// 수정완료버튼 눌렀을 때
 							$("#completeBtn").on("click", function() {
 
-												// 닉네임, 전화번호, 주소 빈값/유효한 값인지 확인 
-												let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
-												let regexPhone = /[0-9]{11}/; // 휴대전화 정규식
+								// 닉네임, 전화번호, 주소 빈값/유효한 값인지 확인 
+								let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
+								let regexPhone = /[0-9]{11}/; // 휴대전화 정규식
+								let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,12}/; // 비밀번호 정규식
 
-												// phone번호 합쳐주는 작업
-												// select박스에서 선택된 값을 가져오는 방법(selected된 옵션의 value값 가져옴)
-												let phone = $(
-														"#phone1 option:selected")
-														.val()
-														+ $("#phone2").val()
-														+ $("#phone3").val();
-												$("#phone").val(phone);
+								// user_phone 번호 합쳐주는 작업
+								let user_phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
+								$("#user_phone").val(user_phone);
 
-												// 유효성 검사
-												if (!regexNickname.test($(
-														"#nickname").val())) {
-													alert("형식에 맞지않는 닉네임입니다.");
-													return;
-												} else if (!regexPhone
-														.test(phone)) { // 숫자 데이터에 대한 별도의 형변환이 필요없음
-													alert("형식에 맞지않는 휴대폰번호입니다.");
-													return;
-												} else if ($("#postcode").val() === ""
-														|| $("#roadAddr").val() === "") { // 빈값확인
-													alert("주소를 입력해 주세요.");
-													return;
-												}
+								// 유효성 검사
+								if (!regexNickname.test($("#user_nickname").val())) {
+									alert("형식에 맞지않는 닉네임입니다.");
+									return;
+								} else if (!regexPhone.test(user_phone)) { // 숫자 데이터에 대한 별도의 형변환이 필요없음
+									alert("형식에 맞지않는 휴대폰번호입니다.");
+									return;
+								} else if (!regexPw.test(user_pw)) {
+									alert("형식에 맞지않는 비밀번호입니다.");
+									return;
+								} else if ($("#user_pw").val() !== $("#user_pwCheck").val()) {
+									alert("비밀번호가 일치하지 않습니다.");
+									return;
+								} else if ($("#postcode").val() === "" || $("#roadAddr").val() === "") { // 빈값확인
+									alert("주소를 입력해 주세요.");
+									return;
+								}
 
-												$("#modifyForm").submit();
-											})
+								$("#modifyForm").submit();
+								})
+
 
 							// 휴대폰 번호 셋팅
-							let phone = "${dto.getUser_phone()}";
-							let phone1 = phone.slice(0, 3);
-							let phone2 = phone.slice(3, 7);
-							let phone3 = phone.slice(7);
+							let user_phone = "${dto.getUser_phone()}";
+							let phone1 = user_phone.slice(0, 3);
+							let phone2 = user_phone.slice(3, 7);
+							let phone3 = user_phone.slice(7);
 
 							// 셀렉트 박스에 default selected값 주기
 							$("#phone1").val(phone1).prop("selected", true);
@@ -668,25 +666,25 @@ a {
 						<div class="snsIcon1">
 							<a href="https://www.kakaocorp.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="kakaoIcon" src="/movie/images/kakaotalk.png">
+								id="kakaoIcon" src="/images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
 							<a href="https://twitter.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="twitterIcon" src="/movie/images/twitter.png">
+								id="twitterIcon" src="/images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
 							<a href="https://www.instagram.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="instagramIcon" src="/movie/images/instagram.png">
+								id="instagramIcon" src="/images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
 							<a href="https://www.facebook.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="facebookIcon" src="/movie/images/facebook.png">
+								id="facebookIcon" src="/images/facebook.png">
 							</a>
 						</div>
 					</div>
