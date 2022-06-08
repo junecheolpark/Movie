@@ -325,7 +325,6 @@ body {
 <body>
 
 	<!-- Header -->
-
 	<header class="mb-3 border-bottom">
 		<div class="container">
 			<!-- 접혔을 때 nav -->
@@ -343,8 +342,8 @@ body {
 							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
-							<li class="nav-item"><a class="nav-link" href="Member/login.jsp">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="Member/signup.jsp">회원가입</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+							<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
 							<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
 						</ul>
@@ -373,7 +372,7 @@ body {
 					<!-- logo -->
 					<div class="col-2">
 						<a href="/home" id="navLogo" class="mb-2 mb-lg-0">
-							<img id="logoImg" src="images/logo3.png">
+							<img id="logoImg" src="/images/logo3.png">
 						</a>
 					</div>
 
@@ -382,10 +381,10 @@ body {
 							<div class="col-auto">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 									<li class="nav-item">
-										<a class="nav-link" href="Member/login.jsp">로그인</a>
+										<a class="nav-link" href="/Member/login.jsp">로그인</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="Member/signup.jsp">회원가입</a>
+										<a class="nav-link" href="/Member/signup.jsp">회원가입</a>
 									</li>
 
 								</ul>
@@ -393,16 +392,16 @@ body {
 
 							<div class="col-auto">
 								<a href="/wishlist.wish" class="">
-									<img class="img-fluid" id="cartIcon" src="images\찜.png">
+									<img class="img-fluid" id="cartIcon" src="/images/찜.png">
 								</a>
 								<a href="/Mypage/mypageIndex.jsp" class="">
-									<img class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
+									<img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
 								</a>
 							</div>
 
 							<div class="col-1">
 								<button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
-									<img src="images/searchIcon.png">
+									<img src="/images/searchIcon.png">
 								</button>
 							</div>
 
