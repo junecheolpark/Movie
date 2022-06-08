@@ -20,7 +20,9 @@
 	width: 1200px;
 	height: 800px;
 }
-
+.content-footer{
+	margin-top:15px;
+}
 .form-select {
 	display: inline-block;
 	width: 100px;
@@ -53,7 +55,7 @@ button {
 </style>
 </head>
 <body>
-
+	
 	<div class="container">
 	
 		<div class="row">
