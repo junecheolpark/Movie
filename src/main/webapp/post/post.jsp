@@ -127,6 +127,8 @@ button {
 		</div>
 		<div class="content-footer">
 		
+		
+		<c:if test="${not empty loginSession}">
 			<!--검색-->
 			<div class="row">
 				<div class="col-2">
@@ -137,6 +139,59 @@ button {
 					<button type="button" id="btn_my_post" class="btn btn-secondary">내글보기</button>
 				</div>
 			</div>
+			
+			<script>
+			$("#btn_write").on("click", function() {
+				location.href = "/write.po"
+			})
+			$("#btn_my_post").on("click",function(){
+				$.ajax({
+					url:"/myPostProc.po",
+					type:"get",
+					dataType:"json",
+					success:function(data){
+						
+						$(".content-body").empty();
+						if(data.length ==0){
+							let div_row= $("<div>").attr("class","row");
+							let div_col= $("<div>").attr("class","col").html("작성한 게시물이 없습니다.");
+							div_row.append(div_col);
+							$(".content-body").append(div_row);
+						}else{
+							for(let dto of data){
+								let div_row= $("<div>").attr("class","row");
+								let div_col1_1= $("<div>").attr("class","col-1");
+								let div_col1_2= $("<div>").attr("class","col-1");
+								let div_col1_3= $("<div>").attr("class","col-1");
+								let div_col2_1= $("<div>").attr("class","col-2");
+								let div_col2_2= $("<div>").attr("class","col-2");
+								let div_col5= $("<div>").attr("class","col-5");
+								let hr=$("<hr>");
+							
+								
+								let a=$("<a>").attr("href","/detailPost.po?seq_post="+dto.seq_post).html(dto.p_title);
+								div_col5.append(a);
+								
+								console.log(dto.seq_post);
+								div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
+										div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
+								
+								$(".content-body").append(div_row);
+								
+								
+								
+							}
+						}
+					},
+					error:function(e){
+						console.log(e);
+					}
+				
+				})
+			})
+			
+			</script>
+		</c:if>
 			<div class="row">
 				<!--글 페이지 이동-->
 				<div class="col-4"></div>
@@ -298,54 +353,7 @@ button {
 
 	
 	
-		$("#btn_write").on("click", function() {
-			location.href = "/write.po"
-		})
-		$("#btn_my_post").on("click",function(){
-			$.ajax({
-				url:"/myPostProc.po",
-				type:"get",
-				dataType:"json",
-				success:function(data){
-					
-					$(".content-body").empty();
-					if(data.length ==0){
-						let div_row= $("<div>").attr("class","row");
-						let div_col= $("<div>").attr("class","col").html("작성한 게시물이 없습니다.");
-						div_row.append(div_col);
-						$(".content-body").append(div_row);
-					}else{
-						for(let dto of data){
-							let div_row= $("<div>").attr("class","row");
-							let div_col1_1= $("<div>").attr("class","col-1");
-							let div_col1_2= $("<div>").attr("class","col-1");
-							let div_col1_3= $("<div>").attr("class","col-1");
-							let div_col2_1= $("<div>").attr("class","col-2");
-							let div_col2_2= $("<div>").attr("class","col-2");
-							let div_col5= $("<div>").attr("class","col-5");
-							let hr=$("<hr>");
-						
-							
-							let a=$("<a>").attr("href","/detailPost.po?seq_post="+dto.seq_post).html(dto.p_title);
-							div_col5.append(a);
-							
-							console.log(dto.seq_post);
-							div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
-									div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
-							
-							$(".content-body").append(div_row);
-							
-							
-							
-						}
-					}
-				},
-				error:function(e){
-					console.log(e);
-				}
-			
-			})
-		})
+		
 	</script>
 </body>
 </html>
