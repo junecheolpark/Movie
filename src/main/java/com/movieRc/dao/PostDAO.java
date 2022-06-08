@@ -305,6 +305,19 @@ public class PostDAO {
 			}
 		}
 
+	public int pLikeCount(int seq_post,int p_like_check) throws Exception { //p_like_check =1좋아요,2싫어요 개수
+		String sql = "select count(*) from tbl_like_p where seq_post=? and p_like_check=?";
+		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+				pstmt.setInt(1, seq_post);
+				pstmt.setInt(2, p_like_check);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				int result =rs.getInt(1);
+				return result;
+			
+		}
+	}
 	
 	// 선택안함 =0,좋아요=1,싫어요=2
 	////싫어요 업데이트
@@ -331,7 +344,8 @@ public class PostDAO {
 				pstmt.setString(1, user_id);
 				pstmt.setInt(2, seq_post);
 				int rs = pstmt.executeUpdate();
-				return rs;
+				int p_like_check=0;
+				return p_like_check;
 			
 		}
 	}

@@ -1,8 +1,5 @@
 package com.movieRc.controller;
 
-import com.movieRc.dao.MemberDAO;
-import com.movieRc.dto.MemberDTO;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -10,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.movieRc.dao.*;
+import com.movieRc.dao.MemberDAO;
+import com.movieRc.dto.MemberDTO;
 
 
 @WebServlet("*.do")
