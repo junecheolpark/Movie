@@ -197,7 +197,7 @@ public class ReviewController extends HttpServlet {
                   int cnt = reviewDAO.r_grade_count();
                   request.setAttribute("cnt", cnt);
                   // 평균
-                  Double average = reviewDAO.r_grade_average();
+                  Double average = reviewDAO.r_grade_average(movieCd);
                   request.setAttribute("average", average);
                   // 게시글에 해당하는 댓글을 가져와 담아주는 작업
                   ArrayList<ReviewDTO> list = reviewDAO.selectAll(movieCd);
@@ -244,7 +244,7 @@ public class ReviewController extends HttpServlet {
                   int cnt = reviewDAO.r_grade_count();
                   request.setAttribute("cnt", cnt);
                   // 평균
-                  Double average = reviewDAO.r_grade_average();
+                  Double average = reviewDAO.r_grade_average(movieCd);
                   request.setAttribute("average", average);
                   // 게시글에 해당하는 댓글을 가져와 담아주는 작업
                   ArrayList<ReviewDTO> list = reviewDAO.selectAll(movieCd);

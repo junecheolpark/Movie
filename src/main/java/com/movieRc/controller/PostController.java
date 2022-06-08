@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
 import com.movieRc.dao.PostCommentDAO;
@@ -127,10 +126,10 @@ public class PostController extends HttpServlet {
 				
 				
 				//좋아요 싫어요개수 얻기
-				int countLike =dao.pLikeCount(seq_post, 1);
-				int countHate =dao.pLikeCount(seq_post, 2);
-				request.setAttribute("countLike", countLike);
-				request.setAttribute("countHate", countHate);
+//				int countLike =dao.pLikeCount(seq_post, 1);
+//				int countHate =dao.pLikeCount(seq_post, 2);
+//				request.setAttribute("countLike", countLike);
+//				request.setAttribute("countHate", countHate);
 				request.setAttribute("post_commentList", list);
 				
 				request.getRequestDispatcher("/post/post_detailview.jsp").forward(request, response);
