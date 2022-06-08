@@ -28,16 +28,13 @@ a {
 
 /* header */
 #navLogo {
-	width: 90%;
-	height: 90%;
+	width: 150px;
+	height: 100px;
 }
 
-#cart {
-	display: none;
-}
-
-#myPage {
-	display: none;
+#logoImg{
+	width: 100%;
+	height: 100%;
 }
 
 /* Icon */
@@ -50,16 +47,6 @@ a {
 	width: 30px;
 	height: 30px;
 }
-
-/* #calendarIcon {
-	width: 25px;
-	height: 25px;
-}
-
-#humanIcon {
-	width: 25px;
-	height: 25px;
-} */
 
 #kakaoIcon {
 	width: 30px;
@@ -125,12 +112,6 @@ a {
 	}
 	#cartIcon {
 		display: none;
-	}
-	#cart {
-		display: block;
-	}
-	#myPage {
-		display: block;
 	}
 	#menu {
 		display: none;
@@ -295,7 +276,7 @@ section#container::after {
 						</ul>
 
 						<form class="searchForm d-flex">
-							<input class="searchInput form-control me-2" type="search" placeholder="Search" aria-label="Search" name ='val'>
+							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
 							<input type="hidden" name = 'curPage' value="1">
 							<input type="hidden" name = 's_type' value="movieNm">
 							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
@@ -303,27 +284,28 @@ section#container::after {
 					</div>
 				</div>
 			</nav>
+			
 			<!-- 펼쳐졌을 때 nav -->
 			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link px-4" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link px-4" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link px-4" href="#">자유게시판</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="#">영화</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="#">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
 						</ul>
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0">
-							<img id="navLogo" src="images/logo3.png">
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0">
+							<img id="logoImg" src="images/logo3.png">
 						</a>
 					</div>
 
 					<div class="col-5">
-						<div class="row">
-							<div class="col-4">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-auto">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 									<li class="nav-item">
 										<a class="nav-link" href="Member/login.jsp">로그인</a>
@@ -331,30 +313,53 @@ section#container::after {
 									<li class="nav-item">
 										<a class="nav-link" href="Member/signup.jsp">회원가입</a>
 									</li>
+									
 								</ul>
 							</div>
 
-							<div class="col-3">
-								<a href="/wishlist.wish" class="align-items-center ">
+							<div class="col-auto"> 
+								<a href="/wishlist.wish" class="">
 									<img class="img-fluid" id="cartIcon" src="images\찜.png">
 								</a>
-								<a href="" class="align-items-center">
+								<a href="" class="">
 									<img class="img-fluid" id="myPageIcon" src="images\마이페이지.png">
 								</a>
 							</div>
 
-							<div class="col-4">
-								<form class="searchForm d-flex">
-<!-- 							
-                  <input class="searchInput form-control me-2" type="search" placeholder="Search" aria-label="Search" name ='val'>
-                  <input type="hidden" name = 'curPage' value="1">
-									<input type="hidden" name = 's_type' value="movieNm"> 
--->
-									<button class="btn" type="submit">
-										<img src="images/searchIcon.png">
-									</button>
-								</form>
+							<div class="col-1">
+								<button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+									<img src="images/searchIcon.png">
+								</button>
 							</div>
+							
+							<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title m-auto">영화 찾기</h5>
+											<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<form id="searchForm" class="searchForm">
+												<div class="row justify-content-center">
+													<div class="col-11">
+														<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
+														<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+														<input type="hidden" name = 'curPage' value="1">
+														<input type="hidden" name = 's_type' value="movieNm"> 
+													</div>
+												</div>
+												<div class="row justify-content-end">
+													<div class="col-3">
+														<button class="searchBtn btn btn-outline-success" type="submit">Search</button>			
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							
 						</div>
 					</div>
 				</div>
