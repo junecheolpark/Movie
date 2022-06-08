@@ -200,7 +200,7 @@
         .contentsmyWriteBox{
             width: 100%;
             height: 1070px;
-            border: 1px solid black;
+            border-top: 1px solid black;
         }
         .myWrite{
             color: black;
@@ -211,6 +211,42 @@
             text-decoration: underline;
             color: black;
         }
+        /* Contents in container */
+        .contentsmyWriteBox .container{
+			text-align: center;
+			width: 100%;
+			height: 100%;
+		}
+		
+		.form-select {
+			display: inline-block;
+			width: 100px;
+		}
+		
+		.search-method {
+			width: 100px;
+			display: inline-block;
+		}
+		
+		.list {
+			width: 120px;
+			display: inline-block;
+		}
+		
+		.form-control {
+			width: 300px;
+			display: inline-block;
+		}
+		
+		button {
+			border: solid 1px black;
+			line-height: normal;
+		}
+		
+		.content-body {
+			
+			background-color: rgb(255, 254, 248);
+		}
     </style>
 </head>
 
@@ -360,12 +396,112 @@
 	            </div>
 	            <div class="contentsBox2">
 	                <div class="contentsmyWrite">
-	                    <a href="/" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
-	                    <a href="/" class="myWrite" id="i_c_inquiry"><strong>작성댓글</strong></a>
+	                    <a href="/myPage.mem" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
 	                    <a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
 	                </div>
 	                <div class="contentsmyWriteBox">
+							<div class="container">
 
+							<div class="row">
+								<div class="col">
+									<h3>
+										내가 쓴 게시글<br />
+									</h3>
+								</div>
+							</div>
+							<div class="content-header">
+								<div class="row">
+									<div class="col-9"></div>
+									<div class="col-3">
+										<select class="form-select list"
+											aria-label="Default select example" id="listItem">
+											<option value="1" selected>목록 10개</option>
+											<option value="2">목록 20개</option>
+											<option value="3">목록 30개</option>
+										</select>
+										<button class="btn btn-warning" id="btnList">출력</button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-1">
+										<strong>글번호</strong>
+									</div>
+									<div class="col-5">
+										<strong>제목</strong>
+									</div>
+									<div class="col-2">
+										<strong>글쓴이</strong>
+									</div>
+									<div class="col-2">
+										<strong>작성일</strong>
+									</div>
+									<div class="col-1">
+										<strong>추천</strong>
+									</div>
+									<div class="col-1">
+										<strong>조회</strong>
+									</div>
+								</div>
+								<hr />
+							</div>
+							<div class="content-body">
+								<!--내용-->
+								
+							</div>
+						<div class="row">
+									<!--글 페이지 이동-->
+									<div class="col-4"></div>
+									<div class="col-4">
+										<nav>
+											<ul class="pagination justify-content-center">
+												<c:if test="${naviMap.needPrev eq true}">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${naviMap.startNavi-1}">Prev</a></li>
+													<%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭했음 ->  5페이지로 이동 --%>
+												</c:if>
+					
+												<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+													end="${naviMap.endNavi}" step="1">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${pageNum}">${pageNum}</a></li>
+												</c:forEach>
+					
+												<c:if test="${naviMap.needNext eq true}">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${naviMap.endNavi+1}">Next</a></li>
+												</c:if>
+											</ul>
+										</nav>
+									</div>
+									<div class="col-4"></div>
+								</div>
+								<div class="row">
+									<!--글 페이지 이동-->
+									<div class="col-2"></div>
+									<div class="col-8">
+										<select class="form-select search-method" id="searchValue"
+											aria-label="Default select example" name="searchOption">
+											<option value="1" selected>제목</option>
+											<option value="2">내용</option>
+											<option value="3">글쓴이</option>
+										</select> <input type="text" id="inputSearch" name="searchInput" class="form-control" />
+										<button type="button" id="btnSearch" class="btn btn-secondary">검색</button>
+									</div>
+									<div class="col-2">
+									<button id="myPostPage" type="button" class="btn btn-secondary">내글보기</button>
+									</div>
+									
+								</div>
+						
+						</div>
+						<script>
+					    $("#myPostPage").on("click",function(){
+					       location.href="/myPostPage.po";
+					    })
+						
+
+					
+						</script>
 	                </div>
 	            </div>
 	        </div>
@@ -436,22 +572,22 @@
                     <div class="snsBox">
                         <div class="snsIcon1">
                             <a href="https://www.kakaocorp.com/" class="d-flex align-items-center mb-2 mb-lg-0">
-                                <img id="kakaoIcon" src="/movie/images/kakaotalk.png">
+                                <img id="kakaoIcon" src="/images/kakaotalk.png">
                             </a>
                         </div>
                         <div class="snsIcon2">
                             <a href="https://twitter.com/" class="d-flex align-items-center mb-2 mb-lg-0">
-                                <img id="twitterIcon" src="/movie/images/twitter.png">
+                                <img id="twitterIcon" src="/images/twitter.png">
                             </a>
                         </div>
                         <div class="snsIcon3">
                             <a href="https://www.instagram.com/" class="d-flex align-items-center mb-2 mb-lg-0">
-                                <img id="instagramIcon" src="/movie/images/instagram.png">
+                                <img id="instagramIcon" src="/images/instagram.png">
                             </a>
                         </div>
                         <div class="snsIcon4">
                             <a href="https://www.facebook.com/" class="d-flex align-items-center mb-2 mb-lg-0">
-                                <img id="facebookIcon" src="/movie/images/facebook.png">
+                                <img id="facebookIcon" src="/images/facebook.png">
                             </a>
                         </div>
                     </div>

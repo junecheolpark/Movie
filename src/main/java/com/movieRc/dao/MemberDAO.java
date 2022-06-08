@@ -24,9 +24,9 @@ public class MemberDAO {
 		}
 	}
 	
-	private Connection getConnection() {
+	private Connection getConnection() throws Exception{
 		// TODO Auto-generated method stub
-		return null;
+		return bds.getConnection();
 	}
 	
 	private void close(Connection con, PreparedStatement pstmt) {
@@ -151,7 +151,7 @@ public class MemberDAO {
 				dto.setUser_id(rs.getString("user_id"));
 				dto.setUser_pw(rs.getString("user_pw"));
 				dto.setUser_nickname(rs.getString("user_nickname"));
-				dto.setUser_phone(rs.getString("phone"));
+				dto.setUser_phone(rs.getString("user_phone"));
 				dto.setPostcode(rs.getString("postcode"));
 				dto.setRoadAddr(rs.getString("roadAddr"));
 				dto.setDetailAddr(rs.getString("detailAddr"));
@@ -303,4 +303,5 @@ public class MemberDAO {
 			}
 		}
 	}
+	
 }
