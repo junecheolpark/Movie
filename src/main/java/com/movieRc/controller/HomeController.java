@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD
+
 import com.movieRc.dao.MemberDAO;
 import com.movieRc.dto.MemberDTO;
-=======
->>>>>>> 750bd768e2160bb2138deb35ad83580dbe71895f
+
 
 @WebServlet("/home")
 public class HomeController extends HttpServlet {
