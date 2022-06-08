@@ -52,7 +52,7 @@ public class ReviewDAO {
                 int r_grade = rs.getInt("r_grade");
                 String user_id = rs.getString("user_id");
                 String user_category = rs.getString("user_category");
-                list.add(new ReviewDTO(seq_review, user_nickname, r_content, r_date, r_grade, movieCd, user_id, user_category));
+                list.add(new ReviewDTO(seq_review,movieCd,user_id,user_category,user_nickname,r_content,r_date,r_grade));
             }
             return list;
         }
@@ -76,7 +76,7 @@ public class ReviewDAO {
                 int r_grade = rs.getInt("r_grade");
                 String user_id = rs.getString("user_id");
                 String user_category = rs.getString("user_category");
-                list.add(new ReviewDTO(seq_review, user_nickname, r_content, r_date, r_grade, movieCd, user_id, user_category));
+                list.add(new ReviewDTO(seq_review,movieCd,user_id,user_category,user_nickname,r_content,r_date,r_grade));
             }
             return list;
         }
@@ -100,7 +100,7 @@ public class ReviewDAO {
                 int r_grade = rs.getInt("r_grade");
                 String user_id = rs.getString("user_id");
                 String user_category = rs.getString("user_category");
-                list.add(new ReviewDTO(seq_review, user_nickname, r_content, r_date, r_grade, movieCd, user_id, user_category));
+                list.add(new ReviewDTO(seq_review,movieCd,user_id,user_category,user_nickname,r_content,r_date,r_grade));
             }
             return list;
         }
@@ -108,18 +108,18 @@ public class ReviewDAO {
 
     //리뷰작성
     public int write(ReviewDTO dto) throws Exception {
-        String sql = "insert into tbl_review values(seq_review.nextval, ?,?,sysdate,?,?,?,?)";
+        String sql = "insert into tbl_review values(seq_review.nextval, ?,?,?,?,?,sysdate,?)";
 
 
         try (Connection con = getConnection();
              PreparedStatement pstmt = con.prepareStatement(sql)) {
 
-            pstmt.setString(1, dto.getUser_nickname());
-            pstmt.setString(2, dto.getR_content());
-            pstmt.setInt(3, dto.getR_grade());
-            pstmt.setString(4, dto.getMovieCd());
-            pstmt.setString(5, dto.getUser_id());
-            pstmt.setString(6, dto.getUser_category());
+            pstmt.setString(1, dto.getMovieCd());
+            pstmt.setString(2, dto.getUser_id());
+            pstmt.setString(3, dto.getUser_category());
+            pstmt.setString(4, dto.getUser_nickname());
+            pstmt.setString(5, dto.getR_content());
+            pstmt.setInt(6,dto.getR_grade());
 
 
             int rs = pstmt.executeUpdate();
@@ -221,23 +221,23 @@ public class ReviewDAO {
         }
     }
 
-    public HashMap<String, Integer> getAvgPointHashMap(HashMap<String, Integer> hashMap, String movieCd) throws Exception {
-
-        String sql = "select a.*, nvl(b.avg, 0)" +
-                "      from tbl_movie a," +
-                "           (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
-                " where a.movieCd = b.movieCd(+)" + "   and a.movieCd = ?";
-
-        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, movieCd);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                hashMap.put(movieCd, resultSet.getInt(8));
-            }
-            return hashMap;
-        }
-    }
+//    public HashMap<String, Integer> getAvgPointHashMap(HashMap<String, Integer> hashMap, String movieCd) throws Exception {
+//
+//        String sql = "select a.*, nvl(b.avg, 0)" +
+//                "      from tbl_movie a," +
+//                "           (select avg(r_grade) as avg, movieCd from tbl_review group by movieCd) b" +
+//                " where a.movieCd = b.movieCd(+)" + "   and a.movieCd = ?";
+//
+//        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+//            preparedStatement.setString(1, movieCd);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            if (resultSet.next()) {
+//                hashMap.put(movieCd, resultSet.getInt(8));
+//            }
+//            return hashMap;
+//        }
+//    }
 
     public double getAvgPoint(String movieCd) throws Exception {
 
@@ -274,15 +274,15 @@ public class ReviewDAO {
 
             while (resultSet.next()) {
                 int seq_review = resultSet.getInt(1);
-                String user_nickname = resultSet.getString(2);
-                String r_content = resultSet.getString(3);
-                String r_date = DateParse.dataParse(resultSet.getDate(4));
-                int r_grade = resultSet.getInt(5);
-                String movieCd = resultSet.getString(6);
-                String user_id = resultSet.getString(7);
-                String user_category = resultSet.getString(8);
+                String movieCd = resultSet.getString(2);
+                String user_id = resultSet.getString(3);
+                String user_category = resultSet.getString(4);
+                String user_nickname = resultSet.getString(5);
+                String r_content = resultSet.getString(6);
+                String r_date = DateParse.dataParse(resultSet.getDate(7));
+                int r_grade = resultSet.getInt(8);
 
-                arrayList.add(new ReviewDTO(seq_review, user_nickname, r_content, r_date, r_grade, movieCd, user_id, user_category));
+                arrayList.add(new ReviewDTO(seq_review, movieCd, user_id, user_category, user_nickname, r_content, r_date, r_grade));
             }
             return arrayList;
 
@@ -345,15 +345,15 @@ public class ReviewDAO {
 
             while (resultSet.next()) {
                 int seq_review = resultSet.getInt(1);
-                String user_nickname = resultSet.getString(2);
-                String r_content = resultSet.getString(3);
-                String r_date = DateParse.dataParse(resultSet.getDate(4));
-                int r_grade = resultSet.getInt(5);
-                String movieCd = resultSet.getString(6);
-                String user_id = resultSet.getString(7);
-                String user_category = resultSet.getString(8);
+                String movieCd = resultSet.getString(2);
+                String user_id = resultSet.getString(3);
+                String user_category = resultSet.getString(4);
+                String user_nickname = resultSet.getString(5);
+                String r_content = resultSet.getString(6);
+                String r_date = DateParse.dataParse(resultSet.getDate(7));
+                int r_grade = resultSet.getInt(8);
 
-                arrayList.add(new ReviewDTO(seq_review, user_nickname, r_content, r_date, r_grade, movieCd, user_id, user_category));
+                arrayList.add(new ReviewDTO(seq_review, movieCd, user_id, user_category, user_nickname, r_content, r_date, r_grade));
             }
             return arrayList;
 
@@ -380,15 +380,15 @@ public class ReviewDAO {
 
             while (resultSet.next()) {
                 int seq_review = resultSet.getInt(1);
-                String user_nickname = resultSet.getString(2);
-                String r_content = resultSet.getString(3);
-                String r_date = DateParse.dataParse(resultSet.getDate(4));
-                int r_grade = resultSet.getInt(5);
-                String movieCd = resultSet.getString(6);
-                String user_id = resultSet.getString(7);
-                String user_category = resultSet.getString(8);
+                String movieCd = resultSet.getString(2);
+                String user_id = resultSet.getString(3);
+                String user_category = resultSet.getString(4);
+                String user_nickname = resultSet.getString(5);
+                String r_content = resultSet.getString(6);
+                String r_date = DateParse.dataParse(resultSet.getDate(7));
+                int r_grade = resultSet.getInt(8);
 
-                arrayList.add(new ReviewDTO(seq_review, user_nickname, r_content, r_date, r_grade, movieCd, user_id, user_category));
+                arrayList.add(new ReviewDTO(seq_review, movieCd, user_id, user_category, user_nickname, r_content, r_date, r_grade));
             }
             return arrayList;
 

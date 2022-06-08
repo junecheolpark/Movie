@@ -53,7 +53,7 @@ public class PostCommentDAO {
 		}
 		
 	public int modify(PostCommentDTO dto) throws Exception{
-		String sql = "update tbl_post_comment set comment_content=? where seq_comment = ?";
+		String sql = "update tbl_post_comment set comment_content=? where seq_post_comment = ?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -65,7 +65,7 @@ public class PostCommentDAO {
 	}
 	
 	public int delete(int seq_comment) throws Exception{
-		String sql = "delete from tbl_post_comment where seq_comment = ?";
+		String sql = "delete from tbl_post_comment where seq_post_comment = ?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			

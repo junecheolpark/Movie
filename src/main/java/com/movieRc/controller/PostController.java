@@ -70,7 +70,8 @@ public class PostController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		}else if(uri.equals("/write.po")) {
+		}
+		else if(uri.equals("/write.po")) {
 			response.sendRedirect("post/post_write.jsp");
 		}else if(uri.equals("/writeProc.po")) {
 			MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
@@ -121,6 +122,27 @@ public class PostController extends HttpServlet {
 				request.setAttribute("dto", dto1);
 				PostCommentDAO PostCommentDAO = new PostCommentDAO();
 				ArrayList<PostCommentDTO> list = PostCommentDAO.selectAll(seq_post);
+				
+				
+				//좋아요 싫어요개수 얻기
+<<<<<<< HEAD
+
+=======
+>>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
+				int countLike =dao.pLikeCount(seq_post, 1);
+				int countHate =dao.pLikeCount(seq_post, 2);
+				request.setAttribute("countLike", countLike);
+				request.setAttribute("countHate", countHate);
+<<<<<<< HEAD
+
+//				int countLike =dao.pLikeCount(seq_post, 1);
+//				int countHate =dao.pLikeCount(seq_post, 2);
+//				request.setAttribute("countLike", countLike);
+//				request.setAttribute("countHate", countHate);
+
+=======
+          
+>>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
 				request.setAttribute("post_commentList", list);
 				
 				request.getRequestDispatcher("/post/post_detailview.jsp").forward(request, response);
@@ -293,15 +315,31 @@ public class PostController extends HttpServlet {
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
 						rs=1;
 						System.out.println("좋아요 취소");
+<<<<<<< HEAD
+					}else if(curPLikeValue == 2) {//싫어요 한 상태
+						
+						rs =dao.updatePostLike(user_id, seq_post, user_category);
+						rs=2;
+						System.out.println("싫어요 취소");
+=======
 					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//싫어요 한 상태
 						rs=2;
 						rs =dao.updatePostLike(user_id, seq_post, user_category);
+>>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
 						System.out.println("좋아요");
 					}
 					String a= Integer.toString(rs);
 				;
 					System.out.println("rs :" +a);
-						response.getWriter().append(a);
+					int likeCount=dao.pLikeCount(seq_post, 1);
+					int hateCount=dao.pLikeCount(seq_post, 2);
+					String lCountStr= Integer.toString(likeCount);
+					String hCountStr=Integer.toString(hateCount);
+					String arr=a+"|"+lCountStr+"|"+hCountStr;
+					System.out.println(arr);
+					// var arr = result.split('|'); 해서 arr[0], arr[1], arr[2] 에 접근하시면 각각 a,b,c가 들어 있습니다.
+					//arr[0] == data, arr[1] ==hCountStr arr[2] ==lCountStr입니다.
+					response.getWriter().append(arr);
 					
 				}catch(Exception e){
 					e.printStackTrace();
@@ -324,7 +362,31 @@ public class PostController extends HttpServlet {
 					}else if(dao.curPLikeValue(user_id, seq_post) == 0) {//0상태
 						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
 						rs=0;
-						System.out.println("좋아요");
+
+						System.out.println("싫어요");
+<<<<<<< HEAD
+
+					}else if(curPLikeValue == 1) {//좋아요 한 상태
+						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
+						rs=1;
+						System.out.println("좋아요 취소, 싫어요");
+					}else if(curPLikeValue == 2) {//좋아요 한 상태
+						
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						rs=2;
+						System.out.println("싫어요 취소 :"+rs );
+
+					}else if(curPLikeValue == 1) {//싫어요 한 상태
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						rs=1;
+						System.out.println("싫어요 취소");
+					}else if(curPLikeValue == 2) {//좋아요 한 상태
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						rs=2;
+						System.out.println("좋아요 취소");
+						System.out.println("싫어요");
+
+=======
 					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//싫어요 한 상태
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
 						rs=1;
@@ -332,13 +394,23 @@ public class PostController extends HttpServlet {
 					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//좋아요 한 상태
 						rs=2;
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
-						System.out.println("좋아요");
+					
+>>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
 					}
 				
 					String a= Integer.toString(rs);
 					
 					System.out.println("a :" +a);
-					response.getWriter().append(a);
+					
+					int likeCount=dao.pLikeCount(seq_post, 1);
+					int hateCount=dao.pLikeCount(seq_post, 2);
+					String lCountStr= Integer.toString(likeCount);
+					String hCountStr=Integer.toString(hateCount);
+					String arr=a+"|"+lCountStr+"|"+hCountStr;
+					System.out.println(arr);
+					// var arr = result.split('|'); 해서 arr[0], arr[1], arr[2] 에 접근하시면 각각 a,b,c가 들어 있습니다.
+					//arr[0] == data, arr[1] ==hCountStr arr[2] ==lCountStr입니다.
+					response.getWriter().append(arr);
 				
 				}catch(Exception e){
 					e.printStackTrace();
