@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<<<<<<< HEAD
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -257,12 +257,12 @@
         /* 반응형 끝 */
     </style>
 
-=======
+
     <title>Title</title>
->>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
+
 </head>
 <body>
-<<<<<<< HEAD
+
 <header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
@@ -549,8 +549,8 @@
         }
     })
 </script>
-=======
+
 <jsp:forward page="/toHome.home"/>
->>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
+
 </body>
 </html>

@@ -1,7 +1,7 @@
 package com.movieRc.dto;
 
 public class PostCommentDTO {
-	private int seq_post_comment;
+	private int seq_comment;
 	private String user_nickname;
 	private String comment_date;
 	private String comment_content;
@@ -11,10 +11,10 @@ public class PostCommentDTO {
 	
 	public PostCommentDTO() {}
 	
-	public PostCommentDTO(int seq_post_comment, String user_nickname, String comment_date, String comment_content,
+	public PostCommentDTO(int seq_comment, String user_nickname, String comment_date, String comment_content,
 			String user_id, int seq_post, String user_category) {
 		super();
-		this.seq_post_comment = seq_post_comment;
+		this.seq_comment = seq_comment;
 		this.user_nickname = user_nickname;
 		this.comment_date = comment_date;
 		this.comment_content = comment_content;
@@ -23,12 +23,12 @@ public class PostCommentDTO {
 		this.user_category = user_category;
 	}
 
-	public int getSeq_post_comment() {
-		return seq_post_comment;
+	public int getseq_comment() {
+		return seq_comment;
 	}
 
-	public void setSeq_post_comment(int seq_post_comment) {
-		this.seq_post_comment = seq_post_comment;
+	public void setseq_comment(int seq_comment) {
+		this.seq_comment = seq_comment;
 	}
 
 	public String getUser_nickname() {
@@ -81,7 +81,7 @@ public class PostCommentDTO {
 
 	@Override
 	public String toString() {
-		return "PostCommentDTO [seq_post_comment=" + seq_post_comment + ", user_nickname=" + user_nickname + ", comment_date="
+		return "PostCommentDTO [seq_comment=" + seq_comment + ", user_nickname=" + user_nickname + ", comment_date="
 				+ comment_date + ", comment_content=" + comment_content + ", user_id=" + user_id + ", seq_post="
 				+ seq_post + ", user_category=" + user_category + "]";
 	}

@@ -594,6 +594,113 @@ iframe {
 								</div>
 							</form>
 
+<<<<<<< HEAD
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- Contents -->
+<div class="contentDiv row justify-content-center">
+    <div class="content1 col-11">나중에 추가</div>
+    <div class="content2 col-11">
+        <div class="contentTitle">
+            <span>최신 영화</span>
+        </div>
+        <div class="movieDiv slider">
+            <c:forEach items="${hashMap1}" var="movie">
+                <c:forEach var="i" begin="0" end="9" step="1">
+                    <c:if test="${i eq movie.key}">
+                        <a href="/detailView.re?movieCd=${movie.value['movieDTO'].movieCd}">
+                            <div class="movie slider_item">
+                                <div class="imgContainer">
+                                    <img src="/images/NoImg.webp" alt="">
+                                </div>
+                                <div class="product">
+                                    <div class="category">
+                                        <span>${movie.value['movieDTO'].genreAlt}</span></div>
+                                    <div class="title">
+                                        <span>${movie.value['movieDTO'].movieNm}</span></div>
+                                    <div class="avgPoint" data-value='${movie.value["avg"]}'>
+                                        <span class="star"></span>
+                                        <span><fmt:formatNumber value="${movie.value['avg']}" type="pattern"
+                                                                pattern="0.00"/> (${movie.value['count']})</span></div>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+        </div>
+        <div class="btnContainer">
+            <button id='toRecentMovie'>최신 영화 더 보기</button>
+        </div>
+    </div>
+    <div class="content3 col-11">
+        <div class="contentTitle">
+            <span>최신 리뷰</span>
+        </div>
+        <div class="reviewDiv slider">
+            <c:forEach items="${hashMap2}" var="review">
+                <c:forEach begin="0" end="9" step="1" var="i">
+                    <c:if test="${i eq review.key}">
+                        <a href="/detailView.re?movieCd=${review.value['movieDTO'].movieCd}">
+                            <div class="review slider_item">
+                                <div class="review_reviewer">
+                                    <div class="reviewer_id">
+                                            ${review.value['reviewDTO'].user_nickname}
+                                    </div>
+                                    <div class="avgPoint" data-value ="${review.value['avg']}">
+                                        <span class="star"></span>
+                                    </div>
+                                </div>
+                                <div class="review_content">
+                                    <span>${review.value['reviewDTO'].r_content}</span>
+                                </div>
+                                <div class="review_movie">
+                                    <span>${review.value['movieDTO'].movieNm}, ${review.value['movieDTO'].directors}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+        </div>
+        <div class="btnContainer">
+            <button id = 'toRecentReview'>최신 리뷰 더 보기</button>
+        </div>
+
+    </div>
+    <div class="content4 col-11">
+        <div class="contentTitle"><span>추천 영화</span></div>
+        <div class="movieDiv slider">
+            <c:forEach items="${hashMap3}" var="movie">
+                <c:forEach var="i" begin="0" end="9" step="1">
+                    <c:if test="${i eq movie.key}">
+                        <a href="/detailView.re?movieCd=${movie.value['movieDTO'].movieCd}">
+                            <div class="movie slider_item">
+                                <div class="imgContainer">
+                                    <img src="/images/NoImg.webp" alt="">
+                                </div>
+                                <div class="product">
+                                    <div class="category">
+                                        <span>${movie.value['movieDTO'].genreAlt}</span></div>
+                                    <div class="title">
+                                        <span>${movie.value['movieDTO'].movieNm}</span></div>
+                                    <div class="avgPoint" data-value='${movie.value["avg"]}'>
+                                        <span class="star"></span>
+                                        <span><fmt:formatNumber value="${movie.value['avg']}" type="pattern"
+                                                                pattern="0.00"/> (${movie.value['count']})</span></div>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+        </div>
+    </div>
+=======
 						</div>
 					</div>
 				</div>
@@ -746,6 +853,7 @@ iframe {
 				</c:forEach>
 			</div>
 		</div>
+>>>>>>> ffb15349e370f55ef69747b52d79c5db11b1dce5
 
 		<div class="content5 col-11">
 			<div class="contentTitle">
