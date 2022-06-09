@@ -1,17 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: jangseoksu
-  Date: 2022/06/02
-  Time: 12:40 PM
+  Date: 2022/06/08
+  Time: 9:50 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -260,15 +257,12 @@
         /* 반응형 끝 */
     </style>
 
+=======
+    <title>Title</title>
+>>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
 </head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
 <body>
+<<<<<<< HEAD
 <header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
@@ -555,5 +549,8 @@
         }
     })
 </script>
+=======
+<jsp:forward page="/toHome.home"/>
+>>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
 </body>
 </html>

@@ -207,17 +207,24 @@ a {
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
-							<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
-							<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+								</c:otherwise>
+							</c:choose>
+
+
 						</ul>
 
-						<form class="searchForm d-flex" action="/search.movie">
-							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
-							<input type="hidden" name = 'curPage' value="1">
-							<input type="hidden" name = 's_type' value="movieNm">
+						<form class="searchForm d-flex" method="get" action="/search.movie">
+							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'> <input
+								type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
 							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
 					</div>
@@ -231,14 +238,15 @@ a {
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
 							<li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/post/post.jsp">자유게시판</a></li>
 						</ul>
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/home" id="navLogo" class="mb-2 mb-lg-0">
+						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
 							<img id="logoImg" src="/images/logo3.png">
+
 						</a>
 					</div>
 
@@ -246,23 +254,20 @@ a {
 						<div class="row align-items-center justify-content-center">
 							<div class="col-auto">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<li class="nav-item">
-										<a class="nav-link" href="/Member/login.jsp">로그인</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="/Member/signup.jsp">회원가입</a>
-									</li>
-
+									<c:if test="${empty loginSession}">
+										<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+										<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+									</c:if>
 								</ul>
 							</div>
 
 							<div class="col-auto">
-								<a href="/wishlist.wish" class="">
-									<img class="img-fluid" id="cartIcon" src="/images/찜.png">
-								</a>
-								<a href="/Mypage/mypageIndex.jsp" class="">
-									<img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
-								</a>
+								<c:if test="${not empty loginSession}">
+									<a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
+									</a>
+									<a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+									</a>
+								</c:if>
 							</div>
 
 							<div class="col-1">
@@ -270,34 +275,34 @@ a {
 									<img src="/images/searchIcon.png">
 								</button>
 							</div>
-
-							<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title m-auto">영화 찾기</h5>
-											<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<form id="searchForm" class="searchForm" action="/search.movie">
-												<div class="row justify-content-center">
-													<div class="col-11">
-														<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
-														<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
-														<input type="hidden" name = 'curPage' value="1">
-														<input type="hidden" name = 's_type' value="movieNm">
+							<form class="searchForm d-flex" method="get" action="/search.movie">
+								<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title m-auto">영화 찾기</h5>
+												<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form id="searchForm" class="searchForm">
+													<div class="row justify-content-center">
+														<div class="col-11">
+															<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'>
+															<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+															<input type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
+														</div>
 													</div>
-												</div>
-												<div class="row justify-content-end">
-													<div class="col-3">
-														<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+													<div class="row justify-content-end">
+														<div class="col-3">
+															<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+														</div>
 													</div>
-												</div>
-											</form>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</form>
 
 						</div>
 					</div>
@@ -336,8 +341,8 @@ a {
 										<label for="nickname" class="form-label">닉네임</label>
 									</div>
 									<div class="col-8 mb-2">
-										<input type="text" class="form-control" id="nickname"
-											name="nickname" value="${dto.getUser_nickname()}" readonly>
+										<input type="text" class="form-control" id="user_nickname"
+											name="user_nickname" value="${dto.getUser_nickname()}" readonly>
 									</div>
 									<div class="col-4 mb-2">
 										<button type="button" id="checkNicknameBtn"
@@ -351,8 +356,7 @@ a {
 											<label for="password" class="form-label">비밀번호</label>
 										</div>
 										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pw" name="pw"
-												readonly>
+											<input type="password" class="form-control" id="user_pw" name="user_pw" readonly>
 										</div>
 									</div>
 									<div class="row p-2">
@@ -360,8 +364,7 @@ a {
 											<label for="pwCheck" class="form-label">비밀번호 확인</label>
 										</div>
 										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pwCheck"
-												readonly>
+											<input type="password" class="form-control" id="user_pwCheck" readonly>
 										</div>
 									</div>
 								</c:if>
@@ -372,7 +375,7 @@ a {
 											<label for="password" class="form-label">비밀번호</label>
 										</div>
 										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pw" name="pw"
+											<input type="password" class="form-control" id="user_pw" name="user_pw"
 												readonly value="${loginSession.user_pw}">
 										</div>
 									</div>
@@ -381,7 +384,7 @@ a {
 											<label for="pwCheck" class="form-label">비밀번호 확인</label>
 										</div>
 										<div class="col-12 mb-2">
-											<input type="password" class="form-control" id="pwCheck"
+											<input type="password" class="form-control" id="user_pwCheck"
 												readonly>
 										</div>
 									</div>
@@ -407,12 +410,12 @@ a {
 										<input type="text" class="form-control" id="phone3" readonly>
 									</div>
 									<div class="col d-none">
-										<input type="text" id="phone" name="phone">
+										<input type="text" id="user_phone" name="user_phone">
 									</div>
 								</div>
 								<div class="row p-2">
 									<div class="col-12">
-										<label for="phone" class="form-label">주소</label>
+										<label for="postcode" class="form-label">주소</label>
 									</div>
 									<div class="col">
 										<input type="text" class="form-control" id="postcode"
@@ -508,42 +511,42 @@ a {
 							// 수정완료버튼 눌렀을 때
 							$("#completeBtn").on("click", function() {
 
-												// 닉네임, 전화번호, 주소 빈값/유효한 값인지 확인 
-												let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
-												let regexPhone = /[0-9]{11}/; // 휴대전화 정규식
+								// 닉네임, 전화번호, 주소 빈값/유효한 값인지 확인 
+								let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
+								let regexPhone = /[0-9]{11}/; // 휴대전화 정규식
+								let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,12}/; // 비밀번호 정규식
 
-												// phone번호 합쳐주는 작업
-												// select박스에서 선택된 값을 가져오는 방법(selected된 옵션의 value값 가져옴)
-												let phone = $(
-														"#phone1 option:selected")
-														.val()
-														+ $("#phone2").val()
-														+ $("#phone3").val();
-												$("#phone").val(phone);
+								// user_phone 번호 합쳐주는 작업
+								let user_phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
+								$("#user_phone").val(user_phone);
 
-												// 유효성 검사
-												if (!regexNickname.test($(
-														"#nickname").val())) {
-													alert("형식에 맞지않는 닉네임입니다.");
-													return;
-												} else if (!regexPhone
-														.test(phone)) { // 숫자 데이터에 대한 별도의 형변환이 필요없음
-													alert("형식에 맞지않는 휴대폰번호입니다.");
-													return;
-												} else if ($("#postcode").val() === ""
-														|| $("#roadAddr").val() === "") { // 빈값확인
-													alert("주소를 입력해 주세요.");
-													return;
-												}
+								// 유효성 검사
+								if (!regexNickname.test($("#user_nickname").val())) {
+									alert("형식에 맞지않는 닉네임입니다.");
+									return;
+								} else if (!regexPhone.test(user_phone)) { // 숫자 데이터에 대한 별도의 형변환이 필요없음
+									alert("형식에 맞지않는 휴대폰번호입니다.");
+									return;
+								} else if (!regexPw.test(user_pw)) {
+									alert("형식에 맞지않는 비밀번호입니다.");
+									return;
+								} else if ($("#user_pw").val() !== $("#user_pwCheck").val()) {
+									alert("비밀번호가 일치하지 않습니다.");
+									return;
+								} else if ($("#postcode").val() === "" || $("#roadAddr").val() === "") { // 빈값확인
+									alert("주소를 입력해 주세요.");
+									return;
+								}
 
-												$("#modifyForm").submit();
-											})
+								$("#modifyForm").submit();
+								})
+
 
 							// 휴대폰 번호 셋팅
-							let phone = "${dto.getUser_phone()}";
-							let phone1 = phone.slice(0, 3);
-							let phone2 = phone.slice(3, 7);
-							let phone3 = phone.slice(7);
+							let user_phone = "${dto.getUser_phone()}";
+							let phone1 = user_phone.slice(0, 3);
+							let phone2 = user_phone.slice(3, 7);
+							let phone3 = user_phone.slice(7);
 
 							// 셀렉트 박스에 default selected값 주기
 							$("#phone1").val(phone1).prop("selected", true);
@@ -668,25 +671,25 @@ a {
 						<div class="snsIcon1">
 							<a href="https://www.kakaocorp.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="kakaoIcon" src="/movie/images/kakaotalk.png">
+								id="kakaoIcon" src="/images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
 							<a href="https://twitter.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="twitterIcon" src="/movie/images/twitter.png">
+								id="twitterIcon" src="/images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
 							<a href="https://www.instagram.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="instagramIcon" src="/movie/images/instagram.png">
+								id="instagramIcon" src="/images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
 							<a href="https://www.facebook.com/"
 								class="d-flex align-items-center mb-2 mb-lg-0"> <img
-								id="facebookIcon" src="/movie/images/facebook.png">
+								id="facebookIcon" src="/images/facebook.png">
 							</a>
 						</div>
 					</div>

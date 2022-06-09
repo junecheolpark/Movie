@@ -88,4 +88,6 @@ public class ReviewDTO {
     public void setR_grade(int r_grade) {
         this.r_grade = r_grade;
     }
+
 }
+

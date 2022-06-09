@@ -115,7 +115,8 @@ public class MemberController extends HttpServlet {
 			try {
 				int rs = dao.deleteMember(user_id);
 				if(rs > 0) {
-					response.sendRedirect("/myPage.mem");
+					session.removeAttribute("loginSession");
+					response.sendRedirect("/Member/login.jsp");
 				}
 				
 			}catch(Exception e) {
@@ -145,7 +146,7 @@ public class MemberController extends HttpServlet {
 					System.out.println("로그인 실패");
 					request.setAttribute("rs", false);
 				}
-				request.getRequestDispatcher("/loginHome.jsp").forward(request, response);
+				request.getRequestDispatcher("/listLookup.movie?curPage=1").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -248,32 +249,48 @@ public class MemberController extends HttpServlet {
 		}else if(uri.equals("/modifyProc.mem")) { // 내 정보수정 요청
 			HttpSession session = request.getSession();
 			String user_id = ((MemberDTO)session.getAttribute("loginSession")).getUser_id();
-			String user_category = request.getParameter("user_category");
-			String user_k = request.getParameter("user_k");
 			String user_pw = request.getParameter("user_pw");
 			String user_nickname = request.getParameter("user_nickname");
-			String user_name = request.getParameter("user_name");
-			int user_birth = Integer.parseInt(request.getParameter("user_birth"));
 			String user_phone = request.getParameter("user_phone");
 			String postcode = request.getParameter("postcode");
 			String roadAddr = request.getParameter("roadAddr");
 			String detailAddr = request.getParameter("detailAddr");
 			String extraAddr = request.getParameter("extraAddr");
-			String grade = request.getParameter("grade");
 			
-			System.out.println(user_id + ":" + user_category + ":" + user_k + ":" + user_pw + ":" + user_nickname + ":" + user_name + ":" + user_birth 
-					+ ":" + user_phone + ":" + postcode + ":" + roadAddr + ":" + detailAddr + ":" + extraAddr + ":" + grade);
+			System.out.println(user_id + ":" + user_pw + ":" + user_nickname + ":" + user_phone + ":" + postcode + ":" + roadAddr + ":" + detailAddr + ":" + extraAddr);
 			
 			MemberDAO dao = new MemberDAO();
 			try {
-				int rs = dao.modifyMember(new MemberDTO(user_id, user_category, user_k, user_pw, user_nickname, user_name, user_birth, user_phone, postcode, roadAddr, detailAddr, extraAddr, grade));
+				user_pw = EncryptionUtils.getSHA512(user_pw);
+				System.out.println("암호화된 pw : " + user_pw);
+				
+				int rs = dao.modifyMember(new MemberDTO(user_id, null, null, user_pw, user_nickname, null, 0, user_phone, postcode, roadAddr, detailAddr, extraAddr, null));
 				if(rs > 0) {
 					response.sendRedirect("/myPage.mem");
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			
+		}else if(uri.equals("/")) { // 전체 조회
+			HttpSession session = request.getSession();
+			String user_id = request.getParameter("user_id");
+			String user_nickname = request.getParameter("user_nickname");
+			String user_name = request.getParameter("user_name");
+			int user_birth = Integer.parseInt(request.getParameter("user_birth"));
+			String user_phone = request.getParameter("user_phone");
+			
+			System.out.println(user_id + ":" + user_nickname + ":" + user_name + ":" + user_birth + ":" + user_phone);
+			
+			MemberDAO dao = new MemberDAO();
+			ArrayList<MemberDTO> list = new ArrayList<>();
+			try {
+				list = dao.selectAll();
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("/").forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
 	}
-
 }

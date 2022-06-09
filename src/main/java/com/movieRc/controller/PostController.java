@@ -165,10 +165,6 @@ public class PostController extends HttpServlet {
 				request.setAttribute("countLike", countLike);
 				request.setAttribute("countHate", countHate);
 
-//				int countLike =dao.pLikeCount(seq_post, 1);
-//				int countHate =dao.pLikeCount(seq_post, 2);
-//				request.setAttribute("countLike", countLike);
-//				request.setAttribute("countHate", countHate);
 
 				request.setAttribute("post_commentList", list);
 				
@@ -303,11 +299,19 @@ public class PostController extends HttpServlet {
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
 						rs=1;
 						System.out.println("좋아요 취소");
+<<<<<<< HEAD
 					}else if(curPLikeValue == 2) {//싫어요 한 상태
 						
 						rs =dao.updatePostLike(user_id, seq_post, user_category);
 						rs=2;
 						System.out.println("싫어요 취소");
+=======
+
+					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//싫어요 한 상태
+						rs=2;
+						rs =dao.updatePostLike(user_id, seq_post, user_category);
+
+>>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
 						System.out.println("좋아요");
 					}else {
 						System.out.println("잘못실행됨");
@@ -348,6 +352,7 @@ public class PostController extends HttpServlet {
 						rs=0;
 						System.out.println("싫어요");
 
+<<<<<<< HEAD
 					}else if(curPLikeValue == 1) {//좋아요 한 상태
 						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
 						rs=1;
@@ -367,6 +372,15 @@ public class PostController extends HttpServlet {
 						rs=2;
 						System.out.println("좋아요 취소");
 						System.out.println("싫어요");
+=======
+					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//싫어요 한 상태
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						rs=1;
+						System.out.println("좋아요 취소");
+					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//좋아요 한 상태
+						rs=2;
+						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+>>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
 
 					}
 				
@@ -405,6 +419,21 @@ public class PostController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			else if(uri.equals("/myPostPage.po")) {
+		         MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
+		         String user_nickname=dto1.getUser_nickname();
+		         
+		         
+		         PostDAO dao= new PostDAO();
+		         ArrayList<PostDTO> list =new ArrayList<>();
+		         try {
+		            list =dao.myPost(user_nickname);
+		            request.setAttribute("list", list);
+		            request.getRequestDispatcher("post/myPost.jsp").forward(request, response);
+		         }catch(Exception e) {
+		            e.printStackTrace();
+		         }
+		      }
 			
 		}
 }
