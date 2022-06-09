@@ -733,7 +733,7 @@
                 <c:forEach begin="0" end="9" step="1" var="i">
                     <c:if test="${i eq topic.key}">
                         <div class="topic col-11 col-lg-5">
-                            <div class="topicTitle">${topic.value['postDTO'].p_title}
+                            <div class="topicTitle"><a href="/detailPost.po?seq_post=${topic.value['postDTO'].seq_post}">${topic.value['postDTO'].p_title}</a>
                             </div>
                             <div class="topicStatus">
 									<span>UP ${topic.value['like']} DOWN
