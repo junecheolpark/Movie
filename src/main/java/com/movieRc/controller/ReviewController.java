@@ -12,10 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.movieRc.dao.BasketDAO;
 import com.movieRc.dao.Like_rDAO;
 import com.movieRc.dao.MovieDAO;
 import com.movieRc.dao.ReviewDAO;
-import com.movieRc.dto.*;
+import com.movieRc.dto.Like_rDTO;
+import com.movieRc.dto.Like_r_countDTO;
+import com.movieRc.dto.MemberDTO;
+import com.movieRc.dto.MovieDTO;
+import com.movieRc.dto.ReviewDTO;
 import com.movieRc.util.Pagination;
 
 @WebServlet("*.re")
@@ -35,6 +40,7 @@ public class ReviewController extends HttpServlet {
         ReviewDAO reviewDAO = new ReviewDAO();
         Pagination pagination = new Pagination();
         Like_rDAO like_rDAO = new Like_rDAO();
+        BasketDAO basketDAO = new BasketDAO();
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
 
@@ -96,7 +102,7 @@ public class ReviewController extends HttpServlet {
             	 request.setAttribute("m_like_count", m_like_count);
             	 System.out.println(m_like_count);
                 // 평점 몇명했는지
-                int cnt = reviewDAO.countByMovieCd(movieCd);
+                int cnt = basketDAO.wishCnt(movieCd);
                 request.setAttribute("cnt", cnt);
                 // 평균
                 Double average = reviewDAO.r_grade_average(movieCd);

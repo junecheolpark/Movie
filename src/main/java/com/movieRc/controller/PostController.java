@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import com.google.gson.Gson;
 import com.movieRc.dao.PostCommentDAO;
 import com.movieRc.dao.PostDAO;
@@ -117,6 +119,7 @@ public class PostController extends HttpServlet {
 				PostDAO dao= new PostDAO();
 				
 				try {
+				
 				dao.updateView_count(seq_post);
 				PostDTO dto1 =dao.getPost(seq_post);
 				request.setAttribute("dto", dto1);
@@ -130,6 +133,7 @@ public class PostController extends HttpServlet {
 				int countHate =dao.pLikeCount(seq_post, 2);
 				request.setAttribute("countLike", countLike);
 				request.setAttribute("countHate", countHate);
+
 
 				request.setAttribute("post_commentList", list);
 				
