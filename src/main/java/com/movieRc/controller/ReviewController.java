@@ -12,10 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.movieRc.dao.BasketDAO;
 import com.movieRc.dao.Like_rDAO;
 import com.movieRc.dao.MovieDAO;
 import com.movieRc.dao.ReviewDAO;
-import com.movieRc.dto.*;
+import com.movieRc.dto.Like_rDTO;
+import com.movieRc.dto.Like_r_countDTO;
+import com.movieRc.dto.MemberDTO;
+import com.movieRc.dto.MovieDTO;
+import com.movieRc.dto.ReviewDTO;
 import com.movieRc.util.Pagination;
 
 @WebServlet("*.re")
@@ -35,6 +40,7 @@ public class ReviewController extends HttpServlet {
         ReviewDAO reviewDAO = new ReviewDAO();
         Pagination pagination = new Pagination();
         Like_rDAO like_rDAO = new Like_rDAO();
+        BasketDAO basketDAO = new BasketDAO();
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
 
@@ -47,19 +53,20 @@ public class ReviewController extends HttpServlet {
             System.out.println("r_content: " + r_content);
             int r_grade = Integer.parseInt(request.getParameter("r_grade"));
             System.out.println("r_grade: " + r_grade);
-            String movieCd = "movieCd";
+            String movieCd = request.getParameter("movieCd");
+        	System.out.println(movieCd);
             String user_id = dto.getUser_id();
             String user_category = dto.getUser_category();
 
             try {
-                int rs = reviewDAO.write(new ReviewDTO(0, user_nickname, r_content, null, r_grade, movieCd, user_id, user_category));
+                int rs = reviewDAO.write(new ReviewDTO(0,movieCd,user_id,user_category,user_nickname,r_content,null,r_grade));
 
                 if (rs > 0) { // 댓글 등록이 제대로 이뤄졌다면
                     int seq_review = reviewDAO.writeSelect(user_id, r_content);
-                    int rs1 = like_rDAO.like_insert(new Like_rDTO(0, 0, user_id, seq_review, user_category));
+                    int rs1 = like_rDAO.like_insert(new Like_rDTO(0, 0, user_id, user_category,seq_review));
 
                     if (rs1 > 0) {
-                        response.sendRedirect("/detailView.re");
+                        response.sendRedirect("/detailView.re?movieCd="+movieCd);
                     }
 
                 } else { // 댓글 등록에 실패했다면
@@ -87,15 +94,31 @@ public class ReviewController extends HttpServlet {
 
             	String movieCd = request.getParameter("movieCd");
             	System.out.println(movieCd);
+            	String Sequence = request.getParameter("Sequence");
+            	System.out.println(Sequence);
+            	
+            	// 그영화에 좋아요 수
+            	int m_like_count = like_rDAO.like_allCount(movieCd);
+            	 request.setAttribute("m_like_count", m_like_count);
+            	 System.out.println(m_like_count);
                 // 평점 몇명했는지
-                int cnt = reviewDAO.r_grade_count();
+                int cnt = basketDAO.wishCnt(movieCd);
                 request.setAttribute("cnt", cnt);
                 // 평균
-                Double average = reviewDAO.r_grade_average();
+                Double average = reviewDAO.r_grade_average(movieCd);
                 request.setAttribute("average", average);
                 // 게시글에 해당하는 댓글을 가져와 담아주는 작업
-                ArrayList<ReviewDTO> list = reviewDAO.selectAll(movieCd);
-//				System.out.println("list" + list);
+                ArrayList<ReviewDTO> list = null;
+                //최신,높은,낮은순
+                if(Sequence == null) {
+                	list = reviewDAO.selectAll(movieCd);
+                }else if(Sequence.equals("low")) {
+                	list = reviewDAO.lowGrade(movieCd);
+                }else if(Sequence.equals("high")) {
+                	list = reviewDAO.highGrade(movieCd);
+                }
+                System.out.println(list);
+                
 
                 //좋아요갯수
                 ArrayList<Like_r_countDTO> like_list = like_rDAO.like_count();
@@ -180,7 +203,7 @@ public class ReviewController extends HttpServlet {
                   int cnt = reviewDAO.r_grade_count();
                   request.setAttribute("cnt", cnt);
                   // 평균
-                  Double average = reviewDAO.r_grade_average();
+                  Double average = reviewDAO.r_grade_average(movieCd);
                   request.setAttribute("average", average);
                   // 게시글에 해당하는 댓글을 가져와 담아주는 작업
                   ArrayList<ReviewDTO> list = reviewDAO.selectAll(movieCd);
@@ -227,7 +250,7 @@ public class ReviewController extends HttpServlet {
                   int cnt = reviewDAO.r_grade_count();
                   request.setAttribute("cnt", cnt);
                   // 평균
-                  Double average = reviewDAO.r_grade_average();
+                  Double average = reviewDAO.r_grade_average(movieCd);
                   request.setAttribute("average", average);
                   // 게시글에 해당하는 댓글을 가져와 담아주는 작업
                   ArrayList<ReviewDTO> list = reviewDAO.selectAll(movieCd);
@@ -251,6 +274,7 @@ public class ReviewController extends HttpServlet {
                 e.printStackTrace();
             }
             request.getRequestDispatcher("/review_d/inquiry_d.jsp").forward(request, response);
+
         } else if (uri.equals("/toReviewList.re")) {
             int curPage = Integer.parseInt(request.getParameter("curPage"));
             HttpSession httpSession = request.getSession();
@@ -327,8 +351,13 @@ public class ReviewController extends HttpServlet {
             int curPage = Integer.parseInt(request.getParameter("curPage"));
             HttpSession httpSession = request.getSession();
             MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("loginSession");
-            String id = memberDTO.getUser_id();
-            String user_category = memberDTO.getUser_category();
+            String id = null;
+            String user_category = null;
+
+            if (memberDTO != null) {
+                id = memberDTO.getUser_id();
+                user_category = memberDTO.getUser_category();
+            }
             String s_type = request.getParameter("s_type");
             String val = request.getParameter("val");
 

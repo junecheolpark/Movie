@@ -32,6 +32,23 @@ public class Like_rDAO {
 		return basicDataSource.getConnection();
 	}
 	
+	//그 영화의 좋아요 누른 수
+	public int like_allCount(String movieCd) throws Exception{
+		String sql = "select sum(r_like_check) from tbl_like_r join tbl_review using(seq_review) where movieCd=? and r_like_check = 1";
+		try(Connection con = getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setString(1, movieCd);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int m_like_count = rs.getInt(1);
+				return m_like_count;
+			}
+			return 0;
+		}
+	}
+	
 	//전체조회
 	public ArrayList<Like_rDTO> selectAll() throws Exception {
 		String sql = "select*from tbl_like_r order by 4";
@@ -45,7 +62,7 @@ public class Like_rDAO {
 				String user_id = rs.getString("user_id");
 				int seq_review = rs.getInt("seq_review");
 				String user_category = rs.getString("user_category");
-				all_list.add(new Like_rDTO(seq_like, r_like_check, user_id, seq_review, user_category));
+				all_list.add(new Like_rDTO(seq_like, r_like_check, user_id, user_category,seq_review));
 			}
 			return all_list;
 		}
@@ -57,8 +74,6 @@ public class Like_rDAO {
 		String sql = "select count(CASE WHEN r_like_check=1 THEN 0 END)as l_count ,seq_review from tbl_like_r group by seq_review order by 2";
 		try(Connection con =getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-			
-	
 
 			ResultSet rs = pstmt.executeQuery(sql);
 			ArrayList<Like_r_countDTO> like_list = new ArrayList<>(); 
@@ -131,13 +146,15 @@ public class Like_rDAO {
 	public int like_insert (Like_rDTO dto) throws Exception{
 		String sql = "insert into tbl_like_r values(seq_like.nextval, ?, ?, ?,?)";
 		
-		try(Connection con =getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+		try(Connection con =getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)){
+
 			pstmt.setInt(1, dto.getR_like_check());
 			pstmt.setString(2, dto.getUser_id());
-			pstmt.setInt(3, dto.getSeq_review());
-			pstmt.setString(4, dto.getUser_category());
+			pstmt.setString(3, dto.getUser_category());
+			pstmt.setInt(4, dto.getSeq_review());
+
 			int rs = pstmt.executeUpdate();
+
 			return rs;
 		}
 	}

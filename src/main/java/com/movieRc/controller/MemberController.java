@@ -3,6 +3,7 @@ package com.movieRc.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -105,6 +106,23 @@ public class MemberController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+		}else if(uri.equals("/deleteProc.mem")) { // 회원탈퇴 요청
+			HttpSession session = request.getSession();
+			String user_id = ((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+			
+			MemberDAO dao = new MemberDAO();
+			try {
+				int rs = dao.deleteMember(user_id);
+				if(rs > 0) {
+					session.removeAttribute("loginSession");
+					response.sendRedirect("/Member/login.jsp");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		} else if (uri.equals("/loginProc.mem")) { // 로그인 요청
 			String user_id = request.getParameter("user_id");
 			String user_pw = request.getParameter("user_pw");
@@ -114,9 +132,10 @@ public class MemberController extends HttpServlet {
 			MemberDAO dao = new MemberDAO();
 
 			try {
-				user_pw = EncryptionUtils.getSHA512(user_pw);
-				System.out.println("암호화된 pw : " + user_pw);
-
+				/**/
+			user_pw = EncryptionUtils.getSHA512(user_pw);
+			System.out.println("암호화된 pw : " + user_pw);
+			/**/
 				MemberDTO dto = dao.checkLogin(user_id, user_pw);
 				if (dto != null) {
 					System.out.println("로그인 성공");
@@ -127,7 +146,7 @@ public class MemberController extends HttpServlet {
 					System.out.println("로그인 실패");
 					request.setAttribute("rs", false);
 				}
-				request.getRequestDispatcher("/loginHome.jsp").forward(request, response);
+				request.getRequestDispatcher("/listLookup.movie?curPage=1").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -196,7 +215,82 @@ public class MemberController extends HttpServlet {
 			response.sendRedirect("/Member/login.jsp");
 
 			System.out.println("로그아웃 성공");
+			
+		}else if(uri.equals("/myPage.mem")) { // 마이페이지 요청
+			HttpSession session = request.getSession();
+			String user_id = ((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+			System.out.println("user_id : " + user_id);
+		
+			MemberDAO dao = new MemberDAO();
+			
+			try {
+				MemberDTO dto = dao.selectById(user_id);				
+				
+				request.setAttribute("dto", dto);
+				request.getRequestDispatcher("/Mypage/mypageIndex.jsp").forward(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(uri.equals("/modify.mem")) { // 내 정보수정 페이지 요청
+			HttpSession session = request.getSession();
+			String user_id = ((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+		
+			MemberDAO dao = new MemberDAO();
+			try {
+				MemberDTO dto = dao.selectById(user_id);			
+				
+				request.setAttribute("dto", dto);
+				request.getRequestDispatcher("/Mypage/mypageModify.jsp").forward(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(uri.equals("/modifyProc.mem")) { // 내 정보수정 요청
+			HttpSession session = request.getSession();
+			String user_id = ((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+			String user_pw = request.getParameter("user_pw");
+			String user_nickname = request.getParameter("user_nickname");
+			String user_phone = request.getParameter("user_phone");
+			String postcode = request.getParameter("postcode");
+			String roadAddr = request.getParameter("roadAddr");
+			String detailAddr = request.getParameter("detailAddr");
+			String extraAddr = request.getParameter("extraAddr");
+			
+			System.out.println(user_id + ":" + user_pw + ":" + user_nickname + ":" + user_phone + ":" + postcode + ":" + roadAddr + ":" + detailAddr + ":" + extraAddr);
+			
+			MemberDAO dao = new MemberDAO();
+			try {
+				user_pw = EncryptionUtils.getSHA512(user_pw);
+				System.out.println("암호화된 pw : " + user_pw);
+				
+				int rs = dao.modifyMember(new MemberDTO(user_id, null, null, user_pw, user_nickname, null, 0, user_phone, postcode, roadAddr, detailAddr, extraAddr, null));
+				if(rs > 0) {
+					response.sendRedirect("/myPage.mem");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(uri.equals("/")) { // 전체 조회
+			HttpSession session = request.getSession();
+			String user_id = request.getParameter("user_id");
+			String user_nickname = request.getParameter("user_nickname");
+			String user_name = request.getParameter("user_name");
+			int user_birth = Integer.parseInt(request.getParameter("user_birth"));
+			String user_phone = request.getParameter("user_phone");
+			
+			System.out.println(user_id + ":" + user_nickname + ":" + user_name + ":" + user_birth + ":" + user_phone);
+			
+			MemberDAO dao = new MemberDAO();
+			ArrayList<MemberDTO> list = new ArrayList<>();
+			try {
+				list = dao.selectAll();
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("/").forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
 	}
-
 }

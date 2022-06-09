@@ -33,36 +33,24 @@ a {
 	height: 500px;
 }
 
+/* header */
 #navLogo {
-	width: 90%;
-	height: 90%;
+	width: 150px;
+	height: 100px;
 }
 
+#logoImg {
+	width: 100%;
+	height: 100%;
+}
+
+/* Icon */
 #cartIcon {
 	width: 30px;
 	height: 30px;
 }
 
 #myPageIcon {
-	width: 30px;
-	height: 30px;
-}
-
-#cart {
-	display: none;
-}
-
-#myPage {
-	display: none;
-}
-
-/* Icon */
-#calendarIcon {
-	width: 30px;
-	height: 30px;
-}
-
-#humanIcon {
 	width: 30px;
 	height: 30px;
 }
@@ -109,7 +97,42 @@ a {
 	float: left;
 	margin-top: 10px;
 }
+/* Icon end */
 
+/* Footer */
+.nav-link {
+	color: gray;
+	text-decoration: none;
+}
+
+.nav-link:hover {
+	color: white;
+}
+
+/* header 반응형 */
+@media ( max-width : 767px) {
+	#navLogo {
+		display: none;
+	}
+	#myPageIcon {
+		display: none;
+	}
+	#cartIcon {
+		display: none;
+	}
+	#menu {
+		display: none;
+	}
+}
+
+@media ( min-width : 768px) {
+	#navibar {
+		display: none;
+	}
+}
+/* header 반응형 끝 */
+
+/* -----------------------------------------------------------*/
 textarea {
 	resize: none;
 }
@@ -124,7 +147,6 @@ body {
 	background-color: rgb(213, 226, 228);
 }
 
-/* -----------------------------------------------------------*/
 /* 왼쪽 영화 이미지 */
 .movie_box {
 	background-color: white;
@@ -142,6 +164,83 @@ body {
 	background-color: #ccc;
 	border-radius: 10px;
 }
+
+/*찜 버튼*/
+
+/* add default color for animation start  */
+
+
+/* toggle this class */
+
+.color-bg-start {
+  background-color: rgb(196, 183, 181);
+}
+
+
+/* toggle class bg-animate-color */
+
+.bg-animate-color {
+  animation: random-bg .5s linear infinite;
+}
+
+
+/* add animation to bg color  */
+
+@keyframes random-bg {
+  from {
+    filter: hue-rotate(0);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.fun-btn {
+  /* change bg color to get different hues    */
+  height: 0px;
+  line-height: 50x;
+  background-color: rgb(182, 173, 172);
+  vertical-align:middle;
+  color: rgb(0, 0, 0);
+  padding-bottom: 30px;
+  
+  border: none;
+  transition: all .3s ease;
+  border-radius: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.fun-btn:hover {
+  animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+}
+
+.start-fun {
+  background-color: #fff !important;
+  /* change color of button text when fun is started   */
+  color: rgb(114, 250, 243) !important;
+}
+
+/* pulsating effect on button */
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.2);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
 
 /* -----------------------------------------------------------*/
 /* 영화 코멘트 */
@@ -219,6 +318,22 @@ body {
 
 #btnHateUp2 {
 	z-index: 1;
+}
+/*버튼 확대*/
+#btnLikeUp:hover {
+	transform: scale(1.2);
+}
+
+#btnLikeUp2:hover {
+	transform: scale(1.2);
+}
+
+#btnHateUp:hover {
+	transform: scale(1.2);
+}
+
+#btnHateUp2:hover {
+	transform: scale(1.2);
 }
 
 .reply_box {
@@ -299,154 +414,189 @@ body {
 
 /* -----------------------------------------------------------*/
 
-/* Footer */
-.nav-link {
-	color: gray;
-	text-decoration: none;
+/* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
+        https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
+/* 반응형 시작 */
+@media screen and (max-width: 1200px) {
+	aside#aside {
+		width: 25%;
+	}
+	div.body-wishList {
+		width: 75%;
+	}
 }
 
-.nav-link:hover {
-	color: white;
-}
-
-@media ( max-width : 1000px) {
-	#navLogo {
+@media screen and (max-width: 1024px) {
+	aside#aside {
 		display: none;
 	}
-	#myPageIcon {
-		display: none;
+	div.body-wishList {
+		width: 100%;
 	}
-	#cartIcon {
-		display: none;
-	}
-	#cart {
+	aside#asideSM {
 		display: block;
+		width: 100%;
 	}
-	#myPage {
-		display: block;
-	}
-	#menu {
+}
+
+@media screen and (min-width: 1024px) {
+	aside#asideSM {
 		display: none;
 	}
 }
 
-@media ( min-width : 1000px) {
-	#navibar {
+@media screen and (max-width: 768px) {
+	aside#asideSM div#profileBox {
+		display: none;
+		width: 50%
+	}
+	aside#asideSM div#profileBtnBox {
+		display: none;
+	}
+	/* aside#asideSM div#profileBtnBoxSM {
+		display: block;
+	} */
+	div.body-wishList {
+		width: 100%;
+		float: none;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	aside#asideSM div#profileBtnBoxSM {
 		display: none;
 	}
 }
+/* 반응형 끝 */
 </style>
+
 </head>
 
 <body>
 
+
 	<!-- Header -->
 	<header class="mb-3 border-bottom">
 		<div class="container">
-			<nav id="navibar" class="navbar navbar-expand-lg navbar-dark" aria-label="Main navigation">
+			<!-- 접혔을 때 nav -->
+			<nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
 				<div class="container-fluid">
 					<!-- toggle button -->
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-						aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
 					<!-- 메뉴 -->
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+								</c:otherwise>
+							</c:choose>
+
+
 						</ul>
-
-						<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-							<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
-						</ul>
-
-
-						<a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="cart">찜한 영화</p>
-						</a> <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
-							<p class="text-light" id="myPage">마이페이지</p>
-						</a>
 
 						<form class="searchForm d-flex" method="get" action="/search.movie">
-							<input
-									class="searchInput form-control me-2"
-									type="search"
-									placeholder="Search"
-									aria-label="Search"
-									name="val">
-							<input type="hidden" name = 'curPage' value="1">
-							<input type="hidden" name = 's_type' value="movieNm">
+							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'> <input
+								type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
 							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
-
 					</div>
 				</div>
 			</nav>
 
-			<nav id="menu" class="navbar navbar-expand-lg w-100 navbar-dark" aria-label="Main navigation">
+			<!-- 펼쳐졌을 때 nav -->
+			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="#">영화</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/post/post.jsp">자유게시판</a></li>
 						</ul>
-
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/" class="d-flex align-items-center justify-content-start mb-2 mb-lg-0"> <img id="navLogo"
-							src="images/logo3.png">
+						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
+							<img id="logoImg" src="/images/logo3.png">
+
 						</a>
 					</div>
 
 					<div class="col-5">
-						<div class="row">
-							<div class="col-5">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-auto">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">회원가입</a></li>
+									<c:if test="${empty loginSession}">
+										<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+										<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+									</c:if>
 								</ul>
 							</div>
 
-							<div class="col-2">
-								<a href="" class="align-items-center "> <img class="img-fluid" id="cartIcon" src="images\찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
-								</a> <a href="" class="align-items-center"> <img class="img-fluid" id="myPageIcon" src="images\마이페이지.png"> <!-- <p class="text-light" id="myPage">마이페이지</p> -->
-								</a>
+							<div class="col-auto">
+								<c:if test="${not empty loginSession}">
+									<a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
+									</a>
+									<a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+									</a>
+								</c:if>
 							</div>
-							<div class="col-5">
-								<form class="searchForm d-flex" method="get" action="/search.movie">
-									<input
-											class="searchInput form-control me-2"
-											type="search"
-											placeholder="Search"
-											aria-label="Search"
-											name="val">
-									<input type="hidden" name = 'curPage' value="1">
-									<input type="hidden" name = 's_type' value="movieNm">
-									<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
-								</form>
+
+							<div class="col-1">
+								<button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+									<img src="/images/searchIcon.png">
+								</button>
 							</div>
+							<form class="searchForm d-flex" method="get" action="/search.movie">
+								<div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title m-auto">영화 찾기</h5>
+												<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form id="searchForm" class="searchForm">
+													<div class="row justify-content-center">
+														<div class="col-11">
+															<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'>
+															<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+															<input type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
+														</div>
+													</div>
+													<div class="row justify-content-end">
+														<div class="col-3">
+															<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
 
 						</div>
-
-
-
-
 					</div>
-
 				</div>
 			</nav>
 		</div>
-		</nav>
-
-		</div>
 	</header>
+
+
 
 	<!-- Contents -->
 	<div class="container">
@@ -454,7 +604,7 @@ body {
 			<!-- 왼쪽 영화이미지 -->
 			<div class="col-3 p-2 movie_box">
 				<div class="col movie_img">
-					<img src="images/movie.jpg" width="100%" height="100%">
+					<img src="images/NoImg.webp" width="100%" height="100%">
 				</div>
 				<div class="col ">
 					<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
@@ -485,12 +635,20 @@ body {
 			<div class="row pt-4">
 				<!-- 좋아요 -->
 				<div class="row col">
-					<div class="col"></div>
-					<div class="col-lg-5 col-md-10 text-center like_round">
-						<span> <img src="images/heart.png"> 458
+					<div class="col p-0">
+						<a class="nav-link" href="/wish_insert.wish?movieCd=${moviedto.movieCd}">
+							 <button type="button"class="learn-more fun-btn px-4">
+                           		 <img src="images/star.png" > 찜
+                       		 </button>
+						</a>
+					</div>
+					<div class="col-1"></div>
+					<div class="col-lg-5 col-7 text-center  fun-btn">
+						<span class="mx-2"> <img src="images/heart.png"> ${cnt}
 						</span>
 					</div>
 				</div>
+
 
 
 				<!-- 코멘트,댓글 -->
@@ -509,9 +667,9 @@ body {
 						<c:if test="${not empty reviewList}" var="review">
 							<div class="col-5 pe-5 text-end">
 								<%--<a href="#">&#9786공감순</a> --%>
-								<a href="/highGrade.re?movieCd=${moviedto.movieCd}" class="highGrade">&#9734높은평점순</a> 
-								<a href="/lowGrade.re?movieCd=${moviedto.movieCd}" class="lowGrade">&#9734낮은평점순</a> 
-								<a href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
+								<a href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=high" class="highGrade">&#9734높은평점순</a> <a
+									href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=low" class="lowGrade">&#9734낮은평점순</a> <a
+									href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
 
 							</div>
 						</c:if>
@@ -524,6 +682,7 @@ body {
 									<textarea id="r_content" class="form-control" name="r_content" placeholder="댓글을 입력해주세요."></textarea>
 								</div>
 								<div class="col-2">
+									<input type="hidden" name="movieCd" value="${moviedto.movieCd}">
 									<button type="button" class="btn btnWrite" id="btnWrite">리뷰 등록</button>
 								</div>
 							</div>
@@ -534,7 +693,7 @@ body {
 									<textarea id="r_content" class="form-control" name="r_content" placeholder="로그인을 통해 별점 및 리뷰등록이 가능합니다!"></textarea>
 								</div>
 								<div class="col-2">
-									<button type="button" class="btn btnWrite" id="Sign_in">로그인하기</button>
+									<a href="/Member/login.jsp"><button type="button" class="btn btnWrite" id="Sign_in">로그인하기</button></a>
 								</div>
 							</div>
 						</c:otherwise>
@@ -557,11 +716,8 @@ body {
 				<div class="col-9 reply_box">
 					<!-- 댓글 출력 -->
 					<div class="row">
-						<div class="col-2 text">
-							<!-- 프로필 -->
-							<div class="Profile text-center mt-5">프로필</div>
-						</div>
-						<div class="col-10 text-center">
+
+						<div class="col text-center pt-3">
 							<p>등록된 댓글이 없습니다.</p>
 						</div>
 					</div>
@@ -587,7 +743,7 @@ body {
 							<div class="col-10">
 								<div class="row mb-1">
 									<!-- 닉네임 -->
-									<div class="col-6 ms-2 mt-1">${review.user_nickname}</div>
+									<div class="col-6 ms-2 mt-1 fw-bolder">${review.user_nickname}</div>
 									<div class="col-4 text-end r_grade">
 										<input type=text id="t_r_grade" value="${review.r_grade}">
 										<!-- 별점 표시 if문 -->
@@ -776,7 +932,7 @@ body {
 							<!-- 날짜 -->
 							<div class="row mt-1 likeBox">
 								<div class="col-lg-7 col-md-5 ms-2">
-										<span id="r_date">${review.r_date}</span>
+									<span id="r_date">${review.r_date}</span>
 								</div>
 
 								<div class="row col-lg-2 col-md-3 m-1 like_round">
@@ -816,8 +972,8 @@ body {
 		</c:forEach>
 		<script>
 			const searchForm = $(".searchForm");
-			searchForm.on("submit", function (event) {
-				if ($(this).children(".searchInput").val() === "") {
+			searchForm.on("submit", function(event) {
+				if ($(this).find(".searchInput").val() === "") {
 					event.preventDefault();
 					alert("검색어를 입력하세요");
 				}
@@ -970,7 +1126,7 @@ body {
 								"display", "none"); // 수정삭제 버튼 감추기
 						$(e.target).parent().parent().prev("#divWrite").css(
 								"display", "block"); // 취소완료 버튼 보이기
-						// 댓글 수정가능하게끔 readonly 속성 풀어주기 
+						// 댓글 수정가능하게끔 readonly 속성 풀어주기
 						$(e.target).parent().parent().parent().prev().children(
 								"textarea").attr("readonly", false);
 						// textarea 포커스
@@ -1081,31 +1237,31 @@ body {
 				<div class="col-2">
 					<h5>장르</h5>
 					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">코믹</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">액션</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">멜로</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">SF</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">호러</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디" class="nav-link p-0">코미디</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션" class="nav-link p-0">액션</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로" class="nav-link p-0">멜로</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF" class="nav-link p-0">SF</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러" class="nav-link p-0">호러</a></li>
 					</ul>
 				</div>
 
 				<div class="col-2">
 					<h5>계정</h5>
 					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">로그인</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">회원가입</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">마이페이지</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">아이디 찾기</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">비밀번호 찾기</a></li>
+						<li class="nav-item mb-2"><a href="/Member/login.jsp" class="nav-link p-0">로그인</a></li>
+						<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+						<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
+						<li class="nav-item mb-2"><a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a></li>
+						<li class="nav-item mb-2"><a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a></li>
 					</ul>
 				</div>
 
 				<div class="col-2">
 					<h5>기타</h5>
 					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">리뷰</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">자유게시판</a></li>
-						<li class="nav-item mb-2"><a href="#" class="nav-link p-0">찜 목록</a></li>
+						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
+						<li class="nav-item mb-2"><a href="/post/post.jsp" class="nav-link p-0">자유게시판</a></li>
+						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 					</ul>
 				</div>
 
@@ -1154,18 +1310,11 @@ body {
 
 	</footer>
 	<script>
-	/*
-		$(".lowGrade").on("click", function() { // 낮은 평점
-			location.href = "/lowGrade.re";
-		});
-
-		$(".highGrade").on("click", function() { // 높은 평점
-			location.href = "/highGrade.re";
-		});
-		$(".newGrade").on("click", function() { // 높은 평점
-			location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
-		});
-*/
+		let msg= '${msg}';
+		console.log(msg);
+		if(msg !=""){
+			alert(msg)
+		}
 		$("#btnWrite").on(
 				"click",
 				function() {

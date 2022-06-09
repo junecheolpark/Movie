@@ -1,28 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: jangseoksu
+  Date: 2022/06/08
+  Time: 9:50 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <title>Title</title>
 </head>
 <body>
-
-<button id="btnPost" type="button">게시판</button>
-<button id="test">test</button>
-<button id="test2">test2</button>
-
+<jsp:forward page="/toHome.home"/>
 </body>
-<script>
-    $("#btnPost").on("click", function () {
-        location.href = "/post.po?curPage=1";
-    })
-    $("#test").on("click", function () {
-        location.href = "/listLookup.movie?curPage=1";
-    })
-    $("#test2").on("click", function () {
-        location.href = "/test.movie";
-    })
-</script>
 </html>
