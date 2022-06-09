@@ -113,12 +113,12 @@
 
         /* Footer */
         .nav-link {
-            color: gray;
+            color: gray !important;
             text-decoration: none;
         }
 
         .nav-link:hover {
-            color: white;
+            color: white !important;
         }
 
         /* header 반응형 */
@@ -153,7 +153,7 @@
             resize: none;
         }
 
-        a {
+        .contentDiv a {
             text-decoration: none !important;
             color: black !important;
         }
@@ -194,10 +194,6 @@
         /*  content */
 
         /* -----------------------------------------------------------*/
-        .contentDiv {
-            display: flex;
-            flex-direction: column;
-        }
 
         .content1 {
             height: 20%;
@@ -223,6 +219,7 @@
             height: 12%;
             width: 100%;
             margin-bottom: 50px;
+            max-width: 1200px;
         }
 
         .movieDiv {
@@ -301,11 +298,12 @@
         .content3 {
             height: 8%;
             margin-bottom: 50px;
+            max-width: 1200px;
         }
 
         .reviewDiv {
             display: flex !important;
-            align-items: center;
+            align-items: center !important;
             height: 90%;
             gap: 10px;
         }
@@ -316,6 +314,7 @@
             padding: 12px;
             border: 1px solid silver;
             border-radius: 12px;
+            width: 98%;
         }
 
         .review_reviewer {
@@ -356,6 +355,7 @@
         .content4 {
             height: 12%;
             margin-bottom: 50px;
+            max-width: 1200px;
         }
 
         .topicLi {
@@ -408,6 +408,8 @@
 
         .content5 {
             margin-bottom: 50px;
+            max-width: 1200px;
+            height: 20%;
         }
     </style>
     <link
@@ -437,60 +439,37 @@
 <header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
-        <nav
-                id="navibar"
-                class="navbar navbar-expand-md navbar-dark"
-                aria-label="Main navigation">
+        <nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
             <div class="container-fluid">
                 <!-- toggle button -->
-                <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- 메뉴 -->
-                <div
-                        class="collapse navbar-collapse justify-content-end"
-                        id="navbarNavDropdown">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/listLookup.movie?curPage=1">영화</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">자유게시판</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Member/login.jsp">로그인</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Member/signup.jsp">회원가입</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/wishlist.wish">찜한 영화</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
+                        <c:choose>
+                            <c:when test="${not empty loginSession}">
+                                <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                            </c:otherwise>
+                        </c:choose>
+
+
                     </ul>
 
-                    <form class="searchForm d-flex" action="/search.movie">
-                        <input
-                                class="searchInput form-control me-2"
-                                type="search"
-                                placeholder="영화 검색.."
-                                aria-label="Search"
-                                name='val'>
-                        <input type="hidden" name='curPage' value="1">
-                        <input type="hidden" name='s_type' value="movieNm">
+                    <form class="searchForm d-flex" method="get" action="/search.movie">
+                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'> <input
+                            type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
                         <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -498,29 +477,21 @@
         </nav>
 
         <!-- 펼쳐졌을 때 nav -->
-        <nav
-                id="menu"
-                class="navbar navbar-expand-md w-100 navbar-dark"
-                aria-label="Main navigation">
+        <nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
             <div class="row w-100 align-items-center">
                 <div class="col-5 d-flex justify-content-center">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-2" href="#">자유게시판</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/post/post.jsp">자유게시판</a></li>
                     </ul>
                 </div>
 
                 <!-- logo -->
                 <div class="col-2">
-                    <a href="/lookMovie.home" id="navLogo" class="mb-2 mb-lg-0">
+                    <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
                         <img id="logoImg" src="/images/logo3.png">
+
                     </a>
                 </div>
 
@@ -528,75 +499,55 @@
                     <div class="row align-items-center justify-content-center">
                         <div class="col-auto">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/Member/login.jsp">로그인</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/Member/signup.jsp">회원가입</a>
-                                </li>
-
+                                <c:if test="${empty loginSession}">
+                                    <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                                </c:if>
                             </ul>
                         </div>
 
                         <div class="col-auto">
-                            <a href="/wishlist.wish" class="">
-                                <img class="img-fluid" id="cartIcon" src="/images/찜.png">
-                            </a>
-                            <a href="/Mypage/mypageIndex.jsp" class="">
-                                <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
-                            </a>
+                            <c:if test="${not empty loginSession}">
+                                <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
+                                </a>
+                                <a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+                                </a>
+                            </c:if>
                         </div>
 
                         <div class="col-1">
-                            <button
-                                    id="searchBtn"
-                                    class="btn"
-                                    type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#searchModal">
+                            <button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
                                 <img src="/images/searchIcon.png">
                             </button>
                         </div>
-
-                        <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title m-auto">영화 찾기</h5>
-                                        <button
-                                                type="button"
-                                                class="btn-close m-0"
-                                                data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="searchForm" class="searchForm" action="/search.movie">
-                                            <div class="row justify-content-center">
-                                                <div class="col-11">
-                                                    <input
-                                                            class="searchInput form-control me-2"
-                                                            type="search"
-                                                            placeholder="영화 검색.."
-                                                            aria-label="Search"
-                                                            name='val'>
-                                                    <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를
-                                                        입력해보세요!</p>
-                                                    <input type="hidden" name='curPage' value="1">
-                                                    <input type="hidden" name='s_type' value="movieNm">
+                        <form class="searchForm d-flex" method="get" action="/search.movie">
+                            <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title m-auto">영화 찾기</h5>
+                                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="searchForm" class="searchForm">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-11">
+                                                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'>
+                                                        <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+                                                        <input type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row justify-content-end">
-                                                <div class="col-3">
-                                                    <button class="searchBtn btn btn-outline-success" type="submit">
-                                                        Search
-                                                    </button>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-3">
+                                                        <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
 
                     </div>
                 </div>
@@ -605,9 +556,9 @@
     </div>
 </header>
 <!-- Contents -->
-<div class="contentDiv">
-    <div class="content1">나중에 추가</div>
-    <div class="content2">
+<div class="contentDiv row justify-content-center">
+    <div class="content1 col-7">나중에 추가</div>
+    <div class="content2 col-7">
         <div class="contentTitle">
             <span>최신 영화</span>
         </div>
@@ -640,7 +591,7 @@
             <button id='toRecentMovie'>최신 영화 더 보기</button>
         </div>
     </div>
-    <div class="content3">
+    <div class="content3 col-7">
         <div class="contentTitle">
             <span>최신 리뷰</span>
         </div>
@@ -675,7 +626,7 @@
         </div>
 
     </div>
-    <div class="content4">
+    <div class="content4 col-7">
         <div class="contentTitle"><span>추천 영화</span></div>
         <div class="movieDiv slider">
             <c:forEach items="${hashMap3}" var="movie">
@@ -704,7 +655,7 @@
         </div>
     </div>
 
-    <div class="content5">
+    <div class="content5 col-7">
         <div class="contentTitle">
             <span>최신 토픽</span>
         </div>
