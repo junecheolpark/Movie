@@ -91,17 +91,14 @@ public class PostCommentDAO {
 		}
 	}
 
-	public int countComment (int seq_post1) throws Exception{
+	public int countComment (int seq_post) throws Exception{
 		String sql = "select count(*) from tbl_post_comment where seq_post = ?";
-		try(Connection con = bds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql)){
-
-			pstmt.setInt(1, seq_post1);
-			ResultSet rs = pstmt.executeQuery();
-
-			rs.next();
-
-			return rs.getInt(1);
+		try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setInt(1, seq_post);
+			ResultSet resultset = preparedStatement.executeQuery();
+			if (resultset.next()) {
+				return resultset.getInt(1);
+			} else return 0;
 		}
 	}
 	

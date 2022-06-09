@@ -112,13 +112,17 @@ public class HomeController extends HttpServlet {
                 hashMap1 = new HashMap<>();
                 int like;
                 int hate;
+                int seq;
                 int comment;
 
                 for(int i = 0; i<arrayList3.size(); i++){
                     hashMap2 = new HashMap<>();
-                    like = postDAO.pLikeCount(arrayList3.get(i).getSeq_post(), 1);
-                    hate = postDAO.pLikeCount(arrayList3.get(i).getSeq_post(), 2);
-                    comment = postCommentDAO.countComment(arrayList3.get(i).getSeq_post());
+                    seq = arrayList3.get(i).getSeq_post();
+                    like = postDAO.pLikeCount(seq, 1);
+                    hate = postDAO.pLikeCount(seq, 2);
+                    comment = postCommentDAO.countComment(seq);
+                    System.out.println(seq);
+                    System.out.println(comment);
                     hashMap2.put("like", like);
                     hashMap2.put("hate", hate);
                     hashMap2.put("comment",  comment);
