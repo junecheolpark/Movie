@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.movieRc.dto.BasketDTO;
+import com.movieRc.dto.Like_rDTO;
 
 public class BasketDAO {
 	private BasicDataSource bds;
@@ -154,17 +155,64 @@ public class BasketDAO {
 //		}
 //	}
 	
-	// 찜 개수 카운팅
-	public int getListCnt() throws Exception{
-		String sql = "select count(*) as listCnt from tbl_basket";
+	// 찜 개수 카운팅 중복 방지를 위해 아디값 조회로 수정
+	public int getListCnt(String user_id) throws Exception{
+		String sql = "select count(*) as listCnt from tbl_basket where user_id=?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
-			
+			pstmt.setString(1, user_id);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			int count = rs.getInt("listCnt"); // 전체 찜 개수
 			
 			return count;
+		}
+	}
+	
+//	찜버튼 insert
+	public int wish_insert (BasketDTO dto) throws Exception{
+		String sql = "insert into tbl_basket values(seq_basket.nextval,?,?,?,?,?,?)";
+		
+		try(Connection con =getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setString(1, dto.getUser_id());
+			pstmt.setString(2, dto.getMovieCd());
+			pstmt.setString(3, dto.getMovieNm());
+			pstmt.setString(4, dto.getMovieNmEn());
+			pstmt.setString(5, dto.getPrdtYear());
+			pstmt.setString(6, dto.getUser_category());
+
+			int rs = pstmt.executeUpdate();
+
+			return rs;
+		}
+	}
+	
+	public int wishCnt(String movieCd) throws Exception{
+		String sql = "select count(*) from tbl_basket where movieCd=?";
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, movieCd);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			int wishCnt = rs.getInt(1); // 전체 찜 개수
+			
+			return wishCnt;
+		}
+	}
+	// 중복 찜 등록 방지
+	public int id_Cd_Select (String movieCd, String user_id) throws Exception{
+		String sql = "select*from tbl_basket where movieCd=? and user_id =?";
+		
+		try(Connection con =getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setString(1, movieCd);
+			pstmt.setString(2, user_id);
+			
+
+			int rs = pstmt.executeUpdate();
+
+			return rs;
 		}
 	}
 }

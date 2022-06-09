@@ -145,7 +145,7 @@ public class MemberController extends HttpServlet {
 					System.out.println("로그인 실패");
 					request.setAttribute("rs", false);
 				}
-				request.getRequestDispatcher("/loginHome.jsp").forward(request, response);
+				request.getRequestDispatcher("/listLookup.movie?curPage=1").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -5,22 +5,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- 제이쿼리 코드 -->
-	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-			crossorigin="anonymous"></script>
-	<!-- 부트스트랩 코드 -->
-	<!-- CSS only -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-		  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-	<title>Document</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 제이쿼리 코드 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<!-- 부트스트랩 코드 -->
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<title>Document</title>
 
-	<style>
+<style>
 header, footer {
 	background-color: black;
 }
@@ -39,7 +39,7 @@ a {
 	height: 100px;
 }
 
-#logoImg{
+#logoImg {
 	width: 100%;
 	height: 100%;
 }
@@ -125,13 +125,12 @@ a {
 	}
 }
 
-@media (min-width : 768px) {
+@media ( min-width : 768px) {
 	#navibar {
 		display: none;
 	}
 }
 /* header 반응형 끝 */
-
 
 /* -----------------------------------------------------------*/
 textarea {
@@ -165,6 +164,83 @@ body {
 	background-color: #ccc;
 	border-radius: 10px;
 }
+
+/*찜 버튼*/
+
+/* add default color for animation start  */
+
+
+/* toggle this class */
+
+.color-bg-start {
+  background-color: rgb(196, 183, 181);
+}
+
+
+/* toggle class bg-animate-color */
+
+.bg-animate-color {
+  animation: random-bg .5s linear infinite;
+}
+
+
+/* add animation to bg color  */
+
+@keyframes random-bg {
+  from {
+    filter: hue-rotate(0);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.fun-btn {
+  /* change bg color to get different hues    */
+  height: 0px;
+  line-height: 50x;
+  background-color: rgb(182, 173, 172);
+  vertical-align:middle;
+  color: rgb(0, 0, 0);
+  padding-bottom: 30px;
+  
+  border: none;
+  transition: all .3s ease;
+  border-radius: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.fun-btn:hover {
+  animation: random-bg .5s linear infinite, grow 1300ms ease infinite;
+}
+
+.start-fun {
+  background-color: #fff !important;
+  /* change color of button text when fun is started   */
+  color: rgb(114, 250, 243) !important;
+}
+
+/* pulsating effect on button */
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.2);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
 
 /* -----------------------------------------------------------*/
 /* 영화 코멘트 */
@@ -242,6 +318,22 @@ body {
 
 #btnHateUp2 {
 	z-index: 1;
+}
+/*버튼 확대*/
+#btnLikeUp:hover {
+	transform: scale(1.2);
+}
+
+#btnLikeUp2:hover {
+	transform: scale(1.2);
+}
+
+#btnHateUp:hover {
+	transform: scale(1.2);
+}
+
+#btnHateUp2:hover {
+	transform: scale(1.2);
 }
 
 .reply_box {
@@ -326,30 +418,29 @@ body {
         https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
 /* 반응형 시작 */
 @media screen and (max-width: 1200px) {
-	aside#aside{
+	aside#aside {
 		width: 25%;
 	}
-	div.body-wishList{
+	div.body-wishList {
 		width: 75%;
 	}
 }
 
 @media screen and (max-width: 1024px) {
-	aside#aside{
+	aside#aside {
 		display: none;
 	}
-	div.body-wishList{
+	div.body-wishList {
 		width: 100%;
 	}
-	
-	aside#asideSM{
+	aside#asideSM {
 		display: block;
 		width: 100%;
 	}
 }
 
 @media screen and (min-width: 1024px) {
-	aside#asideSM{
+	aside#asideSM {
 		display: none;
 	}
 }
@@ -365,7 +456,6 @@ body {
 	/* aside#asideSM div#profileBtnBoxSM {
 		display: block;
 	} */
-	
 	div.body-wishList {
 		width: 100%;
 		float: none;
@@ -376,7 +466,7 @@ body {
 	aside#asideSM div#profileBtnBoxSM {
 		display: none;
 	}
-} 
+}
 /* 반응형 끝 */
 </style>
 
@@ -385,17 +475,17 @@ body {
 <body>
 
 
-<!-- Header -->
-<header class="mb-3 border-bottom">
-	<div class="container">
-		<!-- 접혔을 때 nav -->
-		<nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
-			<div class="container-fluid">
-				<!-- toggle button -->
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+	<!-- Header -->
+	<header class="mb-3 border-bottom">
+		<div class="container">
+			<!-- 접혔을 때 nav -->
+			<nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
+				<div class="container-fluid">
+					<!-- toggle button -->
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 						aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
 					<!-- 메뉴 -->
 					<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
@@ -404,29 +494,28 @@ body {
 							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
 							<c:choose>
-						      <c:when test="${not empty loginSession}">
-						        <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-								<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
-						      </c:when>
-						      <c:otherwise>
-						     	 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-							   	<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
-						      </c:otherwise>
-						    </c:choose>
-							
-							
+								<c:when test="${not empty loginSession}">
+									<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+								</c:otherwise>
+							</c:choose>
+
+
 						</ul>
 
 						<form class="searchForm d-flex" method="get" action="/search.movie">
-							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
-							<input type="hidden" name = 'curPage' value="1">
-							<input type="hidden" name = 's_type' value="movieNm">
+							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'> <input
+								type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
 							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
 					</div>
 				</div>
 			</nav>
-			
+
 			<!-- 펼쳐졌을 때 nav -->
 			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
 				<div class="row w-100 align-items-center">
@@ -440,8 +529,7 @@ body {
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/lookMovie.home" id="navLogo" class="mb-2 mb-lg-0">
-							<img id="logoImg" src="/images/logo3.png">
+						<a href="/lookMovie.home" id="navLogo" class="mb-2 mb-lg-0"> <img id="logoImg" src="/images/logo3.png">
 						</a>
 					</div>
 
@@ -450,23 +538,17 @@ body {
 							<div class="col-auto">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 									<c:if test="${empty loginSession}">
-										<li class="nav-item">
-											<a class="nav-link" href="/Member/login.jsp">로그인</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="/Member/signup.jsp">회원가입</a>
-										</li>
+										<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+										<li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
 									</c:if>
 								</ul>
 							</div>
 
-							<div class="col-auto"> 
+							<div class="col-auto">
 								<c:if test="${not empty loginSession}">
-									<a href="/wishlist.wish" class="">
-										<img class="img-fluid" id="cartIcon" src="/images\찜.png">
+									<a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
 									</a>
-									<a href="" class="">
-										<img class="img-fluid" id="myPageIcon" src="/images\마이페이지.png">
+									<a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
 									</a>
 								</c:if>
 							</div>
@@ -488,15 +570,14 @@ body {
 												<form id="searchForm" class="searchForm">
 													<div class="row justify-content-center">
 														<div class="col-11">
-															<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
+															<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'>
 															<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
-															<input type="hidden" name = 'curPage' value="1">
-															<input type="hidden" name = 's_type' value="movieNm"> 
+															<input type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
 														</div>
 													</div>
 													<div class="row justify-content-end">
 														<div class="col-3">
-															<button class="searchBtn btn btn-outline-success" type="submit">Search</button>			
+															<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 														</div>
 													</div>
 												</form>
@@ -505,7 +586,7 @@ body {
 									</div>
 								</div>
 							</form>
-							
+
 						</div>
 					</div>
 				</div>
@@ -515,138 +596,136 @@ body {
 
 
 
-<!-- Contents -->
-<div class="container">
-	<div class="row pt-4">
-		<!-- 왼쪽 영화이미지 -->
-		<div class="col-3 p-2 movie_box">
-			<div class="col movie_img">
-				<img src="images/NoImg.webp" width="100%" height="100%">
-			</div>
-			<div class="col ">
-				<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
-				<p class="m_name my-1">
-					${moviedto.movieNm}<br>(${moviedto.movieNmEn})
-				</p>
-				<p class="m_genre mb-1 mt-1">개봉: ${moviedto.prdtYear} 감독: ${moviedto.directors}</p>
-				<p class="m_genre mb-1 mt-1">국가: ${moviedto.nationAlt}</p>
-			</div>
-		</div>
-
-		<!-- 코멘트,댓글 -->
-		<div class="col-9">
-			<!-- 영화 코멘트 -->
-			<div class="col-10 p-2 mt-3 movie_coment">
-				<textarea id="" class="form-control content-movie" name="m_coment">영화 소개</textarea>
-			</div>
-
-
-		</div>
-
-	</div>
-</div>
-<!-- ---------------------------------------------------------------------------------------------------------------------- -->
-<!-- 좋아요, 댓글창 -->
-<form id="movie_comment_write" action="/write.re" method="post">
+	<!-- Contents -->
 	<div class="container">
 		<div class="row pt-4">
-			<!-- 좋아요 -->
-			  <div class="row col">
-                    <div class="col p-0">
-                        <button class="border-0 px-4 like_round">
-                            <img src="images/star.png" >
-                            찜
-                        </button>
-                    </div>
-                    <div class="col-1">
-                      
-                    </div>
-                    <div class="col-lg-5 col-7 text-center like_round">
-                        <span>
-                            <img src="images/heart.png">
-                            수정</span>
-                    </div>
-                </div>
-
-
+			<!-- 왼쪽 영화이미지 -->
+			<div class="col-3 p-2 movie_box">
+				<div class="col movie_img">
+					<img src="images/NoImg.webp" width="100%" height="100%">
+				</div>
+				<div class="col ">
+					<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
+					<p class="m_name my-1">
+						${moviedto.movieNm}<br>(${moviedto.movieNmEn})
+					</p>
+					<p class="m_genre mb-1 mt-1">개봉: ${moviedto.prdtYear} 감독: ${moviedto.directors}</p>
+					<p class="m_genre mb-1 mt-1">국가: ${moviedto.nationAlt}</p>
+				</div>
+			</div>
 
 			<!-- 코멘트,댓글 -->
-			<div class="col-9 movie_comment_box">
-				<div class="row container r_grade_box mb-1">
-					<!-- 별점 -->
-					<div class="col-6 r_grade">
-						평균 <label for="star" class="star">&#9733;</label> ${average}(${cnt}명) 별점주기 <span class="star-rating" id="r_grade_star">
+			<div class="col-9">
+				<!-- 영화 코멘트 -->
+				<div class="col-10 p-2 mt-3 movie_coment">
+					<textarea id="" class="form-control content-movie" name="m_coment">영화 소개</textarea>
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+	<!-- ---------------------------------------------------------------------------------------------------------------------- -->
+	<!-- 좋아요, 댓글창 -->
+	<form id="movie_comment_write" action="/write.re" method="post">
+		<div class="container">
+			<div class="row pt-4">
+				<!-- 좋아요 -->
+				<div class="row col">
+					<div class="col p-0">
+						<a class="nav-link" href="/wish_insert.wish?movieCd=${moviedto.movieCd}">
+							 <button type="button"class="learn-more fun-btn px-4">
+                           		 <img src="images/star.png" > 찜
+                       		 </button>
+						</a>
+					</div>
+					<div class="col-1"></div>
+					<div class="col-lg-5 col-7 text-center  fun-btn">
+						<span class="mx-2"> <img src="images/heart.png"> ${cnt}
+						</span>
+					</div>
+				</div>
+
+
+
+				<!-- 코멘트,댓글 -->
+				<div class="col-9 movie_comment_box">
+					<div class="row container r_grade_box mb-1">
+						<!-- 별점 -->
+						<div class="col-6 r_grade">
+							평균 <label for="star" class="star">&#9733;</label> ${average}(${cnt}명) 별점주기 <span class="star-rating" id="r_grade_star">
 								<input type="radio" class="inputStar" id="5-stars" name="r_grade" value="5" /> <label for="5-stars" class="star">&#9733;</label>
 								<input type="radio" class="inputStar" id="4-stars" name="r_grade" value="4" /> <label for="4-stars" class="star">&#9733;</label>
 								<input type="radio" class="inputStar" id="3-stars" name="r_grade" value="3" /> <label for="3-stars" class="star">&#9733;</label>
 								<input type="radio" class="inputStar" id="2-stars" name="r_grade" value="2" /> <label for="2-stars" class="star">&#9733;</label>
 								<input type="radio" class="inputStar" id="1-star" name="r_grade" value="1" /> <label for="1-star" class="star">&#9733;</label>
 							</span>
-					</div>
-					<c:if test="${not empty reviewList}" var="review">
-						<div class="col-5 pe-5 text-end">
+						</div>
+						<c:if test="${not empty reviewList}" var="review">
+							<div class="col-5 pe-5 text-end">
 								<%--<a href="#">&#9786공감순</a> --%>
-							<a href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=high" class="highGrade">&#9734높은평점순</a> <a
-								href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=low" class="lowGrade">&#9734낮은평점순</a> <a
-								href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
+								<a href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=high" class="highGrade">&#9734높은평점순</a> <a
+									href="/detailView.re?movieCd=${moviedto.movieCd}&Sequence=low" class="lowGrade">&#9734낮은평점순</a> <a
+									href="/detailView.re?movieCd=${moviedto.movieCd}" class="newGrade">&#9737최신순</a>
 
-						</div>
-					</c:if>
+							</div>
+						</c:if>
+					</div>
+					<!-- 댓글 입력창 -->
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<div class="row align-items-center comment_box">
+								<div class="col-10">
+									<textarea id="r_content" class="form-control" name="r_content" placeholder="댓글을 입력해주세요."></textarea>
+								</div>
+								<div class="col-2">
+									<input type="hidden" name="movieCd" value="${moviedto.movieCd}">
+									<button type="button" class="btn btnWrite" id="btnWrite">리뷰 등록</button>
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="row align-items-center comment_box">
+								<div class="col-10">
+									<textarea id="r_content" class="form-control" name="r_content" placeholder="로그인을 통해 별점 및 리뷰등록이 가능합니다!"></textarea>
+								</div>
+								<div class="col-2">
+									<a href="/Member/login.jsp"><button type="button" class="btn btnWrite" id="Sign_in">로그인하기</button></a>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
+
 				</div>
-				<!-- 댓글 입력창 -->
-				<c:choose>
-					<c:when test="${not empty loginSession}">
-						<div class="row align-items-center comment_box">
-							<div class="col-10">
-								<textarea id="r_content" class="form-control" name="r_content" placeholder="댓글을 입력해주세요."></textarea>
-							</div>
-							<div class="col-2">
-								<input type="hidden" name="movieCd" value="${moviedto.movieCd}">
-								<button type="button" class="btn btnWrite" id="btnWrite">리뷰 등록</button>
-							</div>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="row align-items-center comment_box">
-							<div class="col-10">
-								<textarea id="r_content" class="form-control" name="r_content" placeholder="로그인을 통해 별점 및 리뷰등록이 가능합니다!"></textarea>
-							</div>
-							<div class="col-2">
-								<button type="button" class="btn btnWrite" id="Sign_in">로그인하기</button>
-							</div>
-						</div>
-					</c:otherwise>
-				</c:choose>
 
 			</div>
-
 		</div>
-	</div>
-</form>
-<!-- ---------------------------------------------------------------------------------------------------------------------- -->
-<!-- 좋아요, 댓글창 -->
-<%--등록된 댓글이 없다면 --%>
+	</form>
+	<!-- ---------------------------------------------------------------------------------------------------------------------- -->
+	<!-- 좋아요, 댓글창 -->
+	<%--등록된 댓글이 없다면 --%>
 
-<c:if test="${empty reviewList}">
-	<div class="container">
-		<div class="row pt-4">
-			<div class="col text-end"></div>
-			<!-- 코멘트,댓글 -->
-			<div class="col-9 reply_box">
-				<!-- 댓글 출력 -->
-				<div class="row">
+	<c:if test="${empty reviewList}">
+		<div class="container">
+			<div class="row pt-4">
+				<div class="col text-end"></div>
+				<!-- 코멘트,댓글 -->
+				<div class="col-9 reply_box">
+					<!-- 댓글 출력 -->
+					<div class="row">
 
-					<div class="col text-center pt-3">
-						<p>등록된 댓글이 없습니다.</p>
+						<div class="col text-center pt-3">
+							<p>등록된 댓글이 없습니다.</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</c:if>
-<c:if test="${not empty reviewList}">
-	<c:forEach items="${reviewList}" var="review">
-		<from id="like_comentForm" action="/r_modify.re" method="post">
+	</c:if>
+	<c:if test="${not empty reviewList}">
+		<c:forEach items="${reviewList}" var="review">
+			<from id="like_comentForm" action="/r_modify.re" method="post">
 			<div class="container">
 				<div class="row pt-4">
 					<div class="col text-end"></div>
@@ -667,84 +746,84 @@ body {
 										<input type=text id="t_r_grade" value="${review.r_grade}">
 										<!-- 별점 표시 if문 -->
 										<span class="reply-star-rating1" id="r_grade_star1"> <c:if test="${review.r_grade eq '1' }">
-											<label id="r_star">&#9733;</label>
-											<label id="r_star">&#9733;</label>
-											<label id="r_star">&#9733;</label>
-											<label id="r_star">&#9733;</label>
-											<label id="">&#9733;</label>
-										</c:if> <c:if test="${review.r_grade eq '2' }">
-											<label id="r_star">&#9733;</label>
-											<label id="r_star">&#9733;</label>
-											<label id="r_star">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-										</c:if> <c:if test="${review.r_grade eq '3' }">
-											<label id="r_star">&#9733;</label>
-											<label id="r_star">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-										</c:if> <c:if test="${review.r_grade eq '4' }">
-											<label id="r_star">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-										</c:if> <c:if test="${review.r_grade eq '5' }">
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-											<label id="">&#9733;</label>
-										</c:if>
+												<label id="r_star">&#9733;</label>
+												<label id="r_star">&#9733;</label>
+												<label id="r_star">&#9733;</label>
+												<label id="r_star">&#9733;</label>
+												<label id="">&#9733;</label>
+											</c:if> <c:if test="${review.r_grade eq '2' }">
+												<label id="r_star">&#9733;</label>
+												<label id="r_star">&#9733;</label>
+												<label id="r_star">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+											</c:if> <c:if test="${review.r_grade eq '3' }">
+												<label id="r_star">&#9733;</label>
+												<label id="r_star">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+											</c:if> <c:if test="${review.r_grade eq '4' }">
+												<label id="r_star">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+											</c:if> <c:if test="${review.r_grade eq '5' }">
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+												<label id="">&#9733;</label>
+											</c:if>
 										</span> <span class="reply-star-rating " id="r_grade_star2"> <input type="radio" class="inputStar"
-																											id="5-${review.seq_review}" name="r_grade" value="5" /> <label for="5-${review.seq_review}" class="star">&#9733;</label>
+											id="5-${review.seq_review}" name="r_grade" value="5" /> <label for="5-${review.seq_review}" class="star">&#9733;</label>
 											<input type="radio" class="inputStar" id="4-${review.seq_review}" name="r_grade" value="4" /> <label
-												for="4-${review.seq_review}" class="star">&#9733;</label> <input type="radio" class="inputStar"
-																												 id="3-${review.seq_review}" name="r_grade" value="3" /> <label for="3-${review.seq_review}" class="star">&#9733;</label>
+											for="4-${review.seq_review}" class="star">&#9733;</label> <input type="radio" class="inputStar"
+											id="3-${review.seq_review}" name="r_grade" value="3" /> <label for="3-${review.seq_review}" class="star">&#9733;</label>
 											<input type="radio" class="inputStar" id="2-${review.seq_review}" name="r_grade" value="2" /> <label
-												for="2-${review.seq_review}" class="star">&#9733;</label> <input type="radio" class="inputStar"
-																												 id="1${review.seq_review}" name="r_grade" value="1" /> <label for="1${review.seq_review}" class="star">&#9733;</label>
+											for="2-${review.seq_review}" class="star">&#9733;</label> <input type="radio" class="inputStar"
+											id="1${review.seq_review}" name="r_grade" value="1" /> <label for="1${review.seq_review}" class="star">&#9733;</label>
 										</span>
 									</div>
 
 									<c:choose>
-									<c:when test="${not empty loginSession}">
-									<!-- 아이디 값이 있다면 -->
-									<!-- 신고 -->
-									<div class="col-1 mt-1 pt-0 text-end r_report">
-										<button type="button" class="btn pt-0 border-0" data-bs-toggle="modal" data-bs-target="#exampleModal"
-												data-bs-whatever="@getbootstrap">
-											<img src="images/report.png" height="20px">
-										</button>
-										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">Report</h5>
-														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-													</div>
-													<div class="modal-body">
-														<form id="reportForm">
-															<div class="mb-3">
-																<label for="message-title" class="col-form-label">Title:</label> <input type="text" class="form-control"
-																																		id="message-title" name="title" />
+										<c:when test="${not empty loginSession}">
+											<!-- 아이디 값이 있다면 -->
+											<!-- 신고 -->
+											<div class="col-1 mt-1 pt-0 text-end r_report">
+												<button type="button" class="btn pt-0 border-0" data-bs-toggle="modal" data-bs-target="#exampleModal"
+													data-bs-whatever="@getbootstrap">
+													<img src="images/report.png" height="20px">
+												</button>
+												<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleModalLabel">Report</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 															</div>
-															<div class="mb-3">
-																<label for="message-text" class="col-form-label">Message: </label>
-																<textarea class="form-control" id="message-text" name="message"> </textarea>
+															<div class="modal-body">
+																<form id="reportForm">
+																	<div class="mb-3">
+																		<label for="message-title" class="col-form-label">Title:</label> <input type="text" class="form-control"
+																			id="message-title" name="title" />
+																	</div>
+																	<div class="mb-3">
+																		<label for="message-text" class="col-form-label">Message: </label>
+																		<textarea class="form-control" id="message-text" name="message"> </textarea>
+																	</div>
 															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																<button id="sendMessage" type="button" class="btn btn-primary">Send message</button>
+															</div>
+															</form>
+														</div>
 													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-														<button id="sendMessage" type="button" class="btn btn-primary">Send message</button>
-													</div>
-													</form>
+													<div></div>
 												</div>
 											</div>
-											<div></div>
-										</div>
-									</div>
 								</div>
 
 								<div class="row body-review">
@@ -807,12 +886,12 @@ body {
 												<c:if test="${review.seq_review eq all.seq_review && all.user_id eq loginSession.user_id}">
 													<c:if test="${all.r_like_check eq 2}">
 														<input type="image" id="btnHateUp2" class="mt-1 position-absolute" value="${review.seq_review}"
-															   src="images/hate.png" height="22px">
+															src="images/hate.png" height="22px">
 													</c:if>
 												</c:if>
 											</c:forEach>
 											<input type="image" id="btnHateUp" class="mt-1 position-absolute" value="${review.seq_review}"
-												   src="images/hatebefor.png" height="22px">
+												src="images/hatebefor.png" height="22px">
 
 										</div>
 										<!-- 싫어요 카운트 -->
@@ -827,14 +906,14 @@ body {
 								</div>
 								</c:when>
 
-									<%-- 로그인 안되어있으면 좋아요 x --%>
+								<%-- 로그인 안되어있으면 좋아요 x --%>
 								<c:otherwise>
-								<!-- 신고 -->
-								<div class="col-1 mt-1 pt-0 text-end r_report">
-									<button type="button" class="btn pt-0 border-0">
-										<img src="images/report.png" height="20px">
-									</button>
-								</div>
+									<!-- 신고 -->
+									<div class="col-1 mt-1 pt-0 text-end r_report">
+										<button type="button" class="btn pt-0 border-0">
+											<img src="images/report.png" height="20px">
+										</button>
+									</div>
 							</div>
 
 							<div class="row body-review">
@@ -887,380 +966,373 @@ body {
 				</div>
 			</div>
 			</div>
-		</from>
-	</c:forEach>
-	<script>
-		const searchForm = $(".searchForm");
-		searchForm.on("submit", function (event) {
-			if ($(this).find(".searchInput").val() === "") {
-				event.preventDefault();
-				alert("검색어를 입력하세요");
+			</from>
+		</c:forEach>
+		<script>
+			const searchForm = $(".searchForm");
+			searchForm.on("submit", function(event) {
+				if ($(this).find(".searchInput").val() === "") {
+					event.preventDefault();
+					alert("검색어를 입력하세요");
+				}
+			});
+
+			$("#Sign_in").on("click", function() { // 로그인하기 클릭시 로그인페이지로 이동
+				location.href = "/Member/login.jsp";
+			});
+
+			$(".likeBox").on("click", "#notLogin", function() {
+				alert("로그인후 이용해주세요!");
+			})
+			//빨간색 좋아요 눌렀을때
+			$(".likeBox").on("click", "#btnLikeUp", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review", seq_review);
+				let r_like_check = 1;
+				console.log("r_like_check", r_like_check);
+				//버튼 보이기 숨기기
+				$(e.target).css("display", "none");
+				$(e.target).next().css("display", "block");
+
+				$.ajax({
+					url : "/l_modify.likeR",
+					type : "post",
+					data : {
+						seq_review : seq_review,
+						r_like_check : r_like_check
+					},
+					success : function(data) {
+						console.log(data);
+						if (data === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("좋아요!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+
+			});
+
+			//빨간색 싫어요 눌렀을때
+			$(".likeBox").on("click", "#btnHateUp", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review", seq_review);
+				let r_like_check = 2;
+				console.log("r_like_check", r_like_check);
+				//버튼 보이기 숨기기
+				$(e.target).css("display", "none");
+				$(e.target).next().css("display", "block");
+
+				$.ajax({
+					url : "/l_modify.likeR",
+					type : "post",
+					data : {
+						seq_review : seq_review,
+						r_like_check : r_like_check
+					},
+					success : function(data) {
+						console.log(data);
+						if (data === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("싫어요!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+			})
+
+			//파란색 좋아요 눌렀을때
+			$(".likeBox").on("click", "#btnLikeUp2", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review", seq_review);
+				let r_like_check = 0;
+				console.log("r_like_check", r_like_check);
+				//버튼 보이기 숨기기
+				$(e.target).css("display", "none");
+				$(e.target).prev().css("display", "block");
+
+				$.ajax({
+					url : "/l_modify.likeR",
+					type : "post",
+					data : {
+						seq_review : seq_review,
+						r_like_check : r_like_check
+					},
+					success : function(data) {
+						console.log(data);
+						if (data === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("좋아요!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+
+			});
+
+			//파란색 싫어요 눌렀을때
+			$(".likeBox").on("click", "#btnHateUp2", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review", seq_review);
+				let r_like_check = 0;
+				console.log("r_like_check", r_like_check);
+				//버튼 보이기 숨기기
+				$(e.target).css("display", "none");
+				$(e.target).prev().css("display", "block");
+
+				$.ajax({
+					url : "/l_modify.likeR",
+					type : "post",
+					data : {
+						seq_review : seq_review,
+						r_like_check : r_like_check
+					},
+					success : function(data) {
+						console.log(data);
+						if (data === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("싫어요!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+			})
+
+			// 댓글 수정 버튼에게 이벤트 부여
+			$(".body-review").on(
+					"click",
+					".modify-review",
+					function(e) {
+						console.log(e.target);
+						$(e.target).parent().parent("#modify_box").css(
+								"display", "none"); // 수정삭제 버튼 감추기
+						$(e.target).parent().parent().prev("#divWrite").css(
+								"display", "block"); // 취소완료 버튼 보이기
+						// 댓글 수정가능하게끔 readonly 속성 풀어주기
+						$(e.target).parent().parent().parent().prev().children(
+								"textarea").attr("readonly", false);
+						// textarea 포커스
+						$(e.target).parent().parent().parent().prev().children(
+								"textarea").focus();
+						// 별점 수정
+						$(e.target).parent().parent().parent().parent()
+								.parent().find("#r_grade_star2").css("display",
+										"inline-flex");
+						$(e.target).parent().parent().parent().parent()
+								.parent().find("#r_grade_star1").css("display",
+										"none");
+
+					});
+			/**/
+			// 수정 버튼 눌렀을때
+			$(".body-review").on(
+					"click",
+					".btnSave",
+					function(e) {
+						let seq_review = $(e.target).val();
+						console.log("seq_review :", seq_review)
+						let r_content = $(e.target).parent().parent().prev()
+								.children("textarea").val();
+						console.log("r_content: ", r_content);
+						let r_grade = $(e.target).parent().parent().parent()
+								.parent().find("#r_grade_star2").children(
+										'input[name=r_grade]:checked').val()
+						console.log("r_grade : ", r_grade);
+						if (r_content === "") {
+							alert("리뷰를 입력해 주세요!");
+							return;
+						} else if (r_grade === undefined) {
+							alert("별점를 입력해 주세요!");
+							return;
+						}
+
+						$.ajax({
+							url : "/r_modify.re",
+							type : "post",
+							data : {
+								seq_review : seq_review,
+								r_content : r_content,
+								r_grade : r_grade
+							},
+							success : function(rs) {
+								console.log(rs);
+								if (rs === "fail") {
+									alert("댓글 수정에 실패했습니다.");
+								} else {
+									alert("댓글 수정에 성공!");
+									refreshMemList();
+								}
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+					});
+			// 삭제 버튼 눌렀을때
+			$(".body-review").on("click", ".delete-review", function(e) {
+				let seq_review = $(e.target).val();
+				console.log("seq_review :", seq_review)
+
+				$.ajax({
+					url : "/r_delete.re",
+					type : "post",
+					data : {
+						seq_review : seq_review
+					},
+					success : function(rs) {
+						console.log(rs);
+						if (rs === "fail") {
+							alert("댓글 수정에 실패했습니다.");
+						} else {
+							alert("댓글 삭제 성공!");
+							refreshMemList();
+						}
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+			});
+			//리로드
+			function refreshMemList() {
+				location.reload();
 			}
-		});
+		</script>
+	</c:if>
+	<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 
-		$("#Sign_in").on("click", function() { // 로그인하기 클릭시 로그인페이지로 이동
-			location.href = "/Member/login.jsp";
-		});
 
-		$(".likeBox").on("click", "#notLogin", function() {
-			alert("로그인후 이용해주세요!");
-		})
-		//빨간색 좋아요 눌렀을때
-		$(".likeBox").on("click", "#btnLikeUp", function(e) {
-			let seq_review = $(e.target).val();
-			console.log("seq_review", seq_review);
-			let r_like_check = 1;
-			console.log("r_like_check", r_like_check);
-			//버튼 보이기 숨기기
-			$(e.target).css("display", "none");
-			$(e.target).next().css("display", "block");
+	<!-- 빈창 -->
+	<div class="container">
+		<div class="row ">
+			<div class="col"></div>
+			<!-- 코멘트,댓글 -->
+			<div class="col-9 my-3 reply_box" style="height: 15px;"></div>
+		</div>
+	</div>
 
-			$.ajax({
-				url : "/l_modify.likeR",
-				type : "post",
-				data : {
-					seq_review : seq_review,
-					r_like_check : r_like_check
-				},
-				success : function(data) {
-					console.log(data);
-					if (data === "fail") {
-						alert("댓글 수정에 실패했습니다.");
-					} else {
-						alert("좋아요!");
-						refreshMemList();
-					}
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			})
 
-		});
+	<!-- Footer -->
+	<footer class="py-5 mt-3 text-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-2">
+					<h5>장르</h5>
+					<ul class="nav flex-column">
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디" class="nav-link p-0">코미디</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션" class="nav-link p-0">액션</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로" class="nav-link p-0">멜로</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF" class="nav-link p-0">SF</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러" class="nav-link p-0">호러</a></li>
+					</ul>
+				</div>
 
-		//빨간색 싫어요 눌렀을때
-		$(".likeBox").on("click", "#btnHateUp", function(e) {
-			let seq_review = $(e.target).val();
-			console.log("seq_review", seq_review);
-			let r_like_check = 2;
-			console.log("r_like_check", r_like_check);
-			//버튼 보이기 숨기기
-			$(e.target).css("display", "none");
-			$(e.target).next().css("display", "block");
+				<div class="col-2">
+					<h5>계정</h5>
+					<ul class="nav flex-column">
+						<li class="nav-item mb-2"><a href="/Member/login.jsp" class="nav-link p-0">로그인</a></li>
+						<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+						<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
+						<li class="nav-item mb-2"><a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a></li>
+						<li class="nav-item mb-2"><a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a></li>
+					</ul>
+				</div>
 
-			$.ajax({
-				url : "/l_modify.likeR",
-				type : "post",
-				data : {
-					seq_review : seq_review,
-					r_like_check : r_like_check
-				},
-				success : function(data) {
-					console.log(data);
-					if (data === "fail") {
-						alert("댓글 수정에 실패했습니다.");
-					} else {
-						alert("싫어요!");
-						refreshMemList();
-					}
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			})
-		})
+				<div class="col-2">
+					<h5>기타</h5>
+					<ul class="nav flex-column">
+						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
+						<li class="nav-item mb-2"><a href="/post/post.jsp" class="nav-link p-0">자유게시판</a></li>
+						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+					</ul>
+				</div>
 
-		//파란색 좋아요 눌렀을때
-		$(".likeBox").on("click", "#btnLikeUp2", function(e) {
-			let seq_review = $(e.target).val();
-			console.log("seq_review", seq_review);
-			let r_like_check = 0;
-			console.log("r_like_check", r_like_check);
-			//버튼 보이기 숨기기
-			$(e.target).css("display", "none");
-			$(e.target).prev().css("display", "block");
+				<div class="col-4 offset-1">
+					<form>
+						<h5>영화 리뷰 플랫폼 - 영화 추천이</h5>
+						<p>
+							지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
+						</p>
+						<div class="d-flex w-100 gap-2">
+							<label for="newsletter1" class="visually-hidden">Email address</label> <input id="newsletter1" type="text"
+								class="form-control" placeholder="Email address">
+							<button class="btn btn-primary" type="button">영화 추천받기</button>
+						</div>
+					</form>
 
-			$.ajax({
-				url : "/l_modify.likeR",
-				type : "post",
-				data : {
-					seq_review : seq_review,
-					r_like_check : r_like_check
-				},
-				success : function(data) {
-					console.log(data);
-					if (data === "fail") {
-						alert("댓글 수정에 실패했습니다.");
-					} else {
-						alert("좋아요!");
-						refreshMemList();
-					}
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			})
+					<div class="snsBox">
+						<div class="snsIcon1">
+							<a href="https://www.kakaocorp.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="kakaoIcon"
+								src="images/kakaotalk.png">
+							</a>
+						</div>
+						<div class="snsIcon2">
+							<a href="https://twitter.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="twitterIcon"
+								src="images/twitter.png">
+							</a>
+						</div>
+						<div class="snsIcon3">
+							<a href="https://www.instagram.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="instagramIcon"
+								src="images/instagram.png">
+							</a>
+						</div>
+						<div class="snsIcon4">
+							<a href="https://www.facebook.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="facebookIcon"
+								src="images/facebook.png">
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
-		});
+			<div class="d-flex justify-content-center py-4 my-4 border-top">
+				<p>&copy; 영화 리뷰 플랫폼, 영화 추천이 All rights reserved.</p>
+			</div>
+		</div>
 
-		//파란색 싫어요 눌렀을때
-		$(".likeBox").on("click", "#btnHateUp2", function(e) {
-			let seq_review = $(e.target).val();
-			console.log("seq_review", seq_review);
-			let r_like_check = 0;
-			console.log("r_like_check", r_like_check);
-			//버튼 보이기 숨기기
-			$(e.target).css("display", "none");
-			$(e.target).prev().css("display", "block");
-
-			$.ajax({
-				url : "/l_modify.likeR",
-				type : "post",
-				data : {
-					seq_review : seq_review,
-					r_like_check : r_like_check
-				},
-				success : function(data) {
-					console.log(data);
-					if (data === "fail") {
-						alert("댓글 수정에 실패했습니다.");
-					} else {
-						alert("싫어요!");
-						refreshMemList();
-					}
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			})
-		})
-
-		// 댓글 수정 버튼에게 이벤트 부여
-		$(".body-review").on(
+	</footer>
+	<script>
+		let msg= '${msg}';
+		console.log(msg);
+		if(msg !=""){
+			alert(msg)
+		}
+		$("#btnWrite").on(
 				"click",
-				".modify-review",
-				function(e) {
-					console.log(e.target);
-					$(e.target).parent().parent("#modify_box").css(
-							"display", "none"); // 수정삭제 버튼 감추기
-					$(e.target).parent().parent().prev("#divWrite").css(
-							"display", "block"); // 취소완료 버튼 보이기
-					// 댓글 수정가능하게끔 readonly 속성 풀어주기
-					$(e.target).parent().parent().parent().prev().children(
-							"textarea").attr("readonly", false);
-					// textarea 포커스
-					$(e.target).parent().parent().parent().prev().children(
-							"textarea").focus();
-					// 별점 수정
-					$(e.target).parent().parent().parent().parent()
-							.parent().find("#r_grade_star2").css("display",
-							"inline-flex");
-					$(e.target).parent().parent().parent().parent()
-							.parent().find("#r_grade_star1").css("display",
-							"none");
-
-				});
-		/**/
-		// 수정 버튼 눌렀을때
-		$(".body-review").on(
-				"click",
-				".btnSave",
-				function(e) {
-					let seq_review = $(e.target).val();
-					console.log("seq_review :", seq_review)
-					let r_content = $(e.target).parent().parent().prev()
-							.children("textarea").val();
-					console.log("r_content: ", r_content);
-					let r_grade = $(e.target).parent().parent().parent()
-							.parent().find("#r_grade_star2").children(
-									'input[name=r_grade]:checked').val()
-					console.log("r_grade : ", r_grade);
-					if (r_content === "") {
+				function() {
+					let grade = $("#r_grade_star").children(
+							'input[name=r_grade]:checked').val();
+					console.log(grade);
+					if ($("#r_content").val() === "") {
 						alert("리뷰를 입력해 주세요!");
 						return;
-					} else if (r_grade === undefined) {
+					} else if (grade === undefined) {
 						alert("별점를 입력해 주세요!");
 						return;
 					}
-
-					$.ajax({
-						url : "/r_modify.re",
-						type : "post",
-						data : {
-							seq_review : seq_review,
-							r_content : r_content,
-							r_grade : r_grade
-						},
-						success : function(rs) {
-							console.log(rs);
-							if (rs === "fail") {
-								alert("댓글 수정에 실패했습니다.");
-							} else {
-								alert("댓글 수정에 성공!");
-								refreshMemList();
-							}
-						},
-						error : function(e) {
-							console.log(e);
-						}
-					})
-				});
-		// 삭제 버튼 눌렀을때
-		$(".body-review").on("click", ".delete-review", function(e) {
-			let seq_review = $(e.target).val();
-			console.log("seq_review :", seq_review)
-
-			$.ajax({
-				url : "/r_delete.re",
-				type : "post",
-				data : {
-					seq_review : seq_review
-				},
-				success : function(rs) {
-					console.log(rs);
-					if (rs === "fail") {
-						alert("댓글 수정에 실패했습니다.");
-					} else {
-						alert("댓글 삭제 성공!");
-						refreshMemList();
-					}
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			})
-		});
+					document.getElementById("movie_comment_write").submit();
+				})
 		//리로드
 		function refreshMemList() {
 			location.reload();
 		}
 	</script>
-</c:if>
-<!-- ---------------------------------------------------------------------------------------------------------------------- -->
-
-
-<!-- 빈창 -->
-<div class="container">
-	<div class="row ">
-		<div class="col"></div>
-		<!-- 코멘트,댓글 -->
-		<div class="col-9 my-3 reply_box" style="height: 15px;"></div>
-	</div>
-</div>
-
-
-<!-- Footer -->
-<footer class="py-5 mt-3 text-light">
-	<div class="container">
-		<div class="row">
-			<div class="col-2">
-				<h5>장르</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디" class="nav-link p-0">코미디</a></li>
-					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션" class="nav-link p-0">액션</a></li>
-					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로" class="nav-link p-0">멜로</a></li>
-					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF" class="nav-link p-0">SF</a></li>
-					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러" class="nav-link p-0">호러</a></li>
-				</ul>
-			</div>
-
-			<div class="col-2">
-				<h5>계정</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="/Member/login.jsp" class="nav-link p-0">로그인</a></li>
-					<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-					<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
-					<li class="nav-item mb-2"><a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a></li>
-					<li class="nav-item mb-2"><a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a></li>
-				</ul>
-			</div>
-
-			<div class="col-2">
-				<h5>기타</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
-					<li class="nav-item mb-2"><a href="/post/post.jsp" class="nav-link p-0">자유게시판</a></li>
-					<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
-				</ul>
-			</div>
-
-			<div class="col-4 offset-1">
-				<form>
-					<h5>영화 리뷰 플랫폼 - 영화 추천이</h5>
-					<p>
-						지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
-					</p>
-					<div class="d-flex w-100 gap-2">
-						<label for="newsletter1" class="visually-hidden">Email address</label> <input id="newsletter1" type="text"
-																									  class="form-control" placeholder="Email address">
-						<button class="btn btn-primary" type="button">영화 추천받기</button>
-					</div>
-				</form>
-
-				<div class="snsBox">
-					<div class="snsIcon1">
-						<a href="https://www.kakaocorp.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="kakaoIcon"
-																												  src="images/kakaotalk.png">
-						</a>
-					</div>
-					<div class="snsIcon2">
-						<a href="https://twitter.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="twitterIcon"
-																											src="images/twitter.png">
-						</a>
-					</div>
-					<div class="snsIcon3">
-						<a href="https://www.instagram.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="instagramIcon"
-																												  src="images/instagram.png">
-						</a>
-					</div>
-					<div class="snsIcon4">
-						<a href="https://www.facebook.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="facebookIcon"
-																												 src="images/facebook.png">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="d-flex justify-content-center py-4 my-4 border-top">
-			<p>&copy; 영화 리뷰 플랫폼, 영화 추천이 All rights reserved.</p>
-		</div>
-	</div>
-
-</footer>
-<script>
-	/*
-        $(".lowGrade").on("click", function() { // 낮은 평점
-            location.href = "/lowGrade.re";
-        });
-
-        $(".highGrade").on("click", function() { // 높은 평점
-            location.href = "/highGrade.re";
-        });
-        $(".newGrade").on("click", function() { // 높은 평점
-            location.href = "/detailView.re?movieCd=${reviewDTO.movieCd}";
-			});
-		 */
-	$("#btnWrite").on(
-			"click",
-			function() {
-				let grade = $("#r_grade_star").children(
-						'input[name=r_grade]:checked').val();
-				console.log(grade);
-				if ($("#r_content").val() === "") {
-					alert("리뷰를 입력해 주세요!");
-					return;
-				} else if (grade === undefined) {
-					alert("별점를 입력해 주세요!");
-					return;
-				}
-				document.getElementById("movie_comment_write").submit();
-			})
-	//리로드
-	function refreshMemList() {
-		location.reload();
-	}
-</script>
 
 </body>
 
