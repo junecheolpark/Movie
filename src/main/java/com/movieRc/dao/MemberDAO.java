@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -56,7 +57,7 @@ public class MemberDAO {
 			return list;
 		}
 	}
-
+	
 	// 아이디 찾기
 	public String findId(String user_name, String user_phone) throws Exception {
 		String user_id = null;
@@ -222,6 +223,93 @@ public class MemberDAO {
 			} else {
 				return false;
 			}
+		}
+	}
+	
+	// 전체 조회 페이징(관리자 페이지)
+	public ArrayList<MemberDTO> selectAll_Admin(int start, int end) throws Exception {
+		String sql = "select * from (select tbl_member.*, row_number() over(order by user_id)"
+				+ " as num from tbl_member)"
+				+ " where num between ? and ?";
+
+		try (Connection con = bds.getConnection();
+			 PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<MemberDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				String user_id = rs.getString("user_id");
+				String user_category = rs.getString("user_category");
+				String user_k = rs.getString("user_k");
+				String user_pw = rs.getString("user_pw");
+				String user_nickname = rs.getString("user_nickname");
+				String user_name = rs.getString("user_name");
+				int user_birth = rs.getInt("user_birth");
+				String user_phone = rs.getString("user_phone");
+				String postcode = rs.getString("postcode");
+				String roadAddr = rs.getString("roadAddr");
+				String detailAddr = rs.getString("detailAddr");
+				String extraAddr = rs.getString("extraAddr");
+				String grade = rs.getString("grade");
+
+				list.add(new MemberDTO(user_id, user_category, user_k, user_pw, user_nickname, user_name, user_birth, user_phone, postcode, roadAddr, detailAddr, extraAddr, grade));
+			}
+			return list;
+		}
+	}
+	
+	// 페이징
+	public HashMap<String, Object> getPageNavi(int curPage) throws Exception{
+		String sql = "select count(*) as totalCnt from tbl_member";
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			
+			int totalCnt = rs.getInt("totalCnt"); // 전체 개수
+			int recordCntPerPage = 10; // 한 페이지 글 몇 개
+			int naviCntPerPage = 5; // navi 몇 개
+			
+			int pageTotalCnt = 0; // 페이지 몇 개
+			if(totalCnt % recordCntPerPage > 0) { // 나머지가 생김(10의 배수가 아님x)
+				pageTotalCnt = totalCnt / recordCntPerPage + 1;				
+			}else {
+				pageTotalCnt = totalCnt / recordCntPerPage;
+			}
+			
+			if(curPage < 1) {
+				curPage = 1;
+			}else if(curPage > pageTotalCnt) {
+				curPage = pageTotalCnt;
+			}
+			
+			int startNavi = ((curPage-1) / naviCntPerPage) * naviCntPerPage + 1;
+			int endNavi = startNavi + naviCntPerPage - 1;
+			if(pageTotalCnt < endNavi) {
+				endNavi = pageTotalCnt;
+			}
+			
+			boolean needPrev = true;
+			boolean needNext = true;
+			if(startNavi == 1) {
+				needPrev = false;
+			}
+			if(endNavi == pageTotalCnt) {
+				needNext = false;
+			}
+			
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("curPage", curPage);
+			map.put("startNavi", startNavi);
+			map.put("endNavi", endNavi);
+			map.put("needPrev", needPrev);
+			map.put("needNext", needNext);
+			
+			return map;
 		}
 	}
 }
