@@ -61,9 +61,11 @@ public class Like_rDTO {
     }
 
 
+
 @Override
 public String toString() {
 	return seq_like + " : " + r_like_check + " : "  
 			+ user_id + " : " + user_category + " : " + seq_review;
 }
+
 }

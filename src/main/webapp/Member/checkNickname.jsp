@@ -81,8 +81,7 @@
 				return;
 			}
 
-			opener.document.getElementById("user_nickname").value = document
-					.getElementById("user_nickname").value;
+			opener.document.getElementById("user_nickname").value = document.getElementById("user_nickname").value;
 			self.close();
 		}
 

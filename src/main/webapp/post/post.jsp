@@ -20,7 +20,9 @@
 	width: 1200px;
 	height: 800px;
 }
-
+.content-footer{
+	margin-top:15px;
+}
 .form-select {
 	display: inline-block;
 	width: 100px;
@@ -47,15 +49,15 @@ button {
 }
 
 .content-body {
-	
+
 	background-color: rgb(255, 254, 248);
 }
 </style>
 </head>
 <body>
-
-	<div class="container">
 	
+	<div class="container">
+
 		<div class="row">
 			<div class="col">
 				<h3>
@@ -67,7 +69,7 @@ button {
 			<div class="row">
 				<div class="col-9"></div>
 				<div class="col-3">
-					<select class="form-select list" 
+					<select class="form-select list"
 						aria-label="Default select example" id="listItem">
 						<option value="1" selected>목록 10개</option>
 						<option value="2">목록 20개</option>
@@ -126,8 +128,8 @@ button {
 			</c:choose>
 		</div>
 		<div class="content-footer">
-		
-		
+
+
 		<c:if test="${not empty loginSession}">
 			<!--검색-->
 			<div class="row">
@@ -139,7 +141,7 @@ button {
 					<button type="button" id="btn_my_post" class="btn btn-secondary">내글보기</button>
 				</div>
 			</div>
-			
+
 			<script>
 			$("#btn_write").on("click", function() {
 				location.href = "/write.po"
@@ -150,7 +152,7 @@ button {
 					type:"get",
 					dataType:"json",
 					success:function(data){
-						
+
 						$(".content-body").empty();
 						if(data.length ==0){
 							let div_row= $("<div>").attr("class","row");
@@ -167,29 +169,29 @@ button {
 								let div_col2_2= $("<div>").attr("class","col-2");
 								let div_col5= $("<div>").attr("class","col-5");
 								let hr=$("<hr>");
-							
-								
+
+
 								let a=$("<a>").attr("href","/detailPost.po?seq_post="+dto.seq_post).html(dto.p_title);
 								div_col5.append(a);
-								
+
 								console.log(dto.seq_post);
 								div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
 										div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
-								
+
 								$(".content-body").append(div_row);
-								
-								
-								
+
+
+
 							}
 						}
 					},
 					error:function(e){
 						console.log(e);
 					}
-				
+
 				})
 			})
-			
+
 			</script>
 		</c:if>
 			<div class="row">
@@ -237,11 +239,11 @@ button {
 	</div>
 
 	<script>
-	
+
 	//목록 개수별 나타내기
 	$("#btnList").on("click",function(){
 		let listItem= $("#listItem").val();
-		
+
 		$.ajax({
 			url:"/listItem.po?curPage=1&&listItem="+listItem,
 			type:"get",
@@ -264,15 +266,15 @@ button {
 						let div_col2_2= $("<div>").attr("class","col-2");
 						let div_col5= $("<div>").attr("class","col-5");
 						let hr=$("<hr>");
-						
-						
+
+
 						let a=$("<a>").attr("href","/detailPost.po?seq_post=${dto.seq_post}").html(dto.p_title);
 						div_col5.append(a);
-						
+
 						console.log(dto.seq_post);
 						div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
 								div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
-						
+
 						$(".content-body").append(div_row);
 					}
 				}
@@ -280,11 +282,11 @@ button {
 			error:function(e){
 				console.log(e);
 			}
-		
+
 		})
 	})
-	
-	
+
+
 	//포스트 항목별 검색
 	$("#btnSearch").on("click", function() {
 		if ($("#inputSearch").val() === "") { // 댓글 입력창이 비어있다면
@@ -327,33 +329,33 @@ button {
 						let div_col2_2= $("<div>").attr("class","col-2");
 						let div_col5= $("<div>").attr("class","col-5");
 						let hr=$("<hr>");
-						
-						
+
+
 						let a=$("<a>").attr("href","/detailPost.po?seq_post=${dto.seq_post}").html(dto.p_title);
 						div_col5.append(a);
-						
+
 						console.log(dto.seq_post);
 						div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
 								div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
-						
+
 						$(".content-body").append(div_row);
-						
-						
-						
+
+
+
 					}
 				}
 			},
 			error:function(e){
 				console.log(e);
 			}
-		
+
 		})
 
 	})
 
-	
-	
-		
+
+
+
 	</script>
 </body>
 </html>
