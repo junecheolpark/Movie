@@ -19,7 +19,7 @@
 
     <style>
         body {
-            height: 4000px;
+            min-height: 4000px;
             min-width: 640px;
         }
 
@@ -31,6 +31,12 @@
             width: 100%;
             height: 3.6%;
             background-color: black;
+        }
+
+        .contentDiv {
+            height: 84%;
+            margin-left: 5%;
+            margin-right: 5%;
         }
 
         footer {
@@ -116,7 +122,7 @@
         }
 
         /* header 반응형 */
-        @media ( max-width: 767px) {
+        @media (max-width: 767px) {
             #navLogo {
                 display: none;
             }
@@ -148,28 +154,20 @@
         }
 
         a {
-            text-decoration: none;
-            font-weight: bold;
-            color: black;
+            text-decoration: none !important;
+            color: black !important;
         }
 
         body {
-            background-color: white
+            background-color: white;
         }
 
         .content {
             height: 1000px;
         }
 
-        =
-        =
-        =
-        =
-        =
-        =
-        =
         /* header 반응형 */
-        @media ( max-width: 767px) {
+        @media (max-width: 767px) {
             #navLogo {
                 display: none;
             }
@@ -193,111 +191,304 @@
             }
         }
 
-
-
         /*  content */
 
-
         /* -----------------------------------------------------------*/
-
-        /* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
-                https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
-        /* 반응형 시작 */
-        @media screen and (max-width: 1200px) {
-            aside#aside {
-                width: 25%;
-            }
-
-            div.body-wishList {
-                width: 75%;
-            }
+        .contentDiv {
+            display: flex;
+            flex-direction: column;
         }
 
-        @media screen and (max-width: 1024px) {
-            aside#aside {
-                display: none;
-            }
-
-            div.body-wishList {
-                width: 100%;
-            }
-
-            aside#asideSM {
-                display: block;
-                width: 100%;
-            }
+        .content1 {
+            height: 20%;
         }
 
-        @media screen and (min-width: 1024px) {
-            aside#asideSM {
-                display: none;
-            }
+        .contentTitle {
+            padding: 10px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            background-color: #503396;
+            border-radius: 10px;
+            margin-bottom: 45px;
         }
 
-        @media screen and (max-width: 768px) {
-            aside#asideSM div#profileBox {
-                display: none;
-                width: 50%
-            }
-
-            aside#asideSM div#profileBtnBox {
-                display: none;
-            }
-
-            /* aside#asideSM div#profileBtnBoxSM {
-                display: block;
-            } */
-            div.body-wishList {
-                width: 100%;
-                float: none;
-            }
+        .contentTitle span {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
         }
 
-        @media screen and (min-width: 768px) {
-            aside#asideSM div#profileBtnBoxSM {
-                display: none;
-            }
+        .content2 {
+            height: 12%;
+            width: 100%;
+            margin-bottom: 50px;
         }
 
-        /* 반응형 끝 */
+        .movieDiv {
+            width: 100%;
+            height: 100%;
+            display: flex !important;
+            gap: 10px;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .slick-list {
+            height: 100%;
+        }
+
+        .slick-track {
+            height: 100%;
+        }
+
+
+        .movie {
+            height: 90% !important;
+            margin: 20px;
+            border: 1px solid #b4b7ba;
+            border-radius: 10px;
+        }
+
+        .movie .imgContainer {
+            height: 60%;
+            padding: 7px;
+        }
+
+        .imgContainer img {
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .product {
+            padding: 7px;
+            height: 40%;
+        }
+
+        .product .category span {
+            color: silver;
+            font-size: 0.7em;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .product .title span {
+            font-weight: bold;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 1.1em;
+        }
+
+        .avgPoint {
+            display: flex;
+            gap: 5px;
+        }
+
+        .avgPoint span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: silver;
+            font-size: 0.7em;
+        }
+
+        .content3 {
+            height: 8%;
+            margin-bottom: 50px;
+        }
+
+        .reviewDiv {
+            display: flex !important;
+            align-items: center;
+            height: 90%;
+            gap: 10px;
+        }
+
+        .review {
+            height: 100%;
+            min-height: 110px;
+            padding: 12px;
+            border: 1px solid silver;
+            border-radius: 12px;
+        }
+
+        .review_reviewer {
+            height: 20%;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid silver;
+        }
+
+        .review_reviewer .review_id {
+            font-size: 1.2em;
+        }
+
+        .review_reviewer .avgPoint {
+            font-size: 0.9em;
+        }
+
+        .review_content {
+            height: 50%;
+            margin-bottom: 10px;
+        }
+
+        .review_content span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .review_movie {
+            height: 20%;
+            font-size: 0.8em;
+            color: silver;
+        }
+
+        .content4 {
+            height: 12%;
+            margin-bottom: 50px;
+        }
+
+        .topicLi {
+            padding: 20px;
+            height: 100%;
+            border: 1px solid #b4b7ba;
+            border-radius: 10px;
+        }
+
+        .topic {
+            height: 20%;
+            margin-bottom: 20px;
+            border-bottom: solid 1px #b4b7ba;
+        }
+
+        .topicTitle {
+            font-size: 1.1em;
+        }
+
+        .topicStatus {
+            display: flex;
+            justify-content: space-between;
+            color: silver;
+            font-size: 0.8em;
+            margin-bottom: 2px;
+        }
+
+        .btnContainer {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btnContainer button {
+            border: none;
+            background-color: white;
+        }
+
+        .btnContainer button:hover {
+            color: #503396;
+        }
+
+        button[class^='slick'] {
+            border-radius: 20px;
+            background-color: #b4b7ba;
+            height: 40px;
+            color: white;
+            border: none;
+        }
+
+        .content5 {
+            margin-bottom: 50px;
+        }
     </style>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
 </head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+<script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+<link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous">
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 <body>
 <header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
-        <nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
+        <nav
+                id="navibar"
+                class="navbar navbar-expand-md navbar-dark"
+                aria-label="Main navigation">
             <div class="container-fluid">
                 <!-- toggle button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        aria-controls="navbarNavDropdown"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <!-- 메뉴 -->
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                <div
+                        class="collapse navbar-collapse justify-content-end"
+                        id="navbarNavDropdown">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/listLookup.movie?curPage=1">영화</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">자유게시판</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Member/login.jsp">로그인</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Member/signup.jsp">회원가입</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/wishlist.wish">찜한 영화</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a>
+                        </li>
                     </ul>
 
                     <form class="searchForm d-flex" action="/search.movie">
-                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.."
-                               aria-label="Search" name='val'>
+                        <input
+                                class="searchInput form-control me-2"
+                                type="search"
+                                placeholder="영화 검색.."
+                                aria-label="Search"
+                                name='val'>
                         <input type="hidden" name='curPage' value="1">
                         <input type="hidden" name='s_type' value="movieNm">
                         <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
@@ -307,13 +498,22 @@
         </nav>
 
         <!-- 펼쳐졌을 때 nav -->
-        <nav id="menu" class="navbar navbar-expand-md w-100 navbar-dark" aria-label="Main navigation">
+        <nav
+                id="menu"
+                class="navbar navbar-expand-md w-100 navbar-dark"
+                aria-label="Main navigation">
             <div class="row w-100 align-items-center">
                 <div class="col-5 d-flex justify-content-center">
                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
-                        <li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2" href="#">자유게시판</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -348,7 +548,11 @@
                         </div>
 
                         <div class="col-1">
-                            <button id="searchBtn" class="btn" type="button" data-bs-toggle="modal"
+                            <button
+                                    id="searchBtn"
+                                    class="btn"
+                                    type="button"
+                                    data-bs-toggle="modal"
                                     data-bs-target="#searchModal">
                                 <img src="/images/searchIcon.png">
                             </button>
@@ -359,15 +563,22 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title m-auto">영화 찾기</h5>
-                                        <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
+                                        <button
+                                                type="button"
+                                                class="btn-close m-0"
+                                                data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form id="searchForm" class="searchForm" action="/search.movie">
                                             <div class="row justify-content-center">
                                                 <div class="col-11">
-                                                    <input class="searchInput form-control me-2" type="search"
-                                                           placeholder="영화 검색.." aria-label="Search" name='val'>
+                                                    <input
+                                                            class="searchInput form-control me-2"
+                                                            type="search"
+                                                            placeholder="영화 검색.."
+                                                            aria-label="Search"
+                                                            name='val'>
                                                     <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를
                                                         입력해보세요!</p>
                                                     <input type="hidden" name='curPage' value="1">
@@ -393,49 +604,131 @@
         </nav>
     </div>
 </header>
-<div class="container">
-    <!-- Contents -->
-
-    <div class="content">
-        <div id="movieDiv">
-            <div class="movieLi row">
-                <c:forEach items="${arrayList}" var="movieDTO">
-                    <div class="movie col-6 col-lg-4">
-                        <div class="movieImgDiv">
-                            <img src="<c:url value="/images/NoImg.webp"/>">
-                        </div>
-                        <div class="movieNameDiv">
-								<span class="movieName">
-                                    <a
-                                            href="/detailView.re?movieCd=${movieDTO.movieCd}">${movieDTO.movieNm}</a>
-								</span>
-                            <c:if test="${not empty movieDTO.directors}">
-                                <span class="directors">${movieDTO.directors}</span>
-                            </c:if>
-                            <c:if test="${empty movieDTO.directors}">
-                                <span class="directors">등록된 감독이 없습니다</span>
-                            </c:if>
-                        </div>
-                        <div class="categoryDiv">
-                            <span class="movieCategory">${movieDTO.genreAlt}</span>
-                        </div>
-                        <div class="avgPointDiv">
-                            <span class="avgPointImg"> </span>
-                            <c:forEach items="${points}" var="i">
-                                <c:if test="${i.key eq movieDTO.movieCd}">
-										<span class="movieAvgPoint" data-value="${i.value['avg']}"> <fmt:formatNumber
-                                                value="${i.value['avg']}"
-                                                type="pattern" pattern="0.00"/> (${i.value['count']})
-										</span>
-                                </c:if>
-                            </c:forEach>
-
-                        </div>
-                    </div>
+<!-- Contents -->
+<div class="contentDiv">
+    <div class="content1">나중에 추가</div>
+    <div class="content2">
+        <div class="contentTitle">
+            <span>최신 영화</span>
+        </div>
+        <div class="movieDiv slider">
+            <c:forEach items="${hashMap1}" var="movie">
+                <c:forEach var="i" begin="0" end="9" step="1">
+                    <c:if test="${i eq movie.key}">
+                        <a href="/detailView.re?movieCd=${movie.value['movieDTO'].movieCd}">
+                            <div class="movie slider_item">
+                                <div class="imgContainer">
+                                    <img src="/images/NoImg.webp" alt="">
+                                </div>
+                                <div class="product">
+                                    <div class="category">
+                                        <span>${movie.value['movieDTO'].genreAlt}</span></div>
+                                    <div class="title">
+                                        <span>${movie.value['movieDTO'].movieNm}</span></div>
+                                    <div class="avgPoint" data-value='${movie.value['avg']}'>
+                                        <span class="star"></span>
+                                        <span><fmt:formatNumber value="${movie.value['avg']}" type="pattern"
+                                                                pattern="0.00"/> (${movie.value['count']})</span></div>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
                 </c:forEach>
+            </c:forEach>
+        </div>
+        <div class="btnContainer">
+            <button id='toRecentMovie'>최신 영화 더 보기</button>
+        </div>
+    </div>
+    <div class="content3">
+        <div class="contentTitle">
+            <span>최신 리뷰</span>
+        </div>
+        <div class="reviewDiv slider">
+            <c:forEach items="${hashMap2}" var="review">
+                <c:forEach begin="0" end="9" step="1" var="i">
+                    <c:if test="${i eq review.key}">
+                        <a href="/detailView.re?movieCd=${review.value['movieDTO'].movieCd}">
+                            <div class="review slider_item">
+                                <div class="review_reviewer">
+                                    <div class="reviewer_id">
+                                            ${review.value['reviewDTO'].user_nickname}
+                                    </div>
+                                    <div class="avgPoint" data-value ='${review.value['avg']}'>
+                                        <span class="star"></span>
+                                    </div>
+                                </div>
+                                <div class="review_content">
+                                    <span>${review.value['reviewDTO'].r_content}</span>
+                                </div>
+                                <div class="review_movie">
+                                    <span>${review.value['movieDTO'].movieNm}, ${review.value['movieDTO'].directors}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+        </div>
+        <div class="btnContainer">
+            <button id = 'toRecentReview'>최신 리뷰 더 보기</button>
+        </div>
 
+    </div>
+    <div class="content4">
+        <div class="contentTitle"><span>추천 영화</span></div>
+        <div class="movieDiv slider">
+            <c:forEach items="${hashMap3}" var="movie">
+                <c:forEach var="i" begin="0" end="9" step="1">
+                    <c:if test="${i eq movie.key}">
+                        <a href="/detailView.re?movieCd=${movie.value['movieDTO'].movieCd}">
+                            <div class="movie slider_item">
+                                <div class="imgContainer">
+                                    <img src="/images/NoImg.webp" alt="">
+                                </div>
+                                <div class="product">
+                                    <div class="category">
+                                        <span>${movie.value['movieDTO'].genreAlt}</span></div>
+                                    <div class="title">
+                                        <span>${movie.value['movieDTO'].movieNm}</span></div>
+                                    <div class="avgPoint" data-value='${movie.value['avg']}'>
+                                        <span class="star"></span>
+                                        <span><fmt:formatNumber value="${movie.value['avg']}" type="pattern"
+                                                                pattern="0.00"/> (${movie.value['count']})</span></div>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+        </div>
+    </div>
 
-            </div>
+    <div class="content5">
+        <div class="contentTitle">
+            <span>최신 토픽</span>
+        </div>
+        <div class="topicLi">
+            <c:if test="${empty hashMap4}">
+                <div class="notFound"><span>등록된 게시글이 없습니다.</span></div>
+            </c:if>
+            <c:forEach items="${hashMap4}" var="topic">
+                <c:forEach begin="0" end="9" step="1" var="i">
+                    <c:if test="${i eq topic.key}">
+                        <div class="topic">
+                            <div class="topicTitle">
+                                ${topic.value['postDTO'].p_title}
+                            </div>
+                            <div class="topicStatus">
+                                <span>UP ${topic.value['like']} DOWN ${topic.value['hate']} COMMENT ${topic.value['comment']} VIEW ${topic.value['postDTO'].p_view_count}</span> <span>글쓴이</span>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
+        </div>
+        <div class="btnContainer">
+            <button id = 'toRecentTopic'>최신 토픽 더 보기</button>
         </div>
     </div>
 </div>
@@ -447,29 +740,41 @@
             <div class="col-2">
                 <h5>장르</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디"
-                                                 class="nav-link p-0">코미디</a></li>
-                    <li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션"
-                                                 class="nav-link p-0">액션</a></li>
-                    <li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로"
-                                                 class="nav-link p-0">멜로</a></li>
-                    <li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF"
-                                                 class="nav-link p-0">SF</a></li>
-                    <li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러"
-                                                 class="nav-link p-0">호러</a></li>
+                    <li class="nav-item mb-2">
+                        <a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디" class="nav-link p-0">코미디</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/search.movie?s_type=genreAlt&curPage=1&val=액션" class="nav-link p-0">액션</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로" class="nav-link p-0">멜로</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/search.movie?s_type=genreAlt&curPage=1&val=SF" class="nav-link p-0">SF</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/search.movie?s_type=genreAlt&curPage=1&val=호러" class="nav-link p-0">호러</a>
+                    </li>
                 </ul>
             </div>
 
             <div class="col-2">
                 <h5>계정</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/Member/login.jsp" class="nav-link p-0">로그인</a></li>
-                    <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                    <li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp"
-                                                 class="nav-link p-0">마이페이지</a></li>
-                    <li class="nav-item mb-2"><a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
+                    <li class="nav-item mb-2">
+                        <a href="/Member/login.jsp" class="nav-link p-0">로그인</a>
                     </li>
-                    <li class="nav-item mb-2"><a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a>
+                    <li class="nav-item mb-2">
+                        <a href="/signup.mem" class="nav-link p-0">회원가입</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/Member/findId.jsp" class="nav-link p-0">아이디 찾기</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/Member/findPw.jsp" class="nav-link p-0">비밀번호 찾기</a>
                     </li>
                 </ul>
             </div>
@@ -477,10 +782,15 @@
             <div class="col-2">
                 <h5>기타</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1"
-                                                 class="nav-link p-0">리뷰</a></li>
-                    <li class="nav-item mb-2"><a href="/post/post.jsp" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                    <li class="nav-item mb-2">
+                        <a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/post/post.jsp" class="nav-link p-0">자유게시판</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="/wishlist.wish" class="nav-link p-0">찜 목록</a>
+                    </li>
                 </ul>
             </div>
 
@@ -488,39 +798,45 @@
                 <form>
                     <h5>영화 리뷰 플랫폼 - 영화 추천이</h5>
                     <p>
-                        지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
+                        지금 영화를 리뷰하고,<br>
+                        내 취향에 딱 맞는 영화를 추천받아 보세요!
                     </p>
                     <div class="d-flex w-100 gap-2">
-                        <label for="newsletter1" class="visually-hidden">Email address</label> <input
-                            id="newsletter1" type="text"
-                            class="form-control" placeholder="Email address">
+                        <label for="newsletter1" class="visually-hidden">Email address</label>
+                        <input
+                                id="newsletter1"
+                                type="text"
+                                class="form-control"
+                                placeholder="Email address">
                         <button class="btn btn-primary" type="button">영화 추천받기</button>
                     </div>
                 </form>
 
                 <div class="snsBox">
                     <div class="snsIcon1">
-                        <a href="https://www.kakaocorp.com/" class="d-flex align-items-center mb-2 mb-lg-0">
-                            <img id="kakaoIcon"
-                                 src="images/kakaotalk.png">
+                        <a
+                                href="https://www.kakaocorp.com/"
+                                class="d-flex align-items-center mb-2 mb-lg-0">
+                            <img id="kakaoIcon" src="images/kakaotalk.png">
                         </a>
                     </div>
                     <div class="snsIcon2">
-                        <a href="https://twitter.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img
-                                id="twitterIcon"
-                                src="images/twitter.png">
+                        <a href="https://twitter.com/" class="d-flex align-items-center mb-2 mb-lg-0">
+                            <img id="twitterIcon" src="images/twitter.png">
                         </a>
                     </div>
                     <div class="snsIcon3">
-                        <a href="https://www.instagram.com/" class="d-flex align-items-center mb-2 mb-lg-0">
-                            <img id="instagramIcon"
-                                 src="images/instagram.png">
+                        <a
+                                href="https://www.instagram.com/"
+                                class="d-flex align-items-center mb-2 mb-lg-0">
+                            <img id="instagramIcon" src="images/instagram.png">
                         </a>
                     </div>
                     <div class="snsIcon4">
-                        <a href="https://www.facebook.com/" class="d-flex align-items-center mb-2 mb-lg-0">
-                            <img id="facebookIcon"
-                                 src="images/facebook.png">
+                        <a
+                                href="https://www.facebook.com/"
+                                class="d-flex align-items-center mb-2 mb-lg-0">
+                            <img id="facebookIcon" src="images/facebook.png">
                         </a>
                     </div>
                 </div>
@@ -542,18 +858,66 @@
         }
     });
 
-    $.each($(".movie .movieAvgPoint"), function () {
+    $.each($(".avgPoint"), function () {
         let points = $(this).attr('data-value');
+        console.log(points)
         points = Math.round(points);
+        console.log(points);
 
         for (let i = 0; i < points; i++) {
-            $(this).siblings('.avgPointImg')[0].append('★');
+            $(this).find('.star').append('★');
         }
 
         for (let i = 0; i < 5 - points; i++) {
-            $(this).siblings('.avgPointImg')[0].append('☆');
+            $(this).find('.star').append('☆');
         }
+    });
+
+    $("#toRecentMovie").on("click", ()=>{
+        location.href = '/listLookup.movie?curPage=1';
     })
+    $('#toRecentReview').on("click", ()=>{
+        location.href = '/toReviewList.re?curPage=1';
+    })
+    $('#toRecentTopic').on("click", () => {
+        location.href =　'/post.po?curPage=1';
+    })
+
+    $(document).ready(function () {
+        $('.movieDiv').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: "<button type='button' class='slick-prev'><</button>",
+            nextArrow: "<button type='button' class='slick-next'>></button>",
+            responsive: [
+
+                { // -> 반응형 옵션
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                }, { // -> 반응형 옵션
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                }
+
+            ]
+        });
+        $('.reviewDiv').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            prevArrow: "<button type='button' class='slick-prev'><</button>",
+            nextArrow: "<button type='button' class='slick-next'>></button>"
+        });
+    });
 </script>
 </body>
 </html>

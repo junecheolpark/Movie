@@ -90,6 +90,20 @@ public class PostCommentDAO {
 			return rs;			
 		}
 	}
+
+	public int countComment (int seq_post1) throws Exception{
+		String sql = "select count(*) from tbl_post_comment where seq_post = ?";
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setInt(1, seq_post1);
+			ResultSet rs = pstmt.executeQuery();
+
+			rs.next();
+
+			return rs.getInt(1);
+		}
+	}
 	
 	public ArrayList<PostCommentDTO> selectAll(int seq_post1) throws Exception{
 		String sql = "select * from tbl_post_comment where seq_post = ?";
