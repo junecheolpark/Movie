@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,16 +9,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>Mypage</title>
 
-    <style>
+ 	<style>
         body {
             background-color: black;
         }
@@ -251,7 +251,6 @@
 </head>
 
 <body>
-
 <!-- Header -->
 <header class="mb-3 border-bottom">
     <div class="container">
@@ -371,147 +370,150 @@
         </nav>
     </div>
 </header>
+    <!-- Contents -->
+    <div class="contents">
+    	<form id="indexForm" action="/modify.mem" method="post">
+	    	<div class="contents row text-black">
+	            <div class="contentsBox">
+	                <div class="contentsImgBox">
+	                	<c:if test="${profile eq null}">
+	                		<img class="profileImg" src="/images/기본프로필.jpg">
+	                	</c:if>
+	                	<c:if test="${profile ne null}">
+	                		<img class="profileImg" src="/files/${profile}">
+	                	</c:if>
+	                </div>
+	                <br><p>${dto.user_nickname}</p>
+	                <button type="button" class="btn btn-outline-danger" id="mb_delete">회원 탈퇴</button>
+	                <button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
+	                <button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
+	            </div>
+	            <div class="contentsBox2">
+	                <div class="contentsmyWrite">
+	                    <a href="/myPage.mem" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
+	                    <a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
+	                </div>
+	                <div class="contentsmyWriteBox">
+							<div class="container">
 
-<!-- Contents -->
-<div class="contents">
-    <form id="indexForm" action="/modify.mem" method="post">
-        <div class="contents row text-black">
-            <div class="contentsBox">
-                <div class="contentsImgBox">
-                    <img class="profileImg" src="/files/${file_dto.sys_name}">
-                </div>
-                <br><p>${loginSession.user_nickname}</p>
-                <button type="button" class="btn btn-outline-danger" id="mb_delete">회원 탈퇴</button>
-                <button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
-                <button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
-            </div>
-            <div class="contentsBox2">
-                <div class="contentsmyWrite">
-                    <a href="/myPage.mem" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
-                    <a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
-                </div>
-                <div class="contentsmyWriteBox">
-                    <div class="container">
+							<div class="row">
+								<div class="col">
+									<h3>
+										내가 쓴 게시글<br />
+									</h3>
+								</div>
+							</div>
+							<div class="content-header">
+								<div class="row">
+									<div class="col-9"></div>
+									<div class="col-3">
+										<select class="form-select list"
+											aria-label="Default select example" id="listItem">
+											<option value="1" selected>목록 10개</option>
+											<option value="2">목록 20개</option>
+											<option value="3">목록 30개</option>
+										</select>
+										<button class="btn btn-warning" id="btnList">출력</button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-1">
+										<strong>글번호</strong>
+									</div>
+									<div class="col-5">
+										<strong>제목</strong>
+									</div>
+									<div class="col-2">
+										<strong>글쓴이</strong>
+									</div>
+									<div class="col-2">
+										<strong>작성일</strong>
+									</div>
+									<div class="col-1">
+										<strong>추천</strong>
+									</div>
+									<div class="col-1">
+										<strong>조회</strong>
+									</div>
+								</div>
+								<hr />
+							</div>
+							<div class="content-body">
+								<!--내용-->
+								
+							</div>
+						<div class="row">
+									<!--글 페이지 이동-->
+									<div class="col-4"></div>
+									<div class="col-4">
+										<nav>
+											<ul class="pagination justify-content-center">
+												<c:if test="${naviMap.needPrev eq true}">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${naviMap.startNavi-1}">Prev</a></li>
+													<%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭했음 ->  5페이지로 이동 --%>
+												</c:if>
+					
+												<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+													end="${naviMap.endNavi}" step="1">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${pageNum}">${pageNum}</a></li>
+												</c:forEach>
+					
+												<c:if test="${naviMap.needNext eq true}">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${naviMap.endNavi+1}">Next</a></li>
+												</c:if>
+											</ul>
+										</nav>
+									</div>
+									<div class="col-4"></div>
+								</div>
+								<div class="row">
+									<!--글 페이지 이동-->
+									<div class="col-2"></div>
+									<div class="col-8">
+										<select class="form-select search-method" id="searchValue"
+											aria-label="Default select example" name="searchOption">
+											<option value="1" selected>제목</option>
+											<option value="2">내용</option>
+											<option value="3">글쓴이</option>
+										</select> <input type="text" id="inputSearch" name="searchInput" class="form-control" />
+										<button type="button" id="btnSearch" class="btn btn-secondary">검색</button>
+									</div>
+									<div class="col-2">
+									<button id="myPostPage" type="button" class="btn btn-secondary">내글보기</button>
+									</div>
+									
+								</div>
+						
+						</div>
+						<script>
+					    $("#myPostPage").on("click",function(){
+					       location.href="/myPostPage.po";
+					    })
+						
 
-                        <div class="row">
-                            <div class="col">
-                                <h3>
-                                    내가 쓴 게시글<br />
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="content-header">
-                            <div class="row">
-                                <div class="col-9"></div>
-                                <div class="col-3">
-                                    <select class="form-select list"
-                                            aria-label="Default select example" id="listItem">
-                                        <option value="1" selected>목록 10개</option>
-                                        <option value="2">목록 20개</option>
-                                        <option value="3">목록 30개</option>
-                                    </select>
-                                    <button class="btn btn-warning" id="btnList">출력</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-1">
-                                    <strong>글번호</strong>
-                                </div>
-                                <div class="col-5">
-                                    <strong>제목</strong>
-                                </div>
-                                <div class="col-2">
-                                    <strong>글쓴이</strong>
-                                </div>
-                                <div class="col-2">
-                                    <strong>작성일</strong>
-                                </div>
-                                <div class="col-1">
-                                    <strong>추천</strong>
-                                </div>
-                                <div class="col-1">
-                                    <strong>조회</strong>
-                                </div>
-                            </div>
-                            <hr />
-                        </div>
-                        <div class="content-body">
-                            <!--내용-->
+					
+						</script>
+	                </div>
+	            </div>
+	        </div>
+    	</form>
+    </div>
+    <script>
+	    $("#mb_delete").on("click", function(){ // 회원탈퇴 요청
+			location.href = "/deleteProc.mem";
+		});
 
-                        </div>
-                        <div class="row">
-                            <!--글 페이지 이동-->
-                            <div class="col-4"></div>
-                            <div class="col-4">
-                                <nav>
-                                    <ul class="pagination justify-content-center">
-                                        <c:if test="${naviMap.needPrev eq true}">
-                                            <li class="page-item"><a class="page-link"
-                                                                     href="/post.po?curPage=${naviMap.startNavi-1}">Prev</a></li>
-                                            <%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭했음 ->  5페이지로 이동 --%>
-                                        </c:if>
+    	$("#i_logout").on("click", function(){ // 로그아웃 요청
+    		location.href = "/logout.mem";
+    	})
 
-                                        <c:forEach var="pageNum" begin="${naviMap.startNavi}"
-                                                   end="${naviMap.endNavi}" step="1">
-                                            <li class="page-item"><a class="page-link"
-                                                                     href="/post.po?curPage=${pageNum}">${pageNum}</a></li>
-                                        </c:forEach>
-
-                                        <c:if test="${naviMap.needNext eq true}">
-                                            <li class="page-item"><a class="page-link"
-                                                                     href="/post.po?curPage=${naviMap.endNavi+1}">Next</a></li>
-                                        </c:if>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="col-4"></div>
-                        </div>
-                        <div class="row">
-                            <!--글 페이지 이동-->
-                            <div class="col-2"></div>
-                            <div class="col-8">
-                                <select class="form-select search-method" id="searchValue"
-                                        aria-label="Default select example" name="searchOption">
-                                    <option value="1" selected>제목</option>
-                                    <option value="2">내용</option>
-                                    <option value="3">글쓴이</option>
-                                </select> <input type="text" id="inputSearch" name="searchInput" class="form-control" />
-                                <button type="button" id="btnSearch" class="btn btn-secondary">검색</button>
-                            </div>
-                            <div class="col-2">
-                                <button id="myPostPage" type="button" class="btn btn-secondary">내글보기</button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <script>
-                        $("#myPostPage").on("click",function(){
-                            location.href="/myPostPage.po";
-                        })
-
-
-
-                    </script>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-<script>
-    $("#mb_delete").on("click", function(){ // 회원탈퇴 요청
-        location.href = "/deleteProc.mem";
-    });
-
-    $("#i_logout").on("click", function(){ // 로그아웃 요청
-        location.href = "/logout.mem";
-    })
-
-    $("#i_modify").on("click", function(){ // 내 정보 수정 페이지 요청
-        location.href = "/modify.mem";
-    });
-</script>
-
+    	$("#i_modify").on("click", function(){ // 내 정보 수정 페이지 요청
+    		location.href = "/modify.mem";
+		});
+    </script>
 
 <!-- Footer -->
 <footer class="py-5 text-light">
@@ -602,15 +604,15 @@
     </div>
 
 </footer>
-<script>
-    const searchForm = $(".searchForm");
-    searchForm.on("submit", function (event) {
-        if ($(this).children(".searchInput").val() === "") {
-            event.preventDefault();
-            alert("검색어를 입력하세요");
-        }
-    });
-</script>
+    <script>
+        const searchForm = $(".searchForm");
+        searchForm.on("submit", function (event) {
+            if ($(this).children(".searchInput").val() === "") {
+                event.preventDefault();
+                alert("검색어를 입력하세요");
+            }
+        });
+    </script>
 </body>
 
 </html>

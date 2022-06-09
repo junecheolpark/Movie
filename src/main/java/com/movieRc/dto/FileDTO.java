@@ -6,8 +6,7 @@ public class FileDTO {
     private String ori_name;
     private String sys_name;
 
-    public FileDTO() {
-    }
+    public FileDTO() {}
 
     public FileDTO(int seq_file, int seq_board, String ori_name, String sys_name) {
         this.seq_file = seq_file;
