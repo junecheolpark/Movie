@@ -173,7 +173,7 @@ public class Like_rController extends HttpServlet {
 					}
 				} else {// 아니라면 존재하지 않으므로 insert후 업데이트
 						// tbl_like_r insert
-					int l_rs = ldao.like_insert(new Like_rDTO(0, 0, user_id, seq_review, user_category));
+					int l_rs = ldao.like_insert(new Like_rDTO(0, 0, user_id, user_category,seq_review));
 					if (l_rs > 0) {// 생성
 						
 						int rs1 = ldao.like_update(r_like_check, user_id, seq_review);
@@ -187,7 +187,6 @@ public class Like_rController extends HttpServlet {
 						}
 					}
 				}
-				response.sendRedirect("/detailView.re");
 
 			} catch (Exception e) {
 				e.printStackTrace();

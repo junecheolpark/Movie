@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+		 pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%>
+<% response.setContentType("text/html; charset=UTF-8");%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,13 +25,22 @@
 #container {
 	margin: auto;
 	background-color: antiquewhite;
+<<<<<<< HEAD
+	width: 960px;
+	padding-top:70px;
+	border-radius:15px;
+}
+#content-box{
+text-align:left;
+padding:20px;
+=======
 	width: 900px;
+<<<<<<< HEAD
+	
 }
 
-.modal-content {
-	text-align: left;
-}
-
+.modal-content{
+text-align: left;}
 #content-box {
 	background-color: rgb(255, 254, 248);
 	height: 500px;
@@ -56,6 +68,43 @@
 	margin: 20px
 }
 
+=======
+>>>>>>> 750bd768e2160bb2138deb35ad83580dbe71895f
+}
+.modal-content {
+	text-align: left;
+}
+
+#content-box {
+	
+	
+	background-color: rgb(255, 254, 248);
+	min-height: 500px;
+	width: 800px;
+	margin: auto;
+
+	border-radius: 15px;
+}
+
+#input-box {
+	width: 800px;
+	margin: auto;
+}
+
+#comment_post {
+	margin: auto;
+	width: 600px;
+	height: 80px;
+	border-radius: 10px;
+	resize: none;
+}
+
+.comment-box {
+	margin: auto;
+	margin: 20px
+}
+
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 #submit {
 	width: 70px;
 	height: 70px;
@@ -63,7 +112,7 @@
 }
 
 #content {
-	height: 400px;
+	min-height: 400px;
 }
 
 .comment-text {
@@ -94,9 +143,6 @@
 	height: 30px;
 }
 
-div {
-	border: 1px solid black;
-}
 
 .click {
 	background-color: rgb(211, 209, 209);
@@ -132,36 +178,6 @@ div {
 	background-color: rgb(197, 192, 192);
 }
 
-/* 별점 Write */
-.star-rating {
-	/* border: solid 1px #ccc; */
-	display: inline-flex;
-	flex-direction: row-reverse;
-	font-size: 1.2em;
-	justify-content: space-around;
-	padding: 0 .2em;
-	text-align: center;
-	width: 5em;
-}
-
-.star-rating input {
-	display: none;
-}
-
-.star-rating label {
-	color: #ccc;
-	cursor: pointer;
-}
-
-.star-rating :checked ~label {
-	color: rgb(0, 0, 0);
-}
-
-.star-rating label:hover, .star-rating label:hover ~label {
-	color: #fc0;
-}
-
-/* -----------------------------------------------------------*/
 /* 리플 박스 */
 #btnLikeUp2 {
 	display: none;
@@ -199,53 +215,6 @@ div {
 	border-radius: 15px;
 }
 
-/* 별점 reply */
-#r_grade_star2 {
-	display: none;
-}
-
-.reply-star-rating1 {
-	/* border: solid 1px #ccc; */
-	display: inline-flex;
-	flex-direction: row-reverse;
-	font-size: 1.1em;
-	justify-content: space-around;
-	padding: 0 em;
-	text-align: center;
-	width: em;
-}
-
-.reply-star-rating {
-	/* border: solid 1px #ccc; */
-	display: inline-flex;
-	flex-direction: row-reverse;
-	font-size: 1.1em;
-	justify-content: space-around;
-	padding: 0 em;
-	text-align: center;
-	width: em;
-}
-
-.reply-star-rating1 #r_star {
-	color: #ccc;
-}
-
-.reply-star-rating input {
-	display: none;
-}
-
-.reply-star-rating label {
-	color: #ccc;
-	cursor: pointer;
-}
-
-.reply-star-rating :checked ~label {
-	color: rgb(0, 0, 0);
-}
-
-.reply-star-rating label:hover, .reply-star-rating label:hover ~label {
-	color: #fc0;
-}
 </style>
 </head>
 
@@ -257,17 +226,36 @@ div {
 			<div class="row">
 				<div class="col">
 					<h4>제목 : ${dto.p_title}</h4>
-
+			
 				</div>
+				<hr>
 			</div>
 
 			<div class="row">
+<<<<<<< HEAD
+				<div class="col-2"><span>닉네임:</span>${dto.user_nickname }</div>
+=======
 				<div class="col-2">
 					<span>닉네임:</span>${dto.user_nickname }</div>
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 				<div class="col-6"></div>
 				<div class="col-4">${dto.p_date },<span>조회수:</span>${dto.p_view_count}</div>
+				<hr>
 			</div>
 			<div class="row">
+<<<<<<< HEAD
+				<div class="col-8"><span>글번호:</span>${dto.seq_post }</div>
+				<div class="col">
+					<div class="row">
+						<div class="col-5 click">
+							<button id="p_likebefore" value=${dto.seq_post }><img src="resources/images/likebefore.png" alt="좋아요" id="like" /></button>
+							<button id="p_like" style="display:none;" value=${dto.seq_post }><img src="resources/images/like.png" alt="좋아요" id="like" /></button>
+							
+						</div>
+						<div class="col-5 click">
+						<button id="p_hatebefore" value=${dto.seq_post }><img src="resources/images/hatebefore.png" alt="싫어요" id="hate" /></button>
+							<button id="p_hate" style="display:none;" value=${dto.seq_post }><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
+=======
 				<div class="col-8">
 					<span>글번호:</span>${dto.seq_post }</div>
 				<div class="col">
@@ -275,25 +263,259 @@ div {
 						<div class="col-5 click">
 							<button id="p_likebefore" value=${dto.seq_post }>
 								<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
+
+
 							</button>
 							<button id="p_like" style="display: none;" value=${dto.seq_post }>
 								<img src="resources/images/like.png" alt="좋아요" id="like" />
-							</button>
 
+							</button>
+							<span  id="likeCount-box">${countLike }</span>
 						</div>
-						<div class="col-5 click">
+						<div class="col-5 click" >
 							<button id="p_hatebefore" value=${dto.seq_post }>
 								<img src="resources/images/hatebefore.png" alt="싫어요" id="hate" />
 							</button>
 							<button id="p_hate" style="display: none;" value=${dto.seq_post }>
 								<img src="resources/images/hate.png" alt="싫어요" id="hate" />
 							</button>
+<<<<<<< HEAD
+							<span  id="hateCount-box">${countHate }</span>
+=======
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
+>>>>>>> 750bd768e2160bb2138deb35ad83580dbe71895f
 						</div>
+						
 					</div>
 					<script>
+<<<<<<< HEAD
+					var arr=null;
+						/* 싫어요  */
+						$("#p_hatebefore").on(
+								"click",
+								function() {
+									$("#countHate").val(${countHate });
+									let seq_post = $("#p_hatebefore").val();
+									console.log(seq_post);
+									$.ajax({
+										url : "/phate.po?seq_post=" + seq_post,
+										type : "get",
+										success : function(data) {
+											
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+								
+											 
+											if ( arr[0] == 0 ||  arr[0] == -1) {
+												console.log(data);
+												alert("싫어요");
+												$("#p_hatebefore").css(
+														"display", "none");
+												$("#p_hate").css("display",
+														"block");
+											} else if ( arr[0] == 1) {
+												console.log( arr[0]);
+												alert("좋아요 취소 after 싫어요");
+												
+												$("#p_likebefore").css(
+														"display", "block");
+												$("#p_like").css("display",
+														"none");
+												$("#p_hatebefore").css(
+														"display", "none");
+												$("#p_hate").css("display",
+														"block");
+											} else if ( arr[0] == 2) {
+												console.log(data);
+												alert("싫어요 취소");
+												$("#p_hate").css("display",
+														"none");
+												$("#p_hatebefore").css(
+														"display", "block")
+												
+											}
+											 $("#likeCount-box").text(arr[1]);
+											 $("#hateCount-box").text(arr[2]);
+											
+										},error : function(e) {
+											console.log(e);
+										}
+									})
+
+								})
+
+						$("#p_hate").on(
+								"click",
+								function() {
+									$("#countHate").val(${countHate });
+									let seq_post = $("#p_hate").val();
+									console.log(seq_post);
+									$.ajax({
+										url : "/phate.po?seq_post=" + seq_post,
+										type : "get",
+										success : function(data) {
+											
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+											
+											 
+											if ( arr[0] == 0 ||  arr[0] == -1) {
+												console.log(data);
+												alert("싫어요");
+												$("#p_hatebefore").css(
+														"display", "none");
+												$("#p_hate").css("display",
+														"block");
+											} else if ( arr[0] == 1) {
+												console.log( arr[0]);
+												alert("좋아요 취소 after 싫어요");
+												
+												$("#p_likebefore").css(
+														"display", "block");
+												$("#p_like").css("display",
+														"none");
+												$("#p_hatebefore").css(
+														"display", "none");
+												$("#p_hate").css("display",
+														"block");
+											} else if ( arr[0] == 2) {
+												console.log(data);
+												alert("싫어요 취소");
+												$("#p_hate").css("display",
+														"none");
+												$("#p_hatebefore").css(
+														"display", "block")
+												
+											}
+											
+											 $("#likeCount-box").text(arr[1]);
+											 $("#hateCount-box").text(arr[2]);
+
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									})
+
+								})
+						/*좋아요  */
+						$("#p_likebefore").on(
+								"click",
+								function() {
+									
+									let seq_post = $("#p_likebefore").val();
+
+									$.ajax({
+										url : "/pLike.po?seq_post=" + seq_post,
+										type : "get",
+										success : function(data) {
+											console.log(data);
+
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+											 
+											if (arr[0] == 0 || arr[0] == -1) {
+												console.log(arr[0]);
+												alert("좋아요");
+												$("#p_likebefore").css(
+														"display", "none");
+												$("#p_like").css("display",
+														"block");
+											} else if (arr[0] == 1) {
+												console.log(arr[0]);
+												alert("좋아요 취소");
+												$("#p_like").css("display",
+														"none");
+												$("#p_likebefore").css(
+														"display", "block")
+											} else if (arr[0] == 2) {
+												console.log(arr[0]);										
+												alert("싫어요 취소 after 좋아요");
+												$("#p_hatebefore").css(
+														"display", "block");
+												$("#p_hate").css("display",
+														"none");
+												$("#p_likebefore").css(
+														"display", "none");
+												$("#p_like").css("display",
+														"block");
+											}
+											 $("#likeCount-box").text(arr[1]);
+											 $("#hateCount-box").text(arr[2]);
+
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									})
+									console.log(${countLike });
+									$("#countLike").val(${countLike });
+								})
+						$("#p_like").on(
+								"click",
+								function() {
+									let seq_post = $("#p_like").val();
+
+									
+									
+									$.ajax({
+										url : "/pLike.po?seq_post=" + seq_post,
+										type : "get",
+										success : function(data) {
+											
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+											
+											if (arr[0] == 0 || arr[0] == -1) {
+												console.log(data);							
+												alert("좋아요");
+												$("#p_likebefore").css(
+														"display","block" );
+												$("#p_like").css("display",
+														"none");
+											} else if (arr[0] == 1) {
+												console.log(data);
+												alert("좋아요 취소");
+												$("#p_like").css("display",
+														"none");
+												$("#p_likebefore").css(
+														"display", "block")
+											} else if (arr[0] == 2) {
+												console.log(data);
+												alert("싫어요 취소 after 좋아요");
+												
+												$("#p_hatebefore").css(
+														"display", "block");
+												$("#p_hate").css("display",
+														"none");
+												$("#p_likebefore").css(
+														"display", "none");
+												$("#p_like").css("display",
+														"block");
+											}
+											 $("#likeCount-box").text(arr[1]);
+											 $("#hateCount-box").text(arr[2]);
+
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									})
+									console.log(${countLike });
+									$("#countLike").val(${countLike });
+								})
+=======
 					/* 싫어요  */
 					$("#p_hatebefore").on("click",function(){
 						
+<<<<<<< HEAD
+						$("#p_hatebefore").css("display", "none");
+						$("#p_hate").css("display","block");
+					})
+					$("#p_hate").on("click",function(){
+						$("#p_hate").css("display","none");
+						$("#p_hatebefore").css("display", "block");
+=======
 						let seq_post = $("#p_hatebefore").val();
 						console.log(seq_post);
 						$.ajax({
@@ -355,10 +577,30 @@ div {
 								console.log(e);
 							}
 						})
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 						
 					})
 					/*좋아요  */
 					$("#p_likebefore").on("click",function(){
+<<<<<<< HEAD
+						
+						
+						
+						
+						let seq_post = $("#p_likebefore").val();
+						console.log(seq_post);
+						$.ajax({
+							url : "/pLike.po?seq_post="+ seq_post,
+							type : "get",			
+							success : function(data) {
+									if(data==="true"){
+										console.log("좋아요 성공")
+										$("#p_likebefore").css("display", "none");
+										$("#p_like").css("display","block");
+									}else{
+										console.log("좋아요 실패")
+										
+=======
 						let seq_post = $("#p_likebefore").val();
 						
 						$.ajax({
@@ -381,6 +623,7 @@ div {
 										$("#p_hate").css("display", "none");
 										$("#p_likebefore").css("display", "none");
 										$("#p_like").css("display","block");
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 									}
 							},
 							error : function(e) {
@@ -390,6 +633,10 @@ div {
 						
 					})
 					$("#p_like").on("click",function(){
+<<<<<<< HEAD
+						$("#p_like").css("display","none");
+						$("#p_likebefore").css("display", "block");
+=======
 						let seq_post = $("#p_like").val();
 						
 						$.ajax({
@@ -418,20 +665,32 @@ div {
 								console.log(e);
 							}
 						})
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 						
 					})
+>>>>>>> 750bd768e2160bb2138deb35ad83580dbe71895f
 					</script>
 				</div>
+				<hr>
 			</div>
 			<div class="row">
+<<<<<<< HEAD
+				<div class="col" id="content"><strong>내용:</strong>${dto.p_content }</div>
+=======
 				<div class="col" id="content">
 					<strong>내용:</strong>${dto.p_content }</div>
+<<<<<<< HEAD
+					
+=======
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
+>>>>>>> 750bd768e2160bb2138deb35ad83580dbe71895f
 			</div>
-
+<hr>
 
 			<!-- 수정 버튼영역 -->
 			<div id="user-box">
 				<div class="row">
+				
 					<c:if test="${loginSession.user_id eq dto.user_id}">
 						<div class="col-6">
 							<button type="button" class="btn btn-warning" id="btnModify">수정</button>
@@ -522,10 +781,14 @@ div {
 														data-bs-whatever="@getbootstrap"
 														style="background-color: white; border: none;">
 														<img src="resources/images/report.png" height="80%">
+<<<<<<< HEAD
+														<input id="seqReport" value=${post_comment.seq_post_comment} style="display:none;">
+=======
 														<input id="seqReport"
 															value=${post_comment.seq_post_comment
 															}
 															style="display: none;">
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 													</button>
 													<div class="modal fade" id="exampleModal" tabindex="-1"
 														aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -541,7 +804,11 @@ div {
 
 																		<div class="mb-3">
 																			<label for="message-title" class="col-form-label">Title:</label>
-																			<input type="text" class="form-control"
+																			<input type="text" class="form-control" id="message-title" name="rp_title"/>
+																		</div>
+																		<div class="mb-3">
+																			<label for="message-text" class="col-form-label">Message:</label>
+																			<textarea class="form-control" id="message-text" name="rp_content"> </textarea>
 																				id="message-title" name="rp_title" />
 																		</div>
 																		<div class="mb-3">
@@ -571,6 +838,8 @@ div {
 												</div>
 
 												<!-- 수정,삭제버튼 -->
+												<c:choose>
+												<c:when test="${loginSession.getUser_id() eq post_comment.getUser_id() }">
 												<div class="col-2 ps-3">
 
 													<div class="col" id="divWrite">
@@ -595,6 +864,12 @@ div {
 														</ul>
 													</div>
 												</div>
+												</c:when>
+												<c:otherwise>
+												<div class="col-2 ps-3">
+												</div>
+												</c:otherwise>
+												</c:choose>
 											</div>
 
 											<div class="row mt-1 likeBox">
@@ -646,87 +921,98 @@ div {
 				<div class="col-2">
 					<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
 				</div>
+<<<<<<< HEAD
+				
+=======
 
+>>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 			</div>
 		</div>
 	</div>
 	<script>
-			//싫어요 좋아요버튼 post
-			/* $("#p_likebefore").on("click",function(e){
-				let seq_post = "${dto.seq_post}";
-				$.ajax({
-					url : "/pLike.po?seq_post="+ seq_post,
-					type : "get",			
-					success : function(data) {
-							if(data==="true"){
-								console.log("좋아요 성공")
-							}else{
-								console.log("좋아요 실패")
-							}
-					},
-					error : function(e) {
-						console.log(e);
-					}
-				})
-			}) */
-
-			//모달 입력후 메세지 보냈을경우
-			$("#sendMessage").on("click",function(e) {
-				
-				let seq_post = "${dto.seq_post}";
-						let seq_post_comment=$("#seqReport").val()
-						//  $("#message").val($("#message-text").val());
-						if ($("#message-title").val() === ""
-								|| $("#message-text").val() === "") {
-							alert("제목과 메세지를 제대로 입력하지 않았습니다.");
-							return;
+		//싫어요 좋아요버튼 post
+		/* $("#p_likebefore").on("click",function(e){
+			let seq_post = "${dto.seq_post}";
+			$.ajax({
+				url : "/pLike.po?seq_post="+ seq_post,
+				type : "get",			
+				success : function(data) {
+						if(data==="true"){
+							console.log("좋아요 성공")
+						}else{
+							console.log("좋아요 실패")
 						}
-					
-						let rp_title =$("#message-title").val();
-						let rp_content =$("#message-text").val();
-						let data = $("#reportForm").serialize();
-						console.log(rp_title);
-						console.log(rp_content);
-						console.log(data);
-						$.ajax({
-							url : "/report.co",
-							type : "post",	
-							data : {
-								seq_post: seq_post,
-								seq_post_comment : seq_post_comment,
-								rp_title : rp_title,
-								rp_content : rp_content
-							},	
-							success : function() {
-								$("#exampleModal").modal('hide');
-								
-							},
-							error : function(e) {
-								console.log(e);
-							}
-						})
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			})
+		}) */
 
-					});
-		
-		$(".btn-report").on("click", function() {
-			/*모달 스크립트  */
-			var exampleModal = document.getElementById("exampleModal");
-			exampleModal.addEventListener("show.bs.modal", function(event) {
-				// Button that triggered the modal
-				var button = event.relatedTarget;
-				// Extract info from data-bs-* attributes
-				var recipient = button.getAttribute("data-bs-whatever");
-				// If necessary, you could initiate an AJAX request here
-				// and then do the updating in a callback.
-				//
-				// Update the modal's content.
-				var modalTitle = exampleModal.querySelector(".modal-title");
-				var modalBodyInput = exampleModal
-						.querySelector(".modal-body input");
+		//모달 입력후 메세지 보냈을경우
+		$("#sendMessage").on(
+				"click",
+				function(e) {
 
-				modalTitle.textContent = "Report";
-		})
-		});
+					let seq_post = "${dto.seq_post}";
+					let seq_post_comment = $("#seqReport").val()
+					//  $("#message").val($("#message-text").val());
+					if ($("#message-title").val() === ""
+							|| $("#message-text").val() === "") {
+						alert("제목과 메세지를 제대로 입력하지 않았습니다.");
+						return;
+					}
+
+					let rp_title = $("#message-title").val();
+					let rp_content = $("#message-text").val();
+					let data = $("#reportForm").serialize();
+					console.log(rp_title);
+					console.log(rp_content);
+					console.log(data);
+					$.ajax({
+						url : "/report.co",
+						type : "post",
+						data : {
+							seq_post : seq_post,
+							seq_post_comment : seq_post_comment,
+							rp_title : rp_title,
+							rp_content : rp_content
+						},
+						success : function() {
+							$("#exampleModal").modal('hide');
+
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					})
+
+				});
+
+		$(".btn-report").on(
+				"click",
+				function() {
+					/*모달 스크립트  */
+					var exampleModal = document.getElementById("exampleModal");
+					exampleModal.addEventListener("show.bs.modal",
+							function(event) {
+								// Button that triggered the modal
+								var button = event.relatedTarget;
+								// Extract info from data-bs-* attributes
+								var recipient = button
+										.getAttribute("data-bs-whatever");
+								// If necessary, you could initiate an AJAX request here
+								// and then do the updating in a callback.
+								//
+								// Update the modal's content.
+								var modalTitle = exampleModal
+										.querySelector(".modal-title");
+								var modalBodyInput = exampleModal
+										.querySelector(".modal-body input");
+
+								modalTitle.textContent = "Report";
+							})
+				});
 		// 댓글 수정 버튼에게 이벤트 부여
 		$(".body-reply").on(
 				"click",
@@ -862,13 +1148,142 @@ div {
 
 		function refreshMemList() {
 			location.reload();
+=======
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<!-- include libraries(jQuery, bootstrap) -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link
+			href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+			rel="stylesheet" />
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+	<!-- include summernote css/js -->
+	<link
+			href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+			rel="stylesheet" />
+	<script
+			src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+	<style>
+		btn {
+			border-radius: 13px;
+			width: 70px;
+			height: 40px;
+>>>>>>> b992369 (수정)
 		}
-		$("#btnBack").on("click", function() {
-			location.href = "/post.po?curPage=1";
+
+		.container {
+			margin: auto;
+			margin-top: 30px;
+		}
+
+	</style>
+</head>
+<body>
+<div class="container">
+	<form action="/modifyProc.po" id="writeForm" method="post">
+		<div class="row">
+			<div class="col">
+				<h2>게시글 작성 </h2>
+				<input style="display:none"; id="seq_post" name="seq_post" value=${dto.seq_post }>
+				<hr/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-10">
+				<input type="text" class="form-control" id="title" name="p_title"
+					   placeholder="제목을 입력해 주세요." value=${dto.p_title}/>
+			</div>
+			<div class="col-2">
+				<button type="button" id="btnBack" class="btn btn-secondary">
+					취소</button>
+				<button type="submit" id="submit" class="btn btn-warning">
+					수정</button>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col">
+				<div id="summernote" name="summernote">${dto.p_content}</div>
+			</div>
+		</div>
+		<input style="display:none;" type="text" id="content" name="p_content" >
+	</form>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$("#summernote").summernote();
+	});
+
+	$('#summernote').summernote(
+			{
+
+				height : 400, // 에디터 높이
+				minHeight : null, // 최소 높이
+				maxHeight : null, // 최대 높이
+				fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
+				fontNamesIgnoreCheck : [ '맑은고딕' ],
+				focus : true, // 에디터 로딩후 포커스를 맞출지 여부
+				lang : "ko-KR", // 한글 설정
+				resize: false ,
+				placeholder : '최대 2048자까지 쓸 수 있습니다', //placeholder 설정
+				callbacks: {
+					onImageUpload: function(files, editor, welEditable) {
+						for (var i = files.length - 1; i >= 0; i--) {
+							sendFile(files[i], this);
+						}
+					},
+					onPaste: function (e) {
+						var clipboardData = e.originalEvent.clipboardData;
+						if (clipboardData && clipboardData.items && clipboardData.items.length) {
+							var item = clipboardData.items[0];
+							if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+								e.preventDefault();
+							}
+						}
+					}
+				}
+			})
+	function sendFile(file, el) {
+		var form_data = new FormData();
+		form_data.append('file', file);
+		$.ajax({
+			data: form_data,
+			type: "POST",
+			url: '/SummerNoteImageFile.po',
+			cache: false,
+			contentType: false,
+			enctype: 'multipart/form-data',
+			processData: false,
+			success: function(img_name) {
+				$(el).summernote('editor.insertImage', img_name);
+
+			}
 		});
-	</script>
+	}
 
 
 
+	$("#submit").on("click",function(){
+
+		console.log($('#summernote').summernote('code'));
+		$("#content").val($('#summernote').summernote('code'));
+
+	})
+
+	$("#btnBack").on("click",function(){
+		location.href="detailPost.po?seq_post="+${dto.seq_post };
+	})
+</script>
 </body>
 </html>
+
+
+
+

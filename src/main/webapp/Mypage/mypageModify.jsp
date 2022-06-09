@@ -237,9 +237,9 @@ a {
 						</ul>
 
 
-						<a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+						<a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
 							<p class="text-light" id="cart">찜한 영화</p>
-						</a> <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+						</a> <a href="/myPage.mem" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
 							<p class="text-light" id="myPage">마이페이지</p>
 						</a>
 
@@ -278,17 +278,17 @@ a {
 						<div class="row">
 							<div class="col-5">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<li class="nav-item"><a class="nav-link" href="#">로그인</a>
+									<li class="nav-item"><a class="nav-link" href="/loginProc.mem">로그인</a>
 									</li>
-									<li class="nav-item"><a class="nav-link" href="#">회원가입</a>
+									<li class="nav-item"><a class="nav-link" href="/signup.mem">회원가입</a>
 									</li>
 								</ul>
 							</div>
 
 							<div class="col-2">
-								<a href="" class="align-items-center "> <img
+								<a href="/wishlist.wish" class="align-items-center "> <img
 									class="img-fluid" id="cartIcon" src="/images/찜.png"> <!-- <p class="text-light" id="cart">찜한 영화</p> -->
-								</a> <a href="" class="align-items-center"> <img
+								</a> <a href="/myPage.mem" class="align-items-center"> <img
 									class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
 									<!-- <p class="text-light" id="myPage">마이페이지</p> -->
 								</a>
@@ -316,28 +316,27 @@ a {
 			<div class="contentsBox">
 				<div class="contentsModifyBox">
 					<div class="contentsImgBox">
-						<img class="profileImg" src="/files/${file_dto.sys_name}">
-					</div>
-					<br>
-					<p>${loginSession.user_nickname}</p>
+	                	<c:if test="${profile eq null}">
+	                		<img class="profileImg" src="/images/기본프로필.jpg">
+	                	</c:if>
+	                	<c:if test="${profile ne null}">
+	                		<img class="profileImg" src="/files/${profile}">
+	                	</c:if>
+	                </div>
+	                <br><p>${dto.user_nickname}</p>
 					<div class="contentsModify">
 						<div class="container w-50">
-							<form id="imgChangeForm" action="/upload1.file" method="post"
-								enctype="multipart/form-data">
+							<form id="modifyForm" action="/modifyProc.mem" method="post" enctype="multipart/form-data">
 								<div class="row p-2">
 									<h2>내 정보 수정</h2>
 									<div class="col-12">
 										<label for="profileImg" class="form-label">프로필 사진</label><br>
 										<input type="file" name="photo">
-										<button type="button" id="changeProfile"
-											class="btn btn-outline-info">프로필 사진 변경</button>
 									</div>
-								</div>
-							</form>
-							<form id="modifyForm" action="/modifyProc.mem" method="post">
-								<div class="row p-2">
+									<div class="row p-2">
 									<div class="col-12">
 										<label for="nickname" class="form-label">닉네임</label>
+									</div>
 									</div>
 									<div class="col-8 mb-2">
 										<input type="text" class="form-control" id="user_nickname"
@@ -473,11 +472,6 @@ a {
                                     alert("검색어를 입력하세요");
                                 }
                             });
-
-							// 프로필 변경 사진버튼을 눌렀을때
-							$("#changeProfile").on("click", function() {
-								$("#imgChangeForm").submit();
-							});
 
 							// 뒤로가기버튼을 눌렀을때 mypageIndex로 돌아가기
 							$("#backBtn").on("click", function() {

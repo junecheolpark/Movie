@@ -280,18 +280,18 @@
 
                         <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">로그인</a>
+                                <a class="nav-link" href="/loginProc.mem">로그인</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">회원가입</a>
+                                <a class="nav-link" href="/signup.mem">회원가입</a>
                             </li>
                         </ul>
 
 
-                        <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                        <a href="/wishlist.wish" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                             <p class="text-light" id="cart">찜한 영화</p>
                         </a>
-                        <a href="" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
+                        <a href="/myPage.mem" class="d-flex align-items-center mb-2 mb-lg-0 me-3">
                             <p class="text-light" id="myPage">마이페이지</p>
                         </a>
 
@@ -349,11 +349,11 @@
                             </div>
 
                             <div class="col-2">
-                                <a href="" class="align-items-center ">
+                                <a href="/wishlist.wish" class="align-items-center ">
                                     <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                     <!-- <p class="text-light" id="cart">찜한 영화</p> -->
                                 </a>
-                                <a href="" class="align-items-center">
+                                <a href="/myPage.mem" class="align-items-center">
                                     <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                     <!-- <p class="text-light" id="myPage">마이페이지</p> -->
                                 </a>
@@ -387,9 +387,14 @@
 	    	<div class="contents row text-black">
 	            <div class="contentsBox">
 	                <div class="contentsImgBox">
-	                    <img class="profileImg" src="/files/${file_dto.sys_name}">
+	                	<c:if test="${profile eq null}">
+	                		<img class="profileImg" src="/images/기본프로필.jpg">
+	                	</c:if>
+	                	<c:if test="${profile ne null}">
+	                		<img class="profileImg" src="/files/${profile}">
+	                	</c:if>
 	                </div>
-	                <br><p>${loginSession.user_nickname}</p>
+	                <br><p>${dto.user_nickname}</p>
 	                <button type="button" class="btn btn-outline-danger" id="mb_delete">회원 탈퇴</button>
 	                <button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
 	                <button type="button" class="btn btn-outline-primary" id="i_modify">내 정보 수정</button>
