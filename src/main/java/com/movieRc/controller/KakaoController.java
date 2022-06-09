@@ -113,11 +113,13 @@ public class KakaoController extends HttpServlet {
 					request.setAttribute("rs", true);
 					HttpSession session = request.getSession();
 					session.setAttribute("loginSession", dto);
+					request.getRequestDispatcher("/toHome.home").forward(request, response);
+
 				} else {
 					System.out.println("로그인 실패");
 					request.setAttribute("rs", false);
+					request.getRequestDispatcher("/toLogin.mem").forward(request, response);
 				}
-				request.getRequestDispatcher("/loginHome.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
