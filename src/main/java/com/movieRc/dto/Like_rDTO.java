@@ -59,4 +59,13 @@ public class Like_rDTO {
     public void setSeq_review(int seq_review) {
         this.seq_review = seq_review;
     }
+
+
+
+@Override
+public String toString() {
+	return seq_like + " : " + r_like_check + " : "  
+			+ user_id + " : " + user_category + " : " + seq_review;
+}
+
 }

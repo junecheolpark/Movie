@@ -270,8 +270,8 @@ public class PostDAO {
 			pstmt.setString(3, user_category);
 			int rs = pstmt.executeUpdate();
 
-			return rs;
 
+			return rs;
 
 		}
 	}
