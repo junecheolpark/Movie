@@ -576,7 +576,7 @@
                                         <span>${movie.value['movieDTO'].genreAlt}</span></div>
                                     <div class="title">
                                         <span>${movie.value['movieDTO'].movieNm}</span></div>
-                                    <div class="avgPoint" data-value='${movie.value['avg']}'>
+                                    <div class="avgPoint" data-value='${movie.value["avg"]}'>
                                         <span class="star"></span>
                                         <span><fmt:formatNumber value="${movie.value['avg']}" type="pattern"
                                                                 pattern="0.00"/> (${movie.value['count']})</span></div>
@@ -605,7 +605,7 @@
                                     <div class="reviewer_id">
                                             ${review.value['reviewDTO'].user_nickname}
                                     </div>
-                                    <div class="avgPoint" data-value ='${review.value['avg']}'>
+                                    <div class="avgPoint" data-value ="${review.value['avg']}">
                                         <span class="star"></span>
                                     </div>
                                 </div>
@@ -642,7 +642,7 @@
                                         <span>${movie.value['movieDTO'].genreAlt}</span></div>
                                     <div class="title">
                                         <span>${movie.value['movieDTO'].movieNm}</span></div>
-                                    <div class="avgPoint" data-value='${movie.value['avg']}'>
+                                    <div class="avgPoint" data-value='${movie.value["avg"]}'>
                                         <span class="star"></span>
                                         <span><fmt:formatNumber value="${movie.value['avg']}" type="pattern"
                                                                 pattern="0.00"/> (${movie.value['count']})</span></div>

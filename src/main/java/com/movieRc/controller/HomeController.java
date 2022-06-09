@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD
+
 
 
 import com.movieRc.dao.MemberDAO;
@@ -21,10 +21,10 @@ import com.movieRc.dao.MemberDAO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dao.MovieDAO;
 import com.movieRc.dao.ReviewDAO;
-=======
+
 import com.movieRc.dao.*;
 import com.movieRc.dto.MemberDTO;
->>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
+
 import com.movieRc.dto.MovieDTO;
 import com.movieRc.dto.PostDTO;
 import com.movieRc.dto.ReviewDTO;

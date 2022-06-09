@@ -299,19 +299,19 @@ public class PostController extends HttpServlet {
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
 						rs=1;
 						System.out.println("좋아요 취소");
-<<<<<<< HEAD
+
 					}else if(curPLikeValue == 2) {//싫어요 한 상태
 						
 						rs =dao.updatePostLike(user_id, seq_post, user_category);
 						rs=2;
 						System.out.println("싫어요 취소");
-=======
+
 
 					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//싫어요 한 상태
 						rs=2;
 						rs =dao.updatePostLike(user_id, seq_post, user_category);
 
->>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
+
 						System.out.println("좋아요");
 					}else {
 						System.out.println("잘못실행됨");
@@ -352,7 +352,7 @@ public class PostController extends HttpServlet {
 						rs=0;
 						System.out.println("싫어요");
 
-<<<<<<< HEAD
+
 					}else if(curPLikeValue == 1) {//좋아요 한 상태
 						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
 						rs=1;
@@ -363,26 +363,8 @@ public class PostController extends HttpServlet {
 						rs=2;
 						System.out.println("싫어요 취소 :"+rs );
 
-					}else if(curPLikeValue == 1) {//싫어요 한 상태
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
-						rs=1;
-						System.out.println("싫어요 취소");
-					}else if(curPLikeValue == 2) {//좋아요 한 상태
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
-						rs=2;
-						System.out.println("좋아요 취소");
-						System.out.println("싫어요");
-=======
-					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//싫어요 한 상태
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
-						rs=1;
-						System.out.println("좋아요 취소");
-					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//좋아요 한 상태
-						rs=2;
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
->>>>>>> d8e44652d811e8a4cc019045155656c9bc1fc66e
-
 					}
+					
 				
 					String a= Integer.toString(rs);
 					

@@ -162,19 +162,19 @@ public class PostCommentDAO {
 		}
 		
 	public int modify(PostCommentDTO dto) throws Exception{
-		String sql = "update tbl_post_comment set comment_content=? where seq_post_comment = ?";
+		String sql = "update tbl_post_comment set comment_content=? where seq_comment = ?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			pstmt.setString(1, dto.getComment_content());
-			pstmt.setInt(2, dto.getSeq_post_comment());
+			pstmt.setInt(2, dto.getseq_comment());
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 	
 	public int delete(int seq_comment) throws Exception{
-		String sql = "delete from tbl_post_comment where seq_post_comment = ?";
+		String sql = "delete from tbl_post_comment where seq_comment = ?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -185,7 +185,7 @@ public class PostCommentDAO {
 	}
 	
 	public int insert(PostCommentDTO dto) throws Exception{
-		String sql = "insert into tbl_post_comment values(seq_post_comment.nextval,?,sysdate,?,?,?,?)";
+		String sql = "insert into tbl_post_comment values(seq_comment.nextval,?,sysdate,?,?,?,?)";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -212,7 +212,7 @@ public class PostCommentDAO {
 	}
 	
 	public ArrayList<PostCommentDTO> selectAll(int seq_post1) throws Exception{
-		String sql = "select * from tbl_post_comment where seq_post = ? order by seq_post_comment DESC";
+		String sql = "select * from tbl_post_comment where seq_post = ? order by seq_comment DESC";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -221,14 +221,14 @@ public class PostCommentDAO {
 			
 			ArrayList<PostCommentDTO> list = new ArrayList<>();
 			while(rs.next()) {
-				int seq_post_comment = rs.getInt("seq_post_comment");
+				int seq_comment = rs.getInt("seq_comment");
 				String user_nickname = rs.getString("user_nickname");
 				String comment_date = getStringDate(rs.getDate("comment_date"));
 				String comment_content = rs.getString("comment_content");
 				String user_id = rs.getString("user_id");
 				int seq_post = rs.getInt("seq_post");
 				String user_category= rs.getString("user_category");
-				list.add(new PostCommentDTO(seq_post_comment,user_nickname, comment_date,  comment_content, user_id,seq_post,user_category));
+				list.add(new PostCommentDTO(seq_comment,user_nickname, comment_date,  comment_content, user_id,seq_post,user_category));
 			}
 			return list;			
 		}
