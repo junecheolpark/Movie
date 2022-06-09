@@ -29,7 +29,7 @@
 
         header {
             width: 100%;
-            height: 3.075%;
+            height: 3.6%;
             background-color: black;
         }
 
@@ -41,9 +41,11 @@
 
         #container {
             height: 84%;
-            max-width: 1280px;
             margin-left: 5%;
             margin-right: 5%;
+            display: flex;
+            flex-direction: column;
+
         }
 
         a {
@@ -79,7 +81,7 @@
 
         #selectionDiv1 {
             margin-top: 20px;
-            height: 2%;
+            height: 67px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -126,7 +128,7 @@
         }
 
         .movieImgDiv {
-            flex-basis: 40%;
+            flex-basis: 30%;
             padding: 5px;
         }
 
@@ -162,6 +164,7 @@
         }
 
         .product .productDiv1 .productTitle {
+            max-width: 150px;
             display: block;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -275,10 +278,13 @@
                 grid-template-rows: repeat(10, 10%);
                 height: 9%;
             }
+            .movieImgDiv{
+                display: none;
+            }
 
             .movieDiv {
                 grid-row: 1/11;
-                grid-column: 1/6;
+                grid-column: 1/3;
                 height: 100%;
                 border: none;
             }
@@ -290,7 +296,7 @@
 
             .reviewDiv {
                 grid-row: 1/11;
-                grid-column: 7/11;
+                grid-column: 5/11;
                 height: 100%;
             }
         }
@@ -305,7 +311,7 @@
             height: 100px;
         }
 
-        #logoImg{
+        #logoImg {
             width: 100%;
             height: 100%;
         }
@@ -363,38 +369,46 @@
             float: left;
             margin-top: 10px;
         }
+
         /* Icon end */
 
         /* Footer */
         .nav-link {
-            color: gray;
+            color: gray !important;
             text-decoration: none;
         }
 
         .nav-link:hover {
-            color: white;
+            color: white !important;
         }
 
         /* header 반응형 */
-        @media ( max-width : 767px) {
+        @media ( max-width: 767px) {
             #navLogo {
                 display: none;
             }
+
             #myPageIcon {
                 display: none;
             }
+
             #cartIcon {
                 display: none;
             }
+
             #menu {
                 display: none;
             }
         }
 
-        @media (min-width : 768px) {
+        @media (min-width: 768px) {
             #navibar {
                 display: none;
             }
+        }
+
+        #navibar {
+            background-color: black;
         }
 
         .pagination {
@@ -426,17 +440,24 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">자유게시판</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
+                        <c:choose>
+                            <c:when test="${not empty loginSession}">
+                                <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                            </c:otherwise>
+                        </c:choose>
+
+
                     </ul>
 
-                    <form class="searchForm d-flex" action="/search.movie">
-                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
-                        <input type="hidden" name = 'curPage' value="1">
-                        <input type="hidden" name = 's_type' value="movieNm">
+                    <form class="searchForm d-flex" method="get" action="/search.movie">
+                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'> <input
+                            type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
                         <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -450,14 +471,15 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link mx-2" href="#">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/post/post.jsp">자유게시판</a></li>
                     </ul>
                 </div>
 
                 <!-- logo -->
                 <div class="col-2">
-                    <a href="/home" id="navLogo" class="mb-2 mb-lg-0">
+                    <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
                         <img id="logoImg" src="/images/logo3.png">
+
                     </a>
                 </div>
 
@@ -465,23 +487,20 @@
                     <div class="row align-items-center justify-content-center">
                         <div class="col-auto">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/Member/login.jsp">로그인</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/Member/signup.jsp">회원가입</a>
-                                </li>
-
+                                <c:if test="${empty loginSession}">
+                                    <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                                </c:if>
                             </ul>
                         </div>
 
                         <div class="col-auto">
-                            <a href="/wishlist.wish" class="">
-                                <img class="img-fluid" id="cartIcon" src="/images/찜.png">
-                            </a>
-                            <a href="/Mypage/mypageIndex.jsp" class="">
-                                <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
-                            </a>
+                            <c:if test="${not empty loginSession}">
+                                <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
+                                </a>
+                                <a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+                                </a>
+                            </c:if>
                         </div>
 
                         <div class="col-1">
@@ -489,34 +508,34 @@
                                 <img src="/images/searchIcon.png">
                             </button>
                         </div>
-
-                        <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title m-auto">영화 찾기</h5>
-                                        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="searchForm" class="searchForm" action="/search.movie">
-                                            <div class="row justify-content-center">
-                                                <div class="col-11">
-                                                    <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
-                                                    <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
-                                                    <input type="hidden" name = 'curPage' value="1">
-                                                    <input type="hidden" name = 's_type' value="movieNm">
+                        <form class="searchForm d-flex" method="get" action="/search.movie">
+                            <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title m-auto">영화 찾기</h5>
+                                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="searchForm" class="searchForm">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-11">
+                                                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'>
+                                                        <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+                                                        <input type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row justify-content-end">
-                                                <div class="col-3">
-                                                    <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+                                                <div class="row justify-content-end">
+                                                    <div class="col-3">
+                                                        <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
 
                     </div>
                 </div>
@@ -528,11 +547,13 @@
 <div id="container">
     <div id="titleDiv">
         <div class="title">
-				<span id='title'> <c:if test="${empty s_type}">
-                    전체 영화 리뷰
-                </c:if> <c:if test="${s_type eq 'genreAlt'}">
-                    ${val} 영화 리뷰
-                </c:if>
+				<span id='title'>
+                    <c:if test="${empty s_type}">
+                        전체 영화 리뷰
+                    </c:if>
+                    <c:if test="${s_type eq 'genreAlt'}">
+                        ${val} 영화 리뷰
+                    </c:if>
 				</span><span id='reviewCount'>(${totalCnt})</span>
         </div>
         <div id="titleExplain">
@@ -549,7 +570,7 @@
         <button type="button" class="selectByCategory" value="기타">기타</button>
     </div>
     <div id="reviewDiv">
-        <div class="reviewLi row d-flex justify-content-center">
+        <div class="reviewLi row d-flex justify-content-center align-content-start">
             <c:if test="${not empty arrayList}">
                 <c:forEach items="${arrayList}" var="reviewDTO">
                     <div class="review col-11 col-lg-5">
