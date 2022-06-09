@@ -361,18 +361,18 @@
         .topicLi {
             padding: 20px;
             height: 100%;
-            border: 1px solid #b4b7ba;
-            border-radius: 10px;
         }
 
         .topic {
             height: 20%;
             margin-bottom: 20px;
-            border-bottom: solid 1px #b4b7ba;
+            border: 1px solid #b4b7ba;
+            border-radius: 10px;
         }
 
         .topicTitle {
             font-size: 1.1em;
+            border-bottom: solid 1px #b4b7ba;
         }
 
         .topicStatus {
@@ -557,8 +557,8 @@
 </header>
 <!-- Contents -->
 <div class="contentDiv row justify-content-center">
-    <div class="content1 col-7">나중에 추가</div>
-    <div class="content2 col-7">
+    <div class="content1 col-11">나중에 추가</div>
+    <div class="content2 col-11">
         <div class="contentTitle">
             <span>최신 영화</span>
         </div>
@@ -591,7 +591,7 @@
             <button id='toRecentMovie'>최신 영화 더 보기</button>
         </div>
     </div>
-    <div class="content3 col-7">
+    <div class="content3 col-11">
         <div class="contentTitle">
             <span>최신 리뷰</span>
         </div>
@@ -626,7 +626,7 @@
         </div>
 
     </div>
-    <div class="content4 col-7">
+    <div class="content4 col-11">
         <div class="contentTitle"><span>추천 영화</span></div>
         <div class="movieDiv slider">
             <c:forEach items="${hashMap3}" var="movie">
@@ -655,18 +655,18 @@
         </div>
     </div>
 
-    <div class="content5 col-7">
+    <div class="content5 col-11">
         <div class="contentTitle">
             <span>최신 토픽</span>
         </div>
-        <div class="topicLi">
+        <div class="topicLi row">
             <c:if test="${empty hashMap4}">
                 <div class="notFound"><span>등록된 게시글이 없습니다.</span></div>
             </c:if>
             <c:forEach items="${hashMap4}" var="topic">
                 <c:forEach begin="0" end="9" step="1" var="i">
                     <c:if test="${i eq topic.key}">
-                        <div class="topic">
+                        <div class="topic col-11 col-lg-5">
                             <div class="topicTitle">
                                 ${topic.value['postDTO'].p_title}
                             </div>
@@ -837,12 +837,19 @@
     $(document).ready(function () {
         $('.movieDiv').slick({
             infinite: true,
-            slidesToShow: 4,
+            slidesToShow: 6,
             slidesToScroll: 1,
             prevArrow: "<button type='button' class='slick-prev'><</button>",
             nextArrow: "<button type='button' class='slick-next'>></button>",
             responsive: [
-
+                { // -> 반응형 옵션
+                    breakpoint: 1600,
+                    settings: {
+                        slidesToShow: 5,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                },
                 { // -> 반응형 옵션
                     breakpoint: 1024,
                     settings: {
@@ -863,10 +870,28 @@
         });
         $('.reviewDiv').slick({
             infinite: true,
-            slidesToShow: 1,
+            slidesToShow: 3,
             slidesToScroll: 1,
             prevArrow: "<button type='button' class='slick-prev'><</button>",
-            nextArrow: "<button type='button' class='slick-next'>></button>"
+            nextArrow: "<button type='button' class='slick-next'>></button>",
+            responsive: [
+                { // -> 반응형 옵션
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                }, { // -> 반응형 옵션
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        infinite: true
+                    }
+                }
+
+            ]
         });
     });
 </script>
