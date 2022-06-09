@@ -203,8 +203,6 @@ a {
 </head>
 
 <body>
-
-	<!-- Header -->
 <header class="mb-3 border-bottom">
 	<div class="container">
 		<!-- 접혔을 때 nav -->
@@ -228,7 +226,7 @@ a {
 						<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
 					</ul>
 
-					<form class="searchForm d-flex">
+					<form class="searchForm d-flex" action="/search.movie">
 						<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
 						<input type="hidden" name = 'curPage' value="1">
 						<input type="hidden" name = 's_type' value="movieNm">
@@ -293,7 +291,7 @@ a {
 										<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<form id="searchForm" class="searchForm">
+										<form id="searchForm" class="searchForm" action="/search.movie">
 											<div class="row justify-content-center">
 												<div class="col-11">
 													<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name ='val'>
@@ -615,6 +613,11 @@ a {
                         </ul> -->
 			</div>
 		</div>
+<<<<<<< HEAD
+
+	</footer>
+
+=======
     </footer>
     <script>
         const searchForm = $(".searchForm");
@@ -625,6 +628,7 @@ a {
             }
         });
     </script>
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 </body>
 
 </html>

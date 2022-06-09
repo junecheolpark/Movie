@@ -390,7 +390,10 @@
 </footer>
 
 <script>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {

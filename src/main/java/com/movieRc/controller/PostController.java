@@ -131,6 +131,11 @@ public class PostController extends HttpServlet {
 				int countHate =dao.pLikeCount(seq_post, 2);
 				request.setAttribute("countLike", countLike);
 				request.setAttribute("countHate", countHate);
+//				int countLike =dao.pLikeCount(seq_post, 1);
+//				int countHate =dao.pLikeCount(seq_post, 2);
+//				request.setAttribute("countLike", countLike);
+//				request.setAttribute("countHate", countHate);
+
 				request.setAttribute("post_commentList", list);
 				
 				request.getRequestDispatcher("/post/post_detailview.jsp").forward(request, response);

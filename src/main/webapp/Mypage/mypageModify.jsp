@@ -443,7 +443,10 @@ a {
 											placeholder="읍/면/동" readonly>
 									</div>
 								</div>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 								<div class="row justify-content-center btn-before">
 									<div class="col-4 d-flex justify-content-end">
 										<button type="button" class="btn btn-secondary" id="backBtn">뒤로가기</button>
@@ -463,6 +466,8 @@ a {
 							</form>
 						</div>
 						<script>
+<<<<<<< HEAD
+=======
 
                             const searchForm = $(".searchForm");
                             searchForm.on("submit", function (event) {
@@ -472,6 +477,7 @@ a {
                                 }
                             });
 
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 							// 프로필 변경 사진버튼을 눌렀을때
 							$("#changeProfile").on("click", function() {
 								$("#imgChangeForm").submit();
@@ -507,8 +513,16 @@ a {
 								location.href = "/Mypage/mypageModify.jsp";
 							});
 
+<<<<<<< HEAD
+							// 수정완료버튼 눌렀을 때 
+							$("#completeBtn")
+									.on(
+											"click",
+											function() {
+=======
 							// 수정완료버튼 눌렀을 때
 							$("#completeBtn").on("click", function() {
+>>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 												// 닉네임, 전화번호, 주소 빈값/유효한 값인지 확인 
 												let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
 												let regexPhone = /[0-9]{11}/; // 휴대전화 정규식
