@@ -118,7 +118,7 @@ public class KakaoController extends HttpServlet {
 				} else {
 					System.out.println("로그인 실패");
 					request.setAttribute("rs", false);
-					request.getRequestDispatcher("/toLogin.mem").forward(request, response);
+					request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

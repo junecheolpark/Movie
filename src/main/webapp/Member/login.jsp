@@ -144,11 +144,6 @@
 </head>
 
 <body>
-<c:if test="${rs eq false}">
-    <script>
-        alert("로그인에 실패했습니다.");
-    </script>
-</c:if>
 <header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
@@ -634,8 +629,12 @@
         document.body.append(frm);
         frm.submit();
     }
-    console.log("${loginSession}");
 </script>
+<c:if test="${rs eq false}">
+    <script>
+        alert("로그인에 실패했습니다.");
+    </script>
+</c:if>
 </body>
 
 </html>
