@@ -124,11 +124,11 @@ public class PostDAO {
 	}
 
 	// 글쓴이별 검색 함수
-	public ArrayList<PostDTO> writerSearch(String user_nickname1) throws Exception {
-		String sql = "select * from tbl_post where user_nickname like  '%' || ? || '%'";
+	public ArrayList<PostDTO> writerSearch(String user_id1) throws Exception {
+		String sql = "select * from tbl_post where user_id like  '%' || ? || '%'";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
-			pstmt.setString(1, user_nickname1);
+			pstmt.setString(1, user_id1);
 			pstmt.executeUpdate();
 
 			ResultSet rs = pstmt.executeQuery();
@@ -202,11 +202,11 @@ public class PostDAO {
 	}
 
 	// 내 글 보기 함수
-	public ArrayList<PostDTO> myPost(String user_nickname1) throws Exception {
-		String sql = "select * from tbl_post where user_nickname =? ";
+	public ArrayList<PostDTO> myPost(String user_id1) throws Exception {
+		String sql = "select * from tbl_post where user_id =? ";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
-			pstmt.setString(1, user_nickname1);
+			pstmt.setString(1, user_id1);
 			pstmt.executeUpdate();
 
 			ResultSet rs = pstmt.executeQuery();
@@ -306,8 +306,8 @@ public class PostDAO {
 
 			}
 		}
-
-	public int pLikeCount(int seq_post,int p_like_check) throws Exception { //p_like_check =1좋아요,2싫어요 개수
+	//p_like_check =1좋아요,2싫어요 개수
+	public int pLikeCount(int seq_post,int p_like_check) throws Exception { 
 		String sql = "select count(*) from tbl_like_p where seq_post=? and p_like_check=?";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			
@@ -407,7 +407,7 @@ public class PostDAO {
 	}
 
 	// 글 목록 정리 함수
-	public HashMap<String, Object> getPageNavi(int curPage) throws Exception {
+	public HashMap<String, Object> getPageNavi(int curPage,int perPage) throws Exception {
 		String sql = "select count(*) as totalCnt from tbl_post";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
@@ -415,7 +415,7 @@ public class PostDAO {
 			rs.next();
 
 			int totalCnt = rs.getInt("totalCnt"); // 전체 게시글의 개수
-			int recordCntPerPage = 10; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
+			int recordCntPerPage = perPage; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
 			int naviCntPerPage = 5; // 네비바에 몇개 단위로 페이징을 구성할지
 			int pageTotalCnt = 0; // 총 몇 페이지가 나올지
 

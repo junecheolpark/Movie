@@ -161,13 +161,6 @@
             height: 1000px;
         }
 
-        =
-        =
-        =
-        =
-        =
-        =
-        =
         /* header 반응형 */
         @media ( max-width: 767px) {
             #navLogo {
@@ -486,7 +479,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1"
                                                  class="nav-link p-0">리뷰</a></li>
-                    <li class="nav-item mb-2"><a href="/post/post.jsp" class="nav-link p-0">자유게시판</a></li>
+                    <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
                     <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>

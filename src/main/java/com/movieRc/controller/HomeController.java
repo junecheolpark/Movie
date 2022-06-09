@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD
+
 
 import com.movieRc.dao.MemberDAO;
 import com.movieRc.dto.MemberDTO;
-=======
+
 import com.movieRc.dao.MemberDAO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dao.MovieDAO;
@@ -25,7 +25,6 @@ import com.movieRc.util.Pagination;
 
 
 @WebServlet("*.home")
->>>>>>> 07237bd64e5d1463cee66794cf335283732f045c
 
 
 public class HomeController extends HttpServlet {

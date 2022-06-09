@@ -109,7 +109,8 @@ button {
 					</div>
 				</c:when>
 				<c:otherwise>
-					<c:forEach items="${list }" var="dto">
+				
+					<c:forEach items="${list }" var="dto" varStatus="status">
 						<div class="row">
 							<div class="col-1">${dto.seq_post }</div>
 							<div class="col-5">
@@ -117,13 +118,14 @@ button {
 							</div>
 							<div class="col-2">${dto.user_nickname }</div>
 							<div class="col-2">${dto.p_date }</div>
-							<div class="col-1">추천횟수</div>
+							<div class="col-1">${likeCountList[status.index] }</div>
 							<div class="col-1">
 								<p>${dto.p_view_count }</p>
 							</div>
 						</div>
 						<hr>
 					</c:forEach>
+			
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -134,11 +136,11 @@ button {
 			<!--검색-->
 			<div class="row">
 				<div class="col-2">
-					<button class="btn btn-secondary" id="btn_write">글쓰기</button>
+					
 				</div>
 				<div class="col-8"></div>
 				<div class="col-2">
-					<button type="button" id="btn_my_post" class="btn btn-secondary">내글보기</button>
+					<button class="btn btn-secondary" id="btn_write">글쓰기</button>
 				</div>
 			</div>
 
@@ -146,51 +148,7 @@ button {
 			$("#btn_write").on("click", function() {
 				location.href = "/write.po"
 			})
-			$("#btn_my_post").on("click",function(){
-				$.ajax({
-					url:"/myPostProc.po",
-					type:"get",
-					dataType:"json",
-					success:function(data){
-
-						$(".content-body").empty();
-						if(data.length ==0){
-							let div_row= $("<div>").attr("class","row");
-							let div_col= $("<div>").attr("class","col").html("작성한 게시물이 없습니다.");
-							div_row.append(div_col);
-							$(".content-body").append(div_row);
-						}else{
-							for(let dto of data){
-								let div_row= $("<div>").attr("class","row");
-								let div_col1_1= $("<div>").attr("class","col-1");
-								let div_col1_2= $("<div>").attr("class","col-1");
-								let div_col1_3= $("<div>").attr("class","col-1");
-								let div_col2_1= $("<div>").attr("class","col-2");
-								let div_col2_2= $("<div>").attr("class","col-2");
-								let div_col5= $("<div>").attr("class","col-5");
-								let hr=$("<hr>");
-
-
-								let a=$("<a>").attr("href","/detailPost.po?seq_post="+dto.seq_post).html(dto.p_title);
-								div_col5.append(a);
-
-								console.log(dto.seq_post);
-								div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
-										div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
-
-								$(".content-body").append(div_row);
-
-
-
-							}
-						}
-					},
-					error:function(e){
-						console.log(e);
-					}
-
-				})
-			})
+			
 
 			</script>
 		</c:if>
@@ -202,19 +160,19 @@ button {
 						<ul class="pagination justify-content-center">
 							<c:if test="${naviMap.needPrev eq true}">
 								<li class="page-item"><a class="page-link"
-									href="/post.po?curPage=${naviMap.startNavi-1}">Prev</a></li>
+									href="/post.po?curPage=${naviMap.startNavi-1}&&listItem=${listItem}">Prev</a></li>
 								<%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭했음 ->  5페이지로 이동 --%>
 							</c:if>
 
 							<c:forEach var="pageNum" begin="${naviMap.startNavi}"
 								end="${naviMap.endNavi}" step="1">
 								<li class="page-item"><a class="page-link"
-									href="/post.po?curPage=${pageNum}">${pageNum}</a></li>
+									href="/post.po?curPage=${pageNum}&&listItem=${listItem}">${pageNum}</a></li>
 							</c:forEach>
 
 							<c:if test="${naviMap.needNext eq true}">
 								<li class="page-item"><a class="page-link"
-									href="/post.po?curPage=${naviMap.endNavi+1}">Next</a></li>
+									href="/post.po?curPage=${naviMap.endNavi+1}&&listItem=${listItem}">Next</a></li>
 							</c:if>
 						</ul>
 					</nav>
@@ -243,49 +201,8 @@ button {
 	//목록 개수별 나타내기
 	$("#btnList").on("click",function(){
 		let listItem= $("#listItem").val();
-
-		$.ajax({
-			url:"/listItem.po?curPage=1&&listItem="+listItem,
-			type:"get",
-			dataType:"json",
-			success:function(data){
-				console.log(data[0] );
-				$(".content-body").empty();
-				if(data.length ==0){
-					let div_row= $("<div>").attr("class","row");
-					let div_col= $("<div>").attr("class","col").html("작성한 게시물이 없습니다.");
-					div_row.append(div_col);
-					$(".content-body").append(div_row);
-				}else{
-					for(let dto of data){
-						let div_row= $("<div>").attr("class","row");
-						let div_col1_1= $("<div>").attr("class","col-1");
-						let div_col1_2= $("<div>").attr("class","col-1");
-						let div_col1_3= $("<div>").attr("class","col-1");
-						let div_col2_1= $("<div>").attr("class","col-2");
-						let div_col2_2= $("<div>").attr("class","col-2");
-						let div_col5= $("<div>").attr("class","col-5");
-						let hr=$("<hr>");
-
-
-						let a=$("<a>").attr("href","/detailPost.po?seq_post=${dto.seq_post}").html(dto.p_title);
-						div_col5.append(a);
-
-						console.log(dto.seq_post);
-						div_row.append(div_col1_1.html(dto.seq_post),div_col5,div_col2_1.html(dto.user_nickname),
-								div_col2_2.html(dto.p_date),div_col1_2.html("추천횟수dd"),div_col1_3.html(dto.p_view_count),hr);
-
-						$(".content-body").append(div_row);
-					}
-				}
-			},
-			error:function(e){
-				console.log(e);
-			}
-
-		})
+		location.href="/post.po?curPage=1&&listItem="+listItem;
 	})
-
 
 	//포스트 항목별 검색
 	$("#btnSearch").on("click", function() {
