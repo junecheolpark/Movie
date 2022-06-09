@@ -39,18 +39,13 @@
         }
 
         #navLogo {
-            width: 90%;
-            height: 90%;
+            width: 150px;
+            height: 100px;
         }
-
-        #cartIcon {
-            width: 30px;
-            height: 30px;
-        }
-
-        #myPageIcon {
-            width: 30px;
-            height: 30px;
+        
+        #logoImg {
+            width: 100%;
+            height: 100%;
         }
 
         #cart {
@@ -62,12 +57,12 @@
         }
 
         /* Icon */
-        #calendarIcon {
+        #cartIcon {
             width: 30px;
             height: 30px;
         }
 
-        #humanIcon {
+        #myPageIcon {
             width: 30px;
             height: 30px;
         }
@@ -162,7 +157,7 @@
         }
         .contentsBox{
             width: 1500px;
-            height: 195px;
+            height: 1160px;
             background-color: white;
             border-radius: 10px;
             position: relative;
@@ -191,74 +186,21 @@
             float: right;
             margin: 5px;
         }
-        .contentsBox2{
-            width: 1500px;
-            height: 1150px;
-            background-color: white;
-            border-radius: 10px;
-            position: relative;
-            top: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .contentsmyWrite{
-            margin: 20px;
-        }
-        .contentsmyWriteBox{
-            width: 100%;
-            height: 1070px;
-            border-top: 1px solid black;
-        }
-        .myWrite{
-            color: black;
-            text-decoration: none;
-            margin-right: 15px;
-        }
-        .myWrite:hover{
-            text-decoration: underline;
-            color: black;
-        }
-        /* Contents in container */
-        .contentsmyWriteBox .container{
-            text-align: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .form-select {
-            display: inline-block;
-            width: 100px;
-        }
-
-        .search-method {
-            width: 100px;
-            display: inline-block;
-        }
-
-        .list {
-            width: 120px;
-            display: inline-block;
-        }
-
-        .form-control {
-            width: 300px;
-            display: inline-block;
-        }
-
-        button {
-            border: solid 1px black;
-            line-height: normal;
-        }
-
-        .content-body {
-
-            background-color: rgb(255, 254, 248);
-        }
+		.contentsModify {
+			text-align: left;
+		}
+		
+		.contentsModifyBox {
+			margin: 20px;
+		}
+		
+		.btn-outline-info {
+			float: right;
+		}
     </style>
 </head>
 
 <body>
-
 <!-- Header -->
 <header class="mb-3 border-bottom">
     <div class="container">
@@ -276,15 +218,15 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
                             <c:when test="${not empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/signup.mem">회원가입</a></li>
                             </c:when>
                             <c:otherwise>
                                 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
 
@@ -307,7 +249,7 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link mx-2" href="/post/post.jsp">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/post.po?curPage=1">자유게시판</a></li>
                     </ul>
                 </div>
 
@@ -325,7 +267,7 @@
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <c:if test="${empty loginSession}">
                                     <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/signup.mem">회원가입</a></li>
                                 </c:if>
                             </ul>
                         </div>
@@ -334,7 +276,7 @@
                             <c:if test="${not empty loginSession}">
                                 <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 </a>
-                                <a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 </a>
                             </c:if>
                         </div>
@@ -544,7 +486,7 @@
 
 							// 뒤로가기버튼을 눌렀을때 mypageIndex로 돌아가기
 							$("#backBtn").on("click", function() {
-								location.href = "/Mypage/mypageIndex.jsp";
+								location.href = "/myPage.mem";
 							});
 
 							// 닉네임 확인 버튼 누르면 팝업창 띄우기

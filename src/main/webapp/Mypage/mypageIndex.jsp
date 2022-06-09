@@ -32,18 +32,13 @@
         }
 
         #navLogo {
-            width: 90%;
-            height: 90%;
+            width: 150px;
+            height: 100px;
         }
-
-        #cartIcon {
-            width: 30px;
-            height: 30px;
-        }
-
-        #myPageIcon {
-            width: 30px;
-            height: 30px;
+        
+        #logoImg {
+            width: 100%;
+            height: 100%;
         }
 
         #cart {
@@ -55,12 +50,12 @@
         }
 
         /* Icon */
-        #calendarIcon {
+        #cartIcon {
             width: 30px;
             height: 30px;
         }
 
-        #humanIcon {
+        #myPageIcon {
             width: 30px;
             height: 30px;
         }
@@ -268,15 +263,15 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
                             <c:when test="${not empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/signup.mem">회원가입</a></li>
                             </c:when>
                             <c:otherwise>
                                 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
 
@@ -299,7 +294,7 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-                        <li class="nav-item"><a class="nav-link mx-2" href="/post/post.jsp">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link mx-2" href="/post.po?curPage=1">자유게시판</a></li>
                     </ul>
                 </div>
 
@@ -317,7 +312,7 @@
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <c:if test="${empty loginSession}">
                                     <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/signup.mem">회원가입</a></li>
                                 </c:if>
                             </ul>
                         </div>
@@ -326,7 +321,7 @@
                             <c:if test="${not empty loginSession}">
                                 <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 </a>
-                                <a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 </a>
                             </c:if>
                         </div>
@@ -390,112 +385,11 @@
 	            </div>
 	            <div class="contentsBox2">
 	                <div class="contentsmyWrite">
-	                    <a href="/myPage.mem" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
+	                    <a href="#" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
 	                    <a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
 	                </div>
 	                <div class="contentsmyWriteBox">
-							<div class="container">
 
-							<div class="row">
-								<div class="col">
-									<h3>
-										내가 쓴 게시글<br />
-									</h3>
-								</div>
-							</div>
-							<div class="content-header">
-								<div class="row">
-									<div class="col-9"></div>
-									<div class="col-3">
-										<select class="form-select list"
-											aria-label="Default select example" id="listItem">
-											<option value="1" selected>목록 10개</option>
-											<option value="2">목록 20개</option>
-											<option value="3">목록 30개</option>
-										</select>
-										<button class="btn btn-warning" id="btnList">출력</button>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-1">
-										<strong>글번호</strong>
-									</div>
-									<div class="col-5">
-										<strong>제목</strong>
-									</div>
-									<div class="col-2">
-										<strong>글쓴이</strong>
-									</div>
-									<div class="col-2">
-										<strong>작성일</strong>
-									</div>
-									<div class="col-1">
-										<strong>추천</strong>
-									</div>
-									<div class="col-1">
-										<strong>조회</strong>
-									</div>
-								</div>
-								<hr />
-							</div>
-							<div class="content-body">
-								<!--내용-->
-								
-							</div>
-						<div class="row">
-									<!--글 페이지 이동-->
-									<div class="col-4"></div>
-									<div class="col-4">
-										<nav>
-											<ul class="pagination justify-content-center">
-												<c:if test="${naviMap.needPrev eq true}">
-													<li class="page-item"><a class="page-link"
-														href="/post.po?curPage=${naviMap.startNavi-1}">Prev</a></li>
-													<%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭했음 ->  5페이지로 이동 --%>
-												</c:if>
-					
-												<c:forEach var="pageNum" begin="${naviMap.startNavi}"
-													end="${naviMap.endNavi}" step="1">
-													<li class="page-item"><a class="page-link"
-														href="/post.po?curPage=${pageNum}">${pageNum}</a></li>
-												</c:forEach>
-					
-												<c:if test="${naviMap.needNext eq true}">
-													<li class="page-item"><a class="page-link"
-														href="/post.po?curPage=${naviMap.endNavi+1}">Next</a></li>
-												</c:if>
-											</ul>
-										</nav>
-									</div>
-									<div class="col-4"></div>
-								</div>
-								<div class="row">
-									<!--글 페이지 이동-->
-									<div class="col-2"></div>
-									<div class="col-8">
-										<select class="form-select search-method" id="searchValue"
-											aria-label="Default select example" name="searchOption">
-											<option value="1" selected>제목</option>
-											<option value="2">내용</option>
-											<option value="3">글쓴이</option>
-										</select> <input type="text" id="inputSearch" name="searchInput" class="form-control" />
-										<button type="button" id="btnSearch" class="btn btn-secondary">검색</button>
-									</div>
-									<div class="col-2">
-									<button id="myPostPage" type="button" class="btn btn-secondary">내글보기</button>
-									</div>
-									
-								</div>
-						
-						</div>
-						<script>
-					    $("#myPostPage").on("click",function(){
-					       location.href="/myPostPage.po";
-					    })
-						
-
-					
-						</script>
 	                </div>
 	            </div>
 	        </div>
