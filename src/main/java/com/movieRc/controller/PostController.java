@@ -126,7 +126,7 @@ public class PostController extends HttpServlet {
 				
 				//현재 로그인한 아이디의 좋아요 싫어요 표시
 				int likeValue=0;
-				if(((MemberDTO)request.getSession().getAttribute("loginSession")==null)) {
+				if(((MemberDTO)request.getSession().getAttribute("loginSession")!=null)) {
 					MemberDTO logindto =(MemberDTO)request.getSession().getAttribute("loginSession");
 					String user_id=logindto.getUser_id();
 					System.out.println("user_id:" + user_id);
