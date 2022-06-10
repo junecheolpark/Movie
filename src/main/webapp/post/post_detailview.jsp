@@ -587,7 +587,7 @@ text-align: left;
 					</div>
 							
 							<c:choose>
-							<!--만약 좋아요를 한상태라면?  -->
+							
 							<c:when test="${likeValue == 1 }">
 							<script>
 									console.log(${likeValue});
@@ -596,7 +596,7 @@ text-align: left;
 									
 									</script>
 							</c:when>
-							<!--  싫어요 한 상태라면? -->
+							
 							<c:when test="${likeValue == 2 }">
 							<script>
 									$("#p_hatebefore").css("display","none");
@@ -841,7 +841,7 @@ text-align: left;
 			<!-- 수정 버튼영역 -->
 			<div id="user-box">
 				<div class="row">
-					<c:if test="${loginSession not empty }">
+					<c:if test="${not empty loginSession  }">
 					<c:if test="${loginSession.user_id eq dto.user_id}">
 						<div class="col-6">
 							<button type="button" class="btn btn-warning" id="btnModify">수정</button>
