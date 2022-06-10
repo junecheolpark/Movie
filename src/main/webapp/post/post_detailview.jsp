@@ -533,6 +533,7 @@ text-align: left;
 					<div class="row">
 						<c:choose>
 							<c:when test="${not empty loginSession}">
+							<input style="display:none;" id="loginCheck" value="${loginSession.user_id }">
 								<div class="col-5 click">
 									<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }>
 										<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
@@ -559,6 +560,7 @@ text-align: left;
 
 							</c:when>
 							<c:otherwise>
+							<input  id="loginCheck" style="display:none;" value="">
 							<div class="col-5 click">
 								<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }
 									style="disabled: true;">
@@ -878,7 +880,8 @@ text-align: left;
 		</div>
 		<!-- 게시글영역 끝 -->
 		<br /> <br /> <br />
-
+		
+		
 		<!-- 	댓글 출력 영역 -->
 		<div id="input-box">
 			<!-- 댓글 입력 영역 -->
@@ -888,7 +891,7 @@ text-align: left;
 						<input type="text" value="${dto.seq_post}" name="seq_post">
 					</div>
 					<div class="col-10">
-						<textarea id="inputReply" class="form-control" 
+						<textarea id="inputReply" class="form-control"
 							name="comment_content" placeholder="댓글을 입력해주세요."></textarea>
 					</div>
 					<div class="col-2">
@@ -1411,6 +1414,13 @@ text-align: left;
 
 		// 댓글 등록
 		$("#btnSubmitReply").on("click", function() {
+			
+			
+			if($("#loginCheck").val() === ""){
+				alert("로그인 해주세요");
+				return;
+			}
+			
 			if ($("#inputReply").val() === "") { // 댓글 입력창이 비어있다면
 				alert("입력된 댓글이 없습니다.");
 				return;
