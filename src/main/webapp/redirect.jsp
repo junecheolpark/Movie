@@ -977,9 +977,7 @@
 
     $.each($(".avgPoint"), function () {
         let points = $(this).attr('data-value');
-        console.log(points)
         points = Math.round(points);
-        console.log(points);
 
         for (let i = 0; i < points; i++) {
             $(this).find('.star').append('★');

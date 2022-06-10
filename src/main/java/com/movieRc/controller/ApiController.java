@@ -35,7 +35,7 @@ public class ApiController extends HttpServlet {
             try {
 //                movieDAO.deleteAll();
 //                System.out.println("초기화 완");
-                for (int i = 5000; i < num; i++) {
+                for (int i = 0; i < num; i++) {
                     ArrayList<MovieDTO> arrayList = apiExplorer.run(i);
                     for (int j = 0; j < arrayList.size(); j++) {
                         System.out.println((i * 10 + j) + "번째 데이터 넣는 중");

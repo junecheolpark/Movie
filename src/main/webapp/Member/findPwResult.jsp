@@ -23,128 +23,120 @@ a {
 	height: 500px;
 }
 
-#navLogo {
-	width: 90%;
-	height: 90%;
+/* header */
+
+#logoImg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Icon */
+#logoutIcon {
+    width: 30px;
+    height: 30px;
 }
 #logoutIcon {
     width: 30px;
     height: 30px;
 }
-
 #cartIcon {
-	width: 30px;
-	height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 #myPageIcon {
-	width: 30px;
-	height: 30px;
-}
-
-#cart {
-	display: none;
-}
-
-#myPage {
-	display: none;
-}
-
-/* Icon */
-
-#calendarIcon {
-	width: 30px;
-	height: 30px;
-}
-
-#humanIcon {
-	width: 30px;
-	height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 #kakaoIcon {
-	width: 30px;
-	height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 #twitterIcon {
-	width: 30px;
-	height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 #instagramIcon {
-	width: 30px;
-	height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 #facebookIcon {
-	width: 30px;
-	height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 .snsIcon1 {
-	float: left;
-	margin-top: 10px;
-	margin-right: 5px;
+    float: left;
+    margin-top: 10px;
+    margin-right: 5px;
 }
 
 .snsIcon2 {
-	float: left;
-	margin-top: 10px;
-	margin-right: 5px;
+    float: left;
+    margin-top: 10px;
+    margin-right: 5px;
 }
 
 .snsIcon3 {
-	float: left;
-	margin-top: 10px;
-	margin-right: 5px;
+    float: left;
+    margin-top: 10px;
+    margin-right: 5px;
 }
 
 .snsIcon4 {
-	float: left;
-	margin-top: 10px;
+    float: left;
+    margin-top: 10px;
 }
-
-/* body*/
-.card-header {
-	background-color: white;
-}
+/* Icon end */
 
 /* Footer */
 .nav-link {
-	color: gray;
-	text-decoration: none;
+    color: gray !important;
+    text-decoration: none;
 }
 
 .nav-link:hover {
-	color: white;
+    color: white !important;
 }
 
-@media ( max-width : 1000px) {
-	#navLogo {
-		display: none;
-	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
-	#cart {
-		display: block;
-	}
-	#myPage {
-		display: block;
-	}
-	#menu {
-		display: none;
-	}
+/* header 반응형 */
+@media ( max-width : 768px) {
+    #navLogo {
+        display: none;
+    }
+    #myPageIcon {
+        display: none;
+    }
+    #cartIcon {
+        display: none;
+    }
+    #menu {
+        display: none;
+    }
 }
 
-@media ( min-width : 1000px) {
-	#navibar {
-		display: none;
-	}
+@media ( min-width : 768px) {
+    #navibar {
+        display: none;
+    }
+}
+/* header 반응형 끝 */
+
+/* footer 반응형 시작 */
+@media ( max-width : 768px) {
+    #bigFoot {
+        display: none;
+    }
+}
+
+@media ( min-width : 768px) {
+    #smallFoot {
+        display: none;
+    }
 }
 </style>
 </head>
