@@ -888,7 +888,7 @@ text-align: left;
 						<input type="text" value="${dto.seq_post}" name="seq_post">
 					</div>
 					<div class="col-10">
-						<textarea id="inputReply" class="form-control" 
+						<textarea id="inputReply" class="form-control"
 							name="comment_content" placeholder="댓글을 입력해주세요."></textarea>
 					</div>
 					<div class="col-2">

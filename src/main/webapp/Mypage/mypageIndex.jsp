@@ -420,7 +420,7 @@ button {
 		});
 
 		$("#i_logout").on("click", function() { // 로그아웃 요청
-			location.href = "/logout.mem";
+			location.href = "/logout.mem"
 		})
 
 		$("#i_modify").on("click", function() { // 내 정보 수정 페이지 요청

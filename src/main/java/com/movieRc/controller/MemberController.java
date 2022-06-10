@@ -2,6 +2,7 @@ package com.movieRc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -211,9 +212,7 @@ public class MemberController extends HttpServlet {
             System.out.println(session.getAttribute("loginSession"));
 
             session.invalidate();
-            response.sendRedirect("/Member/login.jsp");
-
-            System.out.println("로그아웃 성공");
+            response.sendRedirect("/toHome.home");
 
         } else if (uri.equals("/myPage.mem")) { // 마이페이지 요청
             HttpSession session = request.getSession();
