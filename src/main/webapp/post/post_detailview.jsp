@@ -585,24 +585,31 @@ text-align: left;
 							</c:otherwise>
 						</c:choose>
 					</div>
+							
+							<c:choose>
 							<!--만약 좋아요를 한상태라면?  -->
-								<c:if test="${likeValue == 1 }">
-									<script>
+							<c:when test="${likeValue == 1 }">
+							<script>
 									console.log(${likeValue});
 									$("#p_likebefore").css("display","none");
 									$("#p_like").css("display","inline-block");
 									
 									</script>
-								</c:if>
-									<!--  싫어요 한 상태라면? -->
-								<c:if test="${likeValue == 2 }">
-									<script>
+							</c:when>
+							<!--  싫어요 한 상태라면? -->
+							<c:when test="${likeValue == 2 }">
+							<script>
 									$("#p_hatebefore").css("display","none");
 									$("#p_hate").css("display","inline-block");
 									
 									</script>
-									
-								</c:if>
+							</c:when>
+							
+							<c:otherwise>
+							
+							</c:otherwise>
+							</c:choose>
+								
 
 					<script>
 					var arr=null;
@@ -834,7 +841,7 @@ text-align: left;
 			<!-- 수정 버튼영역 -->
 			<div id="user-box">
 				<div class="row">
-
+					<c:if test="${loginSession not empty }">
 					<c:if test="${loginSession.user_id eq dto.user_id}">
 						<div class="col-6">
 							<button type="button" class="btn btn-warning" id="btnModify">수정</button>
@@ -861,6 +868,7 @@ text-align: left;
 												}
 											})
 						</script>
+					</c:if>
 					</c:if>
 				</div>
 			</div>
