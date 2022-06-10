@@ -27,12 +27,10 @@ public class MemberDAO {
 	}
 	
 	private Connection getConnection() throws Exception{
-		// TODO Auto-generated method stub
 		return bds.getConnection();
 	}
 	
 	private void close(Connection con, PreparedStatement pstmt) {
-		// TODO Auto-generated method stub
 		
 	}
 	

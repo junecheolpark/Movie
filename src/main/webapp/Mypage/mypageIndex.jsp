@@ -151,6 +151,20 @@ a {
 	}
 }
 
+  
+/* footer 반응형 시작 */
+@media ( max-width : 768px) {
+	#bigFoot {
+		display: none;
+	}
+}
+
+@media ( min-width : 768px) {
+	#smallFoot {
+		display: none;
+	}
+}
+
 /* footer 반응형 끝 */
 
 /* Contents */
@@ -195,11 +209,12 @@ a {
 
 .contentsBox2 {
 	width: 1500px;
-	height: 1150px;
+	height: 1170px;
 	background-color: white;
 	border-radius: 10px;
 	position: relative;
-	top: 5px;
+	top: 30px;
+
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -224,7 +239,17 @@ a {
 	text-decoration: underline;
 	color: black;
 }
-/* Contents in container */
+
+.contentsmyWriteBox .content {
+	text-align: center;
+	width: 100%;
+	min-height: 700px;
+}
+
+.content-footer2 {
+	margin-top: 15px;
+
+  /* Contents in container */
 .contentsmyWriteBox .container {
 	text-align: center;
 	width: 100%;
@@ -409,19 +434,126 @@ button {
 						<a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
 					</div>
 					<!-- Contents myWrite -->
+					<div class="contentsmyWriteBox">
+						<div class="content">
+							<div class="row">
+								<div class="col">
+									<h3>
+										내가 쓴 게시글
+									</h3>
+								</div>
+							</div>
+							<div class="content-header">
+								<div class="row">
+									<div class="col-1">
+										<strong>글번호</strong>
+									</div>
+									<div class="col-5">
+										<strong>제목</strong>
+									</div>
+									<div class="col-2">
+										<strong>글쓴이</strong>
+									</div>
+									<div class="col-2">
+										<strong>작성일</strong>
+									</div>
+									<div class="col-1">
+										<strong>추천</strong>
+									</div>
+									<div class="col-1">
+										<strong>조회</strong>
+									</div>
+								</div>
+								<hr />
+							</div>
+							<div class="content-body">
+								<!--내용-->
+								<c:choose>
+									<c:when test="${list.size() ==0 }">
+										<div class="row">
+											<div class="col">등록된 게시글이 없습니다.</div>
+										</div>
+									</c:when>
+									<c:otherwise>
+
+										<c:forEach items="${list }" var="post" varStatus="status">
+											<div class="row">
+												<div class="col-1">${post.seq_post }</div>
+												<div class="col-5">
+													<a href="/detailPost.po?seq_post=${post.seq_post}">${post.p_title }</a>
+												</div>
+												<div class="col-2">${post.user_nickname }</div>
+												<div class="col-2">${post.p_date }</div>
+												<div class="col-1">${likeCountList[status.index] }</div>
+												<div class="col-1">
+													<p>${post.p_view_count }</p>
+												</div>
+											</div>
+											<hr>
+										</c:forEach>
+
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div class="content-footer2">
+								<div class="row">
+									<!--글 페이지 이동-->
+									<div class="col-4"></div>
+									<div class="col-4">
+										<nav>
+											<ul class="pagination justify-content-center">
+												<c:if test="${naviMap.needPrev eq true}">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${naviMap.startNavi-1}&&listItem=${listItem}">Prev</a>
+													</li>
+													<%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭했음 ->  5페이지로 이동 --%>
+												</c:if>
+
+												<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+													end="${naviMap.endNavi}" step="1">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${pageNum}&&listItem=${listItem}">${pageNum}</a>
+													</li>
+												</c:forEach>
+
+												<c:if test="${naviMap.needNext eq true}">
+													<li class="page-item"><a class="page-link"
+														href="/post.po?curPage=${naviMap.endNavi+1}&&listItem=${listItem}">Next</a>
+													</li>
+												</c:if>
+											</ul>
+										</nav>
+									</div>
+									<div class="col-4"></div>
+								</div>
+								<div class="row">
+									<!--글 페이지 이동-->
+									<div class="col-2"></div>
+									<div class="col-8">
+										<select class="form-select search-method" id="searchValue"
+											aria-label="Default select example" name="searchOption">
+											<option value="1" selected>제목</option>
+											<option value="2">내용</option>
+											<option value="3">글쓴이</option>
+										</select> <input type="text" id="inputSearch" name="searchInput"
+											class="form-control" />
+										<button type="button" id="btnSearch" class="btn btn-secondary">검색</button>
+									</div>
+									<div class="col-2"></div>
+								</div>
+							</div>
+						</div><!-- content 끝 -->
+					</div>
 				</div>
-			</div>
-		</form>
-	</div>
-	
-	<script>
-		$("#mb_delete").on("click", function() { // 회원탈퇴 요청
+
+				<script>
+	    $("#mb_delete").on("click", function(){ // 회원탈퇴 요청
 			location.href = "/deleteProc.mem";
 		});
 
-		$("#i_logout").on("click", function() { // 로그아웃 요청
-			location.href = "/logout.mem"
-		})
+    	$("#i_logout").on("click", function(){ // 로그아웃 요청
+    		location.href = "/logout.mem";
+    	});
 
 		$("#i_modify").on("click", function() { // 내 정보 수정 페이지 요청
 			location.href = "/modify.mem";
@@ -633,6 +765,7 @@ button {
 			}
 		});
 	</script>
+
 </body>
 
 </html>

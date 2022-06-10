@@ -468,7 +468,7 @@
                             </c:when>
                             <c:otherwise>
                                 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
 
@@ -520,7 +520,7 @@
                                 <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon"
                                                                         src="/images/찜.png">
                                 </a>
-                                <a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon"
+                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon"
                                                                                  src="/images/마이페이지.png">
                                 </a>
                             </c:if>

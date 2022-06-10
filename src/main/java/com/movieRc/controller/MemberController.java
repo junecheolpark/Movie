@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import com.movieRc.dao.MemberDAO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dao.MpDAO;
+import com.movieRc.dao.PostDAO;
 import com.movieRc.dto.MpDTO;
+import com.movieRc.dto.PostDTO;
 import com.movieRc.util.EncryptionUtils;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -117,9 +119,12 @@ public class MemberController extends HttpServlet {
             String user_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_id();
 
             MemberDAO dao = new MemberDAO();
+            MpDAO dao2 = new MpDAO();
+            
             try {
-                int rs = dao.deleteMember(user_id);
-                if (rs > 0) {
+                int rs1 = dao.deleteMember(user_id);
+                int rs2 = dao2.deleteMp(user_id);
+                if (rs1 >0 && rs2 > 0) {
                     session.removeAttribute("loginSession");
                     response.sendRedirect("/Member/login.jsp");
                 }
@@ -221,6 +226,7 @@ public class MemberController extends HttpServlet {
 
             MemberDAO dao = new MemberDAO();
             MpDAO daoMp = new MpDAO();
+	        PostDAO daoPost= new PostDAO();
 
             try {
                 MemberDTO dto = dao.selectById(user_id);
@@ -228,12 +234,14 @@ public class MemberController extends HttpServlet {
                 // 프로필이 있으면 profile 에 파일 경로값을 셋팅
                 // 프로필이 없으면 profile 에 null
                 String profile = daoMp.select(user_id);
+                // user_id로 내가 쓴 게시글만 가져오기 
+                ArrayList<PostDTO> list = daoPost.myPost(user_id);
 
                 System.out.println("profile : " + profile);
 
                 request.setAttribute("profile", profile);
-
                 request.setAttribute("dto", dto);
+                request.setAttribute("list", list); // 내가 쓴 게시글 list에 담아서 보내주기 
                 request.getRequestDispatcher("/Mypage/mypageIndex.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -264,6 +272,7 @@ public class MemberController extends HttpServlet {
         } else if (uri.equals("/modifyProc.mem")) { // 내 정보수정 요청
             HttpSession session = request.getSession();
             String user_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_id();
+            String user_category = ((MemberDTO) session.getAttribute("loginSession")).getUser_category();
 
             // 1. 서버의 루트에 실제 파일이 저장될 경로값 만들어주기
             String filePath = request.getServletContext().getRealPath("files");
@@ -299,10 +308,17 @@ public class MemberController extends HttpServlet {
                 user_pw = EncryptionUtils.getSHA512(user_pw);
                 System.out.println("암호화된 pw : " + user_pw);
 
-                MemberDTO dto = new MemberDTO(user_id, null, null, user_pw, user_nickname, null, 0, user_phone, postcode, roadAddr, detailAddr, extraAddr, null);
+                MemberDTO dto = new MemberDTO(user_id, user_category, null, user_pw, user_nickname, null, 0, user_phone, postcode, roadAddr, detailAddr, extraAddr, null);
 
                 int rs1 = dao.modifyMember(dto);
-                int rs2 = dao2.updateMp(user_id, sys_name);
+                
+                String checkProfile = dao2.select(user_id);
+                int rs2 = 0;
+                if(checkProfile != null) {// 프로필 있으니 update
+                	rs2 = dao2.updateMp(user_id, sys_name);
+                }else {//프로필이 없으니 insert
+                	rs2 = dao2.insertMp(new MpDTO(user_id, sys_name));
+                }
                 if (rs1 > 0 && rs2 > 0) {
                     // loginsession 에 들어있는 수정 전 dto를 새롭게
                     session.setAttribute("loginSession", dto);
@@ -312,44 +328,6 @@ public class MemberController extends HttpServlet {
                 e.printStackTrace();
             }
 
-//		}else if(uri.equals("/")) { // 전체 조회
-//			HttpSession session = request.getSession();
-//			String user_id = request.getParameter("user_id");
-//			String user_nickname = request.getParameter("user_nickname");
-//			String user_name = request.getParameter("user_name");
-//			int user_birth = Integer.parseInt(request.getParameter("user_birth"));
-//			String user_phone = request.getParameter("user_phone");
-//			
-//			System.out.println(user_id + ":" + user_nickname + ":" + user_name + ":" + user_birth + ":" + user_phone);
-//			
-//			MemberDAO dao = new MemberDAO();
-//			ArrayList<MemberDTO> list = new ArrayList<>();
-//			try {
-//				list = dao.selectAll();
-//				request.setAttribute("list", list);
-//				request.getRequestDispatcher("/").forward(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//		}else if(uri.equals("/")) { // 전체 조회
-//			HttpSession session = request.getSession();
-//			String user_id = request.getParameter("user_id");
-//			String user_nickname = request.getParameter("user_nickname");
-//			String user_name = request.getParameter("user_name");
-//			int user_birth = Integer.parseInt(request.getParameter("user_birth"));
-//			String user_phone = request.getParameter("user_phone");
-//
-//			System.out.println(user_id + ":" + user_nickname + ":" + user_name + ":" + user_birth + ":" + user_phone);
-//
-//			MemberDAO dao = new MemberDAO();
-//			ArrayList<MemberDTO> list = new ArrayList<>();
-//			try {
-//				list = dao.selectAll();
-//				request.setAttribute("list", list);
-//				request.getRequestDispatcher("/").forward(request, response);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
         } else if (uri.equals("/toLogin.mem")) {
             response.sendRedirect("/Member/login.jsp");
         } else if (uri.equals("/toSignUp.mem")) {
