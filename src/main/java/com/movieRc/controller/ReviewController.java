@@ -15,11 +15,13 @@ import com.google.gson.Gson;
 import com.movieRc.dao.BasketDAO;
 import com.movieRc.dao.Like_rDAO;
 import com.movieRc.dao.MovieDAO;
+import com.movieRc.dao.PostCommentDAO;
 import com.movieRc.dao.ReviewDAO;
 import com.movieRc.dto.Like_rDTO;
 import com.movieRc.dto.Like_r_countDTO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.MovieDTO;
+import com.movieRc.dto.ReportDTO;
 import com.movieRc.dto.ReviewDTO;
 import com.movieRc.util.Pagination;
 
@@ -445,7 +447,25 @@ public class ReviewController extends HttpServlet {
             }
 
 
-        }
+        }else if(uri.equals("/report.re")) { 
+			int seq_review = Integer.parseInt(request.getParameter("seq_review"));
+			String category_check = "review";
+			MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");
+			String user_category = dto1.getUser_category();
+			String user_id= dto1.getUser_id();
+			String rp_content =request.getParameter("rp_content");
+							
+			System.out.println(seq_review +"seq_review :" + user_id + " U_id: "+" : rp_content"+ rp_content);
+			
+			PostCommentDAO dao =new PostCommentDAO();
+			
+			try {
+			int rs =dao.reportInsert(new ReportDTO(0,category_check,rp_content,user_id,seq_review,0,0,user_category));
+			
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 
     }

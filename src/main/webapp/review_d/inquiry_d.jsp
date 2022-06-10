@@ -809,37 +809,43 @@ body {
 											<!-- 아이디 값이 있다면 -->
 											<!-- 신고 -->
 											<div class="col-1 mt-1 pt-0 text-end r_report">
-												<button type="button" class="btn pt-0 border-0" data-bs-toggle="modal" data-bs-target="#exampleModal"
-													data-bs-whatever="@getbootstrap">
-													<img src="images/report.png" height="20px">
+												<button type="button"  class="btn pt-0 border-0 buttonseq" data-bs-toggle="modal" data-bs-target="#exampleModal_r"
+													data-bs-whatever="@getbootstrap" value="${review.seq_review}">
+													<img src="images/report.png" value="${review.seq_review}" height="20px">
 												</button>
-												<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="exampleModalLabel">Report</h5>
-																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-															</div>
-															<div class="modal-body">
+												
+												<input style="display: none;" id="seqReport_r"
+														value="${review.seq_review}">
+													<div class="modal fade" id="exampleModal_r" tabindex="-1"
+														aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content">
 																<form id="reportForm">
-																	<div class="mb-3">
-																		<label for="message-title" class="col-form-label">Title:</label> <input type="text" class="form-control"
-																			id="message-title" name="title" />
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLabel">Report_Review</h5>
+																		<button type="button" class="btn-close"
+																			data-bs-dismiss="modal" aria-label="Close"></button>
 																	</div>
-																	<div class="mb-3">
-																		<label for="message-text" class="col-form-label">Message: </label>
-																		<textarea class="form-control" id="message-text" name="message"> </textarea>
+																	<div class="modal-body">
+
+
+																		<div class="mb-3">
+																			<label for="message-text_r" class="col-form-label">Message:</label>
+																			<textarea class="form-control" id="message-text_r"
+																				name="rp_content"> </textarea>
+																		</div>
 																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary"
+																			data-bs-dismiss="modal">Close</button>
+																		<button id="sendMessage_r" type="button"
+																			class="btn btn-primary">Send message</button>
+																	</div>
+																</form>
 															</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																<button id="sendMessage" type="button" class="btn btn-primary">Send message</button>
-															</div>
-															</form>
 														</div>
+														<div></div>
 													</div>
-													<div></div>
-												</div>
 											</div>
 								</div>
 
@@ -1441,6 +1447,79 @@ body {
 		</div>
 	</footer>
 	<script>
+	$(".buttonseq").on("click",function(e){
+		 let seqReport_r= $(e.target).val();
+		if(seqReport_r==="" ){
+			seqReport_r = $(e.target).parent().val();
+		}
+
+		
+	})
+	$("#sendMessage_r").on(
+			"click",
+			function(e) {
+				let movieCd="${moviedto.movieCd}";
+				let seq_review = $("#seqReport_r").val();
+				
+				//  $("#message").val($("#message-text").val());
+				if ( $("#message-text_r").val() === "") {
+					alert("메세지를 제대로 입력하지 않았습니다.");
+					return;
+				}
+
+				let rp_content =$("#message-text_r").val();
+				let data = $("#reportForm").serialize();
+
+				console.log(movieCd);
+				console.log(seq_review);
+				console.log(rp_content);
+				$.ajax({
+					url : "/report.re",
+					type : "post",
+					data : {
+						seq_review : seq_review,//리뷰번호
+						movieCd : movieCd,//comment
+				
+						rp_content : rp_content
+					},
+					success : function() {
+						$("#exampleModal_r").modal('hide');
+						console.log("신고완료");
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				})
+
+			});
+	$(".btn-report_r").on(
+			"click",
+			function(e) {
+				
+				/*모달 스크립트  */
+				var exampleModal = document.getElementById("exampleModal_r");
+				exampleModal.addEventListener("show.bs.modal",
+						function(event) {
+							// Button that triggered the modal
+							var button = event.relatedTarget;
+							// Extract info from data-bs-* attributes
+							var recipient = button
+									.getAttribute("data-bs-whatever");
+							// If necessary, you could initiate an AJAX request here
+							// and then do the updating in a callback.
+							//
+							// Update the modal's content.
+							var modalTitle = exampleModal
+									.querySelector(".modal-title");
+							var modalBodyInput = exampleModal
+									.querySelector(".modal-body input");
+
+							modalTitle.textContent = "Report";
+						})
+			});
+	
+	
+	
 		let msg= '${msg}';
 		console.log(msg);
 		if(msg !=""){
