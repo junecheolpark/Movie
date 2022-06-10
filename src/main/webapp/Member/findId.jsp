@@ -291,7 +291,7 @@
 <!-- Contents -->
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-5">
+        <div class="col-lg-6">
             <form id="findIdForm" action="/findId.mem" method="post">
                 <div class="card card-custom">
                     <div class="card-header">

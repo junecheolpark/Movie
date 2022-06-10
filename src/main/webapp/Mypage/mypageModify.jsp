@@ -396,7 +396,7 @@
                                     </div>
                                     <div class="col-12 mb-2">
                                         <input type="password" class="form-control" id="user_pwCheck"
-                                               readonly>
+                                               readonly value="${loginSession.user_pw}">
                                     </div>
                                 </div>
                             </c:if>

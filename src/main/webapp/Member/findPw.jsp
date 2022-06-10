@@ -136,6 +136,25 @@ a {
 
 /* footer 반응형 끝 */
 
+    /* body*/
+        .card-header {
+            background-color: white;
+        }
+
+        #user_name {
+            border-radius: 10px;
+        }
+
+        #user_phone {
+            border-radius: 10px;
+        }
+
+        #findPwBtn {
+            background-color: blueviolet;
+            color: white;
+            border-radius: 8px;
+        }
+
 </style>
 </head>
 
@@ -263,7 +282,7 @@ a {
 	<!-- Contents -->
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-lg-5">
+			<div class="col-lg-6">
 				<form id="findPwForm" action="/findPw.mem" method="post">
 					<div class="card card-custom">
 						<div class="card-header">
