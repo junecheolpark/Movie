@@ -120,13 +120,15 @@ public class PostController extends HttpServlet {
 				
 				dao.updateView_count(seq_post);
 				PostDTO dto1 =dao.getPost(seq_post);
-				request.setAttribute("dto", dto1);
+				
+				request.setAttribute("dto",dto1);
 				PostCommentDAO PostCommentDAO = new PostCommentDAO();
 				ArrayList<PostCommentDTO> list = PostCommentDAO.selectAll(seq_post);
+				//Check완료
 				
 				//현재 로그인한 아이디의 좋아요 싫어요 표시
 				int likeValue=0;
-				if(((MemberDTO)request.getSession().getAttribute("loginSession")==null)) {
+				if(((MemberDTO)request.getSession().getAttribute("loginSession")!=null)) {
 					MemberDTO logindto =(MemberDTO)request.getSession().getAttribute("loginSession");
 					String user_id=logindto.getUser_id();
 					System.out.println("user_id:" + user_id);
@@ -136,7 +138,7 @@ public class PostController extends HttpServlet {
 				}
 				
 				
-				
+				System.out.println("likeValue : "+ likeValue);
 				request.setAttribute("likeValue", likeValue);//1이면 좋아요상태,0이면표시안한상태,-1이면표시안한상태,2이면싫어요상태
 				
 				System.out.println("좋아요한상태? : "+likeValue);

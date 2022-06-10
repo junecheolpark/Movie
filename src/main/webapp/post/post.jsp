@@ -223,6 +223,7 @@
 
         .content-footer2 {
             margin-top: 15px;
+            margin-bottom:30px;
         }
 
         .form-select {
