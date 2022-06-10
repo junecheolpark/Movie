@@ -140,19 +140,20 @@ a {
 
 /* footer 반응형 끝 */
 
+
 /* contents 영역 */
 section#container {
 	/* background: #f6f6f6f8; */
 	background: white;
 }
 
-div.body-wishList {
+div.body-manage {
 	/* background: #eee; */
 	width: 80%;
 	float: right;
 }
 
-section#container, div.body-wishList, aside#aside, aside#asideSM {
+div.body-manage, aside#aside, aside#asideSM {
 	padding: 10px;
 }
 
@@ -160,8 +161,7 @@ aside#aside, aside#asideSM {
 	background: black;
 	width: 20%;
 	float: left;
-	/* border: 1px solid black; */
-	border-radius: 20px;
+	border: 1px solid white;
 }
 
 section#container::after {
@@ -170,41 +170,14 @@ section#container::after {
 	clear: both;
 }
 
-#aside #profile {
-	border: 1px solid grey;
-	border-radius: 30px;
-	/* height: 400px; */
-	width: 100%;
-	margin: 0;
+#menuBox {
+	margin-top: 30px;
 }
 
-#profileBox {
-	background: white;
-	border-radius: 50%;
-	width: 200px;
-	height: 200px;
+#aside{
+	height: 644px;
 }
 
-#profileBox>img {
-	width: 100%;
-	height: 100%;
-}
-
-.profileBtn {
-	padding: 10px;
-	border-radius: 10px;
-	width: 80%;
-}
-
-.imgBox {
-	width: 150px;
-	height: 200px;
-}
-
-.imgBox>img {
-	width: 100%;
-	height: 100%;
-}
 /* contents 영역 끝 */
 
 /* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
@@ -214,7 +187,7 @@ section#container::after {
 	aside#aside {
 		width: 25%;
 	}
-	div.body-wishList {
+	div.body-manage {
 		width: 75%;
 	}
 }
@@ -223,7 +196,7 @@ section#container::after {
 	aside#aside {
 		display: none;
 	}
-	div.body-wishList {
+	div.body-manage {
 		width: 100%;
 	}
 	aside#asideSM {
@@ -239,27 +212,12 @@ section#container::after {
 }
 
 @media screen and (max-width: 768px) {
-	aside#asideSM div#profileBox {
-		display: none;
-		width: 50%
-	}
-	aside#asideSM div#profileBtnBox {
-		display: none;
-	}
-	/* aside#asideSM div#profileBtnBoxSM {
-		display: block;
-	} */
-	div.body-wishList {
+	div.body-manage {
 		width: 100%;
 		float: none;
 	}
 }
 
-@media screen and (min-width: 768px) {
-	aside#asideSM div#profileBtnBoxSM {
-		display: none;
-	}
-}
 /* 반응형 끝 */
 </style>
 </head>
@@ -287,7 +245,7 @@ section#container::after {
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-								<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+								<li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
 							</c:otherwise>
 						</c:choose>
 
@@ -337,7 +295,7 @@ section#container::after {
 							<c:if test="${not empty loginSession}">
 								<a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
 								</a>
-								<a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+								<a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
 								</a>
 							</c:if>
 						</div>
@@ -384,213 +342,126 @@ section#container::after {
 </header>
 
 	<!-- Contents -->
-	<c:choose>
-		<c:when test="${not empty loginSession}">
-			<div class="container">
-				<div class="contents">
-					<section id="container">
-						<aside id="aside" class="p-3 mt-3">
-							<div class="row justify-content-center" id="profile">
-								<div class="col-12 mt-4" id="profileBox">
-									<img src="images/오구3.gif">
-									<%-- <tr>
-				                    	<td class="col-2 text-center align-middle">
-				                            <p class="fw-bold">첨부파일</p>
-				                        </td>
-				                        <td class="col-10" colspan="3">
-				                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
-				                        </td>
-				                        <td>
-				                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
-				                        </td>
-				                    </tr> --%>
-								</div>
+	<div class="container">
+		<div class="contents">
+			<section id="container">
+				<aside id="aside">
+					<div class="row justify-content-center">
+						<div class="col-12 d-flex justify-content-center">
+							<h4 class="text-light">${loginSession.user_nickname}</h4>
+						</div>
 
-								<div class="col-12 d-flex justify-content-center">
-									<h4 class="text-light">${loginSession.user_nickname}님</h4>
-								</div>
+						<div class="col-12 d-flex justify-content-center">
+							<p class="text-light">
+								관리자님<br>어서오세요!
+							</p>
+						</div>
+					</div>
 
-								<div class="col-12 d-flex justify-content-center">
-									<p class="text-light">어서오세요!</p>
-								</div>
-							</div>
+					<div class="row justify-content-center text-center fs-4"
+						id="menuBox">
+						<p class="text-light p-3 mb-0">
+							<a class="text-reset" href="/lookupMem.admin?curPage=1">회원 관리</a>
+						</p>
+						<p class="bg-warning p-3 mb-0">
+							<a class="text-reset" href="/report.admin?curPage=1">신고 관리</a>
+						</p>
+						<p class="text-light p-3 mb-0">
+							<a class="text-reset" href="/black.admin">블랙리스트 관리</a>
+						</p>
+					</div>
+				</aside>
 
-							<div class="row justify-content-center" id="profileBtnBox">
-								<button type="button" class="profileBtn btn btn-warning my-3">
-									<a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a>
-								</button>
-								<button type="button" class="profileBtn btn btn-warning mb-3">
-									<a class="text-reset" href="">내가 쓴 게시글</a>
-								</button>
-								<button type="button" class="profileBtn btn btn-warning mb-3">
-									<a class="text-reset" href="">내가 쓴 리뷰</a>
-								</button>
-							</div>
-						</aside>
+				<aside id="asideSM" class="p-3">
+					<div class="row">
+						<div id="menuBox">
+							<h4 class="text-light">${loginSession.user_nickname}관리자님</h4>
+							<p class="text-light p-3 mb-0">
+								<a class="text-reset" href="/lookupMem.admin?curPage=1">회원 관리</a>
+							</p>
+							<p class="p-3 mb-0 bg-warning">
+								<a class="text-reset" href="/report.admin?curPage=1">신고 관리</a>
+							</p>
+							<p class="text-light p-3 mb-0">
+								<a class="text-reset" href="/black.admin">블랙리스트 관리</a>
+							</p>
+						</div>
 
-						<aside id="asideSM" class="p-3 mt-3">
-							<div class="row pt-3 justify-content-center" id="profile">
-								<div class="col-4 me-5 mt-3" id="profileBox">
-									<img src="/files/${file_dto.sys_name}">
-									<%-- <tr>
-				                    	<td class="col-2 text-center align-middle">
-				                            <p class="fw-bold">첨부파일</p>
-				                        </td>
-				                        <td class="col-10" colspan="3">
-				                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
-				                        </td>
-				                        <td>
-				                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
-				                        </td>
-				                    </tr> --%>
-								</div>
+					</div>
+				</aside>
 
-								<div class="col-6" id="profileBtnBox">
-									<h4 class="text-light">${loginSession.user_nickname}님</h4>
-									<button type="button" class="profileBtn btn btn-warning my-3">
-										<a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a>
-									</button>
-									<button type="button" class="profileBtn btn btn-warning mb-3">
-										<a class="text-reset" href="">내가 쓴 게시글</a>
-									</button>
-									<button type="button" class="profileBtn btn btn-warning mb-3">
-										<a class="text-reset" href="">내가 쓴 리뷰</a>
-									</button>
-								</div>
+				<div class="body-manage">
+					<div class="row p-3 body-manage-header">
+						<div class="col">
+							<span class="fs-4">신고 목록</span>
+						</div>
+					</div>
 
-								<div class="row" id="profileBtnBoxSM">
-									<div class="col-12">
-										<h4 class="text-light">${loginSession.user_nickname}님</h4>
-									</div>
-									<div class="col-4 px-0 d-flex justify-content-center">
-										<button type="button"
-											class="profileBtn btn btn-warning btn-sm">
-											<a class="text-reset" href="Mypage/mypageModify.jsp">정보
-												수정</a>
-										</button>
-									</div>
-									<div class="col-4 px-0 d-flex justify-content-center">
-										<button type="button"
-											class="profileBtn btn btn-warning btn-sm">
-											<a class="text-reset" href="">내가 쓴 게시글</a>
-										</button>
-									</div>
-									<div class="col-4 px-0 d-flex justify-content-center">
-										<button type="button"
-											class="profileBtn btn btn-warning btn-sm">
-											<a class="text-reset" href="">내가 쓴 리뷰</a>
-										</button>
-									</div>
-								</div>
-							</div>
-						</aside>
-
-						<div class="body-wishList">
-							<div class="row p-3 body-wishList-header">
-								<div class="col-7">
-									<span class="fs-4">내가 찜한 영화</span> <span id="wishCnt"
-										class="fs-6 text-secondary">${totalCnt}건</span>
-								</div>
-								<div class="col-3">
-									<select id="selectBox" class="form-select">
-										<option value="1" selected>등록순</option>
-										<option value="2">이름순(영문)</option>
-										<option value="3">이름순(국문)</option>
-									</select>
-								</div>
-								<div class="col-2">
-									<button type="button" class="btn btn-secondary" id="selectBtn">확인</button>
-								</div>
-							</div>
-
-							<div class="body-wishList-content">
-								<c:choose>
-									<c:when test="${wishList.size() == 0}">
-										<div class="row">
-											<p class="text-center fs-5 text-secondary">찜한 영화가 존재하지
-												않습니다.</p>
-										</div>
-									</c:when>
-
-									<c:otherwise>
-										<div class="row p-3">
-											<c:forEach items="${wishList}" var="wishList">
-												<div class="wishBox col-sm-6 col-md-4 mb-3">
-													<div class="imgBox">
-														<img class="posters" src="">
-													</div>
-													<div class="imgText">
-														<p class="mb-0">${wishList.movieNm}
-															${wishList.movieNmEn}</p>
-														<p class="mb-0 text-secondary">${wishList.prdtYear}년
-															개봉</p>
-													</div>
-													<div class="imgBtn">
-														<button type="button"
-															class="reviewBtn btn btn-warning mb-2"
-															value="${wishList.movieCd}">리뷰보기</button>
-														<button type="button"
-															class="deleteWish btn btn-secondary mb-2"
-															value="${wishList.seq_basket}">삭제하기</button>
-													</div>
-												</div>
+					<div class="body-manage-content">
+						<div class="row p-3">
+							<table class="table table-light">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">신고 분류</th>
+										<th scope="col">신고 내용</th>
+										<th scope="col">신고 유저</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:choose>
+										<c:when test="${list.size() == 0}">
+											<tr>
+												<td class="text-center" colspan="4">접수된 신고 내역이 없습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${list}" var="dto">
+												<tr>
+													<td>${dto.seq_report}</td>
+													<td>${dto.category_check}</td>
+													<td>${dto.rp_content}</td>
+													<td>${dto.user_id}</td>
+												</tr>
 											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</tbody>
+							</table>
+
+							<nav>
+								<ul class="pagination justify-content-center">
+									<c:if test="${naviMap.needPrev eq true}">
+										<li class="page-item"><a class="page-link"
+											href="/report.admin?curPage=${naviMap.startNavi-1}">Previous</a></li>
+										<%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭함 -> 5페이지로 이동 --%>
+									</c:if>
+
+									<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+										end="${naviMap.endNavi}" step="1">
+										<li class="page-item"><a class="page-link"
+											href="/report.admin?curPage=${pageNum}">${pageNum}</a></li>
+									</c:forEach>
+
+									<c:if test="${naviMap.needNext eq true}">
+										<li class="page-item"><a class="page-link"
+											href="/report.admin?curPage=${naviMap.endNavi+1}">Next</a></li>
+									</c:if>
+								</ul>
+							</nav>
 
 
-											<script>
-												$(".reviewBtn").on("click", function(){
-													location.href = "/detailView.re?movieCd="+$(this).val();
-												})
-											</script>
-										</div>
-									</c:otherwise>
-								</c:choose>
-							</div>
+							<script>
+								
+							</script>
 						</div>
-					</section>
+					</div>
 				</div>
-			</div>
-		</c:when>
-
-		<c:otherwise>
-			<div class="container">
-				<div class="contents">
-					<section id="container">
-						<div class="body-wishList-content">
-							<div class="row">
-								<div class="col d-flex justify-content-center">
-									<strong class="fs-3">로그인이 필요해요!</strong>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-12 d-flex justify-content-center">
-									<p>로그인 하시면 나중에 보고 싶은 영화를 찜 해둘 수 있습니다!</p>
-								</div>
-								<div class="col-12 d-flex justify-content-center">
-									<p>지금 바로 로그인하시고, 확인해보세요!</p>
-								</div>
-							</div>
-							<div class="row btnBox">
-								<div class="col d-flex justify-content-center">
-									<button class="btn btn-primary me-2">
-										<a class="text-reset" href="Member/signup.jsp">회원가입</a>
-									</button>
-									<button class="btn btn-info text-white">
-										<a class="text-reset" href="Member/login.jsp">로그인하고 영화 찜하러
-											가기!</a>
-									</button>
-								</div>
-							</div>
-						</div>
-					</section>
-				</div>
-			</div>
-		</c:otherwise>
-	</c:choose>
+			</section>
+		</div>
+	</div>
 
 
-
-	<!-- Footer -->
 
 
 	<footer class="py-5 text-light">
@@ -617,7 +488,7 @@ section#container::after {
 						<div class="col-2">
 							<h5>계정</h5>
 							<ul class="nav flex-column">
-								<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
 
 							</ul>
 						</div>
@@ -628,7 +499,7 @@ section#container::after {
 							<ul class="nav flex-column">
 								<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
 								<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-								<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
 								<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
 								<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
 							</ul>
@@ -710,7 +581,7 @@ section#container::after {
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
 						<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-						<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
+						<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
 						<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
 						<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
 					</ul>
@@ -775,133 +646,6 @@ section#container::after {
 	</footer>
 
 	<script>
-		const searchForm = $(".searchForm");
-		searchForm.on("submit", function (event) {
-			if ($(this).children(".searchInput").val() === "") {
-				event.preventDefault();
-				alert("검색어를 입력하세요");
-			}
-		});
-		function sortWish(option){
-			let url;
-			if(option == 1){ //등록순
-				url = "/sortbyAdd.wish";
-			}else if(option == 2){ // 영어이름순
-				url = "/sortbyNameEn.wish";
-			}else if(option == 3){ // 한글이름순
-				url = "/sortbyName.wish";
-			}
-			 $.ajax({
-				url: url
-				, type : "get"
-				, success: function(data){
-					let list = JSON.parse(data);
-					$(".body-wishList-header").empty();
-					
-					let headCol1 = $("<div>").addClass("col-7");
-					let span1 = $("<span>").addClass("fs-4").html("내가 찜한 영화");
-					let span2 = $("<span>").addClass("fs-6 text-secondary").attr("id", "wishCnt").html(list.length + "건");
-					headCol1.append(span1, " ", span2);
-					
-					let headCol2 = $("<div>").addClass("col-3");
-					let selectBox = $("<select>").addClass("form-select").attr("id", "selectBox");
-					
-					let opt1 = $("<option>").html("등록순").val(1);
-					let opt2 = $("<option>").html("이름순(영문)").val(2);
-					let opt3 = $("<option>").html("이름순(국문)").val(3);
-					
-					selectBox.append(opt1, opt2, opt3);
-					headCol2.append(selectBox);
-					
-					let headCol3 = $("<div>").addClass("col-2");
-					let btn = $("<button>").addClass("btn btn-secondary").attr("id", "selectBtn").html("확인");
-					headCol3.append(btn);
-					
-					let rs = $(".body-wishList-header").append(headCol1, headCol2, headCol3);
-					$(".body-wishList").append(rs);
-					
-					//console.log($("#selectBox > option[value='"+option+"']"));
-					$("#selectBox > option[value='"+option+"']").attr("selected", true);
-					
-					console.log(data);
- 					makeList(data);
-				}, error: function(e){
-					console.log(e);
-				}
-			}) 
-		}
-	
-		/* 정렬 */
-		$(".body-wishList").on("click", "#selectBtn", function(){
-			let option = $("#selectBox").val();
-			sortWish(option);
-		})
-		
-		/* 찜 목록 삭제 */
-		$(".body-wishList-content").on("click", ".deleteWish", function(){
-			let answer = confirm("정말 해당 영화를 찜 목록에서 삭제하시겠습니까?");
-			if(answer){
-				let seq_basket = $(this).val();
-				console.log(seq_basket);
-				
-				$.ajax({
-					url: "/delete.wish"
-					, type : "post"
-					, data : {seq_basket: seq_basket}
-					, success : function(data){
-						if(data === "fail"){
-							alert("찜 영화 삭제에 실패했습니다.");
-						}else{
-							let list = JSON.parse(data);
-							
-							$("#wishCnt").html(list.length + "건");							
-							alert("삭제가 완료되었습니다.");
-							makeList(data);
-						}
-					}, error : function(e){
-						console.log(e);
-					}
-				})
-			}
-		})
-		
-		/* 정렬 목록 만드는 함수 */
-		function makeList(data){
-			let list = JSON.parse(data);
-			$(".body-wishList-content").empty();
-			if(list.length == 0){
-				
-				let p = $("<p>").addClass("text-center fs-5 text-secondary").html("찜한 영화가 존재하지 않습니다.");
-				let div = $("<div>").addClass("row");
-				div.append(p);
-	
-				let rs = $(".body-wishList-content").append(div);
-				$(".body-wishList").append(rs);
-				
-			}else{
-				let row = $("<div>").addClass("row p-3");
-				for(let wishList of list){
-					
-					let col = $("<div>").addClass("wishBox col-4 mb-3");
-					let imgBox = $("<div>").addClass("imgBox");
-					let img = $("<img>").addClass("posters").attr("src", "");
-					let imgText = $("<div>").addClass("imgText");
-					let p1 = $("<p>").addClass("mb-0").html(wishList.movieNm + " " + wishList.movieNmEn);
-					let p2 = $("<p>").addClass("mb-0 text-secondary").html(wishList.prdtYear + "년 개봉");
-					let imgBtn = $("<div>").addClass("imgBtn");
-					let button1 = $("<button>").addClass("btn btn btn-warning mb-2").html("리뷰보기");
-					let button2 = $("<button>").addClass("deleteWish btn btn-secondary mb-2").html("삭제하기").val(wishList.seq_basket);
-					
-					imgBox.append(img);
-					imgText.append(p1, p2);
-					imgBtn.append(button1, " ", button2);
-					col.append(imgBox, imgText, imgBtn);
-					row.append(col);
-				}
-				let rs = $(".body-wishList-content").append(row);
-				$(".body-wishList").append(rs);
-			}
-		}
 		
 	</script>
 </body>

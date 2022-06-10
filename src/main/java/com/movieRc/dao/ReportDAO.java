@@ -14,7 +14,7 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import com.movieRc.dto.ReportDTO;
 
 public class ReportDAO {
-private BasicDataSource bds;
+	private BasicDataSource bds;
 	
 	public ReportDAO() {
 		try {

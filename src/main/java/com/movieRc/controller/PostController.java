@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.movieRc.dao.PostCommentDAO;
 import com.movieRc.dao.PostDAO;
+import com.movieRc.dto.LikePostDTO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.PostCommentDTO;
 import com.movieRc.dto.PostDTO;
@@ -38,23 +39,35 @@ public class PostController extends HttpServlet {
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//로그인세션 (참고용)
-		HttpSession session=request.getSession();
-		MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
-				"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
-				"내친구집","3학년");
-		session.setAttribute("loginSession", dto);
+//		HttpSession session=request.getSession();
+//		MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
+//				"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
+//				"내친구집","3학년");
+//		session.setAttribute("loginSession", dto);
 		
 		
 		String uri =request.getRequestURI();
 		System.out.println("요청 uri : " +uri);
 		request.setCharacterEncoding("utf-8");
 		if(uri.equals("/post.po")) {
-			int curPage = Integer.parseInt(request.getParameter("curPage"));
-		
 			
+			int listItem=(request.getParameter("listItem")==null)?1:Integer.parseInt(request.getParameter("listItem"));
+			int curPage = Integer.parseInt(request.getParameter("curPage"));
+			int listItem2=10;
+			if(listItem==1) {
+				listItem2=10;
+			}else if(listItem==2) {
+				listItem2=20;
+			}else if(listItem==3) {
+				listItem2=30;
+			}
+			System.out.println("listItem : "+listItem);
+			int seq_post=0;
+			String likeCountStr="";
+			int likeCount=0;
 			PostDAO dao = new PostDAO();
 			try {
-				HashMap map = dao.getPageNavi(curPage);
+				HashMap map = dao.getPageNavi(curPage,listItem2);
 				
 				System.out.println("현재 페이지 : " + curPage);
 				System.out.println("startNavi : " + map.get("startNavi"));
@@ -62,10 +75,21 @@ public class PostController extends HttpServlet {
 				System.out.println("needPrev 필요? " + map.get("needPrev"));
 				System.out.println("needNext 필요? " + map.get("needNext"));
 				
-				ArrayList<PostDTO> list = dao.selectAll(curPage*10-9,curPage*10);
+				ArrayList<PostDTO> list = dao.selectAll(curPage*listItem2-(listItem2-1),curPage*listItem2);
+				ArrayList<String> likeCountList=new ArrayList<>();
+				for(PostDTO a:list) {
+				  
+					seq_post=a.getSeq_post();
+					//System.out.println("seqpost: "+seq_post);
+					likeCount =dao.pLikeCount(seq_post, 1);
+				//	System.out.println("likeCount : "+ likeCount);
+					likeCountStr =Integer.toString(likeCount); 
+					likeCountList.add(likeCountStr);
+				}
 				request.setAttribute("list", list);
 				request.setAttribute("naviMap", map);
-			
+				request.setAttribute("likeCountList",likeCountList);
+				request.setAttribute("listItem", listItem);
 				request.getRequestDispatcher("post/post.jsp").forward(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -77,6 +101,7 @@ public class PostController extends HttpServlet {
 			MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
 			String user_nickname=dto1.getUser_nickname();
 			String user_id= dto1.getUser_id();
+			String user_category = dto1.getUser_category();
 			
 			String p_title= request.getParameter("title");
 			String p_content =request.getParameter("content");
@@ -85,7 +110,7 @@ public class PostController extends HttpServlet {
 			PostDAO dao =new PostDAO();
 			try {
 				int seq_post = dao.getNewSeq();
-				int rs=dao.write(new PostDTO(seq_post,user_nickname,p_title,p_content,null,0,user_id,"kakao"));
+				int rs=dao.write(new PostDTO(seq_post,user_nickname,p_title,p_content,null,0,user_id,user_category));
 				
 				if(rs>0) {
 					response.sendRedirect("/post.po?curPage=1");
@@ -95,13 +120,13 @@ public class PostController extends HttpServlet {
 			}
 			}else if(uri.equals("/myPostProc.po")) {
 				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-				String user_nickname=dto1.getUser_nickname();
+				String user_id=dto1.getUser_id();
 				
 				
 				PostDAO dao= new PostDAO();
 				ArrayList<PostDTO> list =new ArrayList<>();
 				try {
-					list =dao.myPost(user_nickname);
+					list =dao.myPost(user_id);
 					Gson gson =new Gson();
 					String rs = gson.toJson(list);
 					System.out.println(rs);
@@ -123,6 +148,15 @@ public class PostController extends HttpServlet {
 				request.setAttribute("dto", dto1);
 				PostCommentDAO PostCommentDAO = new PostCommentDAO();
 				ArrayList<PostCommentDTO> list = PostCommentDAO.selectAll(seq_post);
+				
+				//현재 로그인한 아이디의 좋아요 싫어요 표시
+				MemberDTO logindto =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
+				String user_id=logindto.getUser_id();
+				System.out.println("user_id:" + user_id);
+				int likeValue =dao.curPLikeValue(user_id, seq_post);
+				request.setAttribute("likeValue", likeValue);//1이면 좋아요상태,0이면표시안한상태,-1이면표시안한상태,2이면싫어요상태
+				
+				System.out.println("좋아요한상태? : "+likeValue);
 				
 				
 				//좋아요 싫어요개수 얻기
@@ -241,48 +275,7 @@ public class PostController extends HttpServlet {
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
-			}else if(uri.equals("/listItem.po")) {
-				int listItem=Integer.parseInt(request.getParameter("listItem"));
-				int curPage = Integer.parseInt(request.getParameter("curPage"));
-				if(listItem==1) {
-					listItem=10;
-				}else if(listItem==2) {
-					listItem=20;
-				}else if(listItem==3) {
-					listItem=30;
-				}
-				
-				PostDAO dao = new PostDAO();
-				try {
-					HashMap map = dao.getPageNavi(curPage);
-					
-					System.out.println("현재 페이지 : " + curPage);
-					System.out.println("startNavi : " + map.get("startNavi"));
-					System.out.println("endNavi : " + map.get("endNavi"));
-					System.out.println("needPrev 필요? " + map.get("needPrev"));
-					System.out.println("needNext 필요? " + map.get("needNext"));
-					
-					ArrayList<PostDTO> list = dao.selectAll(curPage*10-9,curPage*10);
-					
-					
-					Gson gson =new Gson();
-					String rs = gson.toJson(list);
-					String rs2 = gson.toJson(map);
-					System.out.println(rs);
-					System.out.println(rs2);
-					response.setCharacterEncoding("utf-8");
-					response.getWriter().append(rs);
-					
-					
-					
-				
-					
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-				
-				
-			}else if(uri.equals("/pLike.po")) {
+			} else if(uri.equals("/pLike.po")) {
 				
 				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
 				int seq_post= Integer.parseInt(request.getParameter("seq_post"));
@@ -291,29 +284,33 @@ public class PostController extends HttpServlet {
 				System.out.println("plike.po");
 				PostDAO dao =new PostDAO();
 				int rs =10;
-				try {//좋아요1,싫어요2,선택안됨0
-					if(dao.curPLikeValue(user_id, seq_post) == -1) {//값 없음
+				
+				try {
+					int curPLikeValue =dao.curPLikeValue(user_id, seq_post);//좋아요1,싫어요2,선택안됨0
+					System.out.println("curPLikeValue의 값은: "+curPLikeValue);
+					if(curPLikeValue == -1) {//값 없음
 						dao.insertPostLike(user_id, seq_post, user_category);
-						
 						rs=-1;
 						System.out.println("좋아요");
-					}else if(dao.curPLikeValue(user_id, seq_post) == 0) {//0상태
+					}else if(curPLikeValue == 0) {//0상태
 						rs =dao.updatePostLike(user_id, seq_post, user_category);
 						rs=0;
 						System.out.println("좋아요");
-					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//좋아요 한 상태
+					}else if(curPLikeValue == 1) {//좋아요 한 상태
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
 						rs=1;
 						System.out.println("좋아요 취소");
 
-					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//싫어요 한 상태
-						rs=2;
+					}else if(curPLikeValue == 2) {//싫어요 한 상태
+						
 						rs =dao.updatePostLike(user_id, seq_post, user_category);
+						rs=2;
+						System.out.println("싫어요 취소");
 
-						System.out.println("좋아요");
+					}else {
+						System.out.println("잘못실행됨");
 					}
-					String a= Integer.toString(rs);
-				;
+					String a= Integer.toString(rs);;
 					System.out.println("rs :" +a);
 					int likeCount=dao.pLikeCount(seq_post, 1);
 					int hateCount=dao.pLikeCount(seq_post, 2);
@@ -338,27 +335,29 @@ public class PostController extends HttpServlet {
 				PostDAO dao =new PostDAO();
 				int rs =10;
 				try {//좋아요1,싫어요2,선택안됨0
-					if(dao.curPLikeValue(user_id, seq_post) == -1) {//값 없음
-					
+					int curPLikeValue =dao.curPLikeValue(user_id, seq_post);//좋아요1,싫어요2,선택안됨0
+					System.out.println("curPLikeValue의 값은: "+curPLikeValue);
+					if(curPLikeValue == -1) {//값 없음
 						dao.insertPostNotLike(user_id, seq_post, user_category);
 						rs=-1;
-						System.out.println("좋아요");
-					}else if(dao.curPLikeValue(user_id, seq_post) == 0) {//0상태
+						System.out.println("싫어요 삽입");
+					}else if(curPLikeValue == 0) {//0상태
 						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
 						rs=0;
-
 						System.out.println("싫어요");
 
-					}else if(dao.curPLikeValue(user_id, seq_post) == 1) {//싫어요 한 상태
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+					}else if(curPLikeValue == 1) {//좋아요 한 상태
+						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
 						rs=1;
-						System.out.println("좋아요 취소");
-					}else if(dao.curPLikeValue(user_id, seq_post) == 2) {//좋아요 한 상태
-						rs=2;
+						System.out.println("좋아요 취소, 싫어요");
+					}else if(curPLikeValue == 2) {//좋아요 한 상태
+						
 						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
+						rs=2;
+						System.out.println("싫어요 취소 :"+rs );
 
 					}
-				
+
 					String a= Integer.toString(rs);
 					
 					System.out.println("a :" +a);
@@ -393,16 +392,15 @@ public class PostController extends HttpServlet {
 				}catch(Exception e) {	
 					e.printStackTrace();
 				}
-			}
-			else if(uri.equals("/myPostPage.po")) {
+			}else if(uri.equals("/myPostPage.po")) {
 		         MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-		         String user_nickname=dto1.getUser_nickname();
+		         String user_id = dto1.getUser_id();
 		         
 		         
 		         PostDAO dao= new PostDAO();
 		         ArrayList<PostDTO> list =new ArrayList<>();
 		         try {
-		            list =dao.myPost(user_nickname);
+		            list =dao.myPost(user_id);
 		            request.setAttribute("list", list);
 		            request.getRequestDispatcher("post/myPost.jsp").forward(request, response);
 		         }catch(Exception e) {
