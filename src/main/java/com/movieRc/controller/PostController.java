@@ -369,6 +369,7 @@ public class PostController extends HttpServlet {
 				}catch(Exception e) {	
 					e.printStackTrace();
 				}
+
 			}
 //			else if(uri.equals("/myPostPage.po")) {
 //		         MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
