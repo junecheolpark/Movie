@@ -1451,7 +1451,7 @@ text-align: left;
 								"textarea").focus();
 					});
 
-		// 수정 버튼 눌렀을때
+		// 수정 버튼 눌렀을때 모
 		$(".body-review").on("click",".btnSave",function(e) {
 					let seq_review = $(e.target).val();
 					console.log("seq_review :", seq_review)
