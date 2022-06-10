@@ -58,6 +58,11 @@
         }
 
         /* Icon */
+        #logoutIcon {
+            width : 30px;
+            height : 30px;
+        }
+
         #cartIcon {
             width: 30px;
             height: 30px;
@@ -467,8 +472,9 @@
                                 <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                             </c:when>
                             <c:otherwise>
+                                <li class="nav-item"><a class="nav-link" href="/logout.mem">로그아웃</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/myPage.mem?curPage=1">마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
 
@@ -517,11 +523,13 @@
 
                         <div class="col-auto">
                             <c:if test="${not empty loginSession}">
+                                <a href="logout.mem"><img class="img-fluid" id="logoutIcon"
+                                                          src="/images/logout.png"></a>
                                 <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon"
                                                                         src="/images/찜.png">
                                 </a>
-                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon"
-                                                                                 src="/images/마이페이지.png">
+                                <a href="/myPage.mem?curPage=1" class=""> <img class="img-fluid" id="myPageIcon"
+                                                                     src="/images/마이페이지.png">
                                 </a>
                             </c:if>
                         </div>
@@ -784,7 +792,8 @@
                     <div class="col-2">
                         <h5>계정</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
+                            <li class="nav-item mb-2"><a href="/myPage.mem?curPage=1" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">
                                 <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
@@ -879,7 +888,8 @@
                     <div class="col-4">
                         <h5>계정</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
+                            <li class="nav-item mb-2"><a href="/myPage.mem?curPage=1" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">
                                 <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
