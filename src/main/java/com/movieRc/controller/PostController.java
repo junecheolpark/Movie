@@ -369,21 +369,25 @@ public class PostController extends HttpServlet {
 				}catch(Exception e) {	
 					e.printStackTrace();
 				}
-			}else if(uri.equals("/myPostPage.po")) {
-		         MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-		         String user_id = dto1.getUser_id();
-		         
-		         
-		         PostDAO dao= new PostDAO();
-		         ArrayList<PostDTO> list =new ArrayList<>();
-		         try {
-		            list =dao.myPost(user_id);
-		            request.setAttribute("list", list);
-		            request.getRequestDispatcher("post/myPost.jsp").forward(request, response);
-		         }catch(Exception e) {
-		            e.printStackTrace();
-		         }
-		      }else if(uri.equals("/report.po")) { 
+
+			}
+//			else if(uri.equals("/myPostPage.po")) {
+//		         MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
+//		         String user_id = dto1.getUser_id();
+//
+//
+//		         PostDAO dao= new PostDAO();
+//		         ArrayList<PostDTO> list =new ArrayList<>();
+//		         try {
+//
+//		            list =dao.myPost(user_id);
+//		            request.setAttribute("list", list);
+//		            request.getRequestDispatcher("post/myPost.jsp").forward(request, response);
+//		         }catch(Exception e) {
+//		            e.printStackTrace();
+//		         }
+//		      }
+			else if(uri.equals("/report.po")) {
 					int seq_post = Integer.parseInt(request.getParameter("seq_post"));
 					String category_check = "post";
 					MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");

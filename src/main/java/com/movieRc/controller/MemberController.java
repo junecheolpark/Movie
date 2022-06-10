@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -123,8 +124,16 @@ public class MemberController extends HttpServlet {
             
             try {
                 int rs1 = dao.deleteMember(user_id);
-                int rs2 = dao2.deleteMp(user_id);
-                if (rs1 >0 && rs2 > 0) {
+                
+                String checkProfile = dao2.select(user_id);
+                
+                int rs2 = 0;
+                
+                if(checkProfile != null) {// 프로필 있으면 delete
+                	rs2 = dao2.deleteMp(user_id);
+                }
+                System.out.println("rs2 : " + rs2);
+                if (rs1 >0) {
                     session.removeAttribute("loginSession");
                     response.sendRedirect("/Member/login.jsp");
                 }
@@ -221,6 +230,7 @@ public class MemberController extends HttpServlet {
 
         } else if (uri.equals("/myPage.mem")) { // 마이페이지 요청
             HttpSession session = request.getSession();
+            int curPage = Integer.parseInt(request.getParameter("curPage"));
             String user_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_id();
             System.out.println("user_id : " + user_id);
 
@@ -235,13 +245,17 @@ public class MemberController extends HttpServlet {
                 // 프로필이 없으면 profile 에 null
                 String profile = daoMp.select(user_id);
                 // user_id로 내가 쓴 게시글만 가져오기 
-                ArrayList<PostDTO> list = daoPost.myPost(user_id);
+                HashMap map = dao.getPageNavi(curPage);
+                ArrayList<PostDTO> list = daoPost.myPost(user_id, curPage * 10 - 9, curPage * 10);
 
                 System.out.println("profile : " + profile);
 
                 request.setAttribute("profile", profile);
                 request.setAttribute("dto", dto);
                 request.setAttribute("list", list); // 내가 쓴 게시글 list에 담아서 보내주기 
+                request.setAttribute("naviMap", map);
+                
+                
                 request.getRequestDispatcher("/Mypage/mypageIndex.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -314,16 +328,18 @@ public class MemberController extends HttpServlet {
                 
                 String checkProfile = dao2.select(user_id);
                 int rs2 = 0;
-                if(checkProfile != null) {// 프로필 있으니 update
-                	rs2 = dao2.updateMp(user_id, sys_name);
-                }else {//프로필이 없으니 insert
-                	rs2 = dao2.insertMp(new MpDTO(user_id, sys_name));
+                System.out.println("sys_name : " + sys_name);
+                if(sys_name != null) {
+                	if(checkProfile != null) {// 프로필 있으니 update
+                    	rs2 = dao2.updateMp(user_id, sys_name);
+                    }else {//프로필이 없으니 insert
+                    	rs2 = dao2.insertMp(new MpDTO(user_id, sys_name));
+                    } 
                 }
-                if (rs1 > 0 && rs2 > 0) {
-                    // loginsession 에 들어있는 수정 전 dto를 새롭게
-                    session.setAttribute("loginSession", dto);
-                    response.sendRedirect("/myPage.mem");
-                }
+             // loginsession 에 들어있는 수정 전 dto를 새롭게
+                session.setAttribute("loginSession", dto);
+                response.sendRedirect("/myPage.mem");
+                	
             } catch (Exception e) {
                 e.printStackTrace();
             }
