@@ -165,8 +165,7 @@
         <nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
             <div class="container-fluid">
                 <!-- toggle button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavDropdown"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -178,21 +177,21 @@
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
                         <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
-                            <c:when test="${not empty loginSession}">
+                            <c:when test="${empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                             </c:when>
                             <c:otherwise>
                                 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
+
 
                     </ul>
 
                     <form class="searchForm d-flex" method="get" action="/search.movie">
-                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.."
-                               aria-label="Search" name='val'> <input
+                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'> <input
                             type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
                         <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -232,18 +231,15 @@
 
                         <div class="col-auto">
                             <c:if test="${not empty loginSession}">
-                                <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon"
-                                                                        src="/images/찜.png">
+                                <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 </a>
-                                <a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon"
-                                                                                 src="/images/마이페이지.png">
+                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 </a>
                             </c:if>
                         </div>
 
                         <div class="col-1">
-                            <button id="searchBtn" class="btn" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#searchModal">
+                            <button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
                                 <img src="/images/searchIcon.png">
                             </button>
                         </div>
@@ -253,26 +249,20 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title m-auto">영화 찾기</h5>
-                                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form id="searchForm" class="searchForm">
                                                 <div class="row justify-content-center">
                                                     <div class="col-11">
-                                                        <input class="searchInput form-control me-2" type="search"
-                                                               placeholder="영화 검색.." aria-label="Search" name='val'>
-                                                        <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를
-                                                            입력해보세요!</p>
-                                                        <input type="hidden" name='curPage' value="1"> <input
-                                                            type="hidden" name='s_type' value="movieNm">
+                                                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'>
+                                                        <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
+                                                        <input type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
                                                     </div>
                                                 </div>
                                                 <div class="row justify-content-end">
                                                     <div class="col-3">
-                                                        <button class="searchBtn btn btn-outline-success" type="submit">
-                                                            Search
-                                                        </button>
+                                                        <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -291,7 +281,7 @@
 <!-- Contents -->
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-5">
+        <div class="col-lg-6">
             <form id="findIdForm" action="/findId.mem" method="post">
                 <div class="card card-custom">
                     <div class="card-header">
@@ -326,8 +316,6 @@
         </div>
     </div>
 </div>
-
-
 <footer class="py-5 text-light">
     <div class="container">
         <div class="row" id="bigFoot">
@@ -353,6 +341,10 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
 
                         </ul>
                     </div>
@@ -363,7 +355,6 @@
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
                             <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
                             <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
                         </ul>
@@ -376,7 +367,6 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
@@ -440,23 +430,37 @@
                 </ul>
             </div>
 
-            <div class="col-4">
-                <h5>계정</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-                    <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                    <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-                </ul>
-            </div>
+            <c:choose>
+                <c:when test="${not empty loginSession}">
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
+                        </ul>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+                            <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
             <div class="col-4">
                 <h5>기타</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 

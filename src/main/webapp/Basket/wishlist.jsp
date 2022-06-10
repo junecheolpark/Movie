@@ -179,8 +179,6 @@ section#container::after {
 }
 
 #profileBox {
-	background: white;
-	border-radius: 50%;
 	width: 200px;
 	height: 200px;
 }
@@ -188,6 +186,7 @@ section#container::after {
 #profileBox>img {
 	width: 100%;
 	height: 100%;
+	border-radius: 30%;
 }
 
 .profileBtn {
@@ -263,7 +262,8 @@ section#container::after {
 /* 반응형 끝 */
 </style>
 </head>
-<body><header class="mb-3 border-bottom">
+<body>
+<header class="mb-3 border-bottom">
 	<div class="container">
 		<!-- 접혔을 때 nav -->
 		<nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
@@ -281,13 +281,13 @@ section#container::after {
 						<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
 						<li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
 						<c:choose>
-							<c:when test="${not empty loginSession}">
+							<c:when test="${empty loginSession}">
 								<li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
 								<li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-								<li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+								<li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
 							</c:otherwise>
 						</c:choose>
 
@@ -337,7 +337,7 @@ section#container::after {
 							<c:if test="${not empty loginSession}">
 								<a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
 								</a>
-								<a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+								<a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
 								</a>
 							</c:if>
 						</div>
@@ -392,18 +392,12 @@ section#container::after {
 						<aside id="aside" class="p-3 mt-3">
 							<div class="row justify-content-center" id="profile">
 								<div class="col-12 mt-4" id="profileBox">
-									<img src="images/오구3.gif">
-									<%-- <tr>
-				                    	<td class="col-2 text-center align-middle">
-				                            <p class="fw-bold">첨부파일</p>
-				                        </td>
-				                        <td class="col-10" colspan="3">
-				                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
-				                        </td>
-				                        <td>
-				                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
-				                        </td>
-				                    </tr> --%>
+									<c:if test="${profile eq null}">
+										<img class="profileImg" src="/images/기본프로필.jpg">
+									</c:if>
+									<c:if test="${profile ne null}">
+										<img class="profileImg" src="/files/${profile}">
+									</c:if>
 								</div>
 
 								<div class="col-12 d-flex justify-content-center">
@@ -423,7 +417,7 @@ section#container::after {
 									<a class="text-reset" href="">내가 쓴 게시글</a>
 								</button>
 								<button type="button" class="profileBtn btn btn-warning mb-3">
-									<a class="text-reset" href="">내가 쓴 리뷰</a>
+									<a class="text-reset" href="/myReview.mypage?curPage=1">내가 쓴 리뷰</a>
 								</button>
 							</div>
 						</aside>
@@ -431,18 +425,12 @@ section#container::after {
 						<aside id="asideSM" class="p-3 mt-3">
 							<div class="row pt-3 justify-content-center" id="profile">
 								<div class="col-4 me-5 mt-3" id="profileBox">
-									<img src="/files/${file_dto.sys_name}">
-									<%-- <tr>
-				                    	<td class="col-2 text-center align-middle">
-				                            <p class="fw-bold">첨부파일</p>
-				                        </td>
-				                        <td class="col-10" colspan="3">
-				                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
-				                        </td>
-				                        <td>
-				                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
-				                        </td>
-				                    </tr> --%>
+									<c:if test="${profile eq null}">
+										<img class="profileImg" src="/images/기본프로필.jpg">
+									</c:if>
+									<c:if test="${profile ne null}">
+										<img class="profileImg" src="/files/${profile}">
+									</c:if>
 								</div>
 
 								<div class="col-6" id="profileBtnBox">
@@ -517,7 +505,7 @@ section#container::after {
 											<c:forEach items="${wishList}" var="wishList">
 												<div class="wishBox col-sm-6 col-md-4 mb-3">
 													<div class="imgBox">
-														<img class="posters" src="">
+														<img class="posters" src="<c:url value="/images/NoImg.webp"/>">
 													</div>
 													<div class="imgText">
 														<p class="mb-0">${wishList.movieNm}
@@ -591,188 +579,202 @@ section#container::after {
 
 
 	<!-- Footer -->
-
-
-	<footer class="py-5 text-light">
-		<div class="container">
-			<div class="row" id="bigFoot">
-				<div class="col-2">
-					<h5>장르</h5>
-					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디"
-													 class="nav-link p-0">코미디</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션"
-													 class="nav-link p-0">액션</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로"
-													 class="nav-link p-0">멜로</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF"
-													 class="nav-link p-0">SF</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러"
-													 class="nav-link p-0">호러</a></li>
-					</ul>
-				</div>
-
-				<c:choose>
-					<c:when test="${not empty loginSession}">
-						<div class="col-2">
-							<h5>계정</h5>
-							<ul class="nav flex-column">
-								<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
-
-							</ul>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="col-2">
-							<h5>계정</h5>
-							<ul class="nav flex-column">
-								<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-								<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-								<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
-								<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-								<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-							</ul>
-						</div>
-					</c:otherwise>
-				</c:choose>
-
-				<div class="col-2">
-					<h5>기타</h5>
-					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
-						<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
-					</ul>
-				</div>
-
-				<div class="col-4 offset-1">
-					<form>
-						<h5>영화 리뷰 플랫폼 - 영화 추천이</h5>
-						<p>
-							지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
-						</p>
-						<div class="d-flex w-100 gap-2">
-							<label for="newsletter1" class="visually-hidden">Email
-								address</label> <input id="newsletter1" type="text" class="form-control"
-													   placeholder="Email address">
-							<button class="btn btn-primary" type="button">영화 추천받기</button>
-						</div>
-					</form>
-
-					<div class="snsBox">
-						<div class="snsIcon1">
-							<a href="https://www.kakaocorp.com/"
-							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
-									id="kakaoIcon" src="/images/kakaotalk.png">
-							</a>
-						</div>
-						<div class="snsIcon2">
-							<a href="https://twitter.com/"
-							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
-									id="twitterIcon" src="/images/twitter.png">
-							</a>
-						</div>
-						<div class="snsIcon3">
-							<a href="https://www.instagram.com/"
-							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
-									id="instagramIcon" src="/images/instagram.png">
-							</a>
-						</div>
-						<div class="snsIcon4">
-							<a href="https://www.facebook.com/"
-							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
-									id="facebookIcon" src="/images/facebook.png">
-							</a>
-						</div>
-					</div>
-				</div>
+<footer class="py-5 text-light">
+	<div class="container">
+		<div class="row" id="bigFoot">
+			<div class="col-2">
+				<h5>장르</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디"
+												 class="nav-link p-0">코미디</a></li>
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션"
+												 class="nav-link p-0">액션</a></li>
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로"
+												 class="nav-link p-0">멜로</a></li>
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF"
+												 class="nav-link p-0">SF</a></li>
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러"
+												 class="nav-link p-0">호러</a></li>
+				</ul>
 			</div>
 
-			<div class="row justify-content-center" id="smallFoot">
-				<div class="col-4">
-					<h5>장르</h5>
-					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디"
-													 class="nav-link p-0">코미디</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션"
-													 class="nav-link p-0">액션</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로"
-													 class="nav-link p-0">멜로</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF"
-													 class="nav-link p-0">SF</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러"
-													 class="nav-link p-0">호러</a></li>
-					</ul>
-				</div>
+			<c:choose>
+				<c:when test="${not empty loginSession}">
+					<div class="col-2">
+						<h5>계정</h5>
+						<ul class="nav flex-column">
+							<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+							<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+							<c:if test="${loginSession.grade == 'admin'}">
+								<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+							</c:if>
 
-				<div class="col-4">
-					<h5>계정</h5>
-					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-						<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-						<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
-						<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-						<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-					</ul>
-				</div>
-
-				<div class="col-4">
-					<h5>기타</h5>
-					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
-						<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
-					</ul>
-				</div>
-
-				<div class="col-12 mt-4">
-					<form>
-						<h5>영화 리뷰 플랫폼 - 영화 추천이</h5>
-						<p>
-							지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
-						</p>
-						<div class="d-flex w-100 gap-2">
-							<label for="newsletter1" class="visually-hidden">Email
-								address</label> <input id="newsletter1" type="text" class="form-control"
-													   placeholder="Email address">
-							<button class="btn btn-primary" type="button">영화 추천받기</button>
-						</div>
-					</form>
-
-					<div class="snsBox">
-						<div class="snsIcon1">
-							<a href="https://www.kakaocorp.com/"
-							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
-									id="kakaoIcon" src="/images/kakaotalk.png">
-							</a>
-						</div>
-						<div class="snsIcon2">
-							<a href="https://twitter.com/"
-							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
-									id="twitterIcon" src="/images/twitter.png">
-							</a>
-						</div>
-						<div class="snsIcon3">
-							<a href="https://www.instagram.com/"
-							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
-									id="instagramIcon" src="/images/instagram.png">
-							</a>
-						</div>
-						<div class="snsIcon4">
-							<a href="https://www.facebook.com/"
-							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
-									id="facebookIcon" src="/images/facebook.png">
-							</a>
-						</div>
+						</ul>
 					</div>
-				</div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-2">
+						<h5>계정</h5>
+						<ul class="nav flex-column">
+							<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+							<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+							<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+							<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+						</ul>
+					</div>
+				</c:otherwise>
+			</c:choose>
+
+			<div class="col-2">
+				<h5>기타</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
+					<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
+				</ul>
 			</div>
 
-			<div class="d-flex justify-content-center py-4 my-4 border-top">
-				<p>&copy; 영화 리뷰 플랫폼, 영화 추천이 All rights reserved.</p>
+			<div class="col-4 offset-1">
+				<form>
+					<h5>영화 리뷰 플랫폼 - 영화 추천이</h5>
+					<p>
+						지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
+					</p>
+					<div class="d-flex w-100 gap-2">
+						<label for="newsletter1" class="visually-hidden">Email
+							address</label> <input id="newsletter1" type="text" class="form-control"
+												   placeholder="Email address">
+						<button class="btn btn-primary" type="button">영화 추천받기</button>
+					</div>
+				</form>
+
+				<div class="snsBox">
+					<div class="snsIcon1">
+						<a href="https://www.kakaocorp.com/"
+						   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="kakaoIcon" src="/images/kakaotalk.png">
+						</a>
+					</div>
+					<div class="snsIcon2">
+						<a href="https://twitter.com/"
+						   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="twitterIcon" src="/images/twitter.png">
+						</a>
+					</div>
+					<div class="snsIcon3">
+						<a href="https://www.instagram.com/"
+						   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="instagramIcon" src="/images/instagram.png">
+						</a>
+					</div>
+					<div class="snsIcon4">
+						<a href="https://www.facebook.com/"
+						   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="facebookIcon" src="/images/facebook.png">
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
-	</footer>
+
+		<div class="row justify-content-center" id="smallFoot">
+			<div class="col-4">
+				<h5>장르</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디"
+												 class="nav-link p-0">코미디</a></li>
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션"
+												 class="nav-link p-0">액션</a></li>
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로"
+												 class="nav-link p-0">멜로</a></li>
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF"
+												 class="nav-link p-0">SF</a></li>
+					<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러"
+												 class="nav-link p-0">호러</a></li>
+				</ul>
+			</div>
+
+			<c:choose>
+				<c:when test="${not empty loginSession}">
+					<div class="col-4">
+						<h5>계정</h5>
+						<ul class="nav flex-column">
+							<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+							<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+							<c:if test="${loginSession.grade == 'admin'}">
+								<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-4">
+						<h5>계정</h5>
+						<ul class="nav flex-column">
+							<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+							<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+							<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+							<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+						</ul>
+					</div>
+				</c:otherwise>
+			</c:choose>
+
+			<div class="col-4">
+				<h5>기타</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
+					<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
+				</ul>
+			</div>
+
+			<div class="col-12 mt-4">
+				<form>
+					<h5>영화 리뷰 플랫폼 - 영화 추천이</h5>
+					<p>
+						지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
+					</p>
+					<div class="d-flex w-100 gap-2">
+						<label for="newsletter1" class="visually-hidden">Email
+							address</label> <input id="newsletter1" type="text" class="form-control"
+												   placeholder="Email address">
+						<button class="btn btn-primary" type="button">영화 추천받기</button>
+					</div>
+				</form>
+
+				<div class="snsBox">
+					<div class="snsIcon1">
+						<a href="https://www.kakaocorp.com/"
+						   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="kakaoIcon" src="/images/kakaotalk.png">
+						</a>
+					</div>
+					<div class="snsIcon2">
+						<a href="https://twitter.com/"
+						   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="twitterIcon" src="/images/twitter.png">
+						</a>
+					</div>
+					<div class="snsIcon3">
+						<a href="https://www.instagram.com/"
+						   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="instagramIcon" src="/images/instagram.png">
+						</a>
+					</div>
+					<div class="snsIcon4">
+						<a href="https://www.facebook.com/"
+						   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+								id="facebookIcon" src="/images/facebook.png">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="d-flex justify-content-center py-4 my-4 border-top">
+			<p>&copy; 영화 리뷰 플랫폼, 영화 추천이 All rights reserved.</p>
+		</div>
+	</div>
+</footer>
 
 	<script>
 		const searchForm = $(".searchForm");
@@ -884,7 +886,7 @@ section#container::after {
 					
 					let col = $("<div>").addClass("wishBox col-4 mb-3");
 					let imgBox = $("<div>").addClass("imgBox");
-					let img = $("<img>").addClass("posters").attr("src", "");
+					let img = $("<img>").addClass("posters").attr("src", "<c:url value='/images/NoImg.webp'/>");
 					let imgText = $("<div>").addClass("imgText");
 					let p1 = $("<p>").addClass("mb-0").html(wishList.movieNm + " " + wishList.movieNmEn);
 					let p2 = $("<p>").addClass("mb-0 text-secondary").html(wishList.prdtYear + "년 개봉");

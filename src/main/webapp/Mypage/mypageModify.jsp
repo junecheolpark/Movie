@@ -185,6 +185,7 @@
             float: right;
             margin: 5px;
         }
+
         .contentsModify {
             text-align: left;
         }
@@ -200,8 +201,6 @@
 </head>
 
 <body>
-<!-- Header -->
-
 <!-- Header -->
 <header class="mb-3 border-bottom">
     <div class="container">
@@ -221,7 +220,7 @@
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
                         <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
-                            <c:when test="${not empty loginSession}">
+                            <c:when test="${empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                             </c:when>
@@ -267,6 +266,8 @@
                         <div class="col-auto">
                             <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                 <c:if test="${empty loginSession}">
+                                    <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/signup.mem">회원가입</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                                 </c:if>
@@ -357,7 +358,7 @@
                                 </div>
                                 <div class="col-4 mb-2">
                                     <button type="button" id="checkNicknameBtn"
-                                            class="btn btn-outline-warning w-100">닉네임 확인</button>
+                                            class="btn btn-outline-warning w-100" disabled>닉네임 확인</button>
                                 </div>
                             </div>
                             <c:if test="${loginSession.user_category eq '일반 가입'}">
@@ -396,7 +397,7 @@
                                     </div>
                                     <div class="col-12 mb-2">
                                         <input type="password" class="form-control" id="user_pwCheck"
-                                               readonly>
+                                               readonly value="${loginSession.user_pw}">
                                     </div>
                                 </div>
                             </c:if>
@@ -435,7 +436,7 @@
                                 </div>
                                 <div class="col">
                                     <button type="button" class="btn btn-outline-primary w-100"
-                                            id="btnPostcode">우편번호 찾기</button>
+                                            id="btnPostcode" disabled>우편번호 찾기</button>
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -505,7 +506,8 @@
 
                         // 수정버튼을 눌렀을때
                         $("#modifyBtn").on("click", function() {
-                            $("input").not("#id").attr("readonly", false); // 닉네임를 제외한 input readonly 제거
+                            $("input").not("#user_id").attr("readonly", false); // 닉네임를 제외한 input readonly 제거
+                            $("#checkNicknameBtn").attr("disabled", false); // 닉네임 확인 버튼에 걸린 disabled 제거
                             $("#btnPostcode").attr("disabled", false); // 우편번호찾기 버튼에 걸린 disabled 제거
                             $(".btn-before").css("display", "none"); // 기존의 버튼들 감춰주기
                             $(".btn-after").removeClass("d-none"); // 취소, 완료버튼 보여주기
@@ -513,7 +515,7 @@
 
                         // 수정화면에서 취소 버튼을 눌렀을때
                         $("#cancelBtn").on("click", function() {
-                            location.href = "/Mypage/mypageModify.jsp";
+                            location.href = "/modify.mem";
                         });
 
                         // 수정완료버튼 눌렀을 때
@@ -623,7 +625,6 @@
 </div>
 
 <!-- Footer -->
-
 <footer class="py-5 text-light">
     <div class="container">
         <div class="row" id="bigFoot">
@@ -648,7 +649,11 @@
                     <div class="col-2">
                         <h5>계정</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
 
                         </ul>
                     </div>
@@ -659,7 +664,6 @@
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
                             <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
                             <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
                         </ul>
@@ -672,7 +676,6 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
@@ -736,23 +739,37 @@
                 </ul>
             </div>
 
-            <div class="col-4">
-                <h5>계정</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-                    <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                    <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-                </ul>
-            </div>
+            <c:choose>
+                <c:when test="${not empty loginSession}">
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
+                        </ul>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+                            <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
             <div class="col-4">
                 <h5>기타</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
@@ -805,6 +822,12 @@
     </div>
 </footer>
 <script>
+$("#searchBtn").on("click", function(){ // 검색 버튼 클릭 시
+	// 검색어키워드 값을 가져오기
+	let searchKeyword = $("#searchKeyword").val();
+	console.log(searchKeyword);
+	// /searchProc.bo?searchKeyword=...
+
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {
         if ($(this).children(".searchInput").val() === "") {

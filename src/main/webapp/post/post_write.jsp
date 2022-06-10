@@ -25,7 +25,7 @@
 	rel="stylesheet" />
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <style>
 header, footer {
 	background-color: black;
@@ -245,7 +245,7 @@ a {
 						<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
 						<li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
 						<c:choose>
-							<c:when test="${not empty loginSession}">
+							<c:when test="${empty loginSession}">
 								<li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
 								<li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
 							</c:when>
@@ -400,6 +400,10 @@ a {
 						<h5>계정</h5>
 						<ul class="nav flex-column">
 							<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+							<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+							<c:if test="${loginSession.grade == 'admin'}">
+								<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+							</c:if>
 
 						</ul>
 					</div>
@@ -410,7 +414,6 @@ a {
 						<ul class="nav flex-column">
 							<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
 							<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-							<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
 							<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
 							<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
 						</ul>
@@ -423,7 +426,6 @@ a {
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
 					<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-					<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 				</ul>
 			</div>
 
@@ -487,23 +489,37 @@ a {
 				</ul>
 			</div>
 
-			<div class="col-4">
-				<h5>계정</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-					<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-					<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
-					<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-					<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-				</ul>
-			</div>
+			<c:choose>
+				<c:when test="${not empty loginSession}">
+					<div class="col-4">
+						<h5>계정</h5>
+						<ul class="nav flex-column">
+							<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+							<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+							<c:if test="${loginSession.grade == 'admin'}">
+								<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+							</c:if>
+						</ul>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-4">
+						<h5>계정</h5>
+						<ul class="nav flex-column">
+							<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+							<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+							<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+							<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+						</ul>
+					</div>
+				</c:otherwise>
+			</c:choose>
 
 			<div class="col-4">
 				<h5>기타</h5>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
 					<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-					<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 				</ul>
 			</div>
 
@@ -578,15 +594,6 @@ a {
 				            for (var i = files.length - 1; i >= 0; i--) {
 				            	sendFile(files[i], this);
 				            }
-				        },
-				        onPaste: function (e) {
-							var clipboardData = e.originalEvent.clipboardData;
-							if (clipboardData && clipboardData.items && clipboardData.items.length) {
-								var item = clipboardData.items[0];
-								if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-									e.preventDefault();
-								}
-							}
 				        }
 					}
 			})
@@ -598,10 +605,11 @@ a {
         	type: "POST",
         	url: '/SummerNoteImageFile.po',
         	cache: false,
-        	contentType: false,
         	enctype: 'multipart/form-data',
+        	contentType: false,
         	processData: false,
         	success: function(img_name) {
+        		console.log(img_name);
           		$(el).summernote('editor.insertImage', img_name);
           	
         	}

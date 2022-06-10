@@ -6,13 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
+import com.movieRc.dto.MyReviewDTO;
 import com.movieRc.dto.ReviewDTO;
 import com.movieRc.util.DateParse;
 
@@ -289,7 +289,58 @@ public class ReviewDAO {
 
         }
     }
+    
+    /* 마이페이지 내 리뷰 조회 기능 - 신지윤 */
+    public String getMovieNm(String movieCd) throws Exception{
+    	String sql = "SELECT movieNm FROM tbl_movie WHERE movieCd = ?";
+    	
+    	try(Connection con = getConnection();
+    		PreparedStatement pstmt = con.prepareStatement(sql);){
+    		
+    		pstmt.setString(1, movieCd);
+    		ResultSet rs = pstmt.executeQuery();
+    		
+    		if(rs.next()) {
+    			String movieNm = rs.getString("movieNm");
+    			return movieNm;
+    		}
+    		return null;
+    	}
+    }
+    
+    public ArrayList<MyReviewDTO> selectAll_ByUser(String user_id, int start, int end) throws Exception {
 
+        String sql = "select *" +
+                "from (select a.*, rownum as num" +
+                "      from (select * from tbl_review where user_id = ? order by 1 desc) a" +
+                "      where rownum <= ?)" +
+                "where num >= ?";
+
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, user_id);
+        	preparedStatement.setInt(2, end);
+            preparedStatement.setInt(3, start);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<MyReviewDTO> arrayList = new ArrayList<>();
+
+            while (resultSet.next()) {
+                int seq_review = resultSet.getInt(1);
+                String movieCd = resultSet.getString(2);
+                String movieNm = getMovieNm(movieCd);
+                String user_category = resultSet.getString(4);
+                String user_nickname = resultSet.getString(5);
+                String r_content = resultSet.getString(6);
+                String r_date = DateParse.dataParse(resultSet.getDate(7));
+                int r_grade = resultSet.getInt(8);
+
+                arrayList.add(new MyReviewDTO(seq_review, movieCd, movieNm, user_id, user_category, user_nickname, r_content, r_date, r_grade));
+            }
+            return arrayList;
+
+        }
+    }
+    /* 내 리뷰 조회 끝 */
+    
     public int countByGenre(String genreAlt) throws Exception {
         String sql = "select count(*)" +
                 "from (select a.*, b.*" +

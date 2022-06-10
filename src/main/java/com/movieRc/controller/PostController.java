@@ -163,7 +163,7 @@ public class PostController extends HttpServlet {
 					System.out.println("좋아요한상태? : "+likeValue);
 				}else {
 					user_id="asd";
-					System.out.println(user_id);
+					System.out.println();
 				}
 				
 				
