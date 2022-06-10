@@ -25,7 +25,7 @@
 	rel="stylesheet" />
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <style>
 header, footer {
 	background-color: black;
@@ -459,15 +459,6 @@ a {
 				            for (var i = files.length - 1; i >= 0; i--) {
 				            	sendFile(files[i], this);
 				            }
-				        },
-				        onPaste: function (e) {
-							var clipboardData = e.originalEvent.clipboardData;
-							if (clipboardData && clipboardData.items && clipboardData.items.length) {
-								var item = clipboardData.items[0];
-								if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-									e.preventDefault();
-								}
-							}
 				        }
 					}
 			})
@@ -479,10 +470,11 @@ a {
         	type: "POST",
         	url: '/SummerNoteImageFile.po',
         	cache: false,
-        	contentType: false,
         	enctype: 'multipart/form-data',
+        	contentType: false,
         	processData: false,
         	success: function(img_name) {
+        		console.log(img_name);
           		$(el).summernote('editor.insertImage', img_name);
           	
         	}
