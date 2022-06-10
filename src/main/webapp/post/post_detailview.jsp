@@ -512,9 +512,52 @@ text-align: left;
 
 		<div id="content-box">
 			<div class="row">
-				<div class="col">
+				<div class="col-10">
 					<h4>제목 : ${dto.p_title}</h4>
 
+				</div>
+				<div class="col-2">
+				<c:if test="${not empty loginSession.getUser_id()}">
+													<!--report 모달창  -->
+													<button type="button" class="btn btn-report_p"
+														data-bs-toggle="modal" data-bs-target="#exampleModal_p"
+														data-bs-whatever="@getbootstrap"
+														style="background-color: white; border: none;">
+														<img src="resources/images/report.png" height="80%">
+													</button>
+													<input style="display: none;" id="seqReport_p"
+														value="${post_comment.seq_comment}">
+													<div class="modal fade" id="exampleModal_p" tabindex="-1"
+														aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<form id="reportForm">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLabel">Report_Post</h5>
+																		<button type="button" class="btn-close"
+																			data-bs-dismiss="modal" aria-label="Close"></button>
+																	</div>
+																	<div class="modal-body">
+
+
+																		<div class="mb-3">
+																			<label for="message-text_p" class="col-form-label">Message:</label>
+																			<textarea class="form-control" id="message-text_p"
+																				name="rp_content"> </textarea>
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary"
+																			data-bs-dismiss="modal">Close</button>
+																		<button id="sendMessage_p" type="button"
+																			class="btn btn-primary">Send message</button>
+																	</div>
+																</form>
+															</div>
+														</div>
+														<div></div>
+													</div>
+												</c:if>
 				</div>
 				<hr>
 			</div>
@@ -934,16 +977,17 @@ text-align: left;
 												<div class="col-1 mt-1 text-end r_report">
 												<c:if test="${not empty loginSession.getUser_id()}">
 													<!--report 모달창  -->
-													<button type="button" class="btn btn-report"
-														data-bs-toggle="modal" data-bs-target="#exampleModal"
+													<button type="button" class="btn btn-report_c"
+														data-bs-toggle="modal" data-bs-target="#exampleModal_c"
 														data-bs-whatever="@getbootstrap"
 														style="background-color: white; border: none;">
 														<img src="resources/images/report.png" height="80%">
 													</button>
+													
 												</c:if>
 													<input style="display: none;" id="seqReport"
 														value="${post_comment.seq_comment}">
-													<div class="modal fade" id="exampleModal" tabindex="-1"
+													<div class="modal fade" id="exampleModal_c" tabindex="-1"
 														aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog">
 															<div class="modal-content">
@@ -957,15 +1001,15 @@ text-align: left;
 
 
 																		<div class="mb-3">
-																			<label for="message-text" class="col-form-label">Message:</label>
-																			<textarea class="form-control" id="message-text"
+																			<label for="message-text_c" class="col-form-label">Message:</label>
+																			<textarea class="form-control" id="message-text_c"
 																				name="rp_content"> </textarea>
 																		</div>
 																	</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-secondary"
 																			data-bs-dismiss="modal">Close</button>
-																		<button id="sendMessage" type="button"
+																		<button id="sendMessage_c" type="button"
 																			class="btn btn-primary">Send message</button>
 																	</div>
 																</form>
@@ -1267,7 +1311,8 @@ text-align: left;
 		}) */
 
 		//모달 입력후 메세지 보냈을경우
-		$("#sendMessage").on(
+		
+		$("#sendMessage_p").on(
 				"click",
 				function(e) {
 
@@ -1279,7 +1324,44 @@ text-align: left;
 						return;
 					}
 
-					let rp_content =$("#message-text").val();
+					let rp_content =$("#message-text_p").val();
+					let data = $("#reportForm").serialize();
+	
+					console.log(rp_content);
+					console.log(data);
+					$.ajax({
+						url : "/report.po",
+						type : "post",
+						data : {
+							seq_post : seq_post,												
+							rp_content : rp_content
+						},
+						success : function() {
+							$("#exampleModal_p").modal('hide');
+							console.log("신고완료");
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					})
+
+				});
+
+		
+		
+		$("#sendMessage_c").on(
+				"click",
+				function(e) {
+
+					let seq_post = "${dto.seq_post}";
+					let seq_comment = $("#seqReport").val()
+					//  $("#message").val($("#message-text").val());
+					if ( $("#message-text").val() === "") {
+						alert("메세지를 제대로 입력하지 않았습니다.");
+						return;
+					}
+
+					let rp_content =$("#message-text_c").val();
 					let data = $("#reportForm").serialize();
 	
 					console.log(rp_content);
@@ -1294,8 +1376,8 @@ text-align: left;
 							rp_content : rp_content
 						},
 						success : function() {
-							$("#exampleModal").modal('hide');
-
+							$("#exampleModal_c").modal('hide');
+							console.log("신고완료");
 						},
 						error : function(e) {
 							console.log(e);
@@ -1303,12 +1385,35 @@ text-align: left;
 					})
 
 				});
-
-		$(".btn-report").on(
+		$(".btn-report_p").on(
 				"click",
 				function() {
 					/*모달 스크립트  */
-					var exampleModal = document.getElementById("exampleModal");
+					var exampleModal = document.getElementById("exampleModal_p");
+					exampleModal.addEventListener("show.bs.modal",
+							function(event) {
+								// Button that triggered the modal
+								var button = event.relatedTarget;
+								// Extract info from data-bs-* attributes
+								var recipient = button
+										.getAttribute("data-bs-whatever");
+								// If necessary, you could initiate an AJAX request here
+								// and then do the updating in a callback.
+								//
+								// Update the modal's content.
+								var modalTitle = exampleModal
+										.querySelector(".modal-title");
+								var modalBodyInput = exampleModal
+										.querySelector(".modal-body input");
+
+								modalTitle.textContent = "Report";
+							})
+				});
+		$(".btn-report_c").on(
+				"click",
+				function() {
+					/*모달 스크립트  */
+					var exampleModal = document.getElementById("exampleModal_c");
 					exampleModal.addEventListener("show.bs.modal",
 							function(event) {
 								// Button that triggered the modal
@@ -1346,7 +1451,7 @@ text-align: left;
 								"textarea").focus();
 					});
 
-		// 수정 버튼 눌렀을때
+		// 수정 버튼 눌렀을때 모
 		$(".body-review").on("click",".btnSave",function(e) {
 					let seq_review = $(e.target).val();
 					console.log("seq_review :", seq_review)
@@ -1399,12 +1504,10 @@ text-align: left;
 				},
 				success : function(rs) {
 					console.log(rs);
-					if (rs === "fail") {
-						alert("댓글 수정에 실패했습니다.");
-					} else {
+					
 						alert("댓글 삭제 성공!");
 						refreshMemList();
-					}
+					
 				},
 				error : function(e) {
 					console.log(e);
