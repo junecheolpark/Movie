@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.movieRc.dao.BasketDAO;
 import com.movieRc.dao.MovieDAO;
+import com.movieRc.dao.MpDAO;
 import com.movieRc.dto.BasketDTO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.MovieDTO;
@@ -44,18 +45,24 @@ public class BasketController extends HttpServlet {
 //			String user_id = "abc123";
 
 			BasketDAO dao = new BasketDAO();
+			MpDAO daoMp = new MpDAO();
+			
 			try {
 				ArrayList<BasketDTO> list = dao.selectAll(user_id);
 				request.setAttribute("wishList", list);
 				System.out.println(list.toString());
-
+				
+				String profile = daoMp.select(user_id);
+				request.setAttribute("profile", profile);
+				request.getRequestDispatcher("/Basket/wishlist.jsp").forward(request, response);
+				
 				// 게시글 수 카운팅
 				int totalCnt = dao.getListCnt(user_id);
 				request.setAttribute("totalCnt", totalCnt);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher("/Basket/wishlist.jsp").forward(request, response);
+			
 		} else if (uri.equals("/delete.wish")) { // 찜 목록 삭제
 			MemberDTO dto = (MemberDTO) request.getSession().getAttribute("loginSession");
 //			String user_id = dto.getUser_id();
