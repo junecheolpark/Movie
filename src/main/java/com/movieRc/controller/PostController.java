@@ -20,6 +20,7 @@ import com.movieRc.dto.LikePostDTO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.PostCommentDTO;
 import com.movieRc.dto.PostDTO;
+import com.movieRc.dto.ReportDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -38,12 +39,7 @@ public class PostController extends HttpServlet {
 
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//로그인세션 (참고용)
-//		HttpSession session=request.getSession();
-//		MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
-//				"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
-//				"내친구집","3학년");
-//		session.setAttribute("loginSession", dto);
+		
 		
 		
 		String uri =request.getRequestURI();
@@ -79,10 +75,8 @@ public class PostController extends HttpServlet {
 				ArrayList<String> likeCountList=new ArrayList<>();
 				for(PostDTO a:list) {
 				  
-					seq_post=a.getSeq_post();
-					//System.out.println("seqpost: "+seq_post);
+					seq_post=a.getSeq_post();			
 					likeCount =dao.pLikeCount(seq_post, 1);
-				//	System.out.println("likeCount : "+ likeCount);
 					likeCountStr =Integer.toString(likeCount); 
 					likeCountList.add(likeCountStr);
 				}
@@ -118,54 +112,37 @@ public class PostController extends HttpServlet {
 			}catch(Exception e) {
 			e.printStackTrace();
 			}
-			}else if(uri.equals("/myPostProc.po")) {
-				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-				String user_id=dto1.getUser_id();
-				
-				
-				PostDAO dao= new PostDAO();
-				ArrayList<PostDTO> list =new ArrayList<>();
-				try {
-					list =dao.myPost(user_id);
-					Gson gson =new Gson();
-					String rs = gson.toJson(list);
-					System.out.println(rs);
-					response.setCharacterEncoding("utf-8");
-					response.getWriter().append(rs);
-					
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
 			}else if(uri.equals("/detailPost.po")) {
 				int seq_post= Integer.parseInt(request.getParameter("seq_post"));
 				System.out.println(seq_post);
 				PostDAO dao= new PostDAO();
 				
 				try {
-					System.out.println("1");
+				
 				dao.updateView_count(seq_post);
 				PostDTO dto1 =dao.getPost(seq_post);
-				request.setAttribute("dto", dto1);
-				System.out.println("1");
+				
+				request.setAttribute("dto",dto1);
 				PostCommentDAO PostCommentDAO = new PostCommentDAO();
 				ArrayList<PostCommentDTO> list = PostCommentDAO.selectAll(seq_post);
-				System.out.println("1");
+				//Check완료
 				
 				//현재 로그인한 아이디의 좋아요 싫어요 표시
-				MemberDTO logindto =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-				String user_id=null;
-				if (logindto != null) {
-					user_id=logindto.getUser_id();
+				int likeValue=0;
+				if(((MemberDTO)request.getSession().getAttribute("loginSession")!=null)) {
+					MemberDTO logindto =(MemberDTO)request.getSession().getAttribute("loginSession");
+					String user_id=logindto.getUser_id();
 					System.out.println("user_id:" + user_id);
-					int likeValue =dao.curPLikeValue(user_id, seq_post);
-					request.setAttribute("likeValue", likeValue);//1이면 좋아요상태,0이면표시안한상태,-1이면표시안한상태,2이면싫어요상태
-					
-					System.out.println("좋아요한상태? : "+likeValue);
+					likeValue =dao.curPLikeValue(user_id, seq_post);
 				}else {
-					user_id="asd";
-					System.out.println();
+					likeValue=0;
 				}
 				
+				
+				System.out.println("likeValue : "+ likeValue);
+				request.setAttribute("likeValue", likeValue);//1이면 좋아요상태,0이면표시안한상태,-1이면표시안한상태,2이면싫어요상태
+				
+				System.out.println("좋아요한상태? : "+likeValue);
 				
 				
 				//좋아요 싫어요개수 얻기
@@ -200,10 +177,8 @@ public class PostController extends HttpServlet {
 				int seq_post= Integer.parseInt(request.getParameter("seq_post"));
 				String p_title=request.getParameter("p_title");
 				String p_content=request.getParameter("p_content");
-				/*
-				 * System.out.println(seq_post + " : title " + p_title+ " : content"+
-				 * p_content);
-				 */
+				
+				
 				PostDAO dao =new PostDAO();
 				try {
 					int rs =dao.postModify(seq_post,p_title,p_content);
@@ -241,16 +216,9 @@ public class PostController extends HttpServlet {
 					
 					String rs = "/Movie/files/"+ fileName;
 					response.setCharacterEncoding("utf-8");
-					/* String rs = gson.toJson(); */
+					
 					System.out.println(rs);
-					/*
-					 
-					 * 
-					 * InputStream fileStream = multipartFile.getInputStream();
-					 * FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
-					 * jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
-					 * jsonObject.addProperty("responseCode", "success");
-					 */
+					
 					response.getWriter().append(rs);
 				}catch(Exception e){
 					e.printStackTrace();
@@ -401,22 +369,38 @@ public class PostController extends HttpServlet {
 				}catch(Exception e) {	
 					e.printStackTrace();
 				}
-			}
-			else if(uri.equals("/myPostPage.po")) {
+			}else if(uri.equals("/myPostPage.po")) {
 		         MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-		         String user_nickname=dto1.getUser_nickname();
+		         String user_id = dto1.getUser_id();
 		         
 		         
 		         PostDAO dao= new PostDAO();
 		         ArrayList<PostDTO> list =new ArrayList<>();
 		         try {
-		            list =dao.myPost(user_nickname);
+		            list =dao.myPost(user_id);
 		            request.setAttribute("list", list);
 		            request.getRequestDispatcher("post/myPost.jsp").forward(request, response);
 		         }catch(Exception e) {
 		            e.printStackTrace();
 		         }
-		      }
+		      }else if(uri.equals("/report.po")) { 
+					int seq_post = Integer.parseInt(request.getParameter("seq_post"));
+					String category_check = "post";
+					MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");
+					String user_category = dto1.getUser_category();
+					String user_id= dto1.getUser_id();
+					String rp_content =request.getParameter("rp_content");
+									
+					System.out.println(seq_post +"seq_P : seq_C " + " : " + user_id + " U_id: "+" : rp_content"+ rp_content);
+					
+					PostCommentDAO dao =new PostCommentDAO();
+					
+					try {
+					dao.reportInsert(new ReportDTO(0,category_check,rp_content,user_id,0,0,seq_post,user_category));
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
 			
 		}
 }

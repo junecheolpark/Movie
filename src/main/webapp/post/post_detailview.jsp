@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,29 +8,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 <style>
 header, footer {
 	background-color: black;
 }
-
-#btnBack {
-	margin-bottom: 40px;
+#btnBack{
+	margin-bottom:40px;
 }
-
-#inputReply {
-	height: 100px;
-	width: 100%
+#inputReply{
+height: 100px;
+width:100%
 }
-
 a {
 	text-decoration: none;
 }
-
 .contents {
 	height: 500px;
 }
@@ -38,7 +40,6 @@ a {
 	width: 150px;
 	height: 100px;
 }
-
 #logoImg {
 	width: 100%;
 	height: 100%;
@@ -48,50 +49,41 @@ a {
 	width: 30px;
 	height: 30px;
 }
-
 #myPageIcon {
 	width: 30px;
 	height: 30px;
 }
-
 #kakaoIcon {
 	width: 30px;
 	height: 30px;
 }
-
 #twitterIcon {
 	width: 30px;
 	height: 30px;
 }
-
 #instagramIcon {
 	width: 30px;
 	height: 30px;
 }
-
 #facebookIcon {
 	width: 30px;
 	height: 30px;
 }
-
 .snsIcon1 {
 	float: left;
 	margin-top: 10px;
 	margin-right: 5px;
 }
-
 .snsIcon2 {
 	float: left;
 	margin-top: 10px;
 	margin-right: 5px;
 }
-
 .snsIcon3 {
 	float: left;
 	margin-top: 10px;
 	margin-right: 5px;
 }
-
 .snsIcon4 {
 	float: left;
 	margin-top: 10px;
@@ -102,7 +94,6 @@ a {
 	color: gray;
 	text-decoration: none;
 }
-
 .nav-link:hover {
 	color: white;
 }
@@ -121,7 +112,6 @@ a {
 		display: none;
 	}
 }
-
 @media ( min-width : 768px) {
 	#navibar {
 		display: none;
@@ -134,7 +124,6 @@ a {
 		display: none;
 	}
 }
-
 @media ( min-width : 768px) {
 	#smallFoot {
 		display: none;
@@ -143,9 +132,6 @@ a {
 /* footer 반응형 끝 */
 /* -----------------------------------------------------------*/
 /* content 영역*/
-.container2{
-	margin: auto;
-}
 /* -----------------------------------------------------------*/
 /* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
         https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
@@ -158,7 +144,6 @@ a {
 		width: 75%;
 	}
 }
-
 @media screen and (max-width: 1024px) {
 	aside#aside {
 		display: none;
@@ -171,13 +156,11 @@ a {
 		width: 100%;
 	}
 }
-
 @media screen and (min-width: 1024px) {
 	aside#asideSM {
 		display: none;
 	}
 }
-
 @media screen and (max-width: 768px) {
 	aside#asideSM div#profileBox {
 		display: none;
@@ -194,51 +177,45 @@ a {
 		float: none;
 	}
 }
-
 @media screen and (min-width: 768px) {
 	aside#asideSM div#profileBtnBoxSM {
 		display: none;
 	}
 }
-
 #p_likebefore {
 	border: none;
 	margin: none;
 	background-color: rgb(240, 240, 240);
 }
-
 #p_like {
 	border: none;
 	margin: none;
 	background-color: rgb(240, 240, 240);
 }
-
 #p_hate {
 	border: none;
 	margin: none;
 	background-color: rgb(240, 240, 240);
 }
-
 #p_hatebefore {
 	border: none;
 	margin: none;
 	background-color: rgb(240, 240, 240);
 }
-
 #container2 {
 	margin: auto;
 	background-color: antiquewhite;
 	width: 1100px;
 	padding-top: 70px;
 	border-radius: 15px;
+	margin-bottom:30px;
+	margin-top:30px;
 }
-
 .modal-content {
 	text-align: left;
 }
-
 #content-box {
-	text-align: left;
+text-align: left;
 	padding: 20px;
 	background-color: rgb(255, 254, 248);
 	min-height: 500px;
@@ -246,12 +223,10 @@ a {
 	margin: auto;
 	border-radius: 15px;
 }
-
 #input-box {
 	width: 800px;
 	margin: auto;
 }
-
 #comment_post {
 	margin: auto;
 	width: 600px;
@@ -259,56 +234,45 @@ a {
 	border-radius: 10px;
 	resize: none;
 }
-
 .comment-box {
 	margin: auto;
-	width: 800px
+	width:800px
 }
-
 #submit {
 	width: 70px;
 	height: 70px;
 	border-radius: 10px;
 }
-
 #content {
 	min-height: 400px;
 }
-
 .comment-text {
 	height: 60px;
 }
-
 #profile {
 	width: 80px;
 	height: 80px;
 }
-
 #text {
 	height: 40px;
 }
-
 #hate {
 	width: 25px;
 	height: 25px;
 }
-
 #like {
 	width: 30px;
 	height: 30px;
 }
-
 #report {
 	width: 40px;
 	height: 30px;
 }
-
 .click {
 	background-color: rgb(240, 240, 240);
 	border-radius: 20px;
 	margin: 4px;
 }
-
 #user-box {
 	text-align: center;
 	width: 150px;
@@ -319,19 +283,15 @@ a {
 #divWrite {
 	display: none;
 }
-
 .form-control[readonly] {
 	background-color: transparent;
 }
-
 #t_r_grade {
 	display: none;
 }
-
 .r_grade_box {
 	font-size: 12px;
 }
-
 .btnWrite {
 	background-color: rgb(197, 192, 192);
 }
@@ -339,20 +299,16 @@ a {
 #btnLikeUp2 {
 	display: none;
 }
-
 #btnHateUp2 {
 	display: none;
 }
-
 .reply_box {
 	background-color: white;
 	border-radius: 10px;
 }
-
 .btnModify {
 	border: none;
 }
-
 .Profile {
 	margin: auto;
 	background-color: rgb(165, 162, 162);
@@ -360,7 +316,6 @@ a {
 	height: 70px;
 	border-radius: 35px;
 }
-
 .content-reply {
 	border: none;
 }
@@ -383,7 +338,7 @@ a {
 				<div class="container-fluid">
 					<!-- toggle button -->
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-						aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
@@ -394,7 +349,7 @@ a {
 							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
 							<c:choose>
-								<c:when test="${not empty loginSession}">
+								<c:when test="${empty loginSession}">
 									<li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
 									<li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
 								</c:when>
@@ -429,7 +384,8 @@ a {
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0"> <img id="logoImg" src="/images/logo3.png">
+						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
+							<img id="logoImg" src="/images/logo3.png">
 
 						</a>
 					</div>
@@ -498,9 +454,52 @@ a {
 
 		<div id="content-box">
 			<div class="row">
-				<div class="col">
+				<div class="col-10">
 					<h4>제목 : ${dto.p_title}</h4>
 
+				</div>
+				<div class="col-2">
+				<c:if test="${not empty loginSession.getUser_id()}">
+													<!--report 모달창  -->
+													<button type="button" class="btn btn-report_p"
+														data-bs-toggle="modal" data-bs-target="#exampleModal_p"
+														data-bs-whatever="@getbootstrap"
+														style="background-color: white; border: none;">
+														<img src="resources/images/report.png" height="80%">
+													</button>
+													<input style="display: none;" id="seqReport_p"
+														value="${post_comment.seq_comment}">
+													<div class="modal fade" id="exampleModal_p" tabindex="-1"
+														aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<form id="reportForm">
+																	<div class="modal-header">
+																		<h5 class="modal-title" id="exampleModalLabel">Report_Post</h5>
+																		<button type="button" class="btn-close"
+																			data-bs-dismiss="modal" aria-label="Close"></button>
+																	</div>
+																	<div class="modal-body">
+
+
+																		<div class="mb-3">
+																			<label for="message-text_p" class="col-form-label">Message:</label>
+																			<textarea class="form-control" id="message-text_p"
+																				name="rp_content"> </textarea>
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary"
+																			data-bs-dismiss="modal">Close</button>
+																		<button id="sendMessage_p" type="button"
+																			class="btn btn-primary">Send message</button>
+																	</div>
+																</form>
+															</div>
+														</div>
+														<div></div>
+													</div>
+												</c:if>
 				</div>
 				<hr>
 			</div>
@@ -519,13 +518,15 @@ a {
 					<div class="row">
 						<c:choose>
 							<c:when test="${not empty loginSession}">
+							<input style="display:none;" id="loginCheck" value="${loginSession.user_id }">
 								<div class="col-5 click">
 									<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }>
 										<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
 
 
 									</button>
-									<button class="LHbtn" id="p_like" style="display: none;" value=${dto.seq_post }>
+									<button class="LHbtn" id="p_like" style="display: none;"
+										value=${dto.seq_post }>
 										<img src="resources/images/like.png" alt="좋아요" id="like" />
 
 									</button>
@@ -535,7 +536,8 @@ a {
 									<button class="LHbtn" id="p_hatebefore" value=${dto.seq_post }>
 										<img src="resources/images/hatebefore.png" alt="싫어요" id="hate" />
 									</button>
-									<button class="LHbtn" id="p_hate" style="display: none;" value=${dto.seq_post }>
+									<button class="LHbtn" id="p_hate" style="display: none;"
+										value=${dto.seq_post }>
 										<img src="resources/images/hate.png" alt="싫어요" id="hate" />
 									</button>
 									<span id="hateCount-box">${countHate }</span>
@@ -543,24 +545,28 @@ a {
 
 							</c:when>
 							<c:otherwise>
-								<div class="col-5 click">
-								<button class="LHbtn" id="p_likebefore" value=${dto.seq_post } style="disabled: true;">
+							<input  id="loginCheck" style="display:none;" value="">
+							<div class="col-5 click">
+								<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }
+									style="disabled: true;">
 									<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
 
 
 								</button>
-								<button class="LHbtn" id="p_like" style="display: none; disabled: true;" value=${dto.seq_post }>
+								<button class="LHbtn" id="p_like"
+									style="display: none; disabled: true;" value=${dto.seq_post }>
 									<img src="resources/images/like.png" alt="좋아요" id="like" />
 
 								</button>
 								<span id="likeCount-box">${countLike }</span>
-								</div>
-
+</div>
 								<div class="col-5 click">
-									<button class="LHbtn" id="p_hatebefore" value=${dto.seq_post } style="disabled: true;">
+									<button class="LHbtn" id="p_hatebefore" value=${dto.seq_post }
+										style="disabled: true;">
 										<img src="resources/images/hatebefore.png" alt="싫어요" id="hate" />
 									</button>
-									<button class="LHbtn" id="p_hate" style="display: none; disabled: true;" value=${dto.seq_post }>
+									<button class="LHbtn" id="p_hate"
+										style="display: none; disabled: true;" value=${dto.seq_post }>
 										<img src="resources/images/hate.png" alt="싫어요" id="hate" />
 									</button>
 									<span id="hateCount-box">${countHate }</span>
@@ -568,24 +574,31 @@ a {
 							</c:otherwise>
 						</c:choose>
 					</div>
-					<!--만약 좋아요를 한상태라면?  -->
-					<c:if test="${likeValue == 1 }">
-						<script>
+							
+							<c:choose>
+							
+							<c:when test="${likeValue == 1 }">
+							<script>
 									console.log(${likeValue});
 									$("#p_likebefore").css("display","none");
 									$("#p_like").css("display","inline-block");
 									
 									</script>
-					</c:if>
-					<!--  싫어요 한 상태라면? -->
-					<c:if test="${likeValue == 2 }">
-						<script>
+							</c:when>
+							
+							<c:when test="${likeValue == 2 }">
+							<script>
 									$("#p_hatebefore").css("display","none");
 									$("#p_hate").css("display","inline-block");
 									
 									</script>
-
-					</c:if>
+							</c:when>
+							
+							<c:otherwise>
+							
+							</c:otherwise>
+							</c:choose>
+								
 
 					<script>
 					var arr=null;
@@ -808,7 +821,7 @@ a {
 			<!-- 수정 버튼영역 -->
 			<div id="user-box">
 				<div class="row">
-
+					<c:if test="${not empty loginSession  }">
 					<c:if test="${loginSession.user_id eq dto.user_id}">
 						<div class="col-6">
 							<button type="button" class="btn btn-warning" id="btnModify">수정</button>
@@ -836,13 +849,15 @@ a {
 											})
 						</script>
 					</c:if>
+					</c:if>
 				</div>
 			</div>
 
 		</div>
 		<!-- 게시글영역 끝 -->
 		<br /> <br /> <br />
-
+		
+		
 		<!-- 	댓글 출력 영역 -->
 		<div id="input-box">
 			<!-- 댓글 입력 영역 -->
@@ -852,7 +867,8 @@ a {
 						<input type="text" value="${dto.seq_post}" name="seq_post">
 					</div>
 					<div class="col-10">
-						<textarea id="inputReply" class="form-control" name="comment_content" placeholder="댓글을 입력해주세요."></textarea>
+						<textarea id="inputReply" class="form-control"
+							name="comment_content" placeholder="댓글을 입력해주세요."></textarea>
 					</div>
 					<div class="col-2">
 						<button type="button" class="btn btn-success" id="btnSubmitReply">등록</button>
@@ -890,35 +906,44 @@ a {
 
 										<div class="col-10">
 											<div class="row mb-1">
-												<div class="col-10 ms-2">${post_comment.user_nickname}</div>
+												<div class="col-10 ms-2"> ${post_comment.user_nickname} </div>
 												<div class="col-1 mt-1 text-end r_report">
-													<c:if test="${not empty loginSession.getUser_id()}">
-														<!--report 모달창  -->
-														<button type="button" class="btn btn-report" data-bs-toggle="modal" data-bs-target="#exampleModal"
-															data-bs-whatever="@getbootstrap" style="background-color: white; border: none;">
-															<img src="resources/images/report.png" height="80%">
-														</button>
-													</c:if>
-													<input style="display: none;" id="seqReport" value="${post_comment.seq_comment}">
-													<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<c:if test="${not empty loginSession.getUser_id()}">
+													<!--report 모달창  -->
+													<button type="button" class="btn btn-report_c"
+														data-bs-toggle="modal" data-bs-target="#exampleModal_c"
+														data-bs-whatever="@getbootstrap"
+														style="background-color: white; border: none;">
+														<img src="resources/images/report.png" height="80%">
+													</button>
+													
+												</c:if>
+													<input style="display: none;" id="seqReport"
+														value="${post_comment.seq_comment}">
+													<div class="modal fade" id="exampleModal_c" tabindex="-1"
+														aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog">
 															<div class="modal-content">
 																<form id="reportForm">
 																	<div class="modal-header">
 																		<h5 class="modal-title" id="exampleModalLabel">Report</h5>
-																		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																		<button type="button" class="btn-close"
+																			data-bs-dismiss="modal" aria-label="Close"></button>
 																	</div>
 																	<div class="modal-body">
 
 
 																		<div class="mb-3">
-																			<label for="message-text" class="col-form-label">Message:</label>
-																			<textarea class="form-control" id="message-text" name="rp_content"> </textarea>
+																			<label for="message-text_c" class="col-form-label">Message:</label>
+																			<textarea class="form-control" id="message-text_c"
+																				name="rp_content"> </textarea>
 																		</div>
 																	</div>
 																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-																		<button id="sendMessage" type="button" class="btn btn-primary">Send message</button>
+																		<button type="button" class="btn btn-secondary"
+																			data-bs-dismiss="modal">Close</button>
+																		<button id="sendMessage_c" type="button"
+																			class="btn btn-primary">Send message</button>
 																	</div>
 																</form>
 															</div>
@@ -930,27 +955,37 @@ a {
 
 											<div class="row body-post_comment body-review">
 												<div class="col-10">
-													<textarea style="resize: none;" id="" class="form-control content-reply ps-2" name="comment_content"
-														placeholder="댓글내용" readonly> ${post_comment.comment_content}</textarea>
+													<textarea style="resize: none;" id=""
+														class="form-control content-reply ps-2"
+														name="comment_content" placeholder="댓글내용" readonly> ${post_comment.comment_content}</textarea>
 												</div>
 
 												<!-- 수정,삭제버튼 -->
 												<c:choose>
-													<c:when test="${loginSession.getUser_id() eq post_comment.getUser_id() }">
+													<c:when
+														test="${loginSession.getUser_id() eq post_comment.getUser_id() }">
 														<div class="col-2 ps-3">
 
 															<div class="col" id="divWrite">
-																<button type=submit class="btn mt-2 btnSave complete-reply" id="btnSave" value="${post_comment.seq_comment}">등록</button>
+																<button type=submit
+																	class="btn mt-2 btnSave complete-reply" id="btnSave"
+																	value="${post_comment.seq_comment}">등록</button>
 															</div>
 
 															<div class="dropdown" id="modify_box">
 
-																<button type="button" class="btn btnModify" id="" data-bs-toggle="dropdown" aria-expanded="true">
+																<button type="button" class="btn btnModify" id=""
+																	data-bs-toggle="dropdown" aria-expanded="true">
 																	<img src="resources/images/modify.png" width="50%;">
 																</button>
-																<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-																	<li><button class="dropdown-item modify-post_comment modify-review" value="${post_comment.seq_comment}">수정</button></li>
-																	<li><button class="dropdown-item delete-post_comment delete-review" value="${post_comment.seq_comment}">삭제</button></li>
+																<ul class="dropdown-menu"
+																	aria-labelledby="dropdownMenuButton1">
+																	<li><button
+																			class="dropdown-item modify-post_comment modify-review"
+																			value="${post_comment.seq_comment}">수정</button></li>
+																	<li><button
+																			class="dropdown-item delete-post_comment delete-review"
+																			value="${post_comment.seq_comment}">삭제</button></li>
 																</ul>
 															</div>
 														</div>
@@ -965,7 +1000,7 @@ a {
 												<div class="col-lg-7 col-md-5 ms-2">${post_comment.comment_date}</div>
 
 
-
+												
 											</div>
 										</div>
 									</div>
@@ -991,17 +1026,23 @@ a {
 			</div>
 		</div>
 	</div>
+	<!-- Footer -->
 	<footer class="py-5 text-light">
 		<div class="container">
 			<div class="row" id="bigFoot">
 				<div class="col-2">
 					<h5>장르</h5>
 					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디" class="nav-link p-0">코미디</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션" class="nav-link p-0">액션</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로" class="nav-link p-0">멜로</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF" class="nav-link p-0">SF</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러" class="nav-link p-0">호러</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디"
+													 class="nav-link p-0">코미디</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션"
+													 class="nav-link p-0">액션</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로"
+													 class="nav-link p-0">멜로</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF"
+													 class="nav-link p-0">SF</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러"
+													 class="nav-link p-0">호러</a></li>
 					</ul>
 				</div>
 
@@ -1010,7 +1051,11 @@ a {
 						<div class="col-2">
 							<h5>계정</h5>
 							<ul class="nav flex-column">
-								<li class="nav-item mb-2"><a href="/Mypage/mypageIndex.jsp" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+								<c:if test="${loginSession.grade == 'admin'}">
+									<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+								</c:if>
 
 							</ul>
 						</div>
@@ -1021,7 +1066,6 @@ a {
 							<ul class="nav flex-column">
 								<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
 								<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
 								<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
 								<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
 							</ul>
@@ -1033,9 +1077,7 @@ a {
 					<h5>기타</h5>
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
-						<li class="nav-item mb-2"><a href="/post.po?curPage=1 " class="nav-link p-0">자유게시판</a></li>
-
-						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+						<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
 					</ul>
 				</div>
 
@@ -1046,31 +1088,36 @@ a {
 							지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
 						</p>
 						<div class="d-flex w-100 gap-2">
-							<label for="newsletter1" class="visually-hidden">Email address</label> <input id="newsletter1" type="text"
-								class="form-control" placeholder="Email address">
+							<label for="newsletter1" class="visually-hidden">Email
+								address</label> <input id="newsletter1" type="text" class="form-control"
+													   placeholder="Email address">
 							<button class="btn btn-primary" type="button">영화 추천받기</button>
 						</div>
 					</form>
 
 					<div class="snsBox">
 						<div class="snsIcon1">
-							<a href="https://www.kakaocorp.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="kakaoIcon"
-								src="/images/kakaotalk.png">
+							<a href="https://www.kakaocorp.com/"
+							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+									id="kakaoIcon" src="/images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
-							<a href="https://twitter.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="twitterIcon"
-								src="/images/twitter.png">
+							<a href="https://twitter.com/"
+							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+									id="twitterIcon" src="/images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
-							<a href="https://www.instagram.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="instagramIcon"
-								src="/images/instagram.png">
+							<a href="https://www.instagram.com/"
+							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+									id="instagramIcon" src="/images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
-							<a href="https://www.facebook.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="facebookIcon"
-								src="/images/facebook.png">
+							<a href="https://www.facebook.com/"
+							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+									id="facebookIcon" src="/images/facebook.png">
 							</a>
 						</div>
 					</div>
@@ -1081,31 +1128,50 @@ a {
 				<div class="col-4">
 					<h5>장르</h5>
 					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디" class="nav-link p-0">코미디</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션" class="nav-link p-0">액션</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로" class="nav-link p-0">멜로</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF" class="nav-link p-0">SF</a></li>
-						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러" class="nav-link p-0">호러</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=코미디"
+													 class="nav-link p-0">코미디</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=액션"
+													 class="nav-link p-0">액션</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=멜로"
+													 class="nav-link p-0">멜로</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=SF"
+													 class="nav-link p-0">SF</a></li>
+						<li class="nav-item mb-2"><a href="/search.movie?s_type=genreAlt&curPage=1&val=호러"
+													 class="nav-link p-0">호러</a></li>
 					</ul>
 				</div>
 
-				<div class="col-4">
-					<h5>계정</h5>
-					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-						<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-						<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
-						<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-						<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-					</ul>
-				</div>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<div class="col-4">
+							<h5>계정</h5>
+							<ul class="nav flex-column">
+								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+								<c:if test="${loginSession.grade == 'admin'}">
+									<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+								</c:if>
+							</ul>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="col-4">
+							<h5>계정</h5>
+							<ul class="nav flex-column">
+								<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+								<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+								<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+								<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+					</c:otherwise>
+				</c:choose>
 
 				<div class="col-4">
 					<h5>기타</h5>
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
 						<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 					</ul>
 				</div>
 
@@ -1116,31 +1182,36 @@ a {
 							지금 영화를 리뷰하고,<br> 내 취향에 딱 맞는 영화를 추천받아 보세요!
 						</p>
 						<div class="d-flex w-100 gap-2">
-							<label for="newsletter1" class="visually-hidden">Email address</label> <input id="newsletter1" type="text"
-								class="form-control" placeholder="Email address">
+							<label for="newsletter1" class="visually-hidden">Email
+								address</label> <input id="newsletter1" type="text" class="form-control"
+													   placeholder="Email address">
 							<button class="btn btn-primary" type="button">영화 추천받기</button>
 						</div>
 					</form>
 
 					<div class="snsBox">
 						<div class="snsIcon1">
-							<a href="https://www.kakaocorp.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="kakaoIcon"
-								src="/images/kakaotalk.png">
+							<a href="https://www.kakaocorp.com/"
+							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+									id="kakaoIcon" src="/images/kakaotalk.png">
 							</a>
 						</div>
 						<div class="snsIcon2">
-							<a href="https://twitter.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="twitterIcon"
-								src="/images/twitter.png">
+							<a href="https://twitter.com/"
+							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+									id="twitterIcon" src="/images/twitter.png">
 							</a>
 						</div>
 						<div class="snsIcon3">
-							<a href="https://www.instagram.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="instagramIcon"
-								src="/images/instagram.png">
+							<a href="https://www.instagram.com/"
+							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+									id="instagramIcon" src="/images/instagram.png">
 							</a>
 						</div>
 						<div class="snsIcon4">
-							<a href="https://www.facebook.com/" class="d-flex align-items-center mb-2 mb-lg-0"> <img id="facebookIcon"
-								src="/images/facebook.png">
+							<a href="https://www.facebook.com/"
+							   class="d-flex align-items-center mb-2 mb-lg-0"> <img
+									id="facebookIcon" src="/images/facebook.png">
 							</a>
 						</div>
 					</div>
@@ -1172,7 +1243,8 @@ a {
 			})
 		}) */
 		//모달 입력후 메세지 보냈을경우
-		$("#sendMessage").on(
+		
+		$("#sendMessage_p").on(
 				"click",
 				function(e) {
 					let seq_post = "${dto.seq_post}";
@@ -1182,7 +1254,40 @@ a {
 						alert("메세지를 제대로 입력하지 않았습니다.");
 						return;
 					}
-					let rp_content =$("#message-text").val();
+					let rp_content =$("#message-text_p").val();
+					let data = $("#reportForm").serialize();
+	
+					console.log(rp_content);
+					console.log(data);
+					$.ajax({
+						url : "/report.po",
+						type : "post",
+						data : {
+							seq_post : seq_post,												
+							rp_content : rp_content
+						},
+						success : function() {
+							$("#exampleModal_p").modal('hide');
+							console.log("신고완료");
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					})
+				});
+		
+		
+		$("#sendMessage_c").on(
+				"click",
+				function(e) {
+					let seq_post = "${dto.seq_post}";
+					let seq_comment = $("#seqReport").val()
+					//  $("#message").val($("#message-text").val());
+					if ( $("#message-text").val() === "") {
+						alert("메세지를 제대로 입력하지 않았습니다.");
+						return;
+					}
+					let rp_content =$("#message-text_c").val();
 					let data = $("#reportForm").serialize();
 	
 					console.log(rp_content);
@@ -1197,18 +1302,42 @@ a {
 							rp_content : rp_content
 						},
 						success : function() {
-							$("#exampleModal").modal('hide');
+							$("#exampleModal_c").modal('hide');
+							console.log("신고완료");
 						},
 						error : function(e) {
 							console.log(e);
 						}
 					})
 				});
-		$(".btn-report").on(
+		$(".btn-report_p").on(
 				"click",
 				function() {
 					/*모달 스크립트  */
-					var exampleModal = document.getElementById("exampleModal");
+					var exampleModal = document.getElementById("exampleModal_p");
+					exampleModal.addEventListener("show.bs.modal",
+							function(event) {
+								// Button that triggered the modal
+								var button = event.relatedTarget;
+								// Extract info from data-bs-* attributes
+								var recipient = button
+										.getAttribute("data-bs-whatever");
+								// If necessary, you could initiate an AJAX request here
+								// and then do the updating in a callback.
+								//
+								// Update the modal's content.
+								var modalTitle = exampleModal
+										.querySelector(".modal-title");
+								var modalBodyInput = exampleModal
+										.querySelector(".modal-body input");
+								modalTitle.textContent = "Report";
+							})
+				});
+		$(".btn-report_c").on(
+				"click",
+				function() {
+					/*모달 스크립트  */
+					var exampleModal = document.getElementById("exampleModal_c");
 					exampleModal.addEventListener("show.bs.modal",
 							function(event) {
 								// Button that triggered the modal
@@ -1244,7 +1373,7 @@ a {
 						$(e.target).parent().parent().parent().parent().prev().children(
 								"textarea").focus();
 					});
-		// 수정 버튼 눌렀을때
+		// 수정 버튼 눌렀을때 모
 		$(".body-review").on("click",".btnSave",function(e) {
 					let seq_review = $(e.target).val();
 					console.log("seq_review :", seq_review)
@@ -1296,12 +1425,10 @@ a {
 				},
 				success : function(rs) {
 					console.log(rs);
-					if (rs === "fail") {
-						alert("댓글 수정에 실패했습니다.");
-					} else {
+					
 						alert("댓글 삭제 성공!");
 						refreshMemList();
-					}
+					
 				},
 				error : function(e) {
 					console.log(e);
@@ -1310,6 +1437,13 @@ a {
 		});
 		// 댓글 등록
 		$("#btnSubmitReply").on("click", function() {
+			
+			
+			if($("#loginCheck").val() === ""){
+				alert("로그인 해주세요");
+				return;
+			}
+			
 			if ($("#inputReply").val() === "") { // 댓글 입력창이 비어있다면
 				alert("입력된 댓글이 없습니다.");
 				return;
