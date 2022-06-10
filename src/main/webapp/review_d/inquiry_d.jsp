@@ -18,6 +18,11 @@
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+	   <!-- font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Jua&family=Sunflower&display=swap" rel="stylesheet">
+        
 <title>Document</title>
 
 <style>
@@ -183,6 +188,10 @@ body {
 	background-color: #ccc;
 	border-radius: 10px;
 }
+.movie_img img{
+	width: 100%;
+	height: 100%;
+}
 
 /*찜 버튼*/
 
@@ -271,6 +280,9 @@ body {
 .content-movie {
 	height: 200px;
 	border: none;
+	font-family: 'Cute Font', cursive;
+		    font-size: 21px;
+		    color: rgb(104, 97, 97);
 }
 
 /* -----------------------------------------------------------*/
@@ -293,6 +305,7 @@ body {
 
 .btnWrite {
 	background-color: rgb(197, 192, 192);
+	
 }
 
 /* 별점 Write */
@@ -487,6 +500,20 @@ body {
 	}
 }
 /* 반응형 끝 */
+        /* font 추가*/
+        .m_name{
+		    font-family: 'Jua', sans-serif;
+		    color: rgb(104, 97, 97);
+		}
+		.m_genre{
+		    font-family: 'Cute Font', cursive;
+		    font-size: 18px;
+		}
+		.font_style,#Sign_in,#r_content,#btnWrite{
+			color: rgb(77, 72, 72);
+		    font-family: 'Cute Font', cursive;
+		    font-size: 21px;
+		}
 </style>
 
 </head>
@@ -638,7 +665,7 @@ body {
 				<div class="col movie_img">
 					<img src="images/NoImg.webp" width="100%" height="100%">
 				</div>
-				<div class="col ">
+				<div class="col ps-2">
 					<p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
 					<p class="m_name my-1">
 						${moviedto.movieNm}<br>(${moviedto.movieNmEn})
@@ -652,7 +679,7 @@ body {
 			<div class="col-9">
 				<!-- 영화 코멘트 -->
 				<div class="col-10 p-2 mt-3 movie_coment">
-					<textarea id="" class="form-control content-movie" name="m_coment">영화 소개</textarea>
+					<textarea id="" class="form-control content-movie" name="m_coment" readonly>${moviedto.movieNm} 영화 페이지 입니다:)</textarea>
 				</div>
 
 
@@ -662,6 +689,7 @@ body {
 	</div>
 	<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 	<!-- 좋아요, 댓글창 -->
+	
 	<form id="movie_comment_write" action="/write.re" method="post">
 		<div class="container">
 			<div class="row pt-4">
@@ -669,14 +697,14 @@ body {
 				<div class="row col">
 					<div class="col p-0">
 						<a class="nav-link" href="/wish_insert.wish?movieCd=${moviedto.movieCd}">
-							 <button type="button"class="learn-more fun-btn px-4">
+							 <button type="button"class="learn-more fun-btn px-4 font_style">
                            		 <img src="images/star.png" > 찜
                        		 </button>
 						</a>
 					</div>
 					<div class="col-1"></div>
-					<div class="col-lg-5 col-7 text-center  fun-btn">
-						<span class="mx-2"> <img src="images/heart.png"> ${cnt}
+					<div class="col-lg-5 col-7 text-center fun-btn">
+						<span class="mx-2  font_style"> <img src="images/heart.png"> ${cnt}
 						</span>
 					</div>
 				</div>
@@ -688,7 +716,7 @@ body {
 					<div class="row container r_grade_box mb-1">
 						<!-- 별점 -->
 						<div class="col-6 r_grade">
-							평균 <label for="star" class="star">&#9733;</label> ${average}(${cnt}명) 별점주기 <span class="star-rating" id="r_grade_star">
+							평균 <label for="star" class="star">&#9733;</label> ${average}(${rcnt}명) 별점주기 <span class="star-rating" id="r_grade_star">
 								<input type="radio" class="inputStar" id="5-stars" name="r_grade" value="5" /> <label for="5-stars" class="star">&#9733;</label>
 								<input type="radio" class="inputStar" id="4-stars" name="r_grade" value="4" /> <label for="4-stars" class="star">&#9733;</label>
 								<input type="radio" class="inputStar" id="3-stars" name="r_grade" value="3" /> <label for="3-stars" class="star">&#9733;</label>
@@ -711,11 +739,11 @@ body {
 						<c:when test="${not empty loginSession}">
 							<div class="row align-items-center comment_box">
 								<div class="col-10">
-									<textarea id="r_content" class="form-control" name="r_content" placeholder="댓글을 입력해주세요."></textarea>
+									<textarea id="r_content" class="form-control font_style" name="r_content" placeholder="댓글을 입력해주세요."></textarea>
 								</div>
 								<div class="col-2">
 									<input type="hidden" name="movieCd" value="${moviedto.movieCd}">
-									<button type="button" class="btn btnWrite" id="btnWrite">리뷰 등록</button>
+									<button type="button" class="btn btnWrite" id="btnWrite">리뷰  등록</button>
 								</div>
 							</div>
 						</c:when>
@@ -749,7 +777,7 @@ body {
 					<!-- 댓글 출력 -->
 					<div class="row">
 
-						<div class="col text-center pt-3">
+						<div class="col text-center pt-3 font_style">
 							<p>등록된 댓글이 없습니다.</p>
 						</div>
 					</div>
@@ -764,18 +792,18 @@ body {
 				<div class="row pt-4">
 					<div class="col text-end"></div>
 					<!-- 코멘트,댓글 -->
-					<div class="col-9 reply_box">
+					<div id="" class="col-9 reply_box">
 						<!-- 댓글 출력 -->
 						<div class="row">
 							<div class="col-2 text">
 								<!-- 프로필 -->
-								<div class="Profile text-center mt-2">프로필</div>
+								<div class=" text-center mt-2"><img class="Profile" src="/images/기본프로필.jpg" height="100%"></div>
 							</div>
 
 							<div class="col-10">
 								<div class="row mb-1">
 									<!-- 닉네임 -->
-									<div class="col-6 ms-2 mt-1 fw-bolder">${review.user_nickname}</div>
+									<div class="col-6 ms-2 mt-1 m_name">${review.user_nickname}</div>
 									<div class="col-4 text-end r_grade">
 										<input type=text id="t_r_grade" value="${review.r_grade}">
 										<!-- 별점 표시 if문 -->
@@ -862,7 +890,7 @@ body {
 
 								<div class="row body-review">
 									<div class="col-10">
-										<textarea id="" class="form-control content-reply ps-2" name="r_content" placeholder="댓글내용" readonly>${review.r_content}</textarea>
+										<textarea id="" class="form-control content-reply ps-2 font_style" name="r_content" placeholder="댓글내용" readonly>${review.r_content}</textarea>
 									</div>
 
 									<!-- 수정,삭제버튼 -->
@@ -887,7 +915,7 @@ body {
 
 								<div class="row mt-1 likeBox">
 									<div class="col-lg-7 col-md-5 ms-2">
-										<span id="r_date">${review.r_date}</span>
+										<span id="r_date" class="">${review.r_date}</span>
 									</div>
 
 									<!-- 좋아요 -->
@@ -907,7 +935,7 @@ body {
 										<div class="col m-0">
 											<c:forEach items="${like_list}" var="like">
 												<c:if test="${review.seq_review eq like.seq_review}">
-													<span class="ps-2">${like.l_count}</span>
+													<span class="ps-2 font_style">${like.l_count}</span>
 												</c:if>
 											</c:forEach>
 										</div>
@@ -919,7 +947,7 @@ body {
 												<!-- 리뷰번호와 좋아요 리뷰번호, 좋아요 아이디와 세션 아이디가 같다면 -->
 												<c:if test="${review.seq_review eq all.seq_review && all.user_id eq loginSession.user_id}">
 													<c:if test="${all.r_like_check eq 2}">
-														<input type="image" id="btnHateUp2" class="mt-1 position-absolute" value="${review.seq_review}"
+														<input type="image" id="btnHateUp2" class="mt-1 position-absolute font_style" value="${review.seq_review}"
 															src="images/hate.png" height="22px">
 													</c:if>
 												</c:if>
@@ -932,7 +960,7 @@ body {
 										<div class="col m-0">
 											<c:forEach items="${hate_list}" var="hate">
 												<c:if test="${review.seq_review eq hate.seq_review}">
-													<span class="ps-2">${hate.l_count}</span>
+													<span class="ps-2 font_style">${hate.l_count}</span>
 												</c:if>
 											</c:forEach>
 										</div>
@@ -1312,7 +1340,9 @@ body {
 					<h5>기타</h5>
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
-						<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
+						<li class="nav-item mb-2"><a href="/post.po?curPage=1 " class="nav-link p-0">자유게시판</a></li>
+
+						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 					</ul>
 				</div>
 
@@ -1459,12 +1489,36 @@ body {
 			</div>
 		</div>
 	</footer>
+	<div class="container">
+        <div class="thumbnail"></div>
+        <p></p>
+    </div>
 	<script>
-		let msg= '${msg}';
-		console.log(msg);
-		if(msg !=""){
-			alert(msg)
-		}
+	
+	let msg= '${msg}';
+	console.log(msg);
+	if(msg !=""){
+		alert(msg)
+	}
+        
+
+		/*
+		 $.ajax({
+             method: "GET",
+             url: "https://dapi.kakao.com/v2/search/image",
+             data: {
+                 query: '${moviedto.movieNm}',
+                 
+             },
+             headers: {
+                 Authorization: "KakaoAK 0f7acd5ca96b1d76578d02adc4161263"
+             },
+         })
+         .done(function (msg) {
+           
+             $(".thumbnail").append('<img src="' + msg.documents[1].image_url + '"/>');
+         });
+		*/
 		$("#btnWrite").on(
 				"click",
 				function() {

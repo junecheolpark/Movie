@@ -38,9 +38,13 @@ public class PostCommentController extends HttpServlet {
 			if(uri.equals("/insert.co")) {//post_comment 삽입 
 				int seq_post=Integer.parseInt(request.getParameter("seq_post"));
 				String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
+				System.out.println("test1");
 				String comment_content =request.getParameter("comment_content");
+				System.out.println("test2");
 				String user_id=((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+				System.out.println("test3");
 				String user_category = ((MemberDTO)session.getAttribute("loginSession")).getUser_category();
+				System.out.println("test4");
 				System.out.println(user_id+user_nickname+comment_content+": " + seq_post);
 				
 				PostCommentDAO dao =new PostCommentDAO();

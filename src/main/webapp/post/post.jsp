@@ -18,32 +18,26 @@
         header {
             background-color: black;
         }
-
         footer {
             background-color: black;
         }
 		body {
 			box-sizing: border-box;
 		}
-
         a {
             text-decoration: none;
         }
-
         .contents {
             height: 500px;
         }
-
         #navLogo {
             width: 150px;
             height: 100px;
         }
-
         #logoImg {
             width: 100%;
             height: 100%;
         }
-
         /* Icon */
         #logoutIcon {
             width: 30px;
@@ -53,111 +47,89 @@
             width: 30px;
             height: 30px;
         }
-
         #myPageIcon {
             width: 30px;
             height: 30px;
         }
-
         #kakaoIcon {
             width: 30px;
             height: 30px;
         }
-
         #twitterIcon {
             width: 30px;
             height: 30px;
         }
-
         #instagramIcon {
             width: 30px;
             height: 30px;
         }
-
         #facebookIcon {
             width: 30px;
             height: 30px;
         }
-
         .snsIcon1 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon2 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon3 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon4 {
             float: left;
             margin-top: 10px;
         }
-
         /* Icon end */
-
         /* Footer */
         .nav-link {
             color: gray;
             text-decoration: none;
         }
-
         .nav-link:hover {
             color: white;
         }
-
         /* header 반응형 */
         @media ( max-width: 768px) {
             #navLogo {
                 display: none;
             }
-
             #myPageIcon {
                 display: none;
             }
-
             #cartIcon {
                 display: none;
             }
-
             #menu {
                 display: none;
             }
         }
-
         @media ( min-width: 768px) {
             #navibar {
                 display: none;
             }
         }
-
         /* header 반응형 끝 */
-
         /* footer 반응형 시작 */
         @media ( max-width: 768px) {
             #bigFoot {
                 display: none;
             }
         }
-
         @media ( min-width: 768px) {
             #smallFoot {
                 display: none;
             }
         }
-
         /* -----------------------------------------------------------*/
         /* content 영역*/
         /* -----------------------------------------------------------*/
-
         /* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
                 https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
         /* 반응형 시작 */
@@ -165,43 +137,35 @@
             aside#aside {
                 width: 25%;
             }
-
             div.body-wishList {
                 width: 75%;
             }
         }
-
         @media screen and (max-width: 1024px) {
             aside#aside {
                 display: none;
             }
-
             div.body-wishList {
                 width: 100%;
             }
-
             aside#asideSM {
                 display: block;
                 width: 100%;
             }
         }
-
         @media screen and (min-width: 1024px) {
             aside#asideSM {
                 display: none;
             }
         }
-
         @media screen and (max-width: 768px) {
             aside#asideSM div#profileBox {
                 display: none;
                 width: 50%
             }
-
             aside#asideSM div#profileBtnBox {
                 display: none;
             }
-
             /* aside#asideSM div#profileBtnBoxSM {
                 display: block;
             } */
@@ -210,13 +174,11 @@
                 float: none;
             }
         }
-
         @media screen and (min-width: 768px) {
             aside#asideSM div#profileBtnBoxSM {
                 display: none;
             }
         }
-
         /* 반응형 끝 */
         .content {
         margin:auto;
@@ -224,39 +186,31 @@
             width: 1200px;
             min-height: 800px;
         }
-
         .content-footer2 {
             margin-top: 15px;
             margin-bottom:30px;
         }
-
         .form-select {
             display: inline-block;
             width: 100px;
         }
-
         .search-method {
             width: 100px;
             display: inline-block;
         }
-
         .list {
             width: 120px;
             display: inline-block;
         }
-
         .form-control {
             width: 300px;
             display: inline-block;
         }
-
         button {
             border: solid 1px black;
             line-height: normal;
         }
-
         .content-body {
-
             background-color: rgb(255, 254, 248);
         }
     </style>
@@ -487,8 +441,6 @@
                 $("#btn_write").on("click", function () {
                     location.href = "/write.po"
                 })
-
-
             </script>
         </c:if>
         <div class="row">
@@ -737,26 +689,22 @@
     </div>
 </footer>
 <script>
-
     //목록 개수별 나타내기
     $("#btnList").on("click", function () {
         let listItem = $("#listItem").val();
         location.href = "/post.po?curPage=1&&listItem=" + listItem;
     })
-
     //포스트 항목별 검색
     $("#btnSearch").on("click", function () {
         if ($("#inputSearch").val() === "") { // 댓글 입력창이 비어있다면
             alert("입력된 글이 없습니다.");
             return;
         }
-
         // ajax를 이용해서 search
         let searchValue = $("#searchValue").val()
         let inputSearch = $("#inputSearch").val()
         console.log(searchValue + " : " + inputSearch);
         $("#inputSearch").val("");
-
         $.ajax({
             url: "/search.po?searchValue=" + searchValue + "&&inputSearch=" + inputSearch,
             type: "get",
@@ -786,27 +734,19 @@
                         let div_col2_2 = $("<div>").attr("class", "col-2");
                         let div_col5 = $("<div>").attr("class", "col-5");
                         let hr = $("<hr>");
-
-
                         let a = $("<a>").attr("href", "/detailPost.po?seq_post=${dto.seq_post}").html(dto.p_title);
                         div_col5.append(a);
-
                         console.log(dto.seq_post);
                         div_row.append(div_col1_1.html(dto.seq_post), div_col5, div_col2_1.html(dto.user_nickname),
                             div_col2_2.html(dto.p_date), div_col1_2.html("추천횟수dd"), div_col1_3.html(dto.p_view_count), hr);
-
                         $(".content-body").append(div_row);
-
-
                     }
                 }
             },
             error: function (e) {
                 console.log(e);
             }
-
         })
-
     })
 </script>
 </body>
