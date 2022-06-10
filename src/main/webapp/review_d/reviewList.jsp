@@ -303,6 +303,9 @@
                 grid-column: 5/11;
                 height: 100%;
             }
+            .product {
+                flex-direction: column;
+            }
         }
 
         /*
@@ -322,6 +325,11 @@
         }
 
         /* Icon */
+        #logoutIcon {
+            width: 30px;
+            height: 30px;
+        }
+
         #cartIcon {
             width: 30px;
             height: 30px;
@@ -444,7 +452,8 @@
         <nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
             <div class="container-fluid">
                 <!-- toggle button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -461,6 +470,7 @@
                                 <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                             </c:when>
                             <c:otherwise>
+                                <li class="nav-item"><a class="nav-link" href="/logout.mem">로그아웃</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
                             </c:otherwise>
@@ -470,7 +480,8 @@
                     </ul>
 
                     <form class="searchForm d-flex" method="get" action="/search.movie">
-                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'> <input
+                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.."
+                               aria-label="Search" name='val'> <input
                             type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
                         <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -510,15 +521,20 @@
 
                         <div class="col-auto">
                             <c:if test="${not empty loginSession}">
-                                <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
+                                <a href="logout.mem"><img class="img-fluid" id="logoutIcon"
+                                                          src="/images/logout.png"></a>
+                                <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon"
+                                                                        src="/images/찜.png">
                                 </a>
-                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon"
+                                                                     src="/images/마이페이지.png">
                                 </a>
                             </c:if>
                         </div>
 
                         <div class="col-1">
-                            <button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <button id="searchBtn" class="btn" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#searchModal">
                                 <img src="/images/searchIcon.png">
                             </button>
                         </div>
@@ -528,20 +544,26 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title m-auto">영화 찾기</h5>
-                                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form id="searchForm" class="searchForm">
                                                 <div class="row justify-content-center">
                                                     <div class="col-11">
-                                                        <input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'>
-                                                        <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
-                                                        <input type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
+                                                        <input class="searchInput form-control me-2" type="search"
+                                                               placeholder="영화 검색.." aria-label="Search" name='val'>
+                                                        <p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를
+                                                            입력해보세요!</p>
+                                                        <input type="hidden" name='curPage' value="1"> <input
+                                                            type="hidden" name='s_type' value="movieNm">
                                                     </div>
                                                 </div>
                                                 <div class="row justify-content-end">
                                                     <div class="col-3">
-                                                        <button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+                                                        <button class="searchBtn btn btn-outline-success" type="submit">
+                                                            Search
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -550,7 +572,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -714,6 +735,7 @@
                     <div class="col-2">
                         <h5>계정</h5>
                         <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
                             <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">
@@ -809,6 +831,7 @@
                     <div class="col-4">
                         <h5>계정</h5>
                         <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
                             <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">

@@ -117,7 +117,7 @@ public class PostCommentController extends HttpServlet {
 				int seq_comment=Integer.parseInt(request.getParameter("seq_comment"));
 				String category_check = "post_comment";
 				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");
-				String user_category = ((MemberDTO)session.getAttribute("loginSession")).getUser_category();
+				String user_category = dto1.getUser_category();
 				String rp_content =request.getParameter("rp_content");
 				String rp_title= request.getParameter("rp_title");
 				String user_id= dto1.getUser_id();
