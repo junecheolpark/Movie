@@ -860,7 +860,7 @@ a {
 			    							break;
 			    						}  else{
 			    							// 회원가입
-			    							createHiddenSignupForm(response.id, response.properties.nickname,response.kakao_account.email);				
+			    							createHiddenSignupForm(response.id, response.properties.nickname);				
 			    						}	 
 									}		 		
 		    					},
@@ -896,7 +896,7 @@ a {
 		}
 		
 		// 회원가입
-		function createHiddenSignupForm(user_k, user_name, user_id){		
+		function createHiddenSignupForm(user_k, user_name){		
 			var frm = document.createElement('form');
 			frm.setAttribute('method', 'post');
 			frm.setAttribute('action', '/kakaoSignup.ka');
@@ -908,11 +908,7 @@ a {
  			name.setAttribute('type','hidden');
  			name.setAttribute('name','user_name');
  			name.setAttribute('value', user_name);
- 			var id = document.createElement('input');
- 			id.setAttribute('type','hidden');
- 			id.setAttribute('name','user_id');
- 			id.setAttribute('value', user_id);
-			frm.append(token, name, id);
+			frm.append(token, name);
 			document.body.append(frm);
 			frm.submit();	
 		}
