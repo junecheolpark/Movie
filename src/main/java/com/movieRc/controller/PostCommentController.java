@@ -27,13 +27,10 @@ public class PostCommentController extends HttpServlet {
 			doAction(request,response);
 		}
 		protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//			//로그인세션 (참고용)
-			HttpSession session=request.getSession();
-//			MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
-//					"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
-//					"내친구집","3학년");
-//			session.setAttribute("loginSession", dto);
+
 			
+			HttpSession session=request.getSession();
+
 			
 			String uri =request.getRequestURI();
 			System.out.println("요청 uri : " +uri);

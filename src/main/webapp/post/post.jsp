@@ -215,6 +215,7 @@
 
         /* 반응형 끝 */
         .content {
+        margin:auto;
             text-align: center;
             width: 1200px;
             min-height: 800px;
