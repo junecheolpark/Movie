@@ -27,12 +27,12 @@ public class PostCommentController extends HttpServlet {
 			doAction(request,response);
 		}
 		protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			//로그인세션 (참고용)
+//			//로그인세션 (참고용)
 			HttpSession session=request.getSession();
-			MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
-					"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
-					"내친구집","3학년");
-			session.setAttribute("loginSession", dto);
+//			MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
+//					"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
+//					"내친구집","3학년");
+//			session.setAttribute("loginSession", dto);
 			
 			
 			String uri =request.getRequestURI();
@@ -43,19 +43,22 @@ public class PostCommentController extends HttpServlet {
 				String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
 				String comment_content =request.getParameter("comment_content");
 				String user_id=((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+				String user_category = ((MemberDTO)session.getAttribute("loginSession")).getUser_category();
+				System.out.println(user_id+user_nickname+comment_content+": " + seq_post);
 				
 				PostCommentDAO dao =new PostCommentDAO();
 				try {
-					int rs =dao.insert(new PostCommentDTO(0,user_nickname,null,comment_content,user_id,seq_post,"kakao"));
+					int rs =dao.insert(new PostCommentDTO(0,user_nickname,null,comment_content,user_id,seq_post,user_category));
 					if(rs>0) {
 						ArrayList<PostCommentDTO> list= dao.selectAll(seq_post);
 						Gson gson =new Gson();
 						String result =gson.toJson(list);
 						response.getWriter().append(result);
-						
 					}else {
+						System.out.println("fail");
 						response.getWriter().append("fail");
 					}
+					System.out.println("rs");
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -116,6 +119,7 @@ public class PostCommentController extends HttpServlet {
 				int seq_post = Integer.parseInt(request.getParameter("seq_post"));
 				int seq_comment=Integer.parseInt(request.getParameter("seq_comment")); 
 				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");
+				String user_category = ((MemberDTO)session.getAttribute("loginSession")).getUser_category();
 				String rp_content =request.getParameter("rp_content");
 				String rp_title= request.getParameter("rp_title");
 				String user_id= dto1.getUser_id();
@@ -124,7 +128,7 @@ public class PostCommentController extends HttpServlet {
 				PostCommentDAO dao =new PostCommentDAO();
 				
 				try {
-				dao.reportInsert(new ReportDTO(0,"k",rp_content,user_id,0,seq_comment,seq_post,"kakao"));	
+				dao.reportInsert(new ReportDTO(0,"k",rp_content,user_id,0,seq_comment,seq_post,user_category));
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
