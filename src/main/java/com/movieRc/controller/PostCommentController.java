@@ -27,12 +27,12 @@ public class PostCommentController extends HttpServlet {
 			doAction(request,response);
 		}
 		protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			//로그인세션 (참고용)
+//			//로그인세션 (참고용)
 			HttpSession session=request.getSession();
-			MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
-					"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
-					"내친구집","3학년");
-			session.setAttribute("loginSession", dto);
+//			MemberDTO dto = new MemberDTO("abc123", "kakao", "k","abc123","뚱이",
+//					"김뚱이", 198084, "010-151","서울시우체국","국도123","우리집앞",
+//					"내친구집","3학년");
+//			session.setAttribute("loginSession", dto);
 			
 			
 			String uri =request.getRequestURI();
@@ -43,32 +43,35 @@ public class PostCommentController extends HttpServlet {
 				String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
 				String comment_content =request.getParameter("comment_content");
 				String user_id=((MemberDTO)session.getAttribute("loginSession")).getUser_id();
+				String user_category = ((MemberDTO)session.getAttribute("loginSession")).getUser_category();
+				System.out.println(user_id+user_nickname+comment_content+": " + seq_post);
 				
 				PostCommentDAO dao =new PostCommentDAO();
 				try {
-					int rs =dao.insert(new PostCommentDTO(0,user_nickname,null,comment_content,user_id,seq_post,"kakao"));
+					int rs =dao.insert(new PostCommentDTO(0,user_nickname,null,comment_content,user_id,seq_post,user_category));
 					if(rs>0) {
 						ArrayList<PostCommentDTO> list= dao.selectAll(seq_post);
 						Gson gson =new Gson();
 						String result =gson.toJson(list);
 						response.getWriter().append(result);
-						
 					}else {
+						System.out.println("fail");
 						response.getWriter().append("fail");
 					}
+					System.out.println("rs");
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
 				
 			}else if(uri.equals("/deleteProc.co")) { //댓글 삭제 요청
-				int seq_post_comment = Integer.parseInt(request.getParameter("seq_post_comment"));
+				int seq_comment = Integer.parseInt(request.getParameter("seq_comment"));
 				int seq_post = Integer.parseInt(request.getParameter("seq_post"));
 				
-				System.out.println("삭제 요청 seq : "+ seq_post_comment +", seq_board : " + seq_post);
+				System.out.println("삭제 요청 seq : "+ seq_comment +", seq_board : " + seq_post);
 				PostCommentDAO dao = new PostCommentDAO();
 				
 				try {
-					int rs = dao.delete(seq_post_comment);
+					int rs = dao.delete(seq_comment);
 					if(rs > 0) { //댓글 삭제 성공, 댓글 목록 응담
 						ArrayList<PostCommentDTO> list = dao.selectAll(seq_post);
 						Gson gson = new Gson();
@@ -81,14 +84,14 @@ public class PostCommentController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}else if(uri.equals("/modifyProc.co")) { //댓글수정요청
-				int seq_post_comment = Integer.parseInt(request.getParameter("seq_post_comment"));
+				int seq_comment = Integer.parseInt(request.getParameter("seq_comment"));
 				int seq_post = Integer.parseInt(request.getParameter("seq_post"));
 				String comment_content = request.getParameter("comment_content");
 				
-				System.out.println(seq_post_comment + " : " + seq_post + " : " + comment_content);
+				System.out.println(seq_comment + " : " + seq_post + " : " + comment_content);
 				PostCommentDAO dao = new PostCommentDAO();
 				try {
-					int rs = dao.modify(new PostCommentDTO(seq_post_comment,null,null , comment_content, null,seq_post,null));
+					int rs = dao.modify(new PostCommentDTO(seq_comment,null,null , comment_content, null,seq_post,null));
 					if(rs > 0) { //댓글 수정 성공, 리스트 응답
 						ArrayList<PostCommentDTO> list = dao.selectAll(seq_post);
 						Gson gson = new Gson();
@@ -114,130 +117,24 @@ public class PostCommentController extends HttpServlet {
 				}
 			}else if(uri.equals("/report.co")) { 
 				int seq_post = Integer.parseInt(request.getParameter("seq_post"));
-				int seq_post_comment=Integer.parseInt(request.getParameter("seq_post_comment")); 
+				int seq_comment=Integer.parseInt(request.getParameter("seq_comment")); 
 				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");
+				String user_category = ((MemberDTO)session.getAttribute("loginSession")).getUser_category();
 				String rp_content =request.getParameter("rp_content");
 				String rp_title= request.getParameter("rp_title");
 				String user_id= dto1.getUser_id();
-				System.out.println(seq_post +"seq_P : seq_C " + seq_post_comment+ " : " + user_id + " U_id:  rp_title" +rp_title+ " : rp_content"+ rp_content);
+				System.out.println(seq_post +"seq_P : seq_C " + seq_comment+ " : " + user_id + " U_id:  rp_title" +rp_title+ " : rp_content"+ rp_content);
 				
 				PostCommentDAO dao =new PostCommentDAO();
 				
 				try {
-				dao.reportInsert(new ReportDTO(0,"k",rp_content,user_id,0,seq_post_comment,seq_post,"kakao"));	
+				dao.reportInsert(new ReportDTO(0,"k",rp_content,user_id,0,seq_comment,seq_post,user_category));
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
-			}else if(uri.equals("/pLike.co")) {
-				
-				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-				int seq_post= Integer.parseInt(request.getParameter("seq_post"));
-				String user_id=dto1.getUser_id();
-				String user_category=dto1.getUser_category();
-				System.out.println("plike.po");
-				PostDAO dao =new PostDAO();
-				int rs =10;
-				
-				try {
-					int curPLikeValue =dao.curPLikeValue(user_id, seq_post);//좋아요1,싫어요2,선택안됨0
-					System.out.println("curPLikeValue의 값은: "+curPLikeValue);
-					if(curPLikeValue == -1) {//값 없음
-						dao.insertPostLike(user_id, seq_post, user_category);
-						rs=-1;
-						System.out.println("좋아요");
-					}else if(curPLikeValue == 0) {//0상태
-						rs =dao.updatePostLike(user_id, seq_post, user_category);
-						rs=0;
-						System.out.println("좋아요");
-					}else if(curPLikeValue == 1) {//좋아요 한 상태
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
-						rs=1;
-						System.out.println("좋아요 취소");
-					}else if(curPLikeValue == 2) {//싫어요 한 상태
-						rs=2;
-						rs =dao.updatePostLike(user_id, seq_post, user_category);
-						System.out.println("싫어요 취소");
-						System.out.println("좋아요");
-					}else {
-						System.out.println("잘못실행됨");
-					}
-					String a= Integer.toString(rs);;
-					System.out.println("rs :" +a);
-					int likeCount=dao.pLikeCount(seq_post, 1);
-					int hateCount=dao.pLikeCount(seq_post, 2);
-					String lCountStr= Integer.toString(likeCount);
-					String hCountStr=Integer.toString(hateCount);
-					String arr=a+"|"+lCountStr+"|"+hCountStr;
-					System.out.println(arr);
-					// var arr = result.split('|'); 해서 arr[0], arr[1], arr[2] 에 접근하시면 각각 a,b,c가 들어 있습니다.
-					//arr[0] == data, arr[1] ==hCountStr arr[2] ==lCountStr입니다.
-					response.getWriter().append(arr);
-					
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				
-			}else if(uri.equals("/phate.co")) {
-				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-				int seq_post= Integer.parseInt(request.getParameter("seq_post"));
-				String user_id=dto1.getUser_id();
-				String user_category=dto1.getUser_category();
-				System.out.println("hate.po");
-				PostDAO dao =new PostDAO();
-				int rs =10;
-				try {//좋아요1,싫어요2,선택안됨0
-					int curPLikeValue =dao.curPLikeValue(user_id, seq_post);//좋아요1,싫어요2,선택안됨0
-					System.out.println("curPLikeValue의 값은: "+curPLikeValue);
-					if(curPLikeValue == -1) {//값 없음
-						dao.insertPostNotLike(user_id, seq_post, user_category);
-						rs=-1;
-						System.out.println("싫어요 삽입");
-					}else if(curPLikeValue == 0) {//0상태
-						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
-						rs=0;
-						System.out.println("싫어요");
-
-					}else if(curPLikeValue == 1) {//좋아요 한 상태
-						rs =dao.updatePostNotLike(user_id, seq_post, user_category);
-						rs=1;
-						System.out.println("좋아요 취소, 싫어요");
-					}else if(curPLikeValue == 2) {//좋아요 한 상태
-						
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
-						rs=2;
-						System.out.println("싫어요 취소 :"+rs );
-
-					}else if(curPLikeValue == 1) {//싫어요 한 상태
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
-						rs=1;
-						System.out.println("싫어요 취소");
-					}else if(curPLikeValue == 2) {//좋아요 한 상태
-						rs=2;
-						rs =dao.updatePostCancleLike(user_id, seq_post, user_category);
-						System.out.println("좋아요 취소");
-						System.out.println("싫어요");
-
-					}
-				
-					String a= Integer.toString(rs);
-					
-					System.out.println("a :" +a);
-					
-					int likeCount=dao.pLikeCount(seq_post, 1);
-					int hateCount=dao.pLikeCount(seq_post, 2);
-					String lCountStr= Integer.toString(likeCount);
-					String hCountStr=Integer.toString(hateCount);
-					String arr=a+"|"+lCountStr+"|"+hCountStr;
-					System.out.println(arr);
-					// var arr = result.split('|'); 해서 arr[0], arr[1], arr[2] 에 접근하시면 각각 a,b,c가 들어 있습니다.
-					//arr[0] == data, arr[1] ==hCountStr arr[2] ==lCountStr입니다.
-					response.getWriter().append(arr);
-				
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				
 			}
+				
+			
 			
 		}
 }

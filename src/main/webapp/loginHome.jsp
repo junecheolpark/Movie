@@ -195,7 +195,7 @@ a {
 										<a href="/wishlist.wish" class="">
 											<img class="img-fluid" id="cartIcon" src="/images/찜.png">
 										</a>
-										<a href="/Mypage/mypageIndex.jsp" class="">
+										<a href="/myPage.mem" class="">
 											<img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
 										</a>
 									</div>
