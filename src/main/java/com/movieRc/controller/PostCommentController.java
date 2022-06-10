@@ -114,9 +114,10 @@ public class PostCommentController extends HttpServlet {
 				}
 			}else if(uri.equals("/report.co")) { 
 				int seq_post = Integer.parseInt(request.getParameter("seq_post"));
-				int seq_comment=Integer.parseInt(request.getParameter("seq_comment")); 
+				int seq_comment=Integer.parseInt(request.getParameter("seq_comment"));
+				String category_check = "post_comment";
 				MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");
-				String user_category = ((MemberDTO)session.getAttribute("loginSession")).getUser_category();
+				String user_category = dto1.getUser_category();
 				String rp_content =request.getParameter("rp_content");
 				String rp_title= request.getParameter("rp_title");
 				String user_id= dto1.getUser_id();
@@ -125,7 +126,10 @@ public class PostCommentController extends HttpServlet {
 				PostCommentDAO dao =new PostCommentDAO();
 				
 				try {
-				dao.reportInsert(new ReportDTO(0,"k",rp_content,user_id,0,seq_comment,seq_post,user_category));
+
+				int rs =dao.reportInsert(new ReportDTO(0,category_check,rp_content,user_id,0,seq_comment,seq_post,user_category));
+				System.out.println("신고결과" + rs);
+          
 				}catch(Exception e) {
 					e.printStackTrace();
 				}

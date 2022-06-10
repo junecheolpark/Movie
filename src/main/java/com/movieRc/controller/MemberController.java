@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -229,6 +230,7 @@ public class MemberController extends HttpServlet {
 
         } else if (uri.equals("/myPage.mem")) { // 마이페이지 요청
             HttpSession session = request.getSession();
+            int curPage = Integer.parseInt(request.getParameter("curPage"));
             String user_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_id();
             System.out.println("user_id : " + user_id);
 
@@ -243,13 +245,17 @@ public class MemberController extends HttpServlet {
                 // 프로필이 없으면 profile 에 null
                 String profile = daoMp.select(user_id);
                 // user_id로 내가 쓴 게시글만 가져오기 
-                ArrayList<PostDTO> list = daoPost.myPost(user_id);
+                HashMap map = dao.getPageNavi(curPage);
+                ArrayList<PostDTO> list = daoPost.myPost(user_id, curPage * 10 - 9, curPage * 10);
 
                 System.out.println("profile : " + profile);
 
                 request.setAttribute("profile", profile);
                 request.setAttribute("dto", dto);
                 request.setAttribute("list", list); // 내가 쓴 게시글 list에 담아서 보내주기 
+                request.setAttribute("naviMap", map);
+                
+                
                 request.getRequestDispatcher("/Mypage/mypageIndex.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();

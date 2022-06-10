@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8");%> 
-<% response.setContentType("text/html; charset=UTF-8");%> 
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<%
+response.setContentType("text/html; charset=UTF-8");
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +15,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <!-- include libraries(jQuery, bootstrap) -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -36,8 +44,9 @@ btn {
 .container2 {
 	margin: auto;
 	margin-top: 30px;
-	width:1000px
+	width: 100%
 }
+
 header, footer {
 	background-color: black;
 }
@@ -62,6 +71,11 @@ a {
 }
 
 /* Icon */
+
+#logoutIcon {
+	width: 30px;
+	height: 30px;
+}
 #cartIcon {
 	width: 30px;
 	height: 30px;
@@ -232,7 +246,8 @@ a {
 			<nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
 				<div class="container-fluid">
 					<!-- toggle button -->
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+							data-bs-target="#navbarNavDropdown"
 							aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
@@ -249,8 +264,9 @@ a {
 									<li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
 								</c:when>
 								<c:otherwise>
+									<li class="nav-item"><a class="nav-link" href="/logout.mem">로그아웃</a></li>
 									<li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-									<li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
+									<li class="nav-item"><a class="nav-link" href="/myPage.mem?curPage=1">마이페이지</a></li>
 								</c:otherwise>
 							</c:choose>
 
@@ -258,7 +274,8 @@ a {
 						</ul>
 
 						<form class="searchForm d-flex" method="get" action="/search.movie">
-							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'> <input
+							<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.."
+								   aria-label="Search" name='val'> <input
 								type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
 							<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
 						</form>
@@ -298,15 +315,20 @@ a {
 
 							<div class="col-auto">
 								<c:if test="${not empty loginSession}">
-									<a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
+									<a href="logout.mem"><img class="img-fluid" id="logoutIcon"
+															  src="/images/logout.png"></a>
+									<a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon"
+																			src="/images/찜.png">
 									</a>
-									<a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+									<a href="/myPage.mem?curPage=1" class=""> <img class="img-fluid" id="myPageIcon"
+																		 src="/images/마이페이지.png">
 									</a>
 								</c:if>
 							</div>
 
 							<div class="col-1">
-								<button id="searchBtn" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#searchModal">
+								<button id="searchBtn" class="btn" type="button" data-bs-toggle="modal"
+										data-bs-target="#searchModal">
 									<img src="/images/searchIcon.png">
 								</button>
 							</div>
@@ -316,20 +338,26 @@ a {
 										<div class="modal-content">
 											<div class="modal-header">
 												<h5 class="modal-title m-auto">영화 찾기</h5>
-												<button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+												<button type="button" class="btn-close m-0" data-bs-dismiss="modal"
+														aria-label="Close"></button>
 											</div>
 											<div class="modal-body">
 												<form id="searchForm" class="searchForm">
 													<div class="row justify-content-center">
 														<div class="col-11">
-															<input class="searchInput form-control me-2" type="search" placeholder="영화 검색.." aria-label="Search" name='val'>
-															<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를 입력해보세요!</p>
-															<input type="hidden" name='curPage' value="1"> <input type="hidden" name='s_type' value="movieNm">
+															<input class="searchInput form-control me-2" type="search"
+																   placeholder="영화 검색.." aria-label="Search" name='val'>
+															<p class="text-black-50 text-center mt-3">찾으시는 영화가 있으신가요? 검색어를
+																입력해보세요!</p>
+															<input type="hidden" name='curPage' value="1"> <input
+																type="hidden" name='s_type' value="movieNm">
 														</div>
 													</div>
 													<div class="row justify-content-end">
 														<div class="col-3">
-															<button class="searchBtn btn btn-outline-success" type="submit">Search</button>
+															<button class="searchBtn btn btn-outline-success" type="submit">
+																Search
+															</button>
 														</div>
 													</div>
 												</form>
@@ -338,7 +366,6 @@ a {
 									</div>
 								</div>
 							</form>
-
 						</div>
 					</div>
 				</div>
@@ -346,36 +373,42 @@ a {
 		</div>
 	</header>
 	<div class="container2">
-		<form action="/modifyProc.po" id="writeForm" method="post">
-			<div class="row">
-				<div class="col">
-					<h2>게시글 작성 </h2>
-					<input style="display:none"; id="seq_post" name="seq_post" value=${dto.seq_post }>
-					<hr/>
-				</div>
+		<div class="row justify-content-center">
+			<div class="col-8">
+				<form action="/modifyProc.po" id="writeForm" method="post">
+					<div class="row">
+						<div class="col">
+							<h2>게시글 작성</h2>
+							<input style="display: none" ; id="seq_post" name="seq_post"
+								value=${dto.seq_post }>
+							<hr />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-10">
+							<input type="text" class="form-control" id="title" name="p_title"
+								placeholder="제목을 입력해 주세요." value=${dto.p_title }/>
+						</div>
+						<div class="col-2">
+							<button type="button" id="btnBack" class="btn btn-secondary">
+								취소</button>
+							<button type="submit" id="submit" class="btn btn-warning">
+								수정</button>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col">
+							<div id="summernote" name="summernote">${dto.p_content}</div>
+						</div>
+					</div>
+					<input style="display: none;" type="text" id="content"
+						name="p_content">
+				</form>
 			</div>
-			<div class="row">
-				<div class="col-10">
-					<input type="text" class="form-control" id="title" name="p_title"
-						placeholder="제목을 입력해 주세요." value=${dto.p_title}/>
-				</div>
-				<div class="col-2">
-				<button type="button" id="btnBack" class="btn btn-secondary">
-						취소</button>
-					<button type="submit" id="submit" class="btn btn-warning">
-						수정</button>
-				</div>
-			</div>
-			<br />
-			<div class="row">
-				<div class="col">
-					<div id="summernote" name="summernote">${dto.p_content}</div>
-				</div>
-			</div>
-			<input style="display:none;" type="text" id="content" name="p_content" >
-		</form>
+		</div>
 	</div>
-<!-- Footer -->
+	<!-- Footer -->
 	<footer class="py-5 text-light">
 		<div class="container">
 			<div class="row" id="bigFoot">
@@ -400,7 +433,8 @@ a {
 						<div class="col-2">
 							<h5>계정</h5>
 							<ul class="nav flex-column">
-								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
+								<li class="nav-item mb-2"><a href="/myPage.mem?curPage=1" class="nav-link p-0">마이페이지</a></li>
 								<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 								<c:if test="${loginSession.grade == 'admin'}">
 									<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
@@ -495,7 +529,8 @@ a {
 						<div class="col-4">
 							<h5>계정</h5>
 							<ul class="nav flex-column">
-								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
+								<li class="nav-item mb-2"><a href="/myPage.mem?curPage=1" class="nav-link p-0">마이페이지</a></li>
 								<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 								<c:if test="${loginSession.grade == 'admin'}">
 									<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
@@ -576,66 +611,67 @@ a {
 		$(document).ready(function() {
 			$("#summernote").summernote();
 		});
-		
+
 		$('#summernote').summernote(
 				{
-					
+
 					height : 400, // 에디터 높이
 					minHeight : null, // 최소 높이
 					maxHeight : null, // 최대 높이
-					fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
+					fontNames : [ '맑은고딕', 'Arial', 'Arial Black',
+							'Comic Sans MS', 'Courier New', ],
 					fontNamesIgnoreCheck : [ '맑은고딕' ],
 					focus : true, // 에디터 로딩후 포커스를 맞출지 여부
 					lang : "ko-KR", // 한글 설정
-					resize: false ,
+					resize : false,
 					placeholder : '최대 2048자까지 쓸 수 있습니다', //placeholder 설정
-					callbacks: {
-						onImageUpload: function(files, editor, welEditable) {
-				            for (var i = files.length - 1; i >= 0; i--) {
-				            	sendFile(files[i], this);
-				            }
-				        },
-				        onPaste: function (e) {
+					callbacks : {
+						onImageUpload : function(files, editor, welEditable) {
+							for (var i = files.length - 1; i >= 0; i--) {
+								sendFile(files[i], this);
+							}
+						},
+						onPaste : function(e) {
 							var clipboardData = e.originalEvent.clipboardData;
-							if (clipboardData && clipboardData.items && clipboardData.items.length) {
+							if (clipboardData && clipboardData.items
+									&& clipboardData.items.length) {
 								var item = clipboardData.items[0];
-								if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+								if (item.kind === 'file'
+										&& item.type.indexOf('image/') !== -1) {
 									e.preventDefault();
 								}
 							}
-				        }
+						}
 					}
-			})
+				})
 		function sendFile(file, el) {
-		var form_data = new FormData();
-      	form_data.append('file', file);
-      	$.ajax({
-        	data: form_data,
-        	type: "POST",
-        	url: '/SummerNoteImageFile.po',
-        	cache: false,
-        	contentType: false,
-        	enctype: 'multipart/form-data',
-        	processData: false,
-        	success: function(img_name) {
-          		$(el).summernote('editor.insertImage', img_name);
-          	
-        	}
-      	});
-    }
+			var form_data = new FormData();
+			form_data.append('file', file);
+			$.ajax({
+				data : form_data,
+				type : "POST",
+				url : '/SummerNoteImageFile.po',
+				cache : false,
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(img_name) {
+					$(el).summernote('editor.insertImage', img_name);
 
+				}
+			});
+		}
 
-		
-	$("#submit").on("click",function(){
-		
-		console.log($('#summernote').summernote('code'));
-		$("#content").val($('#summernote').summernote('code'));
-		
-	})
-	
-	$("#btnBack").on("click",function(){
-		location.href="detailPost.po?seq_post="+${dto.seq_post };
-	})
+		$("#submit").on("click", function() {
+
+			console.log($('#summernote').summernote('code'));
+			$("#content").val($('#summernote').summernote('code'));
+
+		})
+
+		$("#btnBack").on("click", function() {
+			location.href = "detailPost.po?seq_post=" + ${dto.seq_post};
+		})
 	</script>
 </body>
 </html>
