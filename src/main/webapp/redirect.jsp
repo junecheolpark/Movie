@@ -417,6 +417,9 @@
             width: 100%;
             height: 100%;
         }
+        .notFound {
+            border: 1px solid silver;
+        }
     </style>
     <link
             rel="stylesheet"
@@ -459,7 +462,7 @@
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
                         <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
-                            <c:when test="${not empty loginSession}">
+                            <c:when test="${empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                             </c:when>
@@ -650,33 +653,40 @@
         <div class="contentTitle">
             <span>최신 리뷰</span>
         </div>
-        <div class="reviewDiv slider">
-            <c:forEach items="${hashMap2}" var="review">
-                <c:forEach begin="0" end="9" step="1" var="i">
-                    <c:if test="${i eq review.key}">
-                        <a
-                                href="/detailView.re?movieCd=${review.value['movieDTO'].movieCd}">
-                            <div class="review slider_item">
-                                <div class="review_reviewer">
-                                    <div class="reviewer_id">
-                                            ${review.value['reviewDTO'].user_nickname}</div>
-                                    <div class="avgPoint" data-value='${review.value["avg"]}'>
-                                        <span class="star"></span>
+        <c:if test="${empty hashMap2}">
+            <div class="notFound">
+                <span>등록된 게시글이 없습니다.</span>
+            </div>
+        </c:if>
+        <c:if test="${not empty hashMap2}">
+            <div class="reviewDiv slider">
+                <c:forEach items="${hashMap2}" var="review">
+                    <c:forEach begin="0" end="9" step="1" var="i">
+                        <c:if test="${i eq review.key}">
+                            <a
+                                    href="/detailView.re?movieCd=${review.value['movieDTO'].movieCd}">
+                                <div class="review slider_item">
+                                    <div class="review_reviewer">
+                                        <div class="reviewer_id">
+                                                ${review.value['reviewDTO'].user_nickname}</div>
+                                        <div class="avgPoint" data-value='${review.value["avg"]}'>
+                                            <span class="star"></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="review_content">
-                                    <span>${review.value['reviewDTO'].r_content}</span>
-                                </div>
-                                <div class="review_movie">
+                                    <div class="review_content">
+                                        <span>${review.value['reviewDTO'].r_content}</span>
+                                    </div>
+                                    <div class="review_movie">
 										<span>${review.value['movieDTO'].movieNm},
                                                 ${review.value['movieDTO'].directors}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </c:if>
+                            </a>
+                        </c:if>
+                    </c:forEach>
                 </c:forEach>
-            </c:forEach>
-        </div>
+            </div>
+        </c:if>
         <div class="btnContainer">
             <button id='toRecentReview'>최신 리뷰 더 보기</button>
         </div>
@@ -750,7 +760,6 @@
         </div>
     </div>
 </div>
-
 <footer class="py-5 text-light">
     <div class="container">
         <div class="row" id="bigFoot">
@@ -776,6 +785,10 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
 
                         </ul>
                     </div>
@@ -786,7 +799,6 @@
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
                             <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
                             <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
                         </ul>
@@ -799,7 +811,6 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
@@ -863,23 +874,37 @@
                 </ul>
             </div>
 
-            <div class="col-4">
-                <h5>계정</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-                    <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                    <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-                </ul>
-            </div>
+            <c:choose>
+                <c:when test="${not empty loginSession}">
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
+                        </ul>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+                            <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
             <div class="col-4">
                 <h5>기타</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
