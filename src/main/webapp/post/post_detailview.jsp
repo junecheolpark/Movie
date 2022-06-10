@@ -237,6 +237,8 @@ a {
 	width: 1100px;
 	padding-top: 70px;
 	border-radius: 15px;
+	margin-bottom:30px;
+	margin-top:30px;
 }
 
 
@@ -557,7 +559,7 @@ text-align: left;
 
 							</c:when>
 							<c:otherwise>
-
+							<div class="col-5 click">
 								<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }
 									style="disabled: true;">
 									<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
@@ -570,7 +572,7 @@ text-align: left;
 
 								</button>
 								<span id="likeCount-box">${countLike }</span>
-
+</div>
 								<div class="col-5 click">
 									<button class="LHbtn" id="p_hatebefore" value=${dto.seq_post }
 										style="disabled: true;">
