@@ -221,7 +221,7 @@
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
                         <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
-                            <c:when test="${not empty loginSession}">
+                            <c:when test="${empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                             </c:when>
@@ -648,6 +648,7 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">
                                 <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
                             </c:if>
@@ -661,7 +662,6 @@
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
                             <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
                             <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
                         </ul>
@@ -674,7 +674,6 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
@@ -744,6 +743,7 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">
                                 <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
                             </c:if>
@@ -756,7 +756,6 @@
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
                             <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
                             <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
                         </ul>
@@ -769,7 +768,6 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
