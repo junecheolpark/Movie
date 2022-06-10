@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.movieRc.dao.MemberDAO;
 import com.movieRc.dao.MovieDAO;
+import com.movieRc.dao.MpDAO;
+import com.movieRc.dao.PostDAO;
 import com.movieRc.dao.ReviewDAO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.MyReviewDTO;
+import com.movieRc.dto.PostDTO;
 import com.movieRc.util.Pagination;
 
 
@@ -42,7 +46,6 @@ public class MypageController extends HttpServlet {
 			MemberDTO dto = (MemberDTO) request.getSession().getAttribute("loginSession");
 			ReviewDAO dao = new ReviewDAO();
 			String user_id = dto.getUser_id();
-			MovieDAO movieDAO = new MovieDAO();
 			
 			try {
 				int totalCnt = dao.getCount();

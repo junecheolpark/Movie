@@ -126,8 +126,10 @@ public class PostCommentController extends HttpServlet {
 				PostCommentDAO dao =new PostCommentDAO();
 				
 				try {
+
 				int rs =dao.reportInsert(new ReportDTO(0,category_check,rp_content,user_id,0,seq_comment,seq_post,user_category));
 				System.out.println("신고결과" + rs);
+          
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
