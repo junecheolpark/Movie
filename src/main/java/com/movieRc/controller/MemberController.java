@@ -169,9 +169,6 @@ public class MemberController extends HttpServlet {
                     request.setAttribute("rs", true);
                     request.setAttribute("user_id", user_id);
 
-                    ArrayList<MemberDTO> list = dao.selectAll();
-                    request.setAttribute("list", list);
-
                 } else {
                     System.out.println("아이디 찾기 실패");
                     request.setAttribute("rs", false);
@@ -192,9 +189,6 @@ public class MemberController extends HttpServlet {
                 if (user_pw != null) {
                     System.out.println("비밀번호 찾기 성공");
                     request.setAttribute("rs", true);
-
-                    ArrayList<MemberDTO> list = dao.selectAll();
-                    request.setAttribute("list", list);
 
                     String randomPassword = dao.randomPassword(7);
                     System.out.println("임시 비밀번호 : " + randomPassword);
