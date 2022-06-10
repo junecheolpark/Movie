@@ -273,7 +273,6 @@ public class PostDAO {
 
 			return rs;
 
-
 		}
 	}
 

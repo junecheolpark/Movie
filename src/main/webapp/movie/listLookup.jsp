@@ -446,14 +446,11 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-<<<<<<< HEAD
                         <li class="nav-item"><a class="nav-link" href="/post.po">자유게시판</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Member/signup.jsp">회원가입</a></li>
                         <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
-=======
-                        <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
                             <c:when test="${not empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
@@ -464,9 +461,6 @@
                                 <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
-
-
->>>>>>> 34a27205d50db772ef9002153c80f4f1e1820ffc
                     </ul>
 
                     <form class="searchForm d-flex" method="get" action="/search.movie">
@@ -485,11 +479,7 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
                         <li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-<<<<<<< HEAD
-                        <li class="nav-item"><a class="nav-link mx-2" href="/post.po">자유게시판</a></li>
-=======
                         <li class="nav-item"><a class="nav-link mx-2" href="/post.po?curPage=1">자유게시판</a></li>
->>>>>>> 34a27205d50db772ef9002153c80f4f1e1820ffc
                     </ul>
                 </div>
 

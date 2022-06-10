@@ -142,21 +142,30 @@ public class PostController extends HttpServlet {
 				PostDAO dao= new PostDAO();
 				
 				try {
-				
+					System.out.println("1");
 				dao.updateView_count(seq_post);
 				PostDTO dto1 =dao.getPost(seq_post);
 				request.setAttribute("dto", dto1);
+				System.out.println("1");
 				PostCommentDAO PostCommentDAO = new PostCommentDAO();
 				ArrayList<PostCommentDTO> list = PostCommentDAO.selectAll(seq_post);
+				System.out.println("1");
 				
 				//현재 로그인한 아이디의 좋아요 싫어요 표시
 				MemberDTO logindto =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
-				String user_id=logindto.getUser_id();
-				System.out.println("user_id:" + user_id);
-				int likeValue =dao.curPLikeValue(user_id, seq_post);
-				request.setAttribute("likeValue", likeValue);//1이면 좋아요상태,0이면표시안한상태,-1이면표시안한상태,2이면싫어요상태
+				String user_id=null;
+				if (logindto != null) {
+					user_id=logindto.getUser_id();
+					System.out.println("user_id:" + user_id);
+					int likeValue =dao.curPLikeValue(user_id, seq_post);
+					request.setAttribute("likeValue", likeValue);//1이면 좋아요상태,0이면표시안한상태,-1이면표시안한상태,2이면싫어요상태
+					
+					System.out.println("좋아요한상태? : "+likeValue);
+				}else {
+					user_id="asd";
+					System.out.println(user_id);
+				}
 				
-				System.out.println("좋아요한상태? : "+likeValue);
 				
 				
 				//좋아요 싫어요개수 얻기

@@ -12,8 +12,6 @@ import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import com.movieRc.dto.LikeCommentDTO;
-import com.movieRc.dto.Like_r_countDTO;
 import com.movieRc.dto.PostCommentDTO;
 import com.movieRc.dto.ReportDTO;
 
@@ -214,11 +212,7 @@ public class PostCommentDAO {
 	}
 	
 	public ArrayList<PostCommentDTO> selectAll(int seq_post1) throws Exception{
-<<<<<<< HEAD
-		String sql = "select * from tbl_post_comment where seq_post = ? order by 1 DESC";
-=======
 		String sql = "select * from tbl_post_comment where seq_post = ? order by seq_comment DESC";
->>>>>>> 34a27205d50db772ef9002153c80f4f1e1820ffc
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -227,16 +221,6 @@ public class PostCommentDAO {
 			
 			ArrayList<PostCommentDTO> list = new ArrayList<>();
 			while(rs.next()) {
-<<<<<<< HEAD
-				int seq_post_comment = rs.getInt(1);
-				String user_nickname = rs.getString(2);
-				String comment_date = getStringDate(rs.getDate(3));
-				String comment_content = rs.getString(4);
-				String user_id = rs.getString(5);
-				int seq_post = rs.getInt(6);
-				String user_category= rs.getString(7);
-				list.add(new PostCommentDTO(seq_post_comment,user_nickname, comment_date,  comment_content, user_id,seq_post,user_category));
-=======
 				int seq_comment = rs.getInt("seq_comment");
 				String user_nickname = rs.getString("user_nickname");
 				String comment_date = getStringDate(rs.getDate("comment_date"));
@@ -245,12 +229,10 @@ public class PostCommentDAO {
 				int seq_post = rs.getInt("seq_post");
 				String user_category= rs.getString("user_category");
 				list.add(new PostCommentDTO(seq_comment,user_nickname, comment_date,  comment_content, user_id,seq_post,user_category));
->>>>>>> 34a27205d50db772ef9002153c80f4f1e1820ffc
 			}
 			return list;			
 		}
 	}
-	
 	
 	public String getStringDate(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
