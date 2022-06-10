@@ -86,15 +86,14 @@ public class ReviewController extends HttpServlet {
             try {
 
                 String movieCd = request.getParameter("movieCd");
-                System.out.println(movieCd);
+//                System.out.println(movieCd);
                 String Sequence = request.getParameter("Sequence");
-                System.out.println(Sequence);
+//                System.out.println(Sequence);
 
                 // 그영화에 좋아요 수
                 int m_like_count = like_rDAO.like_allCount(movieCd);
                 request.setAttribute("m_like_count", m_like_count);
-                System.out.println(m_like_count);
-                // 장바구니 몇명했는지
+
                 int cnt = basketDAO.wishCnt(movieCd);
                 request.setAttribute("cnt", cnt);
                 // 평점 몇명했는지
@@ -115,8 +114,6 @@ public class ReviewController extends HttpServlet {
                 }
 
 
-
-
                 //좋아요갯수
                 ArrayList<Like_r_countDTO> like_list = like_rDAO.like_count();
                 //싫어요 갯수
@@ -126,6 +123,22 @@ public class ReviewController extends HttpServlet {
                 //tbl_movie조회
                 MovieDTO moviedto = movieDAO.selectBySeq(movieCd);
 
+
+                HashMap<Integer, String> hashMap = new HashMap<>();
+
+                String reviewer;
+
+                for(int i =0; i<list.size(); i++){
+                    reviewer = list.get(i).getUser_id();
+                    System.out.println(reviewer);
+                    if(mpDAO.exist(list.get(i).getUser_id())!=0) {
+                        String profile = mpDAO.select(list.get(i).getUser_id());
+                        hashMap.put(list.get(i).getSeq_review(), "/files/"+profile);
+                    } else hashMap.put(list.get(i).getSeq_review(), "/images/기본프로필.jpg");
+                    System.out.println(hashMap.get(list.get(i).getSeq_review()));
+                }
+
+                request.setAttribute("hashMap", hashMap);
                 request.setAttribute("reviewList", list);
                 request.setAttribute("like_list", like_list);
                 request.setAttribute("hate_list", hate_list);

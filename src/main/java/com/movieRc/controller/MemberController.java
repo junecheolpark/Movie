@@ -339,7 +339,7 @@ public class MemberController extends HttpServlet {
                 }
              // loginsession 에 들어있는 수정 전 dto를 새롭게
                 session.setAttribute("loginSession", dto);
-                response.sendRedirect("/myPage.mem");
+                response.sendRedirect("/myPage.mem?curPage=1");
                 	
             } catch (Exception e) {
                 e.printStackTrace();

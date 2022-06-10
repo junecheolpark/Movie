@@ -561,7 +561,7 @@ button {
 											<div class="col-2"></div>
 										</div> -->
 									</div>
-								</div>
+								</div>w
 								<!-- content 끝 -->
 							</div>
 						</div>
@@ -585,13 +585,13 @@ button {
 			} else { // 탈퇴 취소
 				return false;
 			}
-		})
+		});
 		$("#i_logout").on("click", function() { // 로그아웃 요청
 			location.href = "/logout.mem";
 		});
 
 		$("#i_modify").on("click", function() { // 내 정보 수정 페이지 요청
-			location.href = "/modify.mem";
+			location.href = "/modify.mem?curPage=1";
 		});
 	</script>
 

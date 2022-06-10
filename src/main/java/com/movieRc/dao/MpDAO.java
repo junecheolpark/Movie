@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
+import oracle.jdbc.proxy.annotation.Pre;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.movieRc.dto.MpDTO;
@@ -80,5 +81,18 @@ public class MpDAO {
 			return rs;
 		}
 
+	}
+
+	public int exist(String id) throws Exception {
+		String sql = "select count(*) from tbl_mp where user_id = ?";
+		try (Connection connection = bds.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
+			preparedStatement.setString(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			resultSet.next();
+
+			return resultSet.getInt(1);
+		}
 	}
 }

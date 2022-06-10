@@ -44,6 +44,7 @@ public class ReviewDAO {
             ResultSet rs = pstmt.executeQuery();
 
             ArrayList<ReviewDTO> list = new ArrayList<>();
+
             while (rs.next()) {
                 int seq_review = rs.getInt("seq_review");
                 String user_nickname = rs.getString("user_nickname");
