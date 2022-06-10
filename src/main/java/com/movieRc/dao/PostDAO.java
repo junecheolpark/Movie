@@ -272,6 +272,7 @@ public class PostDAO {
 
 			return rs;
 
+
 		}
 	}
 
@@ -305,8 +306,8 @@ public class PostDAO {
 
 			}
 		}
-
-	public int pLikeCount(int seq_post,int p_like_check) throws Exception { //p_like_check =1좋아요,2싫어요 개수
+	//p_like_check =1좋아요,2싫어요 개수
+	public int pLikeCount(int seq_post,int p_like_check) throws Exception { 
 		String sql = "select count(*) from tbl_like_p where seq_post=? and p_like_check=?";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 			

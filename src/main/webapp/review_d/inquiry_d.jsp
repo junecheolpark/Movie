@@ -164,6 +164,10 @@ body {
 	background-color: #ccc;
 	border-radius: 10px;
 }
+.movie_img img{
+	width: 100%;
+	height: 100%;
+}
 
 /*찜 버튼*/
 
@@ -492,7 +496,7 @@ body {
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link" href="/listLookup.movie?curPage=1">영화</a></li>
 							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link" href="/post/post.jsp">자유게시판</a></li>
+							<li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
 							<c:choose>
 								<c:when test="${not empty loginSession}">
 									<li class="nav-item"><a class="nav-link" href="/Member/login.jsp">로그인</a></li>
@@ -523,7 +527,7 @@ body {
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link mx-2" href="/listLookup.movie?curPage=1">영화</a></li>
 							<li class="nav-item"><a class="nav-link mx-2" href="/toReviewList.re?curPage=1">리뷰</a></li>
-							<li class="nav-item"><a class="nav-link mx-2" href="/post/post.jsp">자유게시판</a></li>
+							<li class="nav-item"><a class="nav-link mx-2" href="/post.po?curPage=1">자유게시판</a></li>
 						</ul>
 					</div>
 
@@ -618,7 +622,7 @@ body {
 			<div class="col-9">
 				<!-- 영화 코멘트 -->
 				<div class="col-10 p-2 mt-3 movie_coment">
-					<textarea id="" class="form-control content-movie" name="m_coment">영화 소개</textarea>
+					<textarea id="" class="form-control content-movie" name="m_coment" readonly>영화 소개</textarea>
 				</div>
 
 
@@ -628,6 +632,7 @@ body {
 	</div>
 	<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 	<!-- 좋아요, 댓글창 -->
+	
 	<form id="movie_comment_write" action="/write.re" method="post">
 		<div class="container">
 			<div class="row pt-4">
@@ -1258,7 +1263,7 @@ body {
 					<h5>기타</h5>
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
-						<li class="nav-item mb-2"><a href="/post/post.jsp" class="nav-link p-0">자유게시판</a></li>
+						<li class="nav-item mb-2"><a href="/post.po?curPage=1 " class="nav-link p-0">자유게시판</a></li>
 						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 					</ul>
 				</div>
@@ -1307,12 +1312,36 @@ body {
 		</div>
 
 	</footer>
+	<div class="container">
+        <div class="thumbnail"></div>
+        <p></p>
+    </div>
 	<script>
-		let msg= '${msg}';
-		console.log(msg);
-		if(msg !=""){
-			alert(msg)
-		}
+	
+	let msg= '${msg}';
+	console.log(msg);
+	if(msg !=""){
+		alert(msg)
+	}
+        
+
+		/*
+		 $.ajax({
+             method: "GET",
+             url: "https://dapi.kakao.com/v2/search/image",
+             data: {
+                 query: '${moviedto.movieNm}',
+                 
+             },
+             headers: {
+                 Authorization: "KakaoAK 0f7acd5ca96b1d76578d02adc4161263"
+             },
+         })
+         .done(function (msg) {
+           
+             $(".thumbnail").append('<img src="' + msg.documents[1].image_url + '"/>');
+         });
+		*/
 		$("#btnWrite").on(
 				"click",
 				function() {

@@ -19,44 +19,41 @@
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
 <style>
+#p_likebefore {
+	border: none;
+	margin: none;
+	background-color: rgb(240, 240, 240);
+}
+
+#p_like {
+	border: none;
+	margin: none;
+	background-color: rgb(240, 240, 240);
+}
+
+#p_hate {
+	border: none;
+	margin: none;
+	background-color: rgb(240, 240, 240);
+}
+
+#p_hatebefore {
+	border: none;
+	margin: none;
+	background-color: rgb(240, 240, 240);
+}
+
 #container {
 	margin: auto;
 	background-color: antiquewhite;
-	width: 900px;
-<<<<<<< HEAD
-	
-}
-
-.modal-content{
-text-align: left;}
-#content-box {
-	background-color: rgb(255, 254, 248);
-	height: 500px;
-	width: 800px;
-	margin: auto;
-	margin-top: 50px;
+	width: 960px;
+	padding-top: 70px;
 	border-radius: 15px;
 }
 
-#input-box {
-	width: 800px;
-	margin: auto;
-}
-
-#comment_post {
-	margin: auto;
-	width: 600px;
-	height: 80px;
-	border-radius: 10px;
-	resize: none;
-}
-
-.comment-box {
-	margin: auto;
-	margin: 20px
-}
-
-=======
+#content-box {
+	text-align: left;
+	padding: 20px;
 }
 
 .modal-content {
@@ -65,10 +62,9 @@ text-align: left;}
 
 #content-box {
 	background-color: rgb(255, 254, 248);
-	height: 500px;
+	min-height: 500px;
 	width: 800px;
 	margin: auto;
-	margin-top: 50px;
 	border-radius: 15px;
 }
 
@@ -90,7 +86,6 @@ text-align: left;}
 	margin: 20px
 }
 
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 #submit {
 	width: 70px;
 	height: 70px;
@@ -98,7 +93,7 @@ text-align: left;}
 }
 
 #content {
-	height: 400px;
+	min-height: 400px;
 }
 
 .comment-text {
@@ -129,12 +124,8 @@ text-align: left;}
 	height: 30px;
 }
 
-div {
-	border: 1px solid black;
-}
-
 .click {
-	background-color: rgb(211, 209, 209);
+	background-color: rgb(240, 240, 240);
 	border-radius: 20px;
 	margin: 4px;
 }
@@ -167,36 +158,6 @@ div {
 	background-color: rgb(197, 192, 192);
 }
 
-/* 별점 Write */
-.star-rating {
-	/* border: solid 1px #ccc; */
-	display: inline-flex;
-	flex-direction: row-reverse;
-	font-size: 1.2em;
-	justify-content: space-around;
-	padding: 0 .2em;
-	text-align: center;
-	width: 5em;
-}
-
-.star-rating input {
-	display: none;
-}
-
-.star-rating label {
-	color: #ccc;
-	cursor: pointer;
-}
-
-.star-rating :checked ~label {
-	color: rgb(0, 0, 0);
-}
-
-.star-rating label:hover, .star-rating label:hover ~label {
-	color: #fc0;
-}
-
-/* -----------------------------------------------------------*/
 /* 리플 박스 */
 #btnLikeUp2 {
 	display: none;
@@ -233,54 +194,6 @@ div {
 	height: 30px;
 	border-radius: 15px;
 }
-
-/* 별점 reply */
-#r_grade_star2 {
-	display: none;
-}
-
-.reply-star-rating1 {
-	/* border: solid 1px #ccc; */
-	display: inline-flex;
-	flex-direction: row-reverse;
-	font-size: 1.1em;
-	justify-content: space-around;
-	padding: 0 em;
-	text-align: center;
-	width: em;
-}
-
-.reply-star-rating {
-	/* border: solid 1px #ccc; */
-	display: inline-flex;
-	flex-direction: row-reverse;
-	font-size: 1.1em;
-	justify-content: space-around;
-	padding: 0 em;
-	text-align: center;
-	width: em;
-}
-
-.reply-star-rating1 #r_star {
-	color: #ccc;
-}
-
-.reply-star-rating input {
-	display: none;
-}
-
-.reply-star-rating label {
-	color: #ccc;
-	cursor: pointer;
-}
-
-.reply-star-rating :checked ~label {
-	color: rgb(0, 0, 0);
-}
-
-.reply-star-rating label:hover, .reply-star-rating label:hover ~label {
-	color: #fc0;
-}
 </style>
 </head>
 
@@ -294,235 +207,311 @@ div {
 					<h4>제목 : ${dto.p_title}</h4>
 
 				</div>
+				<hr>
 			</div>
 
 			<div class="row">
-<<<<<<< HEAD
-				<div class="col-2"><span>닉네임:</span>${dto.user_nickname }</div>
-=======
 				<div class="col-2">
 					<span>닉네임:</span>${dto.user_nickname }</div>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 				<div class="col-6"></div>
 				<div class="col-4">${dto.p_date },<span>조회수:</span>${dto.p_view_count}</div>
+				<hr>
 			</div>
 			<div class="row">
-<<<<<<< HEAD
-				<div class="col-8"><span>글번호:</span>${dto.seq_post }</div>
-				<div class="col">
-					<div class="row">
-						<div class="col-5 click">
-							<button id="p_likebefore" value=${dto.seq_post }><img src="resources/images/likebefore.png" alt="좋아요" id="like" /></button>
-							<button id="p_like" style="display:none;" value=${dto.seq_post }><img src="resources/images/like.png" alt="좋아요" id="like" /></button>
-							
-						</div>
-						<div class="col-5 click">
-						<button id="p_hatebefore" value=${dto.seq_post }><img src="resources/images/hatebefore.png" alt="싫어요" id="hate" /></button>
-							<button id="p_hate" style="display:none;" value=${dto.seq_post }><img src="resources/images/hate.png" alt="싫어요" id="hate" /></button>
-=======
 				<div class="col-8">
 					<span>글번호:</span>${dto.seq_post }</div>
 				<div class="col">
 					<div class="row">
-						<div class="col-5 click">
-							<button id="p_likebefore" value=${dto.seq_post }>
-								<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
-							</button>
-							<button id="p_like" style="display: none;" value=${dto.seq_post }>
-								<img src="resources/images/like.png" alt="좋아요" id="like" />
-							</button>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
 
-						</div>
-						<div class="col-5 click">
-							<button id="p_hatebefore" value=${dto.seq_post }>
-								<img src="resources/images/hatebefore.png" alt="싫어요" id="hate" />
-							</button>
-							<button id="p_hate" style="display: none;" value=${dto.seq_post }>
-								<img src="resources/images/hate.png" alt="싫어요" id="hate" />
-							</button>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
-						</div>
+								<div class="col-5 click">
+									<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }>
+										<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
+
+
+									</button>
+									<button class="LHbtn" id="p_like" style="display: none;"
+										value=${dto.seq_post }>
+										<img src="resources/images/like.png" alt="좋아요" id="like" />
+
+									</button>
+									<span id="likeCount-box">${countLike }</span>
+								</div>
+								<div class="col-5 click">
+									<button class="LHbtn" id="p_hatebefore" value=${dto.seq_post }>
+										<img src="resources/images/hatebefore.png" alt="싫어요" id="hate" />
+									</button>
+									<button class="LHbtn" id="p_hate" style="display: none;"
+										value=${dto.seq_post }>
+										<img src="resources/images/hate.png" alt="싫어요" id="hate" />
+									</button>
+									<span id="hateCount-box">${countHate }</span>
+								</div>
+
+							</c:when>
+							<c:otherwise>
+
+								<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }
+									style="disabled: true;">
+									<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
+
+
+								</button>
+								<button class="LHbtn" id="p_like"
+									style="display: none; disabled: true;" value=${dto.seq_post }>
+									<img src="resources/images/like.png" alt="좋아요" id="like" />
+
+								</button>
+								<span id="likeCount-box">${countLike }</span>
+
+								<div class="col-5 click">
+									<button class="LHbtn" id="p_hatebefore" value=${dto.seq_post }
+										style="disabled: true;">
+										<img src="resources/images/hatebefore.png" alt="싫어요" id="hate" />
+									</button>
+									<button class="LHbtn" id="p_hate"
+										style="display: none; disabled: true;" value=${dto.seq_post }>
+										<img src="resources/images/hate.png" alt="싫어요" id="hate" />
+									</button>
+									<span id="hateCount-box">${countHate }</span>
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
+
+
 					<script>
-					/* 싫어요  */
-					$("#p_hatebefore").on("click",function(){
-						
-<<<<<<< HEAD
-						$("#p_hatebefore").css("display", "none");
-						$("#p_hate").css("display","block");
-					})
-					$("#p_hate").on("click",function(){
-						$("#p_hate").css("display","none");
-						$("#p_hatebefore").css("display", "block");
-=======
-						let seq_post = $("#p_hatebefore").val();
-						console.log(seq_post);
-						$.ajax({
-							url : "/phate.po?seq_post="+ seq_post,
-							type : "get",			
-							success : function(data) {
-								console.log(data);
-									if(data==0){
-										console.log("싫어요")
-										$("#p_hatebefore").css("display", "none");
-										$("#p_hate").css("display","block");
-									}else if(data==1){
-										console.log("싫어요 취소")
-										$("#p_hate").css("display", "none");
-										$("#p_hatebefore").css("display","block")
-									}else if(data==2){
-										console.log("좋아요 취소");
-										console.log("싫어요");
-										$("#p_likebefore").css("display","block");
-										$("#p_like").css("display", "none");
-										$("#p_hatebefore").css("display", "none");
-										$("#p_hate").css("display","block");
-									}
-							},
-							error : function(e) {
-								console.log(e);
-							}
-						})
-						
-					})
-										
-					$("#p_hate").on("click",function(){
-						
-						let seq_post = $("#p_hate").val();
-						console.log(seq_post);
-						$.ajax({
-							url : "/phate.po?seq_post="+ seq_post,
-							type : "get",			
-							success : function(data) {
-								console.log(data);
-									if(data==0){
-										console.log("싫어요")
-										$("#p_hatebefore").css("display", "none");
-										$("#p_hate").css("display","block");
-									}else if(data==1){
-										console.log("싫어요 취소")
-										$("#p_hate").css("display", "none");
-										$("#p_hatebefore").css("display","block")
-									}else if(data==2){
-										console.log("좋아요 취소");
-										console.log("싫어요");
-										$("#p_likebefore").css("display","block");
-										$("#p_like").css("display", "none");
-										$("#p_hatebefore").css("display", "none");
-										$("#p_hate").css("display","block");
-									}
-							},
-							error : function(e) {
-								console.log(e);
-							}
-						})
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
-						
-					})
-					/*좋아요  */
-					$("#p_likebefore").on("click",function(){
-<<<<<<< HEAD
-						
-						
-						
-						
-						let seq_post = $("#p_likebefore").val();
-						console.log(seq_post);
-						$.ajax({
-							url : "/pLike.po?seq_post="+ seq_post,
-							type : "get",			
-							success : function(data) {
-									if(data==="true"){
-										console.log("좋아요 성공")
-										$("#p_likebefore").css("display", "none");
-										$("#p_like").css("display","block");
-									}else{
-										console.log("좋아요 실패")
-										
-=======
-						let seq_post = $("#p_likebefore").val();
-						
-						$.ajax({
-							url : "/plike.po?seq_post="+ seq_post,
-							type : "get",			
-							success : function(data) {
-								console.log(data);
-									if(data==0){
-										console.log("좋아요")
-										$("#p_likebefore").css("display", "none");
-										$("#p_like").css("display","block");
-									}else if(data==1){
-										console.log("좋아요 취소")
-										$("#p_like").css("display", "none");
-										$("#p_likebefore").css("display","block")
-									}else if(data==2){
-										console.log("싫어요 취소");
-										console.log("좋아요");
-										$("#p_hatebefore").css("display","block");
-										$("#p_hate").css("display", "none");
-										$("#p_likebefore").css("display", "none");
-										$("#p_like").css("display","block");
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
-									}
-							},
-							error : function(e) {
-								console.log(e);
-							}
-						})
-						
-					})
-					$("#p_like").on("click",function(){
-<<<<<<< HEAD
-						$("#p_like").css("display","none");
-						$("#p_likebefore").css("display", "block");
-=======
-						let seq_post = $("#p_like").val();
-						
-						$.ajax({
-							url : "/phate.po?seq_post="+ seq_post,
-							type : "get",			
-							success : function(data) {
-								console.log(data);
-								if(data==0){
-									console.log("좋아요")
-									$("#p_likebefore").css("display", "none");
-									$("#p_like").css("display","block");
-								}else if(data==1){
-									console.log("좋아요 취소")
-									$("#p_like").css("display", "none");
-									$("#p_likebefore").css("display","block")
-								}else if(data==2){
-									console.log("싫어요 취소");
-									console.log("좋아요");
-									$("#p_hatebefore").css("display","block");
-									$("#p_hate").css("display", "none");
-									$("#p_likebefore").css("display", "none");
-									$("#p_like").css("display","block");
-								}
-						},
-							error : function(e) {
-								console.log(e);
-							}
-						})
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
-						
-					})
+					var arr=null;
+						/* 싫어요  */
+						$("#p_hatebefore").on(
+								"click",
+								function() {
+									$("#countHate").val(${countHate });
+									let seq_post = $("#p_hatebefore").val();
+									console.log(seq_post);
+									$.ajax({
+										url : "/phate.po?seq_post=" + seq_post,
+										type : "get",
+										success : function(data) {
+											
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+								
+											 
+											if ( arr[0] == 0 ||  arr[0] == -1) {
+												console.log(data);
+												alert("싫어요");
+												$("#p_hatebefore").css(
+														"display", "none");
+												$("#p_hate").css("display",
+														"inline-block");
+											} else if ( arr[0] == 1) {
+												console.log( arr[0]);
+												alert("좋아요 취소 after 싫어요");
+												
+												$("#p_likebefore").css(
+														"display", "inline-block");
+												$("#p_like").css("display",
+														"none");
+												$("#p_hatebefore").css(
+														"display", "none");
+												$("#p_hate").css("display",
+														"inline-block");
+											} else if ( arr[0] == 2) {
+												console.log(data);
+												alert("싫어요 취소");
+												$("#p_hate").css("display",
+														"none");
+												$("#p_hatebefore").css(
+														"display", "inline-block")
+												
+											}
+											 $("#likeCount-box").text(arr[1]);
+											 $("#hateCount-box").text(arr[2]);
+											
+										},error : function(e) {
+											console.log(e);
+										}
+									})
+
+								})
+
+						$("#p_hate").on(
+								"click",
+								function() {
+									$("#countHate").val(${countHate });
+									let seq_post = $("#p_hate").val();
+									console.log(seq_post);
+									$.ajax({
+										url : "/phate.po?seq_post=" + seq_post,
+										type : "get",
+										success : function(data) {
+											
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+											
+											 
+											if ( arr[0] == 0 ||  arr[0] == -1) {
+												console.log(data);
+												alert("싫어요");
+												$("#p_hatebefore").css(
+														"display", "none");
+												$("#p_hate").css("display",
+														"inline-block");
+											} else if ( arr[0] == 1) {
+												console.log( arr[0]);
+												alert("좋아요 취소 after 싫어요");
+												
+												$("#p_likebefore").css(
+														"display", "inline-block");
+												$("#p_like").css("display",
+														"none");
+												$("#p_hatebefore").css(
+														"display", "none");
+												$("#p_hate").css("display",
+														"inline-block");
+											} else if ( arr[0] == 2) {
+												console.log(data);
+												alert("싫어요 취소");
+												$("#p_hate").css("display",
+														"none");
+												$("#p_hatebefore").css(
+														"display", "inline-block")
+												
+											}
+											
+											 $("#likeCount-box").text(arr[1]);
+											 $("#hateCount-box").text(arr[2]);
+
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									})
+
+								})
+						/*좋아요  */
+						$("#p_likebefore").on(
+								"click",
+								function() {
+									
+									let seq_post = $("#p_likebefore").val();
+
+									$.ajax({
+										url : "/pLike.po?seq_post=" + seq_post,
+										type : "get",
+										success : function(data) {
+											console.log(data);
+
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+											 
+											if (arr[0] == 0 || arr[0] == -1) {
+												console.log(arr[0]);
+												alert("좋아요");
+												$("#p_likebefore").css(
+														"display", "none");
+												$("#p_like").css("display",
+														"inline-block");
+											} else if (arr[0] == 1) {
+												console.log(arr[0]);
+												alert("좋아요 취소");
+												$("#p_like").css("display",
+														"none");
+												$("#p_likebefore").css(
+														"display", "inline-block")
+											} else if (arr[0] == 2) {
+												console.log(arr[0]);										
+												alert("싫어요 취소 after 좋아요");
+												$("#p_hatebefore").css(
+														"display", "inline-block");
+												$("#p_hate").css("display",
+														"none");
+												$("#p_likebefore").css(
+														"display", "none");
+												$("#p_like").css("display",
+														"inline-block");
+											}
+											 $("#likeCount-box").text(arr[1]);
+											 $("#hateCount-box").text(arr[2]);
+
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									})
+									console.log(${countLike });
+									$("#countLike").val(${countLike });
+								})
+						$("#p_like").on(
+								"click",
+								function() {
+									let seq_post = $("#p_like").val();
+
+									
+									
+									$.ajax({
+										url : "/pLike.po?seq_post=" + seq_post,
+										type : "get",
+										success : function(data) {
+											
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+											
+											if (arr[0] == 0 || arr[0] == -1) {
+												console.log(data);							
+												alert("좋아요");
+												$("#p_likebefore").css(
+														"display","inline-block" );
+												$("#p_like").css("display",
+														"none");
+											} else if (arr[0] == 1) {
+												console.log(data);
+												alert("좋아요 취소");
+												$("#p_like").css("display",
+														"none");
+												$("#p_likebefore").css(
+														"display", "inline-block")
+											} else if (arr[0] == 2) {
+												console.log(data);
+												alert("싫어요 취소 after 좋아요");
+												
+												$("#p_hatebefore").css(
+														"display", "inline-block");
+												$("#p_hate").css("display",
+														"none");
+												$("#p_likebefore").css(
+														"display", "none");
+												$("#p_like").css("display",
+														"inline-block");
+											}
+											 $("#likeCount-box").text(arr[1]);
+											 $("#hateCount-box").text(arr[2]);
+
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									})
+									console.log(${countLike });
+									$("#countLike").val(${countLike });
+								})
 					</script>
 				</div>
+				<hr>
 			</div>
 			<div class="row">
-<<<<<<< HEAD
-				<div class="col" id="content"><strong>내용:</strong>${dto.p_content }</div>
-=======
 				<div class="col" id="content">
 					<strong>내용:</strong>${dto.p_content }</div>
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
-			</div>
 
+			</div>
+			<hr>
 
 			<!-- 수정 버튼영역 -->
 			<div id="user-box">
 				<div class="row">
+
 					<c:if test="${loginSession.user_id eq dto.user_id}">
 						<div class="col-6">
 							<button type="button" class="btn btn-warning" id="btnModify">수정</button>
@@ -578,7 +567,7 @@ div {
 		</div>
 		<br /> <br />
 		<div class="comment-box">
-			<div class="row body-reply p-3">
+			<div class="row body-review p-3" id="contentBox">
 				<c:if test="${empty post_commentList}">
 					<%--등록된 댓글이 없다면 --%>
 					<div class="col-12">
@@ -590,7 +579,7 @@ div {
 
 				<c:if test="${not empty post_commentList}">
 					<c:forEach items="${post_commentList}" var="post_comment">
-						<from id="like_comentForm" action="/modify.po" method="post">
+
 						<div class="container">
 							<div class="row pt-4">
 
@@ -613,15 +602,9 @@ div {
 														data-bs-whatever="@getbootstrap"
 														style="background-color: white; border: none;">
 														<img src="resources/images/report.png" height="80%">
-<<<<<<< HEAD
-														<input id="seqReport" value=${post_comment.seq_post_comment} style="display:none;">
-=======
-														<input id="seqReport"
-															value=${post_comment.seq_post_comment
-															}
-															style="display: none;">
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 													</button>
+													<input style="display: none;" id="seqReport"
+														value="${post_comment.seq_post_comment}">
 													<div class="modal fade" id="exampleModal" tabindex="-1"
 														aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog">
@@ -634,15 +617,7 @@ div {
 																	</div>
 																	<div class="modal-body">
 
-																		<div class="mb-3">
-																			<label for="message-title" class="col-form-label">Title:</label>
-																			<input type="text" class="form-control" id="message-title" name="rp_title"/>
-																		</div>
-																		<div class="mb-3">
-																			<label for="message-text" class="col-form-label">Message:</label>
-																			<textarea class="form-control" id="message-text" name="rp_content"> </textarea>
-																				id="message-title" name="rp_title" />
-																		</div>
+
 																		<div class="mb-3">
 																			<label for="message-text" class="col-form-label">Message:</label>
 																			<textarea class="form-control" id="message-text"
@@ -663,81 +638,373 @@ div {
 												</div>
 											</div>
 
-											<div class="row body-post_comment">
+											<div class="row body-post_comment body-review">
 												<div class="col-10">
-													<textarea id="" class="form-control content-reply ps-2"
+													<textarea style="resize: none;" id=""
+														class="form-control content-reply ps-2"
 														name="comment_content" placeholder="댓글내용" readonly>${post_comment.comment_content}</textarea>
 												</div>
 
 												<!-- 수정,삭제버튼 -->
-												<div class="col-2 ps-3">
+												<c:choose>
+													<c:when
+														test="${loginSession.getUser_id() eq post_comment.getUser_id() }">
+														<div class="col-2 ps-3">
 
-													<div class="col" id="divWrite">
-														<button type=submit class="btn mt-2 btnSave" id="btnSave"
-															value="${post_comment.seq_post_comment}">등록</button>
-													</div>
+															<div class="col" id="divWrite">
+																<button type=submit
+																	class="btn mt-2 btnSave complete-reply" id="btnSave"
+																	value="${post_comment.seq_post_comment}">등록</button>
+															</div>
 
-													<div class="dropdown" id="modify_box">
+															<div class="dropdown" id="modify_box">
 
-														<button type="button" class="btn btnModify" id=""
-															data-bs-toggle="dropdown" aria-expanded="true">
-															<img src="resources/images/modify.png" width="50%;">
-														</button>
-														<ul class="dropdown-menu"
-															aria-labelledby="dropdownMenuButton1">
-															<li><button
-																	class="dropdown-item modify-post_comment"
-																	value="${post_comment.seq_post_comment}">수정</button></li>
-															<li><button
-																	class="dropdown-item delete-post_comment"
-																	value="${post_comment.seq_post_comment}">삭제</button></li>
-														</ul>
-													</div>
-												</div>
+																<button type="button" class="btn btnModify" id=""
+																	data-bs-toggle="dropdown" aria-expanded="true">
+																	<img src="resources/images/modify.png" width="50%;">
+																</button>
+																<ul class="dropdown-menu"
+																	aria-labelledby="dropdownMenuButton1">
+																	<li><button
+																			class="dropdown-item modify-post_comment modify-review"
+																			value="${post_comment.seq_post_comment}">수정</button></li>
+																	<li><button
+																			class="dropdown-item delete-post_comment delete-review"
+																			value="${post_comment.seq_post_comment}">삭제</button></li>
+																</ul>
+															</div>
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="col-2 ps-3"></div>
+													</c:otherwise>
+												</c:choose>
 											</div>
 
 											<div class="row mt-1 likeBox">
 												<div class="col-lg-7 col-md-5 ms-2">${post_comment.comment_date}</div>
 
-												<div class="row col-lg-2 col-md-3 m-1 like_round">
-													<div class="col-4 m-0">
-														<input type="image" id="btnLikeUp" class=""
-															value="${post_comment.seq_post_comment}"
-															src="resources/images/likebefore.png"> <input
-															type="image" id="btnLikeUp2" class=""
-															value="${post_comment.seq_post_comment}"
-															src="resources/images/like.png">
-													</div>
-													<div class="col m-0">
-														<span class="">123</span>
-													</div>
-												</div>
-												<div class="row col-lg-2 col-md-3 m-1 like_round">
-													<div class="col-4 m-0">
-														<input type="image" id="btnHateUp" class="mt-1"
-															value="${post_comment.seq_post_comment}"
-															src="resources/images/hatebefore.png" height="65%">
-														<input type="image" id="btnHateUp2" class="mt-1"
-															value="${post_comment.seq_post_comment}"
-															src="resources/images/hate.png" height="65%">
-													</div>
-													<div class="col m-0">
-														<span class="">123</span>
-													</div>
-												</div>
+
+												<!-- 댓글에 좋아요 싫어요 -->
+												<c:choose>
+													<c:when test="${not empty loginSession}">
+														<div class="row col-lg-2 col-md-3 m-1 like_round">
+															<div class="col-4 m-0">
+																<div class="like-box">
+																<button id="p_c_likebefore" class="p_c_likebefore"
+																	value="${post_comment.seq_post_comment}">
+																	<img src="resources/images/likebefore.png" alt="좋아요"
+																		id="like" />
+																		
+																</button>
+																<button id="p_c_like" class="p_c_like" style="display: none;"
+																	value="${post_comment.seq_post_comment}">
+																	<img src="resources/images/like.png" alt="좋아요"
+																		id="like" />
+																</button>
+																</div>
+															</div>
+															<div class="col m-0">
+																<span id="c_likeCount-box">d${c_countLike}</span>
+															</div>
+														</div>
+														<div class="row col-lg-2 col-md-3 m-1 like_round">
+															<div class="col-4 m-0">
+															<div class="hate-box">
+																<button id="p_c_hatebefore" class="p_c_hatebefore"
+																	value="${post_comment.seq_post_comment}">
+																	<img src="resources/images/hatebefore.png" alt="싫어요"
+																		id="hate" />
+																	
+																</button>
+																<button id="p_c_hate" style="display: none;" class="p_c_hate"
+																	value="${post_comment.seq_post_comment}">
+																	<img src="resources/images/hate.png" alt="싫어요"
+																		id="hate" />
+																</button>
+																</div>
+															</div>
+															<div class="col m-0">
+																<span id="hateCount-box">d${c_countHate}</span>
+															</div>
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="row col-lg-2 col-md-3 m-1 like_round">
+															<div class="col-4 m-0">
+															<div class="like-box">
+																<button id="p_c_likebefore" class="p_c_likebefore" style="disabled: true;"
+																	value="${post_comment.seq_post_comment}">
+																	<img src="resources/images/likebefore.png" alt="좋아요"
+																		id="like" />
+																</button>
+																<button id="p_c_like" class="p_c_like"
+																	style="display: none; disabled: true;"
+																	value="${post_comment.seq_post_comment}">
+																	<img src="resources/images/like.png" alt="좋아요"
+																		id="like" />
+																</button>
+																</div>
+															</div>
+															<div class="col m-0">
+																<span id="c_likeCount-box">${c_countLike}</span>
+															</div>
+														</div>
+														<div class="row col-lg-2 col-md-3 m-1 like_round">
+															<div class="col-4 m-0">
+															<div class="hate-box">
+																<button id="p_c_hatebefore" style="disabled: true;" class="p_c_hatebefore"
+																	value="${post_comment.seq_post_comment}">
+																	<img src="resources/images/hatebefore.png" alt="싫어요"
+																		id="hate" />
+																</button>
+																<button id="p_c_hate" class="p_c_hate"
+																	style="display: none; disabled: true;"
+																	value="${post_comment.seq_post_comment}">
+																	<img src="resources/images/hate.png" alt="싫어요"
+																		id="hate" />
+																</button>
+																</div>
+															</div>
+															<div class="col m-0">
+																<span id="hateCount-box">${c_countHate}</span>
+															</div>
+														</div>
+													</c:otherwise>
+												</c:choose>
+												<!-- 댓글에 좋아요 싫어요 Script-->
+												<script>
+												var arr=null;
+												/* 싫어요  */
+												
+											$("#p_c_hatebefore").on(
+												"click",
+												function(e) {
+													
+												$("#c_countHate").val(${c_countHate });
+												let seq_post_comment = $("#p_c_hatebefore").val();
+												console.log(seq_post_comment);
+												$.ajax({
+												url : "/p_c_hate.co?seq_post_comment=" + seq_post_comment,
+												type : "get",
+												success : function(data) {
+												
+												 arr = data.split('|'); 
+												 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+								
+											 
+												if ( arr[0] == 0 ||  arr[0] == -1) {
+													console.log(data);
+													alert("싫어요");
+													$("#p_c_hatebefore").css(
+															"display", "none");
+													$("#p_c_hate").css("display",
+															"block");
+												} else if ( arr[0] == 1) {
+													console.log( arr[0]);
+													alert("좋아요 취소 after 싫어요");
+													
+													$("#p_c_likebefore").css(
+															"display", "block");
+													$("#p_c_like").css("display",
+															"none");
+													$("#p_c_hatebefore").css(
+															"display", "none");
+													$("#p_c_hate").css("display",
+															"block");
+												} else if ( arr[0] == 2) {
+													console.log(data);
+													alert("싫어요 취소");
+													$("#p_c_hate").css("display",
+															"none");
+													$("#p_c_hatebefore").css(
+															"display", "block")
+													
+												}
+											 	$("#c_likeCount-box").text(arr[1]);
+											 	$("#c_hateCount-box").text(arr[2]);
+												
+											},error : function(e) {
+												console.log(e);
+											}
+										})
+	
+									})
+	
+									$("#p_c_hate").on(
+										"click",
+										function() {
+											$("#c_countHate").val(${c_countHate });
+											let seq_post_comment = $("#p_c_hate").val();
+											console.log(seq_post_comment);
+											$.ajax({
+											url : "/p_c_hate.co?seq_post_comment=" + seq_post_comment,
+											type : "get",
+											success : function(data) {
+												
+											 	arr = data.split('|'); 
+											 	console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+												
+											 	
+												if ( arr[0] == 0 ||  arr[0] == -1) {
+													console.log(data);
+													alert("싫어요");
+													$("#p_c_hatebefore").css(
+															"display", "none");
+													$("#p_c_hate").css("display",
+															"block");
+												} else if ( arr[0] == 1) {
+													console.log( arr[0]);
+													alert("좋아요 취소 after 싫어요");
+													
+													$("#p_c_likebefore").css(
+															"display", "block");
+													$("#p_c_like").css("display",
+															"none");
+													$("#p_c_hatebefore").css(
+															"display", "none");
+													$("#p_c_hate").css("display",
+															"block");
+												} else if ( arr[0] == 2) {
+													console.log(data);
+													alert("싫어요 취소");
+													$("#p_c_hate").css("display",
+															"none");
+													$("#p_c_hatebefore").css(
+															"display", "block")
+													
+												}
+												
+											 	$("#c_likeCount-box").text(arr[1]);
+											 	$("#c_hateCount-box").text(arr[2]);
+	
+											},
+											error : function(e) {
+												console.log(e);
+											}
+										})
+	
+									})
+										/*좋아요  */
+										$("#p_c_likebefore").on(
+										"click",
+											function() {
+										
+												let seq_post_comment = $("#p_c_likebefore").val();
+	
+												$.ajax({
+													url : "/p_c_Like.co?seq_post_comment=" + seq_post_comment,
+													type : "get",
+													success : function(data) {
+													console.log(data);
+		
+													 arr = data.split('|'); 
+													 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+												 
+													if (arr[0] == 0 || arr[0] == -1) {
+															console.log(arr[0]);
+														alert("좋아요");
+														$("#p_c_likebefore").css(
+															"display", "none");
+														$("#p_c_like").css("display",
+															"block");
+													} else if (arr[0] == 1) {
+													console.log(arr[0]);
+														alert("좋아요 취소");
+														$("#p_c_like").css("display",
+															"none");
+														$("#p_c_likebefore").css(
+															"display", "block")
+													} else if (arr[0] == 2) {
+													console.log(arr[0]);										
+													alert("싫어요 취소 after 좋아요");
+														$("#p_c_hatebefore").css(
+															"display", "block");
+														$("#p_c_hate").css("display",
+															"none");
+														$("#p_c_likebefore").css(
+															"display", "none");
+														$("#p_c_like").css("display",
+															"block");
+														}
+											 		$("#c_likeCount-box").text(arr[1]);
+											 		$("#c_hateCount-box").text(arr[2]);
+		
+												},
+												error : function(e) {
+													console.log(e);
+												}
+											})
+											console.log(${c_countLike });
+											$("#c_countLike").val(${c_countLike });
+										})
+								$("#p_c_like").on(
+										"click",
+										function() {
+										let seq_post_comment = $("#p_c_like").val();
+									$.ajax({
+										url : "/p_c_Like.co?seq_post_comment=" + seq_post_comment,
+										type : "get",
+										success : function(data) {
+											
+											 arr = data.split('|'); 
+											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
+											
+											if (arr[0] == 0 || arr[0] == -1) {
+												console.log(data);							
+												alert("좋아요");
+												$("#p_c_likebefore").css(
+														"display","block" );
+												$("#p_c_like").css("display",
+														"none");
+											} else if (arr[0] == 1) {
+												console.log(data);
+												alert("좋아요 취소");
+												$("#p_c_like").css("display",
+														"none");
+												$("#p_c_likebefore").css(
+														"display", "block")
+											} else if (arr[0] == 2) {
+												console.log(data);
+												alert("싫어요 취소 after 좋아요");
+												
+												$("#p_c_hatebefore").css(
+														"display", "block");
+												$("#p_c_hate").css("display",
+														"none");
+												$("#p_c_likebefore").css(
+														"display", "none");
+												$("#p_c_like").css("display",
+														"block");
+											}
+											 $("#c_likeCount-box").text(arr[1]);
+											 $("#c_hateCount-box").text(arr[2]);
+
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									})
+									console.log(${c_countLike });
+									$("#c_countLike").val(${c_countLike });
+								})
+					</script>
+												<!-- 댓글에 좋아요 싫어요 Script끝-->
+
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						</from>
+
 					</c:forEach>
 				</c:if>
 			</div>
 			<!-- 댓글 출력 영역 끝-->
 
 		</div>
+
 		<!-- 댓글 영역 끝 -->
 		<!-- 하단 버튼 영역 -->
 		<div class="container container-footer">
@@ -745,135 +1012,136 @@ div {
 				<div class="col-2">
 					<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
 				</div>
-<<<<<<< HEAD
-				
-=======
 
->>>>>>> 5b804f3585dcfc25220148a25a41dfdd592461e6
 			</div>
 		</div>
 	</div>
 	<script>
-			//싫어요 좋아요버튼 post
-			/* $("#p_likebefore").on("click",function(e){
-				let seq_post = "${dto.seq_post}";
-				$.ajax({
-					url : "/pLike.po?seq_post="+ seq_post,
-					type : "get",			
-					success : function(data) {
-							if(data==="true"){
-								console.log("좋아요 성공")
-							}else{
-								console.log("좋아요 실패")
-							}
-					},
-					error : function(e) {
-						console.log(e);
-					}
-				})
-			}) */
-
-			//모달 입력후 메세지 보냈을경우
-			$("#sendMessage").on("click",function(e) {
-				
-				let seq_post = "${dto.seq_post}";
-						let seq_post_comment=$("#seqReport").val()
-						//  $("#message").val($("#message-text").val());
-						if ($("#message-title").val() === ""
-								|| $("#message-text").val() === "") {
-							alert("제목과 메세지를 제대로 입력하지 않았습니다.");
-							return;
+		//싫어요 좋아요버튼 post
+		/* $("#p_likebefore").on("click",function(e){
+			let seq_post = "${dto.seq_post}";
+			$.ajax({
+				url : "/pLike.po?seq_post="+ seq_post,
+				type : "get",			
+				success : function(data) {
+						if(data==="true"){
+							console.log("좋아요 성공")
+						}else{
+							console.log("좋아요 실패")
 						}
-					
-						let rp_title =$("#message-title").val();
-						let rp_content =$("#message-text").val();
-						let data = $("#reportForm").serialize();
-						console.log(rp_title);
-						console.log(rp_content);
-						console.log(data);
-						$.ajax({
-							url : "/report.co",
-							type : "post",	
-							data : {
-								seq_post: seq_post,
-								seq_post_comment : seq_post_comment,
-								rp_title : rp_title,
-								rp_content : rp_content
-							},	
-							success : function() {
-								$("#exampleModal").modal('hide');
-								
-							},
-							error : function(e) {
-								console.log(e);
-							}
-						})
+				},
+				error : function(e) {
+					console.log(e);
+				}
+			})
+		}) */
 
-					});
-		
-		$(".btn-report").on("click", function() {
-			/*모달 스크립트  */
-			var exampleModal = document.getElementById("exampleModal");
-			exampleModal.addEventListener("show.bs.modal", function(event) {
-				// Button that triggered the modal
-				var button = event.relatedTarget;
-				// Extract info from data-bs-* attributes
-				var recipient = button.getAttribute("data-bs-whatever");
-				// If necessary, you could initiate an AJAX request here
-				// and then do the updating in a callback.
-				//
-				// Update the modal's content.
-				var modalTitle = exampleModal.querySelector(".modal-title");
-				var modalBodyInput = exampleModal
-						.querySelector(".modal-body input");
-
-				modalTitle.textContent = "Report";
-		})
-		});
-		// 댓글 수정 버튼에게 이벤트 부여
-		$(".body-reply").on(
+		//모달 입력후 메세지 보냈을경우
+		$("#sendMessage").on(
 				"click",
-				".modify-reply",
 				function(e) {
-					$(e.target).parent(".body-btnDefault-reply").css("display",
-							"none"); // 수정삭제 버튼 감추기
-					$(e.target).parent().next(".body-btnAfter-reply").css(
-							"display", "block"); // 취소완료 버튼 보이기
-					// 댓글 수정가능하게끔 readonly 속성 풀어주기 
-					$(e.target).parent(".body-btnDefault-reply").prev()
-							.children("textarea").attr("readonly", false);
-					$(e.target).parent(".body-btnDefault-reply").prev()
-							.children("textarea").focus();
+
+					let seq_post = "${dto.seq_post}";
+					let seq_post_comment = $("#seqReport").val()
+					//  $("#message").val($("#message-text").val());
+					if ( $("#message-text").val() === "") {
+						alert("메세지를 제대로 입력하지 않았습니다.");
+						return;
+					}
+
+					let rp_content = $("#message-text").val();
+					let data = $("#reportForm").serialize();
+	
+					console.log(rp_content);
+					console.log(data);
+					$.ajax({
+						url : "/report.co",
+						type : "post",
+						data : {
+							seq_post : seq_post,
+							seq_post_comment : seq_post_comment,
+					
+							rp_content : rp_content
+						},
+						success : function() {
+							$("#exampleModal").modal('hide');
+
+						},
+						error : function(e) {
+							console.log(e);
+						}
+					})
+
 				});
 
-		// 댓글 수정 완료 버튼을 눌렀을때
-		$(".body-reply").on(
+		$(".btn-report").on(
 				"click",
-				".complete-reply",
-				function(e) {
-					// 수정한 내용 (textarea value)
-					// 수정한 댓글의 seq (seq_reply)
-					// 게시글의 seq (seq_board)
-					let seq_reply = $(e.target).val();
+				function() {
+					/*모달 스크립트  */
+					var exampleModal = document.getElementById("exampleModal");
+					exampleModal.addEventListener("show.bs.modal",
+							function(event) {
+								// Button that triggered the modal
+								var button = event.relatedTarget;
+								// Extract info from data-bs-* attributes
+								var recipient = button
+										.getAttribute("data-bs-whatever");
+								// If necessary, you could initiate an AJAX request here
+								// and then do the updating in a callback.
+								//
+								// Update the modal's content.
+								var modalTitle = exampleModal
+										.querySelector(".modal-title");
+								var modalBodyInput = exampleModal
+										.querySelector(".modal-body input");
+
+								modalTitle.textContent = "Report";
+							})
+				});
+		// 댓글 수정 버튼에게 이벤트 부여
+		$(".body-review").on(
+					"click",
+					".modify-review",
+					function(e) {
+						console.log(e.target);
+						$(e.target).parent().parent().parent("#modify_box").css(
+								"display", "none"); // 수정삭제 버튼 감추기
+						$(e.target).parent().parent().parent().prev("#divWrite").css(
+								"display", "inline-block"); // 취소완료 버튼 보이기
+						// 댓글 수정가능하게끔 readonly 속성 풀어주기 
+						$(e.target).parent().parent().parent().parent().prev().children(
+								"textarea").attr("readonly", false);
+						// textarea 포커스
+						$(e.target).parent().parent().parent().parent().prev().children(
+								"textarea").focus();
+					});
+
+		// 수정 버튼 눌렀을때
+		$(".body-review").on("click",".btnSave",function(e) {
+					let seq_review = $(e.target).val();
+					console.log("seq_review :", seq_review)
+					let comment_content = $(e.target).parent().parent().prev().children("textarea").val();
+					console.log("comment_content: ", comment_content);
 					let seq_post = "${dto.seq_post}";
-					// 부모의 형제(위쪽으로)요소 중 body-content-reply를 선택하는데 그 중 가장 첫번째 요소 선택
-					let content = $(e.target).parent(".body-btnAfter-reply")
-							.prevAll(".body-content-reply").first().children(
-									"textarea").val();
+					if (comment_content === "") {
+						alert("리뷰를 입력해 주세요!");
+						return;
+					}
 
 					$.ajax({
 						url : "/modifyProc.co",
 						type : "post",
 						data : {
-							seq_post_comment : seq_post_comment,
-							seq_post : seq_post,
-							comment_content : comment_content
+							seq_post_comment : seq_review,
+							comment_content : comment_content,
+							seq_post : seq_post
 						},
-						success : function(data) {
-							console.log(data);
-							if (data === "fail") {
+						success : function(rs) {
+							console.log(rs);
+							if (rs === "fail") {
 								alert("댓글 수정에 실패했습니다.");
 							} else {
+								alert("댓글 수정에 성공!");
 								refreshMemList();
 							}
 						},
@@ -882,51 +1150,36 @@ div {
 						}
 					})
 				});
-
-		// 댓글 취소 버튼에게 이벤트 부여
-		$(".body-reply").on("click", ".cancel-reply", function(e) {
+	
+		
+	//댓글 삭제
+		$(".body-review").on("click", ".delete-review", function(e) {
+			//let movieCd = "${movie.movieCd}";
+			//let movieCd = "${review.movieCd}";
+			//console.log("movieCd:", movieCd);
+			let seq_review = $(e.target).val();
+			console.log("seq_review :", seq_review)
 			let seq_post = "${dto.seq_post}";
 			$.ajax({
-				url : "/getPostComment.co?seq_post=" + seq_post,
-				type : "get",
-				success : function(data) {
-					refreshMemList();
+				url : "/deleteProc.co",
+				type : "post",
+				data : {
+					seq_post_comment : seq_review,
+					seq_post : seq_post
+				},
+				success : function(rs) {
+					console.log(rs);
+					if (rs === "fail") {
+						alert("댓글 수정에 실패했습니다.");
+					} else {
+						alert("댓글 삭제 성공!");
+						refreshMemList();
+					}
 				},
 				error : function(e) {
 					console.log(e);
 				}
 			})
-
-		});
-
-		// 댓글 삭제 버튼에게 이벤트 부여
-		$(".body-reply").on("click", ".delete-reply", function(e) {
-			let answer = confirm("댓글을 정말 삭제하시겠습니까?");
-			if (answer) {
-				let seq_reply = $(e.target).val();
-
-				$.ajax({
-					url : "/deleteProc.co",
-					type : "post",
-					data : {
-						seq_post_comment : seq_post_comment,
-						seq_post : "${dto.seq_post}"
-					},
-					success : function(data) {
-						console.log(data);
-
-						if (data === "fail") {
-							alert("댓글 삭제에 실패했습니다.");
-						} else { // 댓글 삭제에 성공했다면 댓글 목록을 새롭게 다시 뿌려줌
-							refreshMemList();
-						}
-					},
-					error : function(e) {
-						console.log(e);
-					}
-
-				})
-			}
 		});
 
 		// 댓글 등록
@@ -970,8 +1223,5 @@ div {
 			location.href = "/post.po?curPage=1";
 		});
 	</script>
-
-
-
 </body>
 </html>
