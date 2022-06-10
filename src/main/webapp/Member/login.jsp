@@ -1,150 +1,148 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-            rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <title>로그인</title>
-    <style>
-        body {
-            background-color: black;
-        }
+<meta charset="UTF-8">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<title>로그인</title>
+<style>
+body {
+	background-color: black;
+}
 
-        a {
-            text-decoration: none;
-        }
+a {
+	text-decoration: none;
+}
 
-        .contents {
-            height: 500px;
-        }
+.contents {
+	height: 500px;
+}
 
+/* header */
+#navLogo {
+	width: 150px;
+	height: 100px;
+}
 
-        /* header */
-        #navLogo {
-            width: 150px;
-            height: 100px;
-        }
+#logoImg {
+	width: 100%;
+	height: 100%;
+}
 
-        #logoImg {
-            width: 100%;
-            height: 100%;
-        }
+/* Icon */
+#cartIcon {
+	width: 30px;
+	height: 30px;
+}
 
-        /* Icon */
-        #cartIcon {
-            width: 30px;
-            height: 30px;
-        }
+#myPageIcon {
+	width: 30px;
+	height: 30px;
+}
 
-        #myPageIcon {
-            width: 30px;
-            height: 30px;
-        }
+#kakaoIcon {
+	width: 30px;
+	height: 30px;
+}
 
-        #kakaoIcon {
-            width: 30px;
-            height: 30px;
-        }
+#twitterIcon {
+	width: 30px;
+	height: 30px;
+}
 
-        #twitterIcon {
-            width: 30px;
-            height: 30px;
-        }
+#instagramIcon {
+	width: 30px;
+	height: 30px;
+}
 
-        #instagramIcon {
-            width: 30px;
-            height: 30px;
-        }
+#facebookIcon {
+	width: 30px;
+	height: 30px;
+}
 
-        #facebookIcon {
-            width: 30px;
-            height: 30px;
-        }
+.snsIcon1 {
+	float: left;
+	margin-top: 10px;
+	margin-right: 5px;
+}
 
-        .snsIcon1 {
-            float: left;
-            margin-top: 10px;
-            margin-right: 5px;
-        }
+.snsIcon2 {
+	float: left;
+	margin-top: 10px;
+	margin-right: 5px;
+}
 
-        .snsIcon2 {
-            float: left;
-            margin-top: 10px;
-            margin-right: 5px;
-        }
+.snsIcon3 {
+	float: left;
+	margin-top: 10px;
+	margin-right: 5px;
+}
 
-        .snsIcon3 {
-            float: left;
-            margin-top: 10px;
-            margin-right: 5px;
-        }
+.snsIcon4 {
+	float: left;
+	margin-top: 10px;
+}
+/* Icon end */
 
-        .snsIcon4 {
-            float: left;
-            margin-top: 10px;
-        }
-        /* Icon end */
+/* Footer */
+.nav-link {
+	color: gray !important;
+	text-decoration: none;
+}
 
-        /* Footer */
-        .nav-link {
-            color: gray !important;
-            text-decoration: none;
-        }
+.nav-link:hover {
+	color: white !important;
+}
 
-        .nav-link:hover {
-            color: white !important;
-        }
+/* header 반응형 */
+@media ( max-width : 768px) {
+	#navLogo {
+		display: none;
+	}
+	#myPageIcon {
+		display: none;
+	}
+	#cartIcon {
+		display: none;
+	}
+	#menu {
+		display: none;
+	}
+}
 
-        /* header 반응형 */
-        @media ( max-width : 768px) {
-            #navLogo {
-                display: none;
-            }
-            #myPageIcon {
-                display: none;
-            }
-            #cartIcon {
-                display: none;
-            }
-            #menu {
-                display: none;
-            }
-        }
+@media ( min-width : 768px) {
+	#navibar {
+		display: none;
+	}
+}
+/* header 반응형 끝 */
 
-        @media ( min-width : 768px) {
-            #navibar {
-                display: none;
-            }
-        }
-        /* header 반응형 끝 */
+/* footer 반응형 시작 */
+@media ( max-width : 768px) {
+	#bigFoot {
+		display: none;
+	}
+}
 
-        /* footer 반응형 시작 */
-        @media ( max-width : 768px) {
-            #bigFoot {
-                display: none;
-            }
-        }
+@media ( min-width : 768px) {
+	#smallFoot {
+		display: none;
+	}
+}
 
-        @media ( min-width : 768px) {
-            #smallFoot {
-                display: none;
-            }
-        }
-
-        /* footer 반응형 끝 */
-
-    </style>
+/* footer 반응형 끝 */
+</style>
 </head>
 
 <body>
-<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom">
     <div class="container">
         <!-- 접혔을 때 nav -->
         <nav id="navibar" class="navbar navbar-expand-md navbar-dark" aria-label="Main navigation">
@@ -162,13 +160,13 @@
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
                         <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
-                            <c:when test="${not empty loginSession}">
+                            <c:when test="${empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                             </c:when>
                             <c:otherwise>
                                 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/Mypage/mypageIndex.jsp">마이페이지</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
 
@@ -218,7 +216,7 @@
                             <c:if test="${not empty loginSession}">
                                 <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon" src="/images/찜.png">
                                 </a>
-                                <a href="/Mypage/mypageIndex.jsp" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
+                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon" src="/images/마이페이지.png">
                                 </a>
                             </c:if>
                         </div>
@@ -263,64 +261,63 @@
         </nav>
     </div>
 </header>
-<!-- Contents -->
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-5 col-md-10">
-            <form id="loginForm" action="/loginProc.mem" method="post">
-                <div class="card card-custom">
-                    <div class="card-header">
-                        <h4>로그인</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group p-2">
-                            <p>ID*</p>
-                            <div>
-                                <input type="text" class="form-control" id="user_id"
-                                       name="user_id" placeholder="ID">
-                            </div>
-                        </div>
-                        <div class="form-group p-2">
-                            <p>PW*</p>
-                            <div>
-                                <input type="password" class="form-control " id="user_pw"
-                                       name="user_pw" placeholder="PW">
-                            </div>
-                        </div>
-                        <div class="row p-3 justify-content-center">
-                            <div class="col-5 d-flex justify-content-end">
-                                <button type="button" class="btn btn-dark w-100" id="loginBtn">로그인</button>
-                            </div>
-                            <div class="col-5 flex justify-content-start">
-                                <img id="kakaoLogin" src="/resources/images/kakao_login.png">
-                            </div>
-                        </div>
-                        <div class="row p-3">
-                            <div class="col text-center">
-                                <p class="m-0">
-                                    계정이 없으신가요? <a href="/toSignUp.mem"
-                                                  class="text-decoration-none"><strong>회원가입</strong></a>을해보세요
-                                </p>
-                                <br>
-                                <p class="m-0">
-                                    아이디를 잊으셨나요? <a href="/toFindId.mem"
-                                                   class="text-decoration-none"><strong>아이디찾기</strong></a>
-                                </p>
-                                <br>
-                                <p class="m-0">
-                                    비밀번호를 잊으셨나요? <a href="/toFindPw.mem"
-                                                    class="text-decoration-none"><strong>비밀번호찾기</strong></a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<footer class="py-5 text-light">
+	<!-- Contents -->
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6 col-md-11">
+				<form id="loginForm" action="/loginProc.mem" method="post">
+					<div class="card card-custom">
+						<div class="card-header">
+							<h4>로그인</h4>
+						</div>
+						<div class="card-body">
+							<div class="form-group p-2">
+								<p>ID*</p>
+								<div>
+									<input type="text" class="form-control" id="user_id"
+										name="user_id" placeholder="ID">
+								</div>
+							</div>
+							<div class="form-group p-2">
+								<p>PW*</p>
+								<div>
+									<input type="password" class="form-control " id="user_pw"
+										name="user_pw" placeholder="PW">
+								</div>
+							</div>
+							<div class="row p-3 justify-content-center">
+								<div class="col-5 d-flex justify-content-end">
+									<button type="button" class="btn btn-dark w-100" id="loginBtn">로그인</button>
+								</div>
+								<div class="col-5 flex justify-content-start">
+									<img id="kakaoLogin" src="/resources/images/kakao_login.png">
+								</div>
+							</div>
+							<div class="row p-3">
+								<div class="col text-center">
+									<p class="m-0">
+										계정이 없으신가요? <a href="/toSignUp.mem"
+											class="text-decoration-none"><strong>회원가입</strong></a>을해보세요
+									</p>
+									<br>
+									<p class="m-0">
+										아이디를 잊으셨나요? <a href="/toFindId.mem"
+											class="text-decoration-none"><strong>아이디찾기</strong></a>
+									</p>
+									<br>
+									<p class="m-0">
+										비밀번호를 잊으셨나요? <a href="/toFindPw.mem"
+											class="text-decoration-none"><strong>비밀번호찾기</strong></a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer class="py-5 text-light">
     <div class="container">
         <div class="row" id="bigFoot">
             <div class="col-2">
@@ -345,6 +342,10 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
 
                         </ul>
                     </div>
@@ -355,7 +356,6 @@
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
                             <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
                             <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
                         </ul>
@@ -368,7 +368,6 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
@@ -432,23 +431,37 @@
                 </ul>
             </div>
 
-            <div class="col-4">
-                <h5>계정</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-                    <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                    <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-                </ul>
-            </div>
+            <c:choose>
+                <c:when test="${not empty loginSession}">
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
+                        </ul>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+                            <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
             <div class="col-4">
                 <h5>기타</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
@@ -500,7 +513,7 @@
         </div>
     </div>
 </footer>
-<script>
+	<script>
 
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {
@@ -573,7 +586,7 @@
                                         break;
                                     } else {
                                         // 회원가입
-                                        createHiddenSignupForm(response.id, response.properties.nickname, response.kakao_account.email);
+                                        createHiddenSignupForm(response.id, response.properties.nickname);
                                     }
                                 }
                             },
@@ -608,33 +621,29 @@
         frm.submit();
     }
 
-    // 회원가입
-    function createHiddenSignupForm(user_k, user_name, user_id) {
-        var frm = document.createElement('form');
-        frm.setAttribute('method', 'post');
-        frm.setAttribute('action', '/kakaoSignup.ka');
-        var token = document.createElement('input');
-        token.setAttribute('type', 'hidden');
-        token.setAttribute('name', 'user_k');
-        token.setAttribute('value', user_k);
-        var name = document.createElement('input');
-        name.setAttribute('type', 'hidden');
-        name.setAttribute('name', 'user_name');
-        name.setAttribute('value', user_name);
-        var id = document.createElement('input');
-        id.setAttribute('type', 'hidden');
-        id.setAttribute('name', 'user_id');
-        id.setAttribute('value', user_id);
-        frm.append(token, name, id);
-        document.body.append(frm);
-        frm.submit();
-    }
+ 	// 회원가입
+	function createHiddenSignupForm(user_k, user_name){		
+		var frm = document.createElement('form');
+		frm.setAttribute('method', 'post');
+		frm.setAttribute('action', '/kakaoSignup.ka');
+		var token = document.createElement('input');
+		token.setAttribute('type','hidden');
+		token.setAttribute('name','user_k');
+		token.setAttribute('value',user_k);
+		var name = document.createElement('input');
+		name.setAttribute('type','hidden');
+		name.setAttribute('name','user_name');
+		name.setAttribute('value', user_name);
+		frm.append(token, name);
+		document.body.append(frm);
+		frm.submit();	
+	}
 </script>
-<c:if test="${rs eq false}">
-    <script>
+	<c:if test="${rs eq false}">
+		<script>
         alert("로그인에 실패했습니다.");
     </script>
-</c:if>
+	</c:if>
 </body>
 
 </html>

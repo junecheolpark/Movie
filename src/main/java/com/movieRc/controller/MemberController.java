@@ -2,6 +2,7 @@ package com.movieRc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -174,9 +175,6 @@ public class MemberController extends HttpServlet {
                     request.setAttribute("rs", true);
                     request.setAttribute("user_id", user_id);
 
-                    ArrayList<MemberDTO> list = dao.selectAll();
-                    request.setAttribute("list", list);
-
                 } else {
                     System.out.println("아이디 찾기 실패");
                     request.setAttribute("rs", false);
@@ -197,9 +195,6 @@ public class MemberController extends HttpServlet {
                 if (user_pw != null) {
                     System.out.println("비밀번호 찾기 성공");
                     request.setAttribute("rs", true);
-
-                    ArrayList<MemberDTO> list = dao.selectAll();
-                    request.setAttribute("list", list);
 
                     String randomPassword = dao.randomPassword(7);
                     System.out.println("임시 비밀번호 : " + randomPassword);
@@ -222,9 +217,7 @@ public class MemberController extends HttpServlet {
             System.out.println(session.getAttribute("loginSession"));
 
             session.invalidate();
-            response.sendRedirect("/Member/login.jsp");
-
-            System.out.println("로그아웃 성공");
+            response.sendRedirect("/toHome.home");
 
         } else if (uri.equals("/myPage.mem")) { // 마이페이지 요청
             HttpSession session = request.getSession();

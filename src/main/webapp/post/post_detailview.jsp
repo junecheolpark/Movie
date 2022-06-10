@@ -237,6 +237,8 @@ a {
 	width: 1100px;
 	padding-top: 70px;
 	border-radius: 15px;
+	margin-bottom:30px;
+	margin-top:30px;
 }
 
 
@@ -405,7 +407,7 @@ text-align: left;
 							<li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
 							<li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
 							<c:choose>
-								<c:when test="${not empty loginSession}">
+								<c:when test="${empty loginSession}">
 									<li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
 									<li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
 								</c:when>
@@ -531,6 +533,7 @@ text-align: left;
 					<div class="row">
 						<c:choose>
 							<c:when test="${not empty loginSession}">
+							<input style="display:none;" id="loginCheck" value="${loginSession.user_id }">
 								<div class="col-5 click">
 									<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }>
 										<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
@@ -557,7 +560,8 @@ text-align: left;
 
 							</c:when>
 							<c:otherwise>
-
+							<input  id="loginCheck" style="display:none;" value="">
+							<div class="col-5 click">
 								<button class="LHbtn" id="p_likebefore" value=${dto.seq_post }
 									style="disabled: true;">
 									<img src="resources/images/likebefore.png" alt="좋아요" id="like" />
@@ -570,7 +574,7 @@ text-align: left;
 
 								</button>
 								<span id="likeCount-box">${countLike }</span>
-
+</div>
 								<div class="col-5 click">
 									<button class="LHbtn" id="p_hatebefore" value=${dto.seq_post }
 										style="disabled: true;">
@@ -585,24 +589,31 @@ text-align: left;
 							</c:otherwise>
 						</c:choose>
 					</div>
-							<!--만약 좋아요를 한상태라면?  -->
-								<c:if test="${likeValue == 1 }">
-									<script>
+							
+							<c:choose>
+							
+							<c:when test="${likeValue == 1 }">
+							<script>
 									console.log(${likeValue});
 									$("#p_likebefore").css("display","none");
 									$("#p_like").css("display","inline-block");
 									
 									</script>
-								</c:if>
-									<!--  싫어요 한 상태라면? -->
-								<c:if test="${likeValue == 2 }">
-									<script>
+							</c:when>
+							
+							<c:when test="${likeValue == 2 }">
+							<script>
 									$("#p_hatebefore").css("display","none");
 									$("#p_hate").css("display","inline-block");
 									
 									</script>
-									
-								</c:if>
+							</c:when>
+							
+							<c:otherwise>
+							
+							</c:otherwise>
+							</c:choose>
+								
 
 					<script>
 					var arr=null;
@@ -834,7 +845,7 @@ text-align: left;
 			<!-- 수정 버튼영역 -->
 			<div id="user-box">
 				<div class="row">
-
+					<c:if test="${not empty loginSession  }">
 					<c:if test="${loginSession.user_id eq dto.user_id}">
 						<div class="col-6">
 							<button type="button" class="btn btn-warning" id="btnModify">수정</button>
@@ -862,13 +873,15 @@ text-align: left;
 											})
 						</script>
 					</c:if>
+					</c:if>
 				</div>
 			</div>
 
 		</div>
 		<!-- 게시글영역 끝 -->
 		<br /> <br /> <br />
-
+		
+		
 		<!-- 	댓글 출력 영역 -->
 		<div id="input-box">
 			<!-- 댓글 입력 영역 -->
@@ -878,7 +891,7 @@ text-align: left;
 						<input type="text" value="${dto.seq_post}" name="seq_post">
 					</div>
 					<div class="col-10">
-						<textarea id="inputReply" class="form-control" 
+						<textarea id="inputReply" class="form-control"
 							name="comment_content" placeholder="댓글을 입력해주세요."></textarea>
 					</div>
 					<div class="col-2">
@@ -1062,6 +1075,10 @@ text-align: left;
 							<h5>계정</h5>
 							<ul class="nav flex-column">
 								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+								<c:if test="${loginSession.grade == 'admin'}">
+									<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+								</c:if>
 
 							</ul>
 						</div>
@@ -1072,7 +1089,6 @@ text-align: left;
 							<ul class="nav flex-column">
 								<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
 								<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
 								<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
 								<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
 							</ul>
@@ -1085,7 +1101,6 @@ text-align: left;
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
 						<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 					</ul>
 				</div>
 
@@ -1149,23 +1164,37 @@ text-align: left;
 					</ul>
 				</div>
 
-				<div class="col-4">
-					<h5>계정</h5>
-					<ul class="nav flex-column">
-						<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-						<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-						<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
-						<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-						<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-					</ul>
-				</div>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<div class="col-4">
+							<h5>계정</h5>
+							<ul class="nav flex-column">
+								<li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+								<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+								<c:if test="${loginSession.grade == 'admin'}">
+									<li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+								</c:if>
+							</ul>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="col-4">
+							<h5>계정</h5>
+							<ul class="nav flex-column">
+								<li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+								<li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+								<li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+								<li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+							</ul>
+						</div>
+					</c:otherwise>
+				</c:choose>
 
 				<div class="col-4">
 					<h5>기타</h5>
 					<ul class="nav flex-column">
 						<li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
 						<li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-						<li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
 					</ul>
 				</div>
 
@@ -1385,6 +1414,13 @@ text-align: left;
 
 		// 댓글 등록
 		$("#btnSubmitReply").on("click", function() {
+			
+			
+			if($("#loginCheck").val() === ""){
+				alert("로그인 해주세요");
+				return;
+			}
+			
 			if ($("#inputReply").val() === "") { // 댓글 입력창이 비어있다면
 				alert("입력된 댓글이 없습니다.");
 				return;

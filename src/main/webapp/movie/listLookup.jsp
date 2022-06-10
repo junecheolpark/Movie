@@ -19,7 +19,7 @@
 
     <style>
         body {
-            height: 4000px;
+            min-height: 4000px;
             min-width: 640px;
         }
 
@@ -37,6 +37,9 @@
             width: 100%;
             height: 9%;
             background-color: black !important;
+        }
+        #navibar {
+            background-color: black;
         }
 
         #container {
@@ -72,17 +75,20 @@
             font-size: 0.8em;
             color: silver;
         }
+        .selection {
+            margin-top: 20px;
+            height: 2%;
+            border-radius: 8px;
+            background-color: #503396;
+            margin-bottom: 20px;
+        }
 
         #selectionDiv1 {
-            margin-top: 20px;
-            height: 1%;
+            height: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 60px;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            background-color: #503396;
         }
 
         #selectionDiv1 button {
@@ -97,15 +103,11 @@
         }
 
         #selectionDiv2 {
-            height: 1%;
+            height: 50%;
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            background-color: #503396;
             padding: 10px;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            margin-bottom: 20px;
         }
 
         #selectionDiv2 button {
@@ -448,7 +450,7 @@
                         <li class="nav-item"><a class="nav-link" href="/toReviewList.re?curPage=1">리뷰</a></li>
                         <li class="nav-item"><a class="nav-link" href="/post.po?curPage=1">자유게시판</a></li>
                         <c:choose>
-                            <c:when test="${not empty loginSession}">
+                            <c:when test="${empty loginSession}">
                                 <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
                             </c:when>
@@ -567,19 +569,21 @@
             <span id="movieNum">
                 (${totalCount})</span></div>
     </div>
-    <div id="selectionDiv1">
-        <button type="button" class="selectByCategory" value="전체">전체</button>
-        <button type="button" class="selectByCategory" value="코미디">코미디</button>
-        <button type="button" class="selectByCategory" value="액션">액션</button>
-        <button type="button" class="selectByCategory" value="멜로">멜로</button>
-        <button type="button" class="selectByCategory" value="SF">SF</button>
-        <button type="button" class="selectByCategory" value="호러">호러</button>
-        <button type="button" class="selectByCategory" value="기타">기타</button>
-    </div>
-    <div id="selectionDiv2">
-        <button type="button" id="orderByRecentMovie">최신 영화 순</button>
-        <button type="button" id="orderByReviewCount">리뷰 많은 순</button>
-        <button type="button" id="orderByHighAveragePoint">높은 평점 순</button>
+    <div class="selection">
+        <div id="selectionDiv1">
+            <button type="button" class="selectByCategory" value="전체">전체</button>
+            <button type="button" class="selectByCategory" value="코미디">코미디</button>
+            <button type="button" class="selectByCategory" value="액션">액션</button>
+            <button type="button" class="selectByCategory" value="멜로">멜로</button>
+            <button type="button" class="selectByCategory" value="SF">SF</button>
+            <button type="button" class="selectByCategory" value="호러">호러</button>
+            <button type="button" class="selectByCategory" value="기타">기타</button>
+        </div>
+        <div id="selectionDiv2">
+            <button type="button" id="orderByRecentMovie">최신 영화 순</button>
+            <button type="button" id="orderByReviewCount">리뷰 많은 순</button>
+            <button type="button" id="orderByHighAveragePoint">높은 평점 순</button>
+        </div>
     </div>
     <div id="movieDiv">
         <div class="movieLi row">
@@ -687,7 +691,6 @@
         </form>
     </div>
 </div>
-
 <footer class="py-5 text-light">
     <div class="container">
         <div class="row" id="bigFoot">
@@ -713,6 +716,10 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
 
                         </ul>
                     </div>
@@ -723,7 +730,6 @@
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
                             <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
                             <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
                         </ul>
@@ -736,7 +742,6 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
@@ -800,23 +805,37 @@
                 </ul>
             </div>
 
-            <div class="col-4">
-                <h5>계정</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
-                    <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
-                    <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
-                    <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
-                </ul>
-            </div>
+            <c:choose>
+                <c:when test="${not empty loginSession}">
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
+                            <c:if test="${loginSession.grade == 'admin'}">
+                                <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
+                            </c:if>
+                        </ul>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="col-4">
+                        <h5>계정</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/toLogin.mem" class="nav-link p-0">로그인</a></li>
+                            <li class="nav-item mb-2"><a href="/signup.mem" class="nav-link p-0">회원가입</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindId.mem" class="nav-link p-0">아이디 찾기</a></li>
+                            <li class="nav-item mb-2"><a href="/toFindPw.mem" class="nav-link p-0">비밀번호 찾기</a></li>
+                        </ul>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
             <div class="col-4">
                 <h5>기타</h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="/toReviewList.re?curPage=1" class="nav-link p-0">리뷰</a></li>
                     <li class="nav-item mb-2"><a href="/post.po?curPage=1" class="nav-link p-0">자유게시판</a></li>
-                    <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                 </ul>
             </div>
 
