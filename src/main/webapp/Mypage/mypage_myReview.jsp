@@ -159,7 +159,7 @@ a {
 
 /* Contents */
 .contents {
-	background-color: rgb(237, 241, 244);
+	background-color: white;
 }
 
 .contentsBox {
@@ -229,6 +229,12 @@ a {
 	color: black;
 }
 /* Contents in container */
+.contentsmyWriteBox .content {
+	text-align: center;
+	width: 100%;
+	min-height: 700px;
+}
+
 .contentsmyWriteBox .container {
 	text-align: center;
 	width: 100%;
@@ -261,7 +267,7 @@ button {
 }
 
 .content-body {
-	background-color: rgb(255, 254, 248);
+	background-color: white;
 }
 </style>
 </head>
@@ -425,16 +431,16 @@ button {
 						</div>
 						<div class="contentsBox2">
 							<div class="contentsmyWrite">
-								<a href="링크입력" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
-								<a href="/myReview.mypage?curPage=1" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
+								<a href="/myPage.mem?curPage=1" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
+								<a href="#" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
 							</div>
 							<!-- Contents myWrite -->
 							<div class="contentsmyWriteBox">
-								<div class="container">
+								<div class="content">
 									<div class="row">
 										<div class="col">
 											<h3>
-												내가 쓴 리뷰<br />
+												내가 쓴 리뷰
 											</h3>
 										</div>
 									</div>

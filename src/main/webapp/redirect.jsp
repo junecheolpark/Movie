@@ -756,7 +756,7 @@
                             <div class="topicStatus">
 									<span>UP ${topic.value['like']} DOWN
 										${topic.value['hate']} COMMENT ${topic.value['comment']} VIEW
-                                            ${topic.value['postDTO'].p_view_count}</span> <span>글쓴이</span>
+                                            ${topic.value['postDTO'].p_view_count}</span> <span>${topic.value['postDTO'].user_nickname}</span>
                             </div>
                         </div>
                     </c:if>
