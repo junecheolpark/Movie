@@ -151,7 +151,6 @@ a {
 	}
 }
 
-  
 /* footer 반응형 시작 */
 @media ( max-width : 768px) {
 	#bigFoot {
@@ -164,7 +163,6 @@ a {
 		display: none;
 	}
 }
-
 /* footer 반응형 끝 */
 
 /* Contents */
@@ -214,7 +212,6 @@ a {
 	border-radius: 10px;
 	position: relative;
 	top: 30px;
-
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -239,7 +236,7 @@ a {
 	text-decoration: underline;
 	color: black;
 }
-
+/* Contents in content */
 .contentsmyWriteBox .content {
 	text-align: center;
 	width: 100%;
@@ -248,12 +245,6 @@ a {
 
 .content-footer2 {
 	margin-top: 15px;
-
-  /* Contents in container */
-.contentsmyWriteBox .container {
-	text-align: center;
-	width: 100%;
-	height: 100%;
 }
 
 .form-select {
