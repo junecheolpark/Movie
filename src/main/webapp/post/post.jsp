@@ -289,7 +289,7 @@
                             <c:otherwise>
                                 <li class="nav-item"><a class="nav-link" href="/logout.mem">로그아웃</a></li>
                                 <li class="nav-item"><a class="nav-link" href="/wishlist.wish">찜한 영화</a></li>
-                                <li class="nav-item"><a class="nav-link" href="/myPage.mem">마이페이지</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/myPage.mem?curPage=1">마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
 
@@ -343,7 +343,7 @@
                                 <a href="/wishlist.wish" class=""> <img class="img-fluid" id="cartIcon"
                                                                         src="/images/찜.png">
                                 </a>
-                                <a href="/myPage.mem" class=""> <img class="img-fluid" id="myPageIcon"
+                                <a href="/myPage.mem?curPage=1" class=""> <img class="img-fluid" id="myPageIcon"
                                                                      src="/images/마이페이지.png">
                                 </a>
                             </c:if>
@@ -563,7 +563,7 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/myPage.mem?curPage=1" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">
                                 <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
@@ -659,7 +659,7 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem" class="nav-link p-0">마이페이지</a></li>
+                            <li class="nav-item mb-2"><a href="/myPage.mem?curPage=1" class="nav-link p-0">마이페이지</a></li>
                             <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">
                                 <li class="nav-item mb-2"><a href="/lookupMem.admin?curPage=1" class="nav-link p-0">관리자 페이지</a></li>
