@@ -12,17 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.movieRc.dao.BasketDAO;
-import com.movieRc.dao.Like_rDAO;
-import com.movieRc.dao.MovieDAO;
-import com.movieRc.dao.PostCommentDAO;
-import com.movieRc.dao.ReviewDAO;
-import com.movieRc.dto.Like_rDTO;
-import com.movieRc.dto.Like_r_countDTO;
-import com.movieRc.dto.MemberDTO;
-import com.movieRc.dto.MovieDTO;
-import com.movieRc.dto.ReportDTO;
-import com.movieRc.dto.ReviewDTO;
+
+import com.movieRc.dao.*;
+import com.movieRc.dto.*;
 import com.movieRc.util.Pagination;
 
 @WebServlet("*.re")
@@ -43,6 +35,8 @@ public class ReviewController extends HttpServlet {
         Pagination pagination = new Pagination();
         Like_rDAO like_rDAO = new Like_rDAO();
         BasketDAO basketDAO = new BasketDAO();
+        MpDAO mpDAO = new MpDAO();
+
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
 
@@ -119,7 +113,8 @@ public class ReviewController extends HttpServlet {
                 } else if (Sequence.equals("high")) {
                     list = reviewDAO.highGrade(movieCd);
                 }
-                System.out.println(list);
+
+
 
 
                 //좋아요갯수
@@ -136,6 +131,7 @@ public class ReviewController extends HttpServlet {
                 request.setAttribute("hate_list", hate_list);
                 request.setAttribute("all_list", all_list);
                 request.setAttribute("moviedto", moviedto);
+
 
 
             } catch (Exception e) {

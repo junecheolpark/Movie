@@ -249,7 +249,8 @@ a {
 
 .content-footer2 {
 	margin-top: 15px;
-	/* Contents in container */ 
+}
+/* Contents in container */
   . contentsmyWriteBox .container {
 	text-align : center;
 	width: 100%;
@@ -289,7 +290,7 @@ button {
 </style>
 </head>
 
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 <header class="mb-3 border-bottom">
 	<div class="container">
 		<!-- 접혔을 때 nav -->
@@ -564,6 +565,7 @@ button {
 								<!-- content 끝 -->
 							</div>
 						</div>
+					</div>
 				</form>
 			</div>
 		</c:when>
@@ -577,13 +579,13 @@ button {
 	</c:choose>
 
 		<script>
-	    $("#mb_delete").on("click", function(){ // 회원탈퇴 요청
-		    if (confirm("정말 탈퇴하시겠습니까?") == true){ // 탈퇴 확인
-		    	location.href = "/deleteProc.mem";
-		    }else{ // 탈퇴 취소
-		        return false;
-		    }
-
+	    $("#mb_delete").on("click", function() { // 회원탈퇴 요청
+			if (confirm("정말 탈퇴하시겠습니까?") == true) { // 탈퇴 확인
+				location.href = "/deleteProc.mem";
+			} else { // 탈퇴 취소
+				return false;
+			}
+		})
 		$("#i_logout").on("click", function() { // 로그아웃 요청
 			location.href = "/logout.mem";
 		});
@@ -792,6 +794,11 @@ button {
 	</div>
 </footer>
 	<script>
+		window.history.forward();
+		function noBack(){
+			window.history.forward();
+		}
+
 		const searchForm = $(".searchForm");
 		searchForm.on("submit", function(event) {
 			if ($(this).children(".searchInput").val() === "") {
@@ -799,6 +806,8 @@ button {
 				alert("검색어를 입력하세요");
 			}
 		});
+		window.history.forward();
+
 	</script>
 
 </body>
