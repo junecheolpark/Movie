@@ -121,19 +121,19 @@ public class MemberController extends HttpServlet {
 
             MemberDAO dao = new MemberDAO();
             MpDAO dao2 = new MpDAO();
-            
+
             try {
                 int rs1 = dao.deleteMember(user_id);
-                
+
                 String checkProfile = dao2.select(user_id);
-                
+
                 int rs2 = 0;
-                
-                if(checkProfile != null) {// 프로필 있으면 delete
-                	rs2 = dao2.deleteMp(user_id);
+
+                if (checkProfile != null) {// 프로필 있으면 delete
+                    rs2 = dao2.deleteMp(user_id);
                 }
                 System.out.println("rs2 : " + rs2);
-                if (rs1 >0) {
+                if (rs1 > 0) {
                     session.removeAttribute("loginSession");
                     response.sendRedirect("/Member/login.jsp");
                 }
@@ -165,7 +165,7 @@ public class MemberController extends HttpServlet {
                 } else {
                     System.out.println("로그인 실패");
                     request.setAttribute("rs", false);
-                    request.getRequestDispatcher("/Member/login.jsp").forward(request,response);
+                    request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -236,7 +236,7 @@ public class MemberController extends HttpServlet {
 
             MemberDAO dao = new MemberDAO();
             MpDAO daoMp = new MpDAO();
-	        PostDAO daoPost= new PostDAO();
+            PostDAO daoPost = new PostDAO();
 
             try {
                 MemberDTO dto = dao.selectById(user_id);
@@ -254,8 +254,8 @@ public class MemberController extends HttpServlet {
                 request.setAttribute("dto", dto);
                 request.setAttribute("list", list); // 내가 쓴 게시글 list에 담아서 보내주기 
                 request.setAttribute("naviMap", map);
-                
-                
+
+
                 request.getRequestDispatcher("/Mypage/mypageIndex.jsp").forward(request, response);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -305,13 +305,16 @@ public class MemberController extends HttpServlet {
 
             MultipartRequest multi = new MultipartRequest(request, filePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 
-            String user_pw = multi.getParameter("user_pw");
+            String user_pw = null;
+            user_pw = multi.getParameter("user_pw");
             String user_nickname = multi.getParameter("user_nickname");
             String user_phone = multi.getParameter("user_phone");
             String postcode = multi.getParameter("postcode");
             String roadAddr = multi.getParameter("roadAddr");
             String detailAddr = multi.getParameter("detailAddr");
             String extraAddr = multi.getParameter("extraAddr");
+
+            System.out.println(user_pw);
 
             // 실제 서버 경로에 업로드된 파일명
             String sys_name = multi.getFilesystemName("photo");
@@ -320,27 +323,31 @@ public class MemberController extends HttpServlet {
             MpDAO dao2 = new MpDAO();
 
             try {
-                user_pw = EncryptionUtils.getSHA512(user_pw);
+                if (user_pw == null || user_pw.equals("")) {
+                    dao.modify(new MemberDTO(user_id, user_category, null, null, user_nickname, null, 0, user_phone, postcode, roadAddr, detailAddr, extraAddr, null));
+                } else {
+                    user_pw = EncryptionUtils.getSHA512(user_pw);
+                    dao.modifyMember(new MemberDTO(user_id, user_category, null, user_pw, user_nickname, null, 0, user_phone, postcode, roadAddr, detailAddr, extraAddr, null));
+                }
                 System.out.println("암호화된 pw : " + user_pw);
 
-                MemberDTO dto = new MemberDTO(user_id, user_category, null, user_pw, user_nickname, null, 0, user_phone, postcode, roadAddr, detailAddr, extraAddr, null);
 
-                int rs1 = dao.modifyMember(dto);
-                
                 String checkProfile = dao2.select(user_id);
                 int rs2 = 0;
                 System.out.println("sys_name : " + sys_name);
-                if(sys_name != null) {
-                	if(checkProfile != null) {// 프로필 있으니 update
-                    	rs2 = dao2.updateMp(user_id, sys_name);
-                    }else {//프로필이 없으니 insert
-                    	rs2 = dao2.insertMp(new MpDTO(user_id, sys_name));
-                    } 
+                if (sys_name != null) {
+                    if (checkProfile != null) {// 프로필 있으니 update
+                        rs2 = dao2.updateMp(user_id, sys_name);
+                    } else {//프로필이 없으니 insert
+                        rs2 = dao2.insertMp(new MpDTO(user_id, sys_name));
+                    }
                 }
-             // loginsession 에 들어있는 수정 전 dto를 새롭게
+                MemberDTO dto = new MemberDTO(user_id, user_category, null, user_pw, user_nickname, null, 0, user_phone, postcode, roadAddr, detailAddr, extraAddr, null);
+
+                // loginsession 에 들어있는 수정 전 dto를 새롭게
                 session.setAttribute("loginSession", dto);
                 response.sendRedirect("/myPage.mem?curPage=1");
-                	
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

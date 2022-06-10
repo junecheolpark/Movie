@@ -392,4 +392,22 @@ public class MemberDAO {
 			return map;
 		}
 	}
+
+	public int modify(MemberDTO dto) throws Exception{
+		String sql = "update tbl_member set user_nickname=?, user_phone=?, postcode=?,"
+				+ "roadAddr=?, detailAddr=?, extraAddr=? where user_id=?";
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setString(1, dto.getUser_nickname());
+			pstmt.setString(2, dto.getUser_phone());
+			pstmt.setString(3, dto.getPostcode());
+			pstmt.setString(4, dto.getRoadAddr());
+			pstmt.setString(5, dto.getDetailAddr());
+			pstmt.setString(6, dto.getExtraAddr());
+			pstmt.setString(7, dto.getUser_id());
+
+			return  pstmt.executeUpdate();
+		}
+	}
 }

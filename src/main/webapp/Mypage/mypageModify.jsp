@@ -383,7 +383,7 @@
                                         <label for="password" class="form-label">비밀번호</label>
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <input type="password" class="form-control" id="user_pw" name="user_pw" readonly>
+                                        <input type="password" class="form-control" id="user_pw" name="user_pw" readonly value ="${loginSession.user_pw}">
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -391,31 +391,11 @@
                                         <label for="pwCheck" class="form-label">비밀번호 확인</label>
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <input type="password" class="form-control" id="user_pwCheck" readonly>
+                                        <input type="password" class="form-control" id="user_pwCheck" readonly value ="${loginSession.user_pw}">
                                     </div>
                                 </div>
                             </c:if>
-                            <c:if test="${loginSession.user_category eq '카카오 가입'}">
-                                <%-- 카카오 회원이라면 비밀번호 감추기 --%>
-                                <div class="row p-2 d-none">
-                                    <div class="col-12 ">
-                                        <label for="password" class="form-label">비밀번호</label>
-                                    </div>
-                                    <div class="col-12 mb-2">
-                                        <input type="password" class="form-control" id="user_pw" name="user_pw"
-                                               readonly value="${loginSession.user_pw}">
-                                    </div>
-                                </div>
-                                <div class="row p-2 d-none">
-                                    <div class="col-12 ">
-                                        <label for="pwCheck" class="form-label">비밀번호 확인</label>
-                                    </div>
-                                    <div class="col-12 mb-2">
-                                        <input type="password" class="form-control" id="user_pwCheck"
-                                               readonly value="${loginSession.user_pw}">
-                                    </div>
-                                </div>
-                            </c:if>
+
                             <div class="row p-2">
                                 <div class="col-12">
                                     <label for="phone" class="form-label">휴대폰 번호</label>
@@ -494,14 +474,6 @@
                     </div>
                     <script>
 
-                        const searchForm = $(".searchForm");
-                        searchForm.on("submit", function (event) {
-                            if ($(this).children(".searchInput").val() === "") {
-                                event.preventDefault();
-                                alert("검색어를 입력하세요");
-                            }
-                        });
-
                         // 뒤로가기버튼을 눌렀을때 mypageIndex로 돌아가기
                         $("#backBtn").on("click", function() {
                             location.href = "/myPage.mem?curPage=1";
@@ -523,6 +495,7 @@
                         $("#modifyBtn").on("click", function() {
                             $("#profileInput").attr("disabled", false);
                             $("input").not("#user_id").attr("readonly", false); // 닉네임를 제외한 input readonly 제거
+                            $("#user_nickname").attr("readonly", true);
                             $("#checkNicknameBtn").attr("disabled", false); // 닉네임 확인 버튼에 걸린 disabled 제거
                             $("#btnPostcode").attr("disabled", false); // 우편번호찾기 버튼에 걸린 disabled 제거
                             $(".btn-before").css("display", "none"); // 기존의 버튼들 감춰주기
@@ -536,6 +509,7 @@
 
                         // 수정완료버튼 눌렀을 때
                         $("#completeBtn").on("click", function() {
+                            console.log("a")
 
                             // 닉네임, 전화번호, 주소 빈값/유효한 값인지 확인
                             let regexNickname = /[a-zA-Z0-9ㄱ-힣]{4,8}/; // 닉네임 정규식
@@ -553,7 +527,7 @@
                             } else if (!regexPhone.test(user_phone)) { // 숫자 데이터에 대한 별도의 형변환이 필요없음
                                 alert("형식에 맞지않는 휴대폰번호입니다.");
                                 return;
-                            } else if (!regexPw.test(user_pw)) {
+                            } else if (!regexPw.test($("#user_pw").val())) {
                                 alert("형식에 맞지않는 비밀번호입니다.");
                                 return;
                             } else if ($("#user_pw").val() !== $("#user_pwCheck").val()) {
@@ -564,7 +538,14 @@
                                 return;
                             }
 
+                            let val = "${loginSession.user_pw}";
+
+                            if($("#user_pw").val()=== val) {
+                                $("#user_pw").val(null);
+                            }
+
                             $("#modifyForm").submit();
+
                         })
 
 
