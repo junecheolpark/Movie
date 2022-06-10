@@ -12,13 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.movieRc.dao.MemberDAO;
-import com.movieRc.dao.MovieDAO;
 import com.movieRc.dao.MpDAO;
-import com.movieRc.dao.PostDAO;
 import com.movieRc.dao.ReviewDAO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.MyReviewDTO;
-import com.movieRc.dto.PostDTO;
 import com.movieRc.util.Pagination;
 
 
@@ -43,11 +40,16 @@ public class MypageController extends HttpServlet {
 		
 		if(uri.equals("/myReview.mypage")){
 			int curPage = Integer.parseInt(request.getParameter("curPage"));
-			MemberDTO dto = (MemberDTO) request.getSession().getAttribute("loginSession");
 			ReviewDAO dao = new ReviewDAO();
-			String user_id = dto.getUser_id();
+			String user_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_id();
+			
+			MemberDAO memberDAO = new MemberDAO();
+			MpDAO MpDAO = new MpDAO();
 			
 			try {
+				MemberDTO dto = memberDAO.selectById(user_id);
+				String profile = MpDAO.select(user_id);
+				
 				int totalCnt = dao.getCount();
 				HashMap<String, Object> pageMap = pagination.getPageNavi(totalCnt, 10, 10, curPage);
 				int start = (int) pageMap.get("postStart");
@@ -56,6 +58,8 @@ public class MypageController extends HttpServlet {
 				ArrayList<MyReviewDTO> list = dao.selectAll_ByUser(user_id, start, end);
 				request.setAttribute("myReview", list);
 				request.setAttribute("pageMap", pageMap);
+				request.setAttribute("profile", profile);
+                request.setAttribute("dto", dto);
 				request.getRequestDispatcher("/Mypage/mypage_myReview.jsp").forward(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();

@@ -433,7 +433,7 @@ section#container::after {
 									<a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a>
 								</button>
 								<button type="button" class="profileBtn btn btn-warning mb-3">
-									<a class="text-reset" href="">내가 쓴 게시글</a>
+									<a class="text-reset" href="/myPage.mem?curPage=1">내가 쓴 게시글</a>
 								</button>
 								<button type="button" class="profileBtn btn btn-warning mb-3">
 									<a class="text-reset" href="/myReview.mypage?curPage=1">내가 쓴 리뷰</a>
@@ -458,10 +458,10 @@ section#container::after {
 										<a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a>
 									</button>
 									<button type="button" class="profileBtn btn btn-warning mb-3">
-										<a class="text-reset" href="">내가 쓴 게시글</a>
+										<a class="text-reset" href="/myPage.mem?curPage=1">내가 쓴 게시글</a>
 									</button>
 									<button type="button" class="profileBtn btn btn-warning mb-3">
-										<a class="text-reset" href="">내가 쓴 리뷰</a>
+										<a class="text-reset" href="/myReview.mypage?curPage=1">내가 쓴 리뷰</a>
 									</button>
 								</div>
 
@@ -479,13 +479,13 @@ section#container::after {
 									<div class="col-4 px-0 d-flex justify-content-center">
 										<button type="button"
 											class="profileBtn btn btn-warning btn-sm">
-											<a class="text-reset" href="">내가 쓴 게시글</a>
+											<a class="text-reset" href="/myPage.mem?curPage=1">내가 쓴 게시글</a>
 										</button>
 									</div>
 									<div class="col-4 px-0 d-flex justify-content-center">
 										<button type="button"
 											class="profileBtn btn btn-warning btn-sm">
-											<a class="text-reset" href="">내가 쓴 리뷰</a>
+											<a class="text-reset" href="/myReview.mypage?curPage=1">내가 쓴 리뷰</a>
 										</button>
 									</div>
 								</div>

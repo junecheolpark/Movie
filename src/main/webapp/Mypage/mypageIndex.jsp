@@ -171,7 +171,7 @@ a {
 
 /* Contents */
 .contents {
-	background-color: rgb(237, 241, 244);
+	background-color: white;
 }
 
 .contentsBox {
@@ -251,7 +251,7 @@ a {
 	margin-top: 15px;
 }
 /* Contents in container */
-  . contentsmyWriteBox .container {
+  .contentsmyWriteBox .container {
 	text-align : center;
 	width: 100%;
 	height: 100%;
@@ -285,7 +285,7 @@ button {
 }
 
 .content-body {
-	background-color: rgb(255, 254, 248);
+	background-color: white;
 }
 </style>
 </head>
@@ -450,7 +450,7 @@ button {
 						<div class="contentsBox2">
 							<div class="contentsmyWrite">
 								<a href="#" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
-								<a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
+								<a href="/myReview.mypage?curPage=1" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
 							</div>
 							<!-- Contents myWrite -->
 							<div class="contentsmyWriteBox">
