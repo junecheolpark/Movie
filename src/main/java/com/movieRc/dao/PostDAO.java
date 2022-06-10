@@ -202,11 +202,15 @@ public class PostDAO {
 	}
 
 	// 내 글 보기 함수
-	public ArrayList<PostDTO> myPost(String user_id1) throws Exception {
-		String sql = "select * from tbl_post where user_id =? ";
+	public ArrayList<PostDTO> myPost(String user_id1, int start, int end) throws Exception {
+		String sql = "select * from (select tbl_post.*, row_number() over(order by seq_post desc)"
+				+ " as num from tbl_post where user_id = ?)"
+				+ " where num between ? and ?";
 		try (Connection con = bds.getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
 
 			pstmt.setString(1, user_id1);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
 			pstmt.executeUpdate();
 
 			ResultSet rs = pstmt.executeQuery();
@@ -471,6 +475,60 @@ public class PostDAO {
 
 			return map;
 		}
-
+	}
+		
+		
+	// 페이징 - 매개변수 하나있는걸로 그냥 하나 더만든거에요 지금 고치고 할 시간 없어서
+	// 지우지 말아주세요 내가 쓴 게시글 조회할 때 쓰는거에요
+	public HashMap<String, Object> getPageNavi(int curPage) throws Exception{
+		String sql = "select count(*) as totalCnt from tbl_post";
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			
+			int totalCnt = rs.getInt("totalCnt"); // 전체 개수
+			int recordCntPerPage = 10; // 한 페이지 글 몇 개
+			int naviCntPerPage = 5; // navi 몇 개
+			
+			int pageTotalCnt = 0; // 페이지 몇 개
+			if(totalCnt % recordCntPerPage > 0) { // 나머지가 생김(10의 배수가 아님x)
+				pageTotalCnt = totalCnt / recordCntPerPage + 1;				
+			}else {
+				pageTotalCnt = totalCnt / recordCntPerPage;
+			}
+			
+			if(curPage < 1) {
+				curPage = 1;
+			}else if(curPage > pageTotalCnt) {
+				curPage = pageTotalCnt;
+			}
+				
+			int startNavi = ((curPage-1) / naviCntPerPage) * naviCntPerPage + 1;
+			int endNavi = startNavi + naviCntPerPage - 1;
+			if(pageTotalCnt < endNavi) {
+				endNavi = pageTotalCnt;
+			}				
+			boolean needPrev = true;
+			boolean needNext = true;
+			if(startNavi == 1) {				
+				needPrev = false;
+			}
+				
+			if(endNavi == pageTotalCnt) {
+				needNext = false;
+			}
+							
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("curPage", curPage);
+			map.put("startNavi", startNavi);
+			map.put("endNavi", endNavi);				
+			map.put("needPrev", needPrev);
+			map.put("needNext", needNext);
+			
+			return map;
+		}
 	}
 }
+	
