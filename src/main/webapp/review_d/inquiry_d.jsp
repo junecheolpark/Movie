@@ -533,7 +533,9 @@ body {
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/lookMovie.home" id="navLogo" class="mb-2 mb-lg-0"> <img id="logoImg" src="/images/logo3.png">
+						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
+							<img id="logoImg" src="/images/logo3.png">
+
 						</a>
 					</div>
 

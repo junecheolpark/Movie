@@ -201,6 +201,17 @@ public class PostCommentDAO {
 			return rs;			
 		}
 	}
+
+	public int countComment (int seq_post) throws Exception{
+		String sql = "select count(*) from tbl_post_comment where seq_post = ?";
+		try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setInt(1, seq_post);
+			ResultSet resultset = preparedStatement.executeQuery();
+			if (resultset.next()) {
+				return resultset.getInt(1);
+			} else return 0;
+		}
+	}
 	
 	public ArrayList<PostCommentDTO> selectAll(int seq_post1) throws Exception{
 		String sql = "select * from tbl_post_comment where seq_post = ? order by 1 DESC";

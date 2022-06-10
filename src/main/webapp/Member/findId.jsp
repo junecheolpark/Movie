@@ -183,7 +183,7 @@
 
                 <!-- logo -->
                 <div class="col-2">
-                    <a href="/home" id="navLogo" class="mb-2 mb-lg-0">
+                    <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
                         <img id="logoImg" src="/images/logo3.png">
                     </a>
                 </div>
@@ -390,10 +390,7 @@
 </footer>
 
 <script>
-<<<<<<< HEAD
-=======
 
->>>>>>> 4bfd108815c8a652d88d907f3f06e63476fd98c0
 
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {
