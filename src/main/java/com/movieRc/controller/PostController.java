@@ -20,6 +20,7 @@ import com.movieRc.dto.LikePostDTO;
 import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.PostCommentDTO;
 import com.movieRc.dto.PostDTO;
+import com.movieRc.dto.ReportDTO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -383,7 +384,24 @@ public class PostController extends HttpServlet {
 		         }catch(Exception e) {
 		            e.printStackTrace();
 		         }
-		      }
+		      }else if(uri.equals("/report.po")) { 
+					int seq_post = Integer.parseInt(request.getParameter("seq_post"));
+					String category_check = "post";
+					MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");
+					String user_category = dto1.getUser_category();
+					String user_id= dto1.getUser_id();
+					String rp_content =request.getParameter("rp_content");
+									
+					System.out.println(seq_post +"seq_P : seq_C " + " : " + user_id + " U_id: "+" : rp_content"+ rp_content);
+					
+					PostCommentDAO dao =new PostCommentDAO();
+					
+					try {
+					dao.reportInsert(new ReportDTO(0,category_check,rp_content,user_id,0,0,seq_post,user_category));
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
 			
 		}
 }
