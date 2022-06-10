@@ -32,22 +32,18 @@ width:100%
 a {
 	text-decoration: none;
 }
-
 .contents {
 	height: 500px;
 }
-
 /* header */
 #navLogo {
 	width: 150px;
 	height: 100px;
 }
-
 #logoImg {
 	width: 100%;
 	height: 100%;
 }
-
 /* Icon */
 #logoutIcon {
 	width: 30px;
@@ -58,66 +54,54 @@ a {
 	width: 30px;
 	height: 30px;
 }
-
 #myPageIcon {
 	width: 30px;
 	height: 30px;
 }
-
 #kakaoIcon {
 	width: 30px;
 	height: 30px;
 }
-
 #twitterIcon {
 	width: 30px;
 	height: 30px;
 }
-
 #instagramIcon {
 	width: 30px;
 	height: 30px;
 }
-
 #facebookIcon {
 	width: 30px;
 	height: 30px;
 }
-
 .snsIcon1 {
 	float: left;
 	margin-top: 10px;
 	margin-right: 5px;
 }
-
 .snsIcon2 {
 	float: left;
 	margin-top: 10px;
 	margin-right: 5px;
 }
-
 .snsIcon3 {
 	float: left;
 	margin-top: 10px;
 	margin-right: 5px;
 }
-
 .snsIcon4 {
 	float: left;
 	margin-top: 10px;
 }
 /* Icon end */
-
 /* Footer */
 .nav-link {
 	color: gray;
 	text-decoration: none;
 }
-
 .nav-link:hover {
 	color: white;
 }
-
 /* header 반응형 */
 @media ( max-width : 768px) {
 	#navLogo {
@@ -133,32 +117,27 @@ a {
 		display: none;
 	}
 }
-
 @media ( min-width : 768px) {
 	#navibar {
 		display: none;
 	}
 }
 /* header 반응형 끝 */
-
 /* footer 반응형 시작 */
 @media ( max-width : 768px) {
 	#bigFoot {
 		display: none;
 	}
 }
-
 @media ( min-width : 768px) {
 	#smallFoot {
 		display: none;
 	}
 }
-
 /* footer 반응형 끝 */
 /* -----------------------------------------------------------*/
 /* content 영역*/
 /* -----------------------------------------------------------*/
-
 /* clear:both를 통해 플롯 초기화해야 레이아웃 안깨짐
         https://kuzuro.blogspot.com/2018/08/blog-post_18.html 참고 */
 /* 반응형 시작 */
@@ -170,7 +149,6 @@ a {
 		width: 75%;
 	}
 }
-
 @media screen and (max-width: 1024px) {
 	aside#aside {
 		display: none;
@@ -183,13 +161,11 @@ a {
 		width: 100%;
 	}
 }
-
 @media screen and (min-width: 1024px) {
 	aside#asideSM {
 		display: none;
 	}
 }
-
 @media screen and (max-width: 768px) {
 	aside#asideSM div#profileBox {
 		display: none;
@@ -206,7 +182,6 @@ a {
 		float: none;
 	}
 }
-
 @media screen and (min-width: 768px) {
 	aside#asideSM div#profileBtnBoxSM {
 		display: none;
@@ -217,25 +192,21 @@ a {
 	margin: none;
 	background-color: rgb(240, 240, 240);
 }
-
 #p_like {
 	border: none;
 	margin: none;
 	background-color: rgb(240, 240, 240);
 }
-
 #p_hate {
 	border: none;
 	margin: none;
 	background-color: rgb(240, 240, 240);
 }
-
 #p_hatebefore {
 	border: none;
 	margin: none;
 	background-color: rgb(240, 240, 240);
 }
-
 #container2 {
 	margin: auto;
 	background-color: antiquewhite;
@@ -245,13 +216,9 @@ a {
 	margin-bottom:30px;
 	margin-top:30px;
 }
-
-
-
 .modal-content {
 	text-align: left;
 }
-
 #content-box {
 text-align: left;
 	padding: 20px;
@@ -261,12 +228,10 @@ text-align: left;
 	margin: auto;
 	border-radius: 15px;
 }
-
 #input-box {
 	width: 800px;
 	margin: auto;
 }
-
 #comment_post {
 	margin: auto;
 	width: 600px;
@@ -274,102 +239,81 @@ text-align: left;
 	border-radius: 10px;
 	resize: none;
 }
-
 .comment-box {
 	margin: auto;
 	width:800px
 }
-
 #submit {
 	width: 70px;
 	height: 70px;
 	border-radius: 10px;
 }
-
 #content {
 	min-height: 400px;
 }
-
 .comment-text {
 	height: 60px;
 }
-
 #profile {
 	width: 80px;
 	height: 80px;
 }
-
 #text {
 	height: 40px;
 }
-
 #hate {
 	width: 25px;
 	height: 25px;
 }
-
 #like {
 	width: 30px;
 	height: 30px;
 }
-
 #report {
 	width: 40px;
 	height: 30px;
 }
-
 .click {
 	background-color: rgb(240, 240, 240);
 	border-radius: 20px;
 	margin: 4px;
 }
-
 #user-box {
 	text-align: center;
 	width: 150px;
 	margin: auto;
 }
-
 /* 댓글 스타일  */
 /* 평점, 리뷰등록 */
 #divWrite {
 	display: none;
 }
-
 .form-control[readonly] {
 	background-color: transparent;
 }
-
 #t_r_grade {
 	display: none;
 }
-
 .r_grade_box {
 	font-size: 12px;
 }
-
 .btnWrite {
 	background-color: rgb(197, 192, 192);
 }
-
 /* 리플 박스 */
 #btnLikeUp2 {
 	display: none;
 }
-
 #btnHateUp2 {
 	display: none;
 }
-
 .reply_box {
 	background-color: white;
 	border-radius: 10px;
 }
-
 .btnModify {
 	border: none;
 }
-
 .Profile {
 	margin: auto;
 	background-color: rgb(165, 162, 162);
@@ -377,11 +321,9 @@ text-align: left;
 	height: 70px;
 	border-radius: 35px;
 }
-
 .content-reply {
 	border: none;
 }
-
 /* 좋아요 라운드 */
 .like_round {
 	background-color: rgb(197, 192, 192);
@@ -729,9 +671,7 @@ text-align: left;
 											console.log(e);
 										}
 									})
-
 								})
-
 						$("#p_hate").on(
 								"click",
 								function() {
@@ -778,13 +718,11 @@ text-align: left;
 											
 											 $("#likeCount-box").text(arr[1]);
 											 $("#hateCount-box").text(arr[2]);
-
 										},
 										error : function(e) {
 											console.log(e);
 										}
 									})
-
 								})
 						/*좋아요  */
 						$("#p_likebefore").on(
@@ -792,13 +730,11 @@ text-align: left;
 								function() {
 									
 									let seq_post = $("#p_likebefore").val();
-
 									$.ajax({
 										url : "/pLike.po?seq_post=" + seq_post,
 										type : "get",
 										success : function(data) {
 											console.log(data);
-
 											 arr = data.split('|'); 
 											 console.log("arr[0] : "+arr[0] + " lCount :" + arr[1] + " hCount : " + arr[2]);
 											 
@@ -830,7 +766,6 @@ text-align: left;
 											}
 											 $("#likeCount-box").text(arr[1]);
 											 $("#hateCount-box").text(arr[2]);
-
 										},
 										error : function(e) {
 											console.log(e);
@@ -843,7 +778,6 @@ text-align: left;
 								"click",
 								function() {
 									let seq_post = $("#p_like").val();
-
 									
 									
 									$.ajax({
@@ -883,7 +817,6 @@ text-align: left;
 											}
 											 $("#likeCount-box").text(arr[1]);
 											 $("#hateCount-box").text(arr[2]);
-
 										},
 										error : function(e) {
 											console.log(e);
@@ -1329,13 +1262,11 @@ text-align: left;
 				}
 			})
 		}) */
-
 		//모달 입력후 메세지 보냈을경우
 		
 		$("#sendMessage_p").on(
 				"click",
 				function(e) {
-
 					let seq_post = "${dto.seq_post}";
 					let seq_comment = $("#seqReport").val()
 					//  $("#message").val($("#message-text").val());
@@ -1343,7 +1274,6 @@ text-align: left;
 						alert("메세지를 제대로 입력하지 않았습니다.");
 						return;
 					}
-
 					let rp_content =$("#message-text_p").val();
 					let data = $("#reportForm").serialize();
 	
@@ -1364,15 +1294,12 @@ text-align: left;
 							console.log(e);
 						}
 					})
-
 				});
-
 		
 		
 		$("#sendMessage_c").on(
 				"click",
 				function(e) {
-
 					let seq_post = "${dto.seq_post}";
 					let seq_comment = $("#seqReport").val()
 					//  $("#message").val($("#message-text").val());
@@ -1380,7 +1307,6 @@ text-align: left;
 						alert("메세지를 제대로 입력하지 않았습니다.");
 						return;
 					}
-
 					let rp_content =$("#message-text_c").val();
 					let data = $("#reportForm").serialize();
 	
@@ -1403,7 +1329,6 @@ text-align: left;
 							console.log(e);
 						}
 					})
-
 				});
 		$(".btn-report_p").on(
 				"click",
@@ -1425,7 +1350,6 @@ text-align: left;
 										.querySelector(".modal-title");
 								var modalBodyInput = exampleModal
 										.querySelector(".modal-body input");
-
 								modalTitle.textContent = "Report";
 							})
 				});
@@ -1449,7 +1373,6 @@ text-align: left;
 										.querySelector(".modal-title");
 								var modalBodyInput = exampleModal
 										.querySelector(".modal-body input");
-
 								modalTitle.textContent = "Report";
 							})
 				});
@@ -1470,7 +1393,6 @@ text-align: left;
 						$(e.target).parent().parent().parent().parent().prev().children(
 								"textarea").focus();
 					});
-
 		// 수정 버튼 눌렀을때 모
 		$(".body-review").on("click",".btnSave",function(e) {
 					let seq_review = $(e.target).val();
@@ -1482,7 +1404,6 @@ text-align: left;
 						alert("리뷰를 입력해 주세요!");
 						return;
 					}
-
 					$.ajax({
 						url : "/modifyProc.co",
 						type : "post",
@@ -1534,7 +1455,6 @@ text-align: left;
 				}
 			})
 		});
-
 		// 댓글 등록
 		$("#btnSubmitReply").on("click", function() {
 			
@@ -1548,12 +1468,10 @@ text-align: left;
 				alert("입력된 댓글이 없습니다.");
 				return;
 			}
-
 			// ajax를 이용해서 form 전송
 			let data = $("#formReply").serialize(); //전송할 수 있는 데이터로 변환
 			console.log(data);
 			$("#inputReply").val("");
-
 			$.ajax({
 				url : "/insert.co",
 				type : "post",
@@ -1573,9 +1491,7 @@ text-align: left;
 					console.log(e);
 				}
 			})
-
 		})
-
 		function refreshMemList() {
 			location.reload();
 		}

@@ -189,11 +189,12 @@ public class ReviewDAO {
     }
 
     // r_grade카운트
-    public int r_grade_count() throws Exception {
-        String sql = "select count(*) from tbl_review";
+    public int r_grade_count(String movieCd) throws Exception {
+        String sql = "select count(*) from tbl_review where movieCd=?";
         try (Connection con = bds.getConnection();
              PreparedStatement pstmt = con.prepareStatement(sql)) {
-
+        	
+        	pstmt.setString(1, movieCd);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 int count = rs.getInt(1);

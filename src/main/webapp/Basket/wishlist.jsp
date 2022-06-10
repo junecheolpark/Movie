@@ -436,7 +436,7 @@ section#container::after {
 									<a class="text-reset" href="">내가 쓴 게시글</a>
 								</button>
 								<button type="button" class="profileBtn btn btn-warning mb-3">
-									<a class="text-reset" href="">내가 쓴 리뷰</a>
+									<a class="text-reset" href="/myReview.mypage?curPage=1">내가 쓴 리뷰</a>
 								</button>
 							</div>
 						</aside>

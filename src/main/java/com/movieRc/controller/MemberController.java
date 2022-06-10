@@ -264,6 +264,7 @@ public class MemberController extends HttpServlet {
         } else if (uri.equals("/modify.mem")) { // 내 정보수정 페이지 요청
             HttpSession session = request.getSession();
             String user_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_id();
+            System.out.println(user_id);
 
             MemberDAO dao = new MemberDAO();
             MpDAO daoMp = new MpDAO();
