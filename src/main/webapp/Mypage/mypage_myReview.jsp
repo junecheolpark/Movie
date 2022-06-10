@@ -421,37 +421,144 @@ button {
 			</nav>
 		</div>
 	</header>
+	
 	<!-- Contents -->
-	<div class="contents">
-		<form id="indexForm" action="/modify.mem" method="post">
-			<div class="contents row text-black">
-				<div class="contentsBox">
-					<div class="contentsImgBox">
-						<c:if test="${profile eq null}">
-							<img class="profileImg" src="/images/기본프로필.jpg">
-						</c:if>
-						<c:if test="${profile ne null}">
-							<img class="profileImg" src="/files/${profile}">
-						</c:if>
+	<c:choose>
+		<c:when test="${not empty loginSession}">
+			<div class="contents">
+				<form id="indexForm" action="/modify.mem" method="post">
+					<div class="contents row text-black">
+						<div class="contentsBox">
+							<div class="contentsImgBox">
+								<c:if test="${profile eq null}">
+									<img class="profileImg" src="/images/기본프로필.jpg">
+								</c:if>
+								<c:if test="${profile ne null}">
+									<img class="profileImg" src="/files/${profile}">
+								</c:if>
+							</div>
+							<br>
+							<p>${dto.user_nickname}</p>
+							<button type="button" class="btn btn-outline-danger" id="mb_delete">회원
+								탈퇴</button>
+							<button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
+							<button type="button" class="btn btn-outline-primary" id="i_modify">내
+								정보 수정</button>
+						</div>
+						<div class="contentsBox2">
+							<div class="contentsmyWrite">
+								<a href="링크입력" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
+								<a href="/myReview.mypage?curPage=1" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
+							</div>
+							<!-- Contents myWrite -->
+							<div class="contentsmyWriteBox">
+								<div class="container">
+									<div class="row">
+										<div class="col">
+											<h3>
+												내가 쓴 리뷰<br />
+											</h3>
+										</div>
+									</div>
+									<div class="content-header">
+										<div class="row">
+											<div class="col-3">
+												<strong>영화 이름</strong>
+											</div>
+											<div class="col-6">
+												<strong>리뷰</strong>
+											</div>
+											<div class="col-2">
+												<strong>작성일</strong>
+											</div>
+											<div class="col-1">
+												<strong>평점</strong>
+											</div>
+										</div>
+										<hr />
+									</div>
+		
+									<div class="content-body">
+										<!--내용-->
+										<c:choose>
+											<c:when test="${myReview.size() == 0}">
+												<div class="row">
+													<div class="col">작성한 리뷰가 없습니다.</div>
+												</div>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${myReview}" var="dto">
+													<div class="row">
+														<div class="col-3">${dto.movieNm}</div>
+														<div class="col-6">${dto.r_content}</div>
+														<div class="col-2">${dto.r_date}</div>
+														<div class="col-1">${dto.r_grade}</div>
+														<hr>
+													</div>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+									</div>
+		
+									<div class="row">
+										<!--글 페이지 이동-->
+										<div class="col-4"></div>
+										<div class="col-4">
+											<nav>
+												<ul class="pagination justify-content-center">
+													<c:if test="${pageMap.needPrev eq true}">
+														<li class="page-item"><a class="page-link"
+															href="/myReview.mypage?curPage=${pageMap.naviStart-1}">Prev</a></li>
+														<%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭했음 ->  5페이지로 이동 --%>
+													</c:if>
+		
+													<c:forEach var="pageNum" begin="${pageMap.naviStart}"
+														end="${pageMap.naviEnd}" step="1">
+														<li class="page-item"><a class="page-link"
+															href="/myReview.mypage?curPage=${pageNum}">${pageNum}</a></li>
+													</c:forEach>
+		
+													<c:if test="${pageMap.needNext eq true}">
+														<li class="page-item"><a class="page-link"
+															href="/myReview.mypage?curPage=${pageMap.naviEnd+1}">Next</a></li>
+													</c:if>
+												</ul>
+											</nav>
+										</div>
+										<div class="col-4"></div>
+									</div>
+		
+									<!-- <div class="row">
+										글 페이지 이동
+										<div class="col-2"></div>
+										<div class="col-8">
+											<select class="form-select search-method" id="searchValue"
+												aria-label="Default select example" name="searchOption">
+												<option value="1" selected>제목</option>
+												<option value="2">내용</option>
+												<option value="3">글쓴이</option>
+											</select> <input type="text" id="inputSearch" name="searchInput"
+												class="form-control" />
+											<button type="button" id="btnSearch" class="btn btn-secondary">검색</button>
+										</div>
+		
+									</div> -->
+		
+								</div>
+		
+							</div>
+						</div>
 					</div>
-					<br>
-					<p>${dto.user_nickname}</p>
-					<button type="button" class="btn btn-outline-danger" id="mb_delete">회원
-						탈퇴</button>
-					<button type="button" class="btn btn-outline-warning" id="i_logout">로그아웃</button>
-					<button type="button" class="btn btn-outline-primary" id="i_modify">내
-						정보 수정</button>
-				</div>
-				<div class="contentsBox2">
-					<div class="contentsmyWrite">
-						<a href="#" class="myWrite" id="i_p_inquiry"><strong>작성글</strong></a>
-						<a href="/" class="myWrite" id="i_r_inquiry"><strong>작성리뷰</strong></a>
-					</div>
-					<!-- Contents myWrite -->
-				</div>
+				</form>
 			</div>
-		</form>
-	</div>
+		</c:when>
+		
+		<c:otherwise>
+			<script>
+				location.href = "/Member/login.jsp";
+			</script>
+		</c:otherwise>
+	</c:choose>
 	
 	<script>
 		$("#mb_delete").on("click", function() { // 회원탈퇴 요청
