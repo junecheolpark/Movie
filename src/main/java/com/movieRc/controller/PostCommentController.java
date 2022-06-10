@@ -125,7 +125,7 @@ public class PostCommentController extends HttpServlet {
 				PostCommentDAO dao =new PostCommentDAO();
 				
 				try {
-				dao.reportInsert(new ReportDTO(0,"k",rp_content,user_id,0,seq_comment,seq_post,user_category));
+					dao.reportInsert(new ReportDTO(0,"comment",rp_content,user_id,0,seq_comment,seq_post,user_category));
 				}catch(Exception e) {
 					e.printStackTrace();
 				}
