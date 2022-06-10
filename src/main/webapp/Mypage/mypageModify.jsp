@@ -360,7 +360,7 @@
                                 <h2>내 정보 수정</h2>
                                 <div class="col-12">
                                     <label for="profileImg" class="form-label">프로필 사진</label><br>
-                                    <input type="file" name="photo">
+                                    <input type="file" name="photo" id = "profileInput" disabled >
                                 </div>
                                 <div class="row p-2">
                                     <div class="col-12">
@@ -521,6 +521,7 @@
 
                         // 수정버튼을 눌렀을때
                         $("#modifyBtn").on("click", function() {
+                            $("#profileInput").attr("disabled", false);
                             $("input").not("#user_id").attr("readonly", false); // 닉네임를 제외한 input readonly 제거
                             $("#checkNicknameBtn").attr("disabled", false); // 닉네임 확인 버튼에 걸린 disabled 제거
                             $("#btnPostcode").attr("disabled", false); // 우편번호찾기 버튼에 걸린 disabled 제거
@@ -839,11 +840,6 @@
     </div>
 </footer>
 <script>
-$("#searchBtn").on("click", function(){ // 검색 버튼 클릭 시
-	// 검색어키워드 값을 가져오기
-	let searchKeyword = $("#searchKeyword").val();
-	console.log(searchKeyword);
-	// /searchProc.bo?searchKeyword=...
 
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {

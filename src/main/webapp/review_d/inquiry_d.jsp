@@ -290,7 +290,7 @@
         .content-movie {
             height: 200px;
             border: none;
-            font-family: 'Cute Font', cursive;
+            /*font-family: 'Cute Font', cursive;*/
             font-size: 21px;
             color: rgb(104, 97, 97);
         }
