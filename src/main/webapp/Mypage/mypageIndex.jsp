@@ -537,9 +537,13 @@ button {
 					</div>
 				</div>
 
-				<script>
+		<script>
 	    $("#mb_delete").on("click", function(){ // 회원탈퇴 요청
-			location.href = "/deleteProc.mem";
+		    if (confirm("정말 탈퇴하시겠습니까?") == true){ // 탈퇴 확인
+		    	location.href = "/deleteProc.mem";
+		    }else{ // 탈퇴 취소
+		        return false;
+		    }
 		});
 
     	$("#i_logout").on("click", function(){ // 로그아웃 요청

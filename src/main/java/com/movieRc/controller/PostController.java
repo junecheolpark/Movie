@@ -368,10 +368,10 @@ public class PostController extends HttpServlet {
 				}catch(Exception e) {	
 					e.printStackTrace();
 				}
+				
 			}else if(uri.equals("/myPostPage.po")) {
 		         MemberDTO dto1 =(MemberDTO)request.getSession().getAttribute("loginSession");//로그인섹션
 		         String user_id = dto1.getUser_id();
-		         
 		         
 		         PostDAO dao= new PostDAO();
 		         ArrayList<PostDTO> list =new ArrayList<>();
