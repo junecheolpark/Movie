@@ -170,11 +170,11 @@
             resize: none;
         }
 
-        a {
-            text-decoration: none;
-            font-weight: bold;
-            color: black;
-        }
+        /*a {*/
+        /*    text-decoration: none;*/
+        /*    font-weight: bold;*/
+        /*    color: black;*/
+        /*}*/
 
         body {
             background-color: rgb(213, 226, 228);
@@ -1399,7 +1399,7 @@
                         <h5>계정</h5>
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2"><a href="/logout.mem" class="nav-link p-0">로그아웃</a></li>
-                            <li class="nav-item mb-2"><a href="/myPage.mem?curPage=1 class=" nav-link p-0">마이페이지</a>
+                            <li class="nav-item mb-2"><a href="/myPage.mem?curPage=1" class="nav-link p-0">마이페이지</a>
                             </li>
                             <li class="nav-item mb-2"><a href="/wishlist.wish" class="nav-link p-0">찜 목록</a></li>
                             <c:if test="${loginSession.grade == 'admin'}">

@@ -96,7 +96,7 @@ a {
 /* Icon end */
 /* Footer */
 .nav-link {
-	color: gray;
+	color: gray !important;
 	text-decoration: none;
 }
 .nav-link:hover {
