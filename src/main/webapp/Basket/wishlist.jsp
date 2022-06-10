@@ -179,8 +179,6 @@ section#container::after {
 }
 
 #profileBox {
-	background: white;
-	border-radius: 50%;
 	width: 200px;
 	height: 200px;
 }
@@ -188,6 +186,7 @@ section#container::after {
 #profileBox>img {
 	width: 100%;
 	height: 100%;
+	border-radius: 30%;
 }
 
 .profileBtn {
@@ -393,18 +392,12 @@ section#container::after {
 						<aside id="aside" class="p-3 mt-3">
 							<div class="row justify-content-center" id="profile">
 								<div class="col-12 mt-4" id="profileBox">
-									<img src="images/오구3.gif">
-									<%-- <tr>
-				                    	<td class="col-2 text-center align-middle">
-				                            <p class="fw-bold">첨부파일</p>
-				                        </td>
-				                        <td class="col-10" colspan="3">
-				                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
-				                        </td>
-				                        <td>
-				                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
-				                        </td>
-				                    </tr> --%>
+									<c:if test="${profile eq null}">
+										<img class="profileImg" src="/images/기본프로필.jpg">
+									</c:if>
+									<c:if test="${profile ne null}">
+										<img class="profileImg" src="/files/${profile}">
+									</c:if>
 								</div>
 
 								<div class="col-12 d-flex justify-content-center">
@@ -432,18 +425,12 @@ section#container::after {
 						<aside id="asideSM" class="p-3 mt-3">
 							<div class="row pt-3 justify-content-center" id="profile">
 								<div class="col-4 me-5 mt-3" id="profileBox">
-									<img src="/files/${file_dto.sys_name}">
-									<%-- <tr>
-				                    	<td class="col-2 text-center align-middle">
-				                            <p class="fw-bold">첨부파일</p>
-				                        </td>
-				                        <td class="col-10" colspan="3">
-				                            <a href="/download.fi?ori_name=${file_dto.ori_name}&sys_name=${file_dto.sys_name}">${file_dto.ori_name}</a>
-				                        </td>
-				                        <td>
-				                        	<img style="width:200px" src="/files/${file_dto.sys_name}">
-				                        </td>
-				                    </tr> --%>
+									<c:if test="${profile eq null}">
+										<img class="profileImg" src="/images/기본프로필.jpg">
+									</c:if>
+									<c:if test="${profile ne null}">
+										<img class="profileImg" src="/files/${profile}">
+									</c:if>
 								</div>
 
 								<div class="col-6" id="profileBtnBox">
@@ -518,7 +505,7 @@ section#container::after {
 											<c:forEach items="${wishList}" var="wishList">
 												<div class="wishBox col-sm-6 col-md-4 mb-3">
 													<div class="imgBox">
-														<img class="posters" src="">
+														<img class="posters" src="<c:url value="/images/NoImg.webp"/>">
 													</div>
 													<div class="imgText">
 														<p class="mb-0">${wishList.movieNm}
@@ -899,7 +886,7 @@ section#container::after {
 					
 					let col = $("<div>").addClass("wishBox col-4 mb-3");
 					let imgBox = $("<div>").addClass("imgBox");
-					let img = $("<img>").addClass("posters").attr("src", "");
+					let img = $("<img>").addClass("posters").attr("src", "<c:url value='/images/NoImg.webp'/>");
 					let imgText = $("<div>").addClass("imgText");
 					let p1 = $("<p>").addClass("mb-0").html(wishList.movieNm + " " + wishList.movieNmEn);
 					let p2 = $("<p>").addClass("mb-0 text-secondary").html(wishList.prdtYear + "년 개봉");
