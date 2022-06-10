@@ -170,7 +170,7 @@ a {
 </style>
 </head>
 
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	<!-- Header -->
 	<header class="mb-3 border-bottom">
 		<div class="container">
