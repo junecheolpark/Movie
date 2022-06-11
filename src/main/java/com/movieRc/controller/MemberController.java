@@ -2,7 +2,6 @@ package com.movieRc.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,10 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.movieRc.dao.BlacklistDAO;
 import com.movieRc.dao.MemberDAO;
-import com.movieRc.dto.MemberDTO;
 import com.movieRc.dao.MpDAO;
 import com.movieRc.dao.PostDAO;
+import com.movieRc.dto.MemberDTO;
 import com.movieRc.dto.MpDTO;
 import com.movieRc.dto.PostDTO;
 import com.movieRc.util.EncryptionUtils;
@@ -149,6 +149,7 @@ public class MemberController extends HttpServlet {
             System.out.println(user_id + " : " + user_pw);
 
             MemberDAO dao = new MemberDAO();
+            BlacklistDAO blackdao = new BlacklistDAO();
 
             try {
                 /**/
@@ -156,7 +157,13 @@ public class MemberController extends HttpServlet {
                 System.out.println("암호화된 pw : " + user_pw);
                 /**/
                 MemberDTO dto = dao.checkLogin(user_id, user_pw);
-                if (dto != null) {
+                
+                /* 블랙리스트면 로그인 실패 */
+                if(blackdao.selectById(user_id)) {
+                	System.out.println("블랙리스트 로그인 실패");
+                    request.setAttribute("black_rs", false);
+                    request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
+                } else if (dto != null) {
                     System.out.println("로그인 성공");
                     request.setAttribute("rs", true);
                     HttpSession session = request.getSession();
