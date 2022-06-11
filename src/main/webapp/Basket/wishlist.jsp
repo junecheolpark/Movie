@@ -430,7 +430,7 @@ section#container::after {
 
 							<div class="row justify-content-center" id="profileBtnBox">
 								<button type="button" class="profileBtn btn btn-warning my-3">
-									<a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a>
+									<a class="text-reset" href="/modify.mem?curPage=1">정보 수정</a>
 								</button>
 								<button type="button" class="profileBtn btn btn-warning mb-3">
 									<a class="text-reset" href="/myPage.mem?curPage=1">내가 쓴 게시글</a>
@@ -455,7 +455,7 @@ section#container::after {
 								<div class="col-6" id="profileBtnBox">
 									<h4 class="text-light">${loginSession.user_nickname}님</h4>
 									<button type="button" class="profileBtn btn btn-warning my-3">
-										<a class="text-reset" href="Mypage/mypageModify.jsp">정보 수정</a>
+										<a class="text-reset" href="/modify.mem?curPage=1">정보 수정</a>
 									</button>
 									<button type="button" class="profileBtn btn btn-warning mb-3">
 										<a class="text-reset" href="/myPage.mem?curPage=1">내가 쓴 게시글</a>
@@ -472,7 +472,7 @@ section#container::after {
 									<div class="col-4 px-0 d-flex justify-content-center">
 										<button type="button"
 											class="profileBtn btn btn-warning btn-sm">
-											<a class="text-reset" href="Mypage/mypageModify.jsp">정보
+											<a class="text-reset" href="/modify.mem?curPage=1">정보
 												수정</a>
 										</button>
 									</div>
