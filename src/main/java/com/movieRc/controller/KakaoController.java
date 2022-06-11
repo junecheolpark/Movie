@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.movieRc.dao.BlacklistDAO;
 import com.movieRc.dao.KakaoDAO;
 import com.movieRc.dao.MemberDAO;
 import com.movieRc.dto.MemberDTO;
@@ -105,10 +106,18 @@ public class KakaoController extends HttpServlet {
 			System.out.println(user_k + " : " + user_name);
 
 			KakaoDAO dao = new KakaoDAO();
+			BlacklistDAO blackdao = new BlacklistDAO();
 
 			try {
 				MemberDTO dto = dao.checkLogin(user_name, user_k);
-				if (dto != null) {
+				
+				// 블랙리스트인지 조회
+				String user_id = dto.getUser_id();
+				if(blackdao.selectById(user_id)) {
+					System.out.println("블랙리스트 로그인 실패");
+                    request.setAttribute("black_rs", false);
+                    request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
+				}else if (dto != null) {
 					System.out.println("로그인 성공");
 					request.setAttribute("rs", true);
 					HttpSession session = request.getSession();

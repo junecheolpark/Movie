@@ -579,8 +579,9 @@
             alert("비밀번호를 정확히 입력해 주세요.")
             $('#user_id').focus();
             return;
-        }/**/
+        }
         $("#loginForm").submit();
+        
     })
 
     // 카카오 로그인
@@ -671,6 +672,11 @@
         frm.submit();
     }
 </script>
+<c:if test="${black_rs eq false}">
+	<script>
+    	alert("해당 계정은 블랙리스트로 등록되어 접속이 불가합니다.");
+	</script>
+</c:if>
 <c:if test="${rs eq false}">
     <script>
         alert("로그인에 실패했습니다.");
