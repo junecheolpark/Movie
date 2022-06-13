@@ -388,13 +388,7 @@
             border: none;
         }
 
-        .Profile {
-            margin: auto;
-            background-color: rgb(165, 162, 162);
-            width: 70px;
-            height: 70px;
-            border-radius: 35px;
-        }
+      
 
         .content-reply {
             border: none;
@@ -537,6 +531,17 @@
             justify-content: center;
             align-items: center;
 
+        }
+        #profile {
+	width: 80px;
+	height: 80px;
+}
+          .Profile {
+            margin: auto;
+            background-color: rgb(165, 162, 162);
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
         }
 
         #profileImg {

@@ -234,6 +234,7 @@
             white-space: nowrap;
             padding: 5px;
             margin: 5px;
+            
         }
 
         .reviewLike {
@@ -662,10 +663,10 @@
                                         <c:if test="${reviewDTO.seq_review eq like.key}">
                                             <input type="hidden" value="${like.value['status']}" class="likeStatus">
                                             <span class="likeSpan">${like.value['like']}</span>
-                                            <button type='button' class='likeBtn' value="${reviewDTO.seq_review}">좋아요
+                                            <button type='button' class='likeBtn mt-1' value="${reviewDTO.seq_review}">좋아요
                                             </button>
                                             <span class="hateSpan">${like.value['hate']}</span>
-                                            <button type="button" class="hateBtn" value="${reviewDTO.seq_review}">싫어요
+                                            <button type="button" class="hateBtn mt-1" value="${reviewDTO.seq_review}">싫어요
                                             </button>
                                         </c:if>
                                     </c:forEach>

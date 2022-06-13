@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.movieRc.dao.MpDAO;
 import com.movieRc.dao.PostCommentDAO;
 import com.movieRc.dao.PostDAO;
 import com.movieRc.dto.LikePostDTO;
@@ -143,8 +144,24 @@ public class PostController extends HttpServlet {
 				request.setAttribute("likeValue", likeValue);//1이면 좋아요상태,0이면표시안한상태,-1이면표시안한상태,2이면싫어요상태
 				
 				System.out.println("좋아요한상태? : "+likeValue);
-				
-				
+				//dao쪽
+				MpDAO mpDAO = new MpDAO();
+				 
+                HashMap<Integer, String> hashMap = new HashMap<>();
+
+                String reviewer;
+               
+                for(int i =0; i<list.size(); i++){
+                    reviewer = list.get(i).getUser_id();
+                    System.out.println(reviewer);
+                    if(mpDAO.exist(list.get(i).getUser_id())!=0) {
+                        String profile = mpDAO.select(list.get(i).getUser_id());
+                        hashMap.put(list.get(i).getseq_comment(), "/files/"+profile);
+                    } else hashMap.put(list.get(i).getseq_comment(), "/images/기본프로필.jpg");
+                    System.out.println(hashMap.get(list.get(i).getSeq_post()));
+                }
+
+                request.setAttribute("hashMap", hashMap);
 				//좋아요 싫어요개수 얻기
 
 				int countLike =dao.pLikeCount(seq_post, 1);
