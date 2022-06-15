@@ -187,6 +187,7 @@
 
         .movie .movieImgDiv img {
             height: 100%;
+            width: 52%;
             border-radius: 10px;
         }
 
@@ -253,6 +254,11 @@
                 grid-template-columns: repeat(10, 10%);
                 grid-template-rows: repeat(10, 10%);
             }
+            
+            .movieImgDiv img {
+				max-width : 200px;
+				!important;
+			}
 
             .movie div {
                 padding: 0px;
@@ -610,8 +616,8 @@
             <c:if test="${not empty arrayList}">
                 <c:forEach items="${arrayList}" var="movieDTO">
                     <div class="movie col-6 col-lg-4">
-                        <div class="movieImgDiv">
-                            <img src="<c:url value="/images/NoImg.webp"/>">
+                        <div class="movieImgDiv" id="${movieDTO.movieCd}Img">
+                            <img src="images/NoImg.webp"/>
                         </div>
                         <div class="movieNameDiv">
                             <span class="movieName">
@@ -641,6 +647,34 @@
 
                         </div>
                     </div>
+                    <script>
+                    $.ajax({
+                		url : "<c:url value="/MovieServiceJSON"/>",
+                		type : "post",
+                		dataType : "json",
+                		data : {query : '${movieDTO.movieNm}'},
+                				success : function(json) {
+                					/* $(".movieImgDiv").append('<img src="images/NoImg.webp"/>'); */
+                					$.each(json.items,function(i,item) {
+                						console.log(item.image);
+                						if(item.image){
+                							$('.movieLi').children().children("#${movieDTO.movieCd}Img").empty();
+                    						$('.movieLi').children().children("#${movieDTO.movieCd}Img").append('<img src="' +item.image+ '"/>');
+                						}
+                					 	
+                					 	
+                						/* $(".movieImgDiv").empty();
+                							  console.log("${movieDTO.movieNm}");
+                							$(".movieImgDiv").append('<img src="' +item.image+ '"/>');  */
+                						
+                												});
+                						},error : function(error) {
+                							
+                							
+                						}
+                						
+                				});
+                    </script>
                 </c:forEach>
             </c:if>
             <c:if test="${empty arrayList}">
@@ -910,6 +944,10 @@
     </div>
 </footer>
 <script>
+
+
+
+
     const searchForm = $(".searchForm");
     searchForm.on("submit", function (event) {
         if ($(this).find(".searchInput").val() === "") {
@@ -976,168 +1014,7 @@
     })
 
 
-    <%--function showList(data) {--%>
-    <%--    $.each(data, function (index, item) {--%>
-    <%--        let movie = $("<div>").addClass("movie col-6 col-lg-4");--%>
-    <%--        let movieImgDiv = $("<div>").addClass("movieImgDiv");--%>
-    <%--        let img = $("<img src='/images/NoImg.webp'>");--%>
-    <%--        let movieNameDiv = $("<div>").addClass("movieNameDiv");--%>
-    <%--        let movieName = $("<span>").addClass("movieName");--%>
-    <%--        let movieNameAnchor = $("<a>").attr("href", "").html(item.movieNm); // 수정 필요--%>
-    <%--        let directors = $("<span>").addClass("directors").html(item.directors);--%>
-    <%--        if(item.directors===""){--%>
-    <%--            let directors = $("<span>").addClass("directors").html("등록된 감독이 없습니다.");--%>
-    <%--        }--%>
-    <%--        let categoryDiv = $("<div>").addClass("categoryDiv");--%>
-    <%--        let movieCategory = $("<span>").addClass("movieCategory").html(item.genreAlt);--%>
-    <%--        let avgPointDiv = $("<div>").addClass("avgPointDiv");--%>
-
-    <%--        $.ajax({--%>
-    <%--            url : "/findAvgPoint.movie?movieCd=" + item.movieCd,--%>
-    <%--            dataType : "text",--%>
-    <%--            success : function (avg) {--%>
-    <%--               avg = avg.padEnd(4, ".00");--%>
-    <%--               let movieAvgPoint = $("<span>").addClass("movieAvgPoint").html(avg);--%>
-    <%--               avgPointDiv.append(movieAvgPoint);--%>
-    <%--            },--%>
-    <%--            error : function (e) {--%>
-    <%--                console.log(e);--%>
-    <%--            }--%>
-    <%--        })--%>
-
-    <%--        movieImgDiv.append(img);--%>
-    <%--        movieName.append(movieNameAnchor);--%>
-    <%--        movieNameDiv.append(movieName);--%>
-    <%--        movieNameDiv.append(directors);--%>
-    <%--        categoryDiv.append(movieCategory);--%>
-
-    <%--        movie.append(movieImgDiv);--%>
-    <%--        movie.append(movieNameDiv);--%>
-    <%--        movie.append(categoryDiv);--%>
-    <%--        movie.append(avgPointDiv);--%>
-
-    <%--        $(".movieLi").append(movie);--%>
-    <%--    });--%>
-    <%--}--%>
-
-    <%--function pagination(uri,s_type,val, totalCnt, postPerPage, naviCntPerPage, curPage){--%>
-    <%--    let totalPage = Math.ceil(totalCnt/postPerPage);--%>
-
-    <%--    if(curPage<1) {--%>
-    <%--        curPage =1--%>
-    <%--    } else if (curPage > totalPage) {--%>
-    <%--        curPage = totalPage;--%>
-    <%--    }--%>
-
-    <%--    let naviStart = Math.floor((curPage-1)/naviCntPerPage) * naviCntPerPage +1;--%>
-    <%--    let naviEnd = naviStart + naviCntPerPage - 1;--%>
-    <%--    if(naviEnd>totalPage){--%>
-    <%--        naviEnd = totalPage;--%>
-    <%--    }--%>
-    <%--    naviStart = Number(naviStart);--%>
-    <%--    naviEnd = Number(naviEnd);--%>
-
-    <%--    let prevBtn = (naviStart!==1);--%>
-    <%--    let nextBtn = (naviEnd!==totalPage);--%>
-
-    <%--    let prevBtnLi = $("<li>").addClass("page-item prevBtn");--%>
-    <%--    let prevBtnA = $("<a>").addClass("page-link").attr("href", uri+".movie?s_type="+s_type+"&curPage="+naviStart-1+"&val"+val).html("Previous");--%>
-    <%--    prevBtnLi.append(prevBtnA);--%>
-    <%--    $(".pagination").append(prevBtnLi);--%>
-
-    <%--    let navLi--%>
-    <%--    let navA;--%>
-
-    <%--    for(let i = naviStart; i<naviEnd+1; i++){--%>
-    <%--       navLi = $("<li>").addClass("page-item");--%>
-    <%--       navA = $("<a>").addClass("page-link").attr("href", uri+".movie?s_type="+s_type+"&curPage="+i+"&val"+val).html(i);--%>
-    <%--       navLi.append(navA);--%>
-    <%--       $(".pagination").append(navLi);--%>
-    <%--    }--%>
-    <%--    let nextBtnLi = $("<li>").addClass("page-item nextBtn");--%>
-    <%--    let nextBtnA = $("<a>").addClass("page-link").attr("href", uri+".movie?s_type="+s_type+"&curPage="+naviEnd+1+"&val"+val).html("Next");--%>
-    <%--    nextBtnLi.append(nextBtnA);--%>
-    <%--    $(".pagination").append(nextBtnLi);--%>
-
-    <%--    if (!prevBtn) {--%>
-    <%--        $(".prevBtn").addClass("disabled");--%>
-    <%--    }--%>
-    <%--    if (!nextBtn) {--%>
-    <%--        $(".nextBtn").addClass("disabled");--%>
-    <%--    }--%>
-    <%--}--%>
-
-    <%--$("#orderByRecentMovie").on("click", function () {--%>
-    <%--    var s_type = "${s_type}";--%>
-    <%--    var val = "${val}";--%>
-    <%--    $.ajax({--%>
-    <%--        url: "/orderBy.recent.movie?s_type=" + s_type + "&curPage=1&val=" + val,--%>
-    <%--        dataType: "json",--%>
-    <%--        success: function (data) {--%>
-    <%--            $(".movieLi").empty();--%>
-    <%--            showList(data);--%>
-
-    <%--            $(".pagination").empty();--%>
-
-    <%--            $.ajax({--%>
-    <%--                url : "getCount.movie?s_type=" + s_type + "&curPage=1&val=" + val,--%>
-    <%--                dataType : "json",--%>
-    <%--                success : function (data) {--%>
-    <%--                    pagination("orderBy.recent",s_type,val,data.num,30,10,data.curPage);--%>
-    <%--                },--%>
-    <%--                error : function (e) {--%>
-    <%--                    console.log(e);--%>
-    <%--                }--%>
-    <%--            });--%>
-
-    <%--        },--%>
-    <%--        error: function () {--%>
-    <%--            console.log(e);--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
-
-    <%--$("#orderByReviewCount").on("click", function () {--%>
-    <%--    var s_type = "${s_type}";--%>
-    <%--    var val = "${val}";--%>
-    <%--    $.ajax({--%>
-    <%--        url: "/orderBy.reviewCount.movie?s_type=" + s_type + "&curPage=1&val=" + val,--%>
-    <%--        dataType: "json",--%>
-    <%--        success: function (data) {--%>
-    <%--            $(".movieLi").empty();--%>
-    <%--            showList(data);--%>
-    <%--            $(".pagination").empty();--%>
-    <%--            let num;--%>
-    <%--            for (let i = 1; 0 < 12; i++) {--%>
-    <%--                num = $(".pagination>li:eq(i)>a").attr("data-value");--%>
-    <%--                $(".pagination>li:eq(i)>a").attr("href", "/orderBy.reviewCount.movie?s_type=" + s_type + "&curPage=" + num + "&val=" + val);--%>
-    <%--            }--%>
-    <%--        },--%>
-    <%--        error: function () {--%>
-    <%--            console.log(e);--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
-    <%--$("#orderByHighAveragePoint").on("click", function () {--%>
-    <%--    var s_type = "${s_type}";--%>
-    <%--    var val = "${val}";--%>
-    <%--    $.ajax({--%>
-    <%--        url: "/orderBy.avgPoint.movie?s_type=" + s_type + "&curPage=1&val=" + val,--%>
-    <%--        dataType: "json",--%>
-    <%--        success: function (data) {--%>
-    <%--            $(".movieLi").empty();--%>
-    <%--            showList(data);--%>
-    <%--            let num;--%>
-    <%--            for (let i = 0; i < 12; i++) {--%>
-    <%--                num = $(".pagination>li:eq(i)>a").attr("data-value");--%>
-    <%--                $(".pagination>li:eq(i)>a").attr("href", "/orderBy.avgPoint.movie?s_type=" + s_type + "&curPage=" + num + "&val=" + val);--%>
-    <%--            }--%>
-    <%--        },--%>
-    <%--        error: function (e) {--%>
-    <%--            console.log(e);--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
+   
 
 </script>
 </body>

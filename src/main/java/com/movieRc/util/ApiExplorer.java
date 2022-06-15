@@ -1,23 +1,23 @@
 package com.movieRc.util;/* Java 샘플 코드 */
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.movieRc.dto.MovieDTO;
 
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-
 public class ApiExplorer {
     public ArrayList<MovieDTO> run(int no) throws IOException {
         // 1. URL
-        String urlBuilder = "https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json" + "?key=bd9be97f79ac9419f55520a622db6761" + "&itemPerPage=10" + "&curPage=" + no;
+        String urlBuilder = "https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json" + "?key=0b5614361bd8f2d735ce0a51f7929512" + "&itemPerPage=10" + "&curPage=" + no;
         URL url = new URL(urlBuilder);
         // 2. 요청하고자 하는 URL과 통신하기 위한 Connection 객체 생성.
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

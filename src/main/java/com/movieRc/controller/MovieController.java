@@ -46,7 +46,7 @@ public class MovieController extends HttpServlet {
             int curPage = Integer.parseInt(request.getParameter("curPage"));
             try {
                 int totalCount = movieDAO.CountAll();
-                HashMap<String, Object> hashMap = pagination.getPageNavi(totalCount, 30, 10, curPage);
+                HashMap<String, Object> hashMap = pagination.getPageNavi(totalCount, 12, 10, curPage);
                 int start = (int) hashMap.get("postStart");
                 int end = (int) hashMap.get("postEnd");
                 ArrayList<MovieDTO> arrayList = movieDAO.selectAll(start, end);
@@ -377,8 +377,6 @@ public class MovieController extends HttpServlet {
         	  MovieDTO dto = new MovieDTO(tmp[0],tmp[1],tmp[2],tmp[3],tmp[4],tmp[5],tmp[6]);
         	  dtos.add(dto);
           }
-          
-      
         	 int rs = dao.insert(dtos);
         	 
         	 if(rs == dtos.size()) {

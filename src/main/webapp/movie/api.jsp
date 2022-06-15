@@ -16,7 +16,7 @@
 
         //index.json
 
-        var key = "?key=d70a242ca6f2719e32f71a1df9ed50a5" // key 앞에 <?key=>를 붙여야함 : prameter
+        var key = "?key=0b5614361bd8f2d735ce0a51f7929512" // key 앞에 <?key=>를 붙여야함 : prameter
         var itemPerPage = "&itemPerPage=100" //100개를 가져올것이라서
         const url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json"
             + key

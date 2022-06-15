@@ -43,6 +43,20 @@ public class ApiDAO {
         }
     }
 
+    public int update (String MovieCd, String MovieNm) throws Exception{
+		String sql = "update tbl_movie set movieNm = ? where MovieCd = ?";
+		
+		try(Connection con =getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setString(2, MovieCd);
+			pstmt.setString(1, MovieNm);
+
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
+    
     public int deleteAll() throws Exception {
         String sql = "delete from tbl_movie";
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

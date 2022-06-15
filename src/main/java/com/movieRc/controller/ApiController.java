@@ -38,8 +38,15 @@ public class ApiController extends HttpServlet {
                 for (int i = 0; i < num; i++) {
                     ArrayList<MovieDTO> arrayList = apiExplorer.run(i);
                     for (int j = 0; j < arrayList.size(); j++) {
-                        System.out.println((i * 10 + j) + "번째 데이터 넣는 중");
-                        movieDAO.insert(arrayList.get(j));
+                    	System.out.println(i+"업데이트" +j);
+                    	int rs1 = movieDAO.update(arrayList.get(j).getMovieCd(), arrayList.get(j).getMovieNm());
+                        
+                       
+                        if(rs1<0) {
+                        	System.out.println((i * 10 + j) + "번째 데이터 넣는 중");
+                             movieDAO.insert(arrayList.get(j));
+                        	
+                        }
                     }
                 }
             } catch (Exception e) {

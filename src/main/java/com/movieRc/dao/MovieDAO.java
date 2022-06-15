@@ -527,6 +527,7 @@ public class MovieDAO {
 		return rs;
 	}
 	
+	
 	// movieCd로 조회
 	public MovieDTO selectBySeq(String movieCd) throws Exception{
 		String sql = "SELECT * FROM tbl_movie WHERE movieCd = ?";

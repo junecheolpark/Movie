@@ -697,7 +697,7 @@
         <!-- 왼쪽 영화이미지 -->
         <div class="col-3 p-2 movie_box">
             <div class="col movie_img">
-                <img src="images/NoImg.webp" width="100%" height="100%">
+                <%--<img src="images/NoImg.webp" width="100%" height="100%"> --%>
             </div>
             <div class="col ps-2">
                 <p class="m_genre mb-1 mt-1">장르: ${moviedto.genreAlt}</p>
@@ -1090,7 +1090,7 @@
                                     <div class="col m-0">
                                         <c:forEach items="${like_list}" var="like">
                                             <c:if test="${review.seq_review eq like.seq_review}">
-                                                <span class="">${like.l_count}</span>
+                                                <span class="ps-2 font_style">${like.l_count}</span>
                                             </c:if>
                                         </c:forEach>
                                     </div>
@@ -1103,7 +1103,7 @@
                                     <div class="col m-0">
                                         <c:forEach items="${hate_list}" var="hate">
                                             <c:if test="${review.seq_review eq hate.seq_review}">
-                                                <span class="">${hate.l_count}</span>
+                                                <span class="ps-2 font_style">${hate.l_count}</span>
                                             </c:if>
                                         </c:forEach>
                                     </div>
@@ -1661,29 +1661,32 @@
 
 
     let msg = '${msg}';
-    console.log(msg);
     if (msg != "") {
         alert(msg)
     }
+    //<img src="images/NoImg.webp" width="100%" height="100%">
 
-
-    /*
-     $.ajax({
-         method: "GET",
-         url: "https://dapi.kakao.com/v2/search/image",
-         data: {
-             query: '${moviedto.movieNm}',
-                 
-             },
-             headers: {
-                 Authorization: "KakaoAK 0f7acd5ca96b1d76578d02adc4161263"
-             },
-         })
-         .done(function (msg) {
-           
-             $(".thumbnail").append('<img src="' + msg.documents[1].image_url + '"/>');
-         });
-		*/
+    $.ajax({
+		url : "<c:url value="/MovieServiceJSON"/>",
+		type : "post",
+		dataType : "json",
+		data : {query : '${moviedto.movieNm}'},
+				success : function(json) {
+					$(".movie_img").append('<img src="images/NoImg.webp"/>');
+					$.each(json.items,function(i,item) {
+						console.log(item.image);
+						$(".movie_img").empty();
+							  console.log("값이 ㅇㅇ");
+							$(".movie_img").append('<img src="' +item.image+ '"/>');
+						
+												});
+						},error : function(error) {
+							
+							
+						}
+						
+				});
+   
     $("#btnWrite").on(
         "click",
         function () {
