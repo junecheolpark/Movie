@@ -658,14 +658,9 @@
                 					$.each(json.items,function(i,item) {
                 						console.log(item.image);
                 						if(item.image){
-                							$('.movieLi').children().children("#${movieDTO.movieCd}Img").empty();
-                    						$('.movieLi').children().children("#${movieDTO.movieCd}Img").append('<img src="' +item.image+ '"/>');
+                							$('.movieLi').find("#${movieDTO.movieCd}Img").empty();
+                    						$('.movieLi').find("#${movieDTO.movieCd}Img").append('<img src="' +item.image+ '"/>');
                 						}
-                					 	
-                					 	
-                						/* $(".movieImgDiv").empty();
-                							  console.log("${movieDTO.movieNm}");
-                							$(".movieImgDiv").append('<img src="' +item.image+ '"/>');  */
                 						
                 												});
                 						},error : function(error) {

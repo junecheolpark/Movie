@@ -42,7 +42,7 @@ public class ApiController extends HttpServlet {
                     	int rs1 = movieDAO.update(arrayList.get(j).getMovieCd(), arrayList.get(j).getMovieNm());
                         
                        
-                        if(rs1<0) {
+                        if(rs1>0) {
                         	System.out.println((i * 10 + j) + "번째 데이터 넣는 중");
                              movieDAO.insert(arrayList.get(j));
                         	

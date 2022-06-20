@@ -613,14 +613,14 @@
                         <div class="movieDiv">
                             <c:forEach items="${movies}" var="movie">
                                 <c:if test="${reviewDTO.movieCd eq movie.key}">
-                                    <div class="movieImgDiv">
+                                    <div class="movieImgDiv" id="${reviewDTO.seq_review}">
                                         <a href="/detailView.re?movieCd=${reviewDTO.movieCd}"><img
                                                 src="/images/NoImg.webp"></a>
 
                                     </div>
                                     <div class="product">
                                         <div class="productDiv1">
-                                            <div class="productTitle">
+                                            <div class="productTitle" id="">
                                                 <a href="/detailView.re?movieCd=${reviewDTO.movieCd}">${movie.value['movieDTO'].movieNm}</a>
                                             </div>
                                             <div class="productCategory">${movie.value['movieDTO'].genreAlt}</div>
@@ -637,6 +637,29 @@
                                             <span class="directors">${movie.value['movieDTO'].directors}</span>
                                         </div>
                                     </div>
+                                      <script>
+					                    $.ajax({
+					                		url : "<c:url value="/MovieServiceJSON"/>",
+					                		type : "post",
+					                		dataType : "json",
+					                		data : {query : "${movie.value['movieDTO'].movieNm}"},
+					                				success : function(json) {
+					                					/* $(".movieImgDiv").append('<img src="images/NoImg.webp"/>'); */
+					                					$.each(json.items,function(i,item) {
+					                						console.log(item.image);
+					                						if(item.image){
+					                							$("#${reviewDTO.seq_review}").children().empty();
+					                    						$("#${reviewDTO.seq_review}").children().append('<img src="' +item.image+ '"/>');
+					                						}
+					                						
+					                												});
+					                						},error : function(error) {
+					                							
+					                							
+					                						}
+					                						
+					                				});
+					                    </script>
                                 </c:if>
                             </c:forEach>
                         </div>
@@ -674,6 +697,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </c:forEach>
             </c:if>
             <c:if test="${empty arrayList}">
