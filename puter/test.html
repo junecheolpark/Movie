@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 연습</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Myeongjo&family=Yeon+Sung&display=swap"
+        rel="stylesheet">
+    <style>
+        html {
+            font-family: 'Gugi', cursive;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1> API Practice </h1>
+    <h2> 📚 Book Search Using KaKao API </h2>
+    <hr>
+    <div class="container">
+        <div class="thumbnail"></div>
+        <p></p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+        $.ajax({
+                method: "GET",
+                url: "https://dapi.kakao.com/v3/search/book?target=title",
+                data: {
+                    query: "호모사피엔스",
+                },
+                headers: {
+                    Authorization: "KakaoAK 0f7acd5ca96b1d76578d02adc4161263"
+                },
+            })
+            .done(function (msg) {
+             try{
+                $(".thumbnail").append('<img src="'+ msg.documents[1].thumbnail +'" />');
+             }catch(error){
+                $(".thumbnail").append('<img src="images/NoImg.webp"/>');
+             }
+                
+                                
+
+            });
+            onerror="this.src='/images/NoImg.webp'"
+            onError="this.onerror=null;this.src='/images/NoImg.webp';"
+            function imgError(image) {
+            image.onerror = "";
+            image.src = "/images/noimage.gif";
+            return true;
+        }
+    </script>
+</body>
+
+</html>

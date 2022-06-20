@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!-- static 파일들과 연결하였고, API로 얻은 정보들을 html로 보내기위해 id가 a인 div를 만들어 놓음 -->
+<!-- script에 json 연결 -->
+
+
+<!DOCTYPE html>
+
+<html lang="ko">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화목록</title>
+</head>
+
+<body>
+    <div id="result2">
+    </div>
+    <script>
+        var key = "?key=d70a242ca6f2719e32f71a1df9ed50a5" // key 앞에 <?key=>를 붙여야함 : prameter
+        var itemPerPage = "&itemPerPage=10" //100개를 가져올것이라서
+        $.ajax({
+            method: "GET",
+            url : "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json"
+            + key
+            + itemPerPage
+        }).done(function(msg) {
+			let resultt = ""
+            var item_int = 10
+            let short_url = msg.movieListResult.movieList[0];
+            console.log(short_url);
+            resultt += "<b>영화코드 : " + short_url.movieCd+"</b>"
+            resultt += "<p>영화 제목 : "+short_url.movieNm+"</p>"
+            resultt += "<p>영화명 영문: "+short_url.movieNmEn+"</p>"
+            resultt += "<p>제작연도: "+short_url.prdtYear+"</p>"
+            resultt += "<p>국가 : "+short_url.nationAlt+"</p>"
+            resultt += "<p>장르명 : "+short_url.genreNm+"</p>"
+			resultt += "<p>감독: "+short_url.directors[0]['peopleNm']+"</p>"	
+            
+        	$("#result2").append(resultt);
+		});
+      
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
