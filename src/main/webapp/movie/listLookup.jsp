@@ -22,17 +22,14 @@
             min-height: 4000px;
             min-width: 640px;
         }
-
         * {
             box-sizing: border-box;
         }
-
         header {
             width: 100%;
             height: 3.6%;
             background-color: black !important;
         }
-
         footer {
             width: 100%;
             height: 9%;
@@ -41,7 +38,6 @@
         #navibar {
             background-color: black;
         }
-
         #container {
             height: 84%;
             margin-left: 5%;
@@ -49,7 +45,6 @@
             display: flex;
             flex-direction: column;
         }
-
         #titleContainer {
             height: 2%;
             width: 100%;
@@ -61,16 +56,12 @@
             padding: 10px;
             border-radius: 8px;
         }
-
         #titleDiv {
-
         }
-
         #titleDiv #title {
             font-size: 1.5em;
             font-weight: bold;
         }
-
         #titleDiv #movieNum {
             font-size: 0.8em;
             color: silver;
@@ -82,7 +73,6 @@
             background-color: #503396;
             margin-bottom: 20px;
         }
-
         #selectionDiv1 {
             height: 50%;
             display: flex;
@@ -90,18 +80,15 @@
             justify-content: center;
             gap: 60px;
         }
-
         #selectionDiv1 button {
             background-color: #503396;
             color: white;
             border: none;
             font-size: 0.8em;
         }
-
         #selectionDiv1 button:hover {
             color: silver;
         }
-
         #selectionDiv2 {
             height: 50%;
             display: flex;
@@ -109,42 +96,34 @@
             justify-content: flex-end;
             padding: 10px;
         }
-
         #selectionDiv2 button {
             background-color: #503396;
             color: white;
             border: none;
             font-size: 0.8em;
         }
-
         #selectionDiv2 button:hover {
             color: silver;
         }
-
         #movieDiv {
             height: 90%;
             margin-bottom: 20px;
         }
-
         .movieLi {
             height: 19.8%;
             width: 100%;
         }
-
         .movie {
             height: 50%;
             width: 33%;
         }
-
         .movie div {
             padding-left: 70px;
             padding-right: 70px;
         }
-
         .avgPointImg {
             padding: 1px;
         }
-
         .movie .movieImgDiv {
             height: 72%;
             display: flex;
@@ -152,7 +131,6 @@
             align-items: center;
             padding: 10px;
         }
-
         .movieNameDiv {
             height: 10%;
             display: flex;
@@ -161,20 +139,17 @@
             padding: 5px;
             gap: 10px;
         }
-
         .movieNameDiv a {
             flex-basis: 200px;
             color: black;
             text-decoration: none;
         }
-
         .movieName {
             display: block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .directors {
             display: block;
             flex-basis: 100px;
@@ -184,13 +159,11 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .movie .movieImgDiv img {
             height: 100%;
-            width: 52%;
+            width : 52%;
             border-radius: 10px;
         }
-
         .movieCategory {
             width: 300px;
             color: silver;
@@ -201,20 +174,16 @@
             white-space: nowrap;
             text-align: left;
         }
-
-
         .avgPointDiv {
             display: flex;
             color: silver;
             font-size: 0.7em;
         }
-
         .movieAvgPoint {
             height: 8%;
             text-align: right;
             flex-basis: 70px;
         }
-
         .searchDiv {
             height: 1%;
             display: flex;
@@ -222,7 +191,6 @@
             margin: 20px;
             margin-top: 30px;
         }
-
         #searchBtn2 {
             background-color: #037b94;
             color: white;
@@ -230,23 +198,18 @@
             border-radius: 8px;
             flex-basis: 70%;
         }
-
         #searchInput {
             border-radius: 8px;
             margin-right: 5px;
             flex-basis: 30%;
         }
-
-
         @media screen and (max-width: 700px) {
             #selectionDiv1 {
                 gap: 20px;
             }
-
             .movieCategory {
                 width: 50px;
             }
-
         }
         @media screen and (max-width: 992px) {
             .movie {
@@ -254,68 +217,51 @@
                 grid-template-columns: repeat(10, 10%);
                 grid-template-rows: repeat(10, 10%);
             }
-            
-            .movieImgDiv img {
-				max-width : 200px;
-				!important;
-			}
-
             .movie div {
                 padding: 0px;
             }
-
             .movieImgDiv {
                 grid-column: 1/4;
                 grid-row: 1/11;
             }
-
             .movieNameDiv {
                 grid-column: 5/10;
                 grid-row: 2/3;
             }
-
             .categoryDiv {
                 grid-column: 5/10;
                 grid-row: 3/4;
             }
-
             .avgPointDiv {
                 grid-column: 5/10;
                 grid-row: 4/5;
             }
-
         }
-
-
         @media screen and (max-width: 992px) {
             .movie {
                 height: 33.3%;
                 width: 50%;
             }
+            .movieImgDiv img {
+                max-width: 180px;
+            }
         }
-
         a {
             text-decoration: none;
         }
-
         /*
         .contents {
             height: 500px;
         } */
-
-
         /* header */
-
         #navLogo {
             width: 150px;
             height: 100px;
         }
-
         #logoImg {
             width: 100%;
             height: 100%;
         }
-
         /* Icon */
         #logoutIcon {
             width: 30px;
@@ -325,66 +271,54 @@
             width: 30px;
             height: 30px;
         }
-
         #myPageIcon {
             width: 30px;
             height: 30px;
         }
-
         #kakaoIcon {
             width: 30px;
             height: 30px;
         }
-
         #twitterIcon {
             width: 30px;
             height: 30px;
         }
-
         #instagramIcon {
             width: 30px;
             height: 30px;
         }
-
         #facebookIcon {
             width: 30px;
             height: 30px;
         }
-
         .snsIcon1 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon2 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon3 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon4 {
             float: left;
             margin-top: 10px;
         }
         /* Icon end */
-
         /* Footer */
         .nav-link {
             color: gray !important;
             text-decoration: none;
         }
-
         .nav-link:hover {
             color: white !important;
         }
-
         /* header 반응형 */
         @media ( max-width : 768px) {
             #navLogo {
@@ -400,30 +334,24 @@
                 display: none;
             }
         }
-
         @media ( min-width : 768px) {
             #navibar {
                 display: none;
             }
         }
         /* header 반응형 끝 */
-
         /* footer 반응형 시작 */
         @media ( max-width : 768px) {
             #bigFoot {
                 display: none;
             }
         }
-
         @media ( min-width : 768px) {
             #smallFoot {
                 display: none;
             }
         }
-
         /* footer 반응형 끝 */
-
-
         .pagination {
             margin: 20px;
         }

@@ -22,40 +22,32 @@
             min-height: 4000px;
             min-width: 640px;
         }
-
         * {
             box-sizing: border-box;
         }
-
         header {
             width: 100%;
             height: 3.6%;
             background-color: black;
         }
-
         footer {
             width: 100%;
             height: 9%;
             background-color: black;
         }
-
         #navibar {
             background-color: black;
         }
-
         #container {
             height: 84%;
             margin-left: 5%;
             margin-right: 5%;
             display: flex;
             flex-direction: column;
-
         }
-
         a {
             text-decoration: none;
         }
-
         #titleDiv {
             height: 2%;
             width: 100%;
@@ -67,22 +59,18 @@
             padding: 10px;
             border-radius: 8px;
         }
-
         #title {
             font-size: 1.5em;
             font-weight: bold;
         }
-
         #reviewCount {
             font-size: 0.8em;
             color: silver;
         }
-
         #titleExplain {
             font-size: 0.8em;
             color: silver;
         }
-
         #selectionDiv1 {
             margin-top: 20px;
             height: 67px;
@@ -94,26 +82,21 @@
             background-color: #503396;
             margin-bottom: 20px;
         }
-
         #selectionDiv1 button {
             background-color: #503396;
             color: white;
             border: none;
             font-size: 0.8em;
         }
-
         #selectionDiv1 button:hover {
             color: silver;
         }
-
         #reviewDiv {
             height: 90%;
         }
-
         .reviewLi {
             height: 100%;
         }
-
         .review {
             height: 19%;
             padding: 10px;
@@ -121,7 +104,10 @@
             border: 1px solid silver;
             border-radius: 10px;
         }
-
+        .review a{
+            color: black;
+            text-decoration: none;
+        }
         .movieDiv {
             display: flex;
             height: 50%;
@@ -130,34 +116,28 @@
             padding: 7px;
             align-items: center;
         }
-
         .movieImgDiv {
             flex-basis: 30%;
             padding: 5px;
         }
-
         .movieDiv img {
             width: 90%;
             height: 90%;
             min-width: 140px;
             min-height: 200px;
         }
-
         .reviewDiv {
             height: 50%;
             padding: 10px;
         }
-
         .product {
             flex-basis: 60%;
             display: flex;
         }
-
         .productDiv1 {
             flex-basis: 70%;
             padding: 5px;
         }
-
         .productDiv2 {
             padding: 5px;
             flex-basis: 30%;
@@ -166,7 +146,6 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .product .productDiv1 .productTitle {
             max-width: 150px;
             display: block;
@@ -174,17 +153,14 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .product .productDiv1 .productCategory {
             font-size: 0.8em;
             color: silver;
         }
-
         .product .productDiv1 .productAvgPoint {
             font-size: 0.8em;
             color: silver;
         }
-
         .productDiv2 .directors {
             font-size: 0.8em;
             display: block;
@@ -192,25 +168,20 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .reviewTitle {
             height: 30%;
             display: flex;
         }
-
         .reviewTitleDiv1 {
             flex-basis: 70%;
         }
-
         .reviewTitleDiv2 {
             flex-basis: 30%;
         }
-
         .reviewPoint {
             color: silver;
             font-size: 0.8em;
         }
-
         .reviewWrittenDate {
             color: silver;
             font-size: 0.8em;
@@ -219,11 +190,9 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .reviewContentDiv {
             height: 70%;
         }
-
         .reviewContent {
             border: 1px solid silver;
             border-radius: 10px;
@@ -234,9 +203,7 @@
             white-space: nowrap;
             padding: 5px;
             margin: 5px;
-            
         }
-
         .reviewLike {
             height: 20%;
             display: flex;
@@ -248,57 +215,48 @@
             color: silver;
             align-items: center;
         }
-
         .reviewLike button {
             height: 30px;
             border: none;
             background-color: white;
         }
-
         .reviewLike .likeBtn:hover {
             color: blue;
         }
-
         .reviewLike .hateBtn:hover {
             color: red;
         }
-
         @media screen and (max-width: 700px) {
             #selectionDiv1 {
                 gap: 20px;
             }
         }
-
         @media screen and (max-width: 800px) {
             .movieDiv img {
                 height: 108px;
                 width: 76px;
             }
         }
-
         @media screen and (max-width: 992px) {
             .review {
                 display: grid;
                 grid-template-columns: repeat(10, 10%);
                 grid-template-rows: repeat(10, 10%);
-                height: 9%;
+                height: 10%;
             }
             .movieImgDiv{
                 display: none;
             }
-
             .movieDiv {
                 grid-row: 1/11;
                 grid-column: 1/3;
                 height: 100%;
                 border: none;
             }
-
             .reviewPoint {
                 display: flex;
                 gap: 5px;
             }
-
             .reviewDiv {
                 grid-row: 1/11;
                 grid-column: 5/11;
@@ -307,94 +265,81 @@
             .product {
                 flex-direction: column;
             }
+            .reviewContent {
+                height: 60%;
+                margin-bottom: 20px;
+            }
         }
-
         /*
             .contents {
                 height: 500px;
             } */
-
         /* header */
         #navLogo {
             width: 150px;
             height: 100px;
         }
-
         #logoImg {
             width: 100%;
             height: 100%;
         }
-
         /* Icon */
         #logoutIcon {
             width: 30px;
             height: 30px;
         }
-
         #cartIcon {
             width: 30px;
             height: 30px;
         }
-
         #myPageIcon {
             width: 30px;
             height: 30px;
         }
-
         #kakaoIcon {
             width: 30px;
             height: 30px;
         }
-
         #twitterIcon {
             width: 30px;
             height: 30px;
         }
-
         #instagramIcon {
             width: 30px;
             height: 30px;
         }
-
         #facebookIcon {
             width: 30px;
             height: 30px;
         }
-
         .snsIcon1 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon2 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon3 {
             float: left;
             margin-top: 10px;
             margin-right: 5px;
         }
-
         .snsIcon4 {
             float: left;
             margin-top: 10px;
         }
         /* Icon end */
-
         /* Footer */
         .nav-link {
             color: gray !important;
             text-decoration: none;
         }
-
         .nav-link:hover {
             color: white !important;
         }
-
         /* header 반응형 */
         @media ( max-width : 768px) {
             #navLogo {
@@ -410,30 +355,24 @@
                 display: none;
             }
         }
-
         @media ( min-width : 768px) {
             #navibar {
                 display: none;
             }
         }
         /* header 반응형 끝 */
-
         /* footer 반응형 시작 */
         @media ( max-width : 768px) {
             #bigFoot {
                 display: none;
             }
         }
-
         @media ( min-width : 768px) {
             #smallFoot {
                 display: none;
             }
         }
-
         /* footer 반응형 끝 */
-
-
         .pagination {
             margin: 20px;
         }
