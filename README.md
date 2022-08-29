@@ -1,11 +1,18 @@
 # 영화 리뷰 사이트 [영화추천이]
 
+## 팀 구성
+![팀](https://user-images.githubusercontent.com/98640331/187173600-28acb7b3-0dc9-4cc3-8d49-e929c47d8541.JPG)
+
 ## 페이지 구성
 * 메인페이지
  
 ![세미 메인페이지](https://user-images.githubusercontent.com/98640331/187177990-829b5d7c-bbc9-4d84-bb70-cc9a0379d733.jpg)
 
+메인 | 서브 | 서브 |
+--- | --- | --- |
+장석수 | 박준철 | 연혜원|
 * 영화페이지
+
 
 ![세미 게시글페이지](https://user-images.githubusercontent.com/98640331/187178349-7dd62534-c902-44d2-95b7-45c9c82c1981.JPG)
 
@@ -25,8 +32,6 @@
 
 ![세미 로그인페이지](https://user-images.githubusercontent.com/98640331/187178592-0d08d0d0-e422-4fc5-9d47-e87603774555.jpg)
 
-## 팀 구성
-![팀](https://user-images.githubusercontent.com/98640331/187173600-28acb7b3-0dc9-4cc3-8d49-e929c47d8541.JPG)
 
 ## 개발 환경
 ![개발환경](https://user-images.githubusercontent.com/98640331/187174044-3aa43f31-da1b-4786-9eaf-38ea731c3323.JPG)
