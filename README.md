@@ -5,19 +5,23 @@
 
 ## 페이지 구성
 * 메인페이지
- 
-![세미 메인페이지](https://user-images.githubusercontent.com/98640331/187177990-829b5d7c-bbc9-4d84-bb70-cc9a0379d733.jpg)
-
-메인 | 서브 | 서브 |
+ 메인 | 서브 | 서브 |
 --- | --- | --- |
 장석수 | 박준철 | 연혜원|
-* 영화페이지
 
+![세미 메인페이지](https://user-images.githubusercontent.com/98640331/187177990-829b5d7c-bbc9-4d84-bb70-cc9a0379d733.jpg)
+
+* 영화페이지
+ 메인 | 서브 |
+--- | --- |
+장석수 | 박준철 |
 
 ![세미 게시글페이지](https://user-images.githubusercontent.com/98640331/187178349-7dd62534-c902-44d2-95b7-45c9c82c1981.JPG)
 
 * 상세페이지
-
+ 메인 |
+--- |
+박준철 |
 ![세미 상세페이지](https://user-images.githubusercontent.com/98640331/187178425-919bc347-c4d6-419c-b343-84138672a886.JPG)
 
 * 찜 목록
